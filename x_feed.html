@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Curated energy X (Twitter) feed — tanker trackers, price reporting agencies, analysts, and official sources. Updated daily.">
+<meta name="theme-color" content="#07090d">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🛢️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MOB · Morning Oil Brief">
+<meta property="og:title" content="X Feed · MOB">
+<meta property="og:description" content="Curated energy X (Twitter) feed — tanker trackers, price reporting agencies, analysts, and official sources. Updated daily.">
+<meta property="og:url" content="https://eia-dashboard.netlify.app/x_feed">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="X Feed · MOB">
+<meta name="twitter:description" content="Curated energy X (Twitter) feed — tanker trackers, price reporting agencies, analysts, and official sources.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X Feed · Morning Oil Brief</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg: #07090d; --panel: #0e1117; --panel-2: #141821;
+  --border: #1d222d; --border-soft: #161a23;
+  --text: #e6e8ec; --muted: #7c8593; --muted-2: #9aa3b1;
+  --accent: #f5a524; --mob-ai: #5eead4; --mob-text-dim: #c1c5cf;
+  --mob-border-strong: #2a3041;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    var(--bg);
+  color: var(--text); font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1320px; margin: 0 auto; padding: 22px 32px 60px; }
+@media (max-width: 720px) { .container { padding: 18px 18px 40px; } }
+
+/* ─── Nav ───────────────────────────────────────────────────────── */
+.top-nav { margin: 0 0 18px; }
+.nav-inner {
+  max-width: 1320px; margin: 0 auto; padding: 18px 32px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 24px; flex-wrap: wrap;
+}
+@media (max-width: 720px) { .nav-inner { padding: 18px 18px 0; } }
+.nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav-link {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 8px 14px; color: var(--muted-2); background: transparent;
+  border-radius: 6px; text-decoration: none; transition: color 0.15s, background 0.15s;
+}
+.nav-link:hover { color: var(--text); background: var(--panel-2); }
+.nav-link.active { color: var(--accent); }
+.mob-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text);
+}
+.mob-mark { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; }
+.mob-mark svg { width: 100%; height: 100%; display: block; }
+.mob-sep { color: var(--muted); margin: 0 2px; }
+.mob-tagline { color: var(--muted-2); }
+
+/* ─── Header ────────────────────────────────────────────────────── */
+.header {
+  display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between;
+  border-bottom: 1px solid var(--border-soft); padding: 18px 0 26px; margin-bottom: 26px; gap: 24px;
+}
+.header h1 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 56px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; color: var(--text); margin: 0;
+}
+@media (max-width: 900px) { .header h1 { font-size: 40px; } }
+@media (max-width: 560px) { .header h1 { font-size: 32px; } }
+.header .subtitle {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 10px;
+}
+.update-info {
+  margin-left: auto; flex-shrink: 0; text-align: right;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); line-height: 1.7;
+}
+.update-info strong { color: var(--mob-text-dim); font-weight: 500; }
+.update-info .pill {
+  display: inline-block; background: rgba(94,234,212,0.08); color: var(--mob-ai);
+  border: 1px solid rgba(94,234,212,0.35); border-radius: 4px; padding: 4px 10px;
+  font-size: 10.5px; letter-spacing: 0.18em; margin-bottom: 4px;
+}
+
+/* ─── Section ───────────────────────────────────────────────────── */
+.x-section { margin-bottom: 30px; }
+.x-section-title {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 12px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.x-cat-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 5px 12px 5px 10px; border-radius: 999px;
+  background: var(--cat-color, rgba(96,165,250,0.18));
+  color: var(--cat-text, #cbd5e1);
+  border: 1px solid var(--cat-border, rgba(96,165,250,0.4));
+  line-height: 1;
+}
+.x-count { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+/* Category colors — one per source group */
+.cat-flows     { --cat-color: rgba(6,182,212,0.18);   --cat-text: #67e8f9; --cat-border: rgba(6,182,212,0.45); }
+.cat-pra       { --cat-color: rgba(168,85,247,0.18);  --cat-text: #d8b4fe; --cat-border: rgba(168,85,247,0.45); }
+.cat-analyst   { --cat-color: rgba(96,165,250,0.18);  --cat-text: #93c5fd; --cat-border: rgba(96,165,250,0.45); }
+.cat-news      { --cat-color: rgba(34,197,94,0.18);   --cat-text: #86efac; --cat-border: rgba(34,197,94,0.45); }
+.cat-official  { --cat-color: rgba(245,158,11,0.18);  --cat-text: #fcd34d; --cat-border: rgba(245,158,11,0.45); }
+.cat-refiner   { --cat-color: rgba(239,68,68,0.18);   --cat-text: #fca5a5; --cat-border: rgba(239,68,68,0.45); }
+.cat-trading   { --cat-color: rgba(99,102,241,0.18);  --cat-text: #c7d2fe; --cat-border: rgba(99,102,241,0.45); }
+.cat-fuel      { --cat-color: rgba(20,184,166,0.18);  --cat-text: #99f6e4; --cat-border: rgba(20,184,166,0.45); }
+.cat-midstream { --cat-color: rgba(249,115,22,0.18);  --cat-text: #fed7aa; --cat-border: rgba(249,115,22,0.45); }
+.cat-citgo     { --cat-color: rgba(220,38,38,0.18);   --cat-text: #fca5a5; --cat-border: rgba(220,38,38,0.55); }
+
+/* ─── CITGO/Venezuela section ───────────────────────────────────── */
+.citgo-section {
+  margin-bottom: 32px; padding: 18px 20px 20px;
+  background: rgba(220,38,38,0.04); border: 1px solid rgba(220,38,38,0.25);
+  border-left: 3px solid rgba(220,38,38,0.7); border-radius: 8px;
+}
+.citgo-section-title {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 14px; padding-bottom: 8px;
+  border-bottom: 1px solid rgba(220,38,38,0.2);
+}
+.citgo-label {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(252,165,165,0.7); margin-left: auto;
+}
+
+/* ─── Post grid + items (news.html style) ───────────────────────── */
+.x-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+@media (max-width: 900px) { .x-grid { grid-template-columns: 1fr; } }
+
+.x-item {
+  display: block; padding: 12px 14px; text-decoration: none; color: inherit;
+  background: var(--panel); border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--border); border-radius: 6px;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.x-item:hover {
+  background: rgba(29,155,240,0.04);
+  border-left-color: #1d9bf0;
+  transform: translateX(2px);
+}
+.x-item.top-item { border-left-color: var(--accent); }
+.x-item.top-item:hover { border-left-color: var(--accent); background: rgba(245,165,36,0.04); }
+
+.x-summary {
+  font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.45; margin-bottom: 6px;
+}
+.x-meta {
+  font-size: 11px; color: var(--muted);
+  font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em;
+}
+.x-meta .handle { color: var(--muted-2); }
+.x-meta .dot { margin: 0 5px; opacity: 0.4; }
+.x-meta .eng { color: var(--muted); }
+.x-top-badge {
+  display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  background: rgba(245,165,36,0.1); border: 1px solid rgba(245,165,36,0.3);
+  padding: 1px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle;
+}
+
+/* ─── No data ───────────────────────────────────────────────────── */
+.no-data {
+  text-align: center; padding: 60px 20px; color: var(--muted);
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+}
+.no-data h3 {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 16px; letter-spacing: 0.08em; color: var(--text); margin: 12px 0 8px;
+}
+.no-data p { margin: 0; font-size: 13px; }
+
+/* ─── Footer ─────────────────────────────────────────────────────── */
+footer {
+  margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border-soft);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); text-align: center;
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="mob-brand">
+      <span class="mob-mark">
+        <svg width="28" height="32" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;overflow:visible">
+          <path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="#f0b056" opacity="0.95"/>
+          <path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="none" stroke="#f0b056" stroke-width="1.2"/>
+          <ellipse cx="14" cy="4.6" rx="10.8" ry="2.2" fill="#07090d" stroke="#f0b056" stroke-width="1.1"/>
+          <path d="M 2.5 10.6 Q 14 12.4 25.5 10.6" fill="none" stroke="#07090d" stroke-width="1.1"/>
+          <path d="M 2.5 21.4 Q 14 23.2 25.5 21.4" fill="none" stroke="#07090d" stroke-width="1.1"/>
+          <text x="14" y="18.2" text-anchor="middle" fill="#07090d" font-family="'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace" font-size="6" font-weight="700" letter-spacing="0.4">OIL</text>
+        </svg>
+      </span>
+      <span class="mob-name">MOB</span><span class="mob-sep">·</span><span class="mob-tagline">Morning Oil Brief</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="margins.html">Cracks · Prices</a>
+      <a class="nav-link" href="curves.html">Forward Curves</a>
+      <a class="nav-link" href="inventory.html">Inventories</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link active" href="x_feed.html">X Feed</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <div>
+      <h1>X Feed</h1>
+      <div class="subtitle">Trending posts · crude, refining &amp; products · past 24 hours</div>
+    </div>
+    <div class="update-info">
+      <div class="pill">Live</div>
+      <div>Updated: <strong id="last-updated">—</strong></div>
+      <div id="post-count-label"></div>
+    </div>
+  </div>
+
+  <div id="feed-container">
+    <div class="no-data">
+      <div style="font-size:40px">📡</div>
+      <h3>Awaiting First Scrape</h3>
+      <p>The scheduled task runs daily at 4:00 AM CT.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer id="footer-line">Morning Oil Brief · Energy X Feed · Updated daily at 04:00 CT</footer>
+
+<script>
+// ── CITGO/VENEZUELA DATA (rewritten by citgo-venezuela-x-feed-daily task) ──
+const CITGO_DATA = {"lastUpdated":"2026-05-31T11:05:52Z","posts":[{"id":"2060696040462815610","author":{"name":"Azabacheonline","userName":"Azabacheonline"},"text":"🚨 GUAIDÓ Y LA FALSA OPOSICIÓN: EL GRAN FRACASO\nGuaidó representa exactamente lo que ha fallado en Venezuela: una oposición que nunca desmanteló la organización criminal chavista.\nDurante su momento más fuerte tuvo reconocimiento internacional, control de Citgo, Monómeros y millones de dólares… ¿y qué hizo?","summary":"A widely shared post argues that Juan Guaidó's opposition was a failure, claiming that despite holding control of CITGO, Monómeros and millions of dollars plus international recognition, it never dismantled Venezuela's entrenched chavista power structure.","createdAt":"2026-05-30T12:13:16Z","likeCount":14,"retweetCount":16,"replyCount":3},{"id":"2060836851431227395","author":{"name":"ludapifa","userName":"ludapifa"},"text":"@usembassyve @SecRubio De verdad que cada día me sorprende más. Que coño les dijo María Corina Machado??\n\n@MariaCorinaYA \n\nUstedes creen q en Venezuela no teníamos colegios? Universidades? Institutos?? Cómo creen que logramos ser dueños de Citgo??\n\nCoño respeten a la gente q estudio.","summary":"Replying to the US Embassy and Secretary Rubio, a user defends educated Venezuelans, arguing the country's schools and universities are precisely how Venezuela came to own CITGO and demanding more respect for its professionals.","createdAt":"2026-05-30T21:32:48Z","likeCount":1,"retweetCount":0,"replyCount":0},{"id":"2060516037225824426","author":{"name":"Entornointel","userName":"Entornointel"},"text":"CITGO rechaza demanda de venezolanos por deudas en Delaware\n\nCITGO rechaza demanda de grupo venezolano por deudas, alegando que tribunales ya desestimaron casos similares previamente.\n\nhttps://t.co/iurYzS3y4f\n\n#CITGO #Venezuela #Justicia #BeKind","summary":"CITGO has rejected a debt claim brought by a Venezuelan group in Delaware, arguing that courts have already dismissed similar cases in the past.","createdAt":"2026-05-30T00:18:00Z","likeCount":0,"retweetCount":0,"replyCount":0},{"id":"2060529626959515985","author":{"name":"Entornointel","userName":"Entornointel"},"text":"CITGO rechaza demanda de venezolanos por deudas en Delaware\n\nCITGO rechaza demanda de grupo venezolano por deudas, alegando que tribunales ya desestimaron casos similares previamente.\n\nhttps://t.co/iurYzS3y4f\n\n#CITGO #Venezuela #Demanda #BeKind","summary":"A repeat of the report that CITGO has rejected a Venezuelan group's debt lawsuit in Delaware, citing prior court dismissals of comparable claims.","createdAt":"2026-05-30T01:12:00Z","likeCount":0,"retweetCount":0,"replyCount":0}]};
+
+// ── EMBEDDED DATA (rewritten by scheduled task each run) ─────────
+const FEED_DATA = {"lastUpdated":"2026-05-31T11:06:28Z","posts":[{"id":"2060688422101041199","author":{"name":"Javier Blas","userName":"JavierBlas"},"text":"China's is bailing out the global oil market: Is Beijing coordinating with Washington? Or is it taking care of itself, with the global benefit a byproduct? My @Opinion column on China (May 7) is below.","summary":"Bloomberg's Javier Blas asks whether China is effectively propping up the global oil market by absorbing barrels, or simply acting in self-interest with the stabilizing effect a byproduct.","createdAt":"2026-05-30T11:43:00Z","likeCount":219,"retweetCount":47,"replyCount":18},{"id":"2060963645744451687","author":{"name":"Javier Blas","userName":"JavierBlas"},"text":"According to the @NYTimes, US President Trump has toughened the terms of a potential framework for a deal to end the war in Iran, and has sent those proposed changes back to the country for consideration.","summary":"Per the NYT, President Trump has hardened the terms of a proposed framework to end the Iran war and sent the revised deal back to Tehran, a key swing factor for the Strait of Hormuz and the oil risk premium.","createdAt":"2026-05-31T05:56:38Z","likeCount":112,"retweetCount":27,"replyCount":20},{"id":"2061014306934690140","author":{"name":"Javier Blas","userName":"JavierBlas"},"text":"RT @kparpiani: Qatar opposes permanent legal fees for transit through the Strait of Hormuz, but a temporary fee is negotiable and could help...","summary":"Javier Blas shares analysis that Qatar opposes permanent transit fees through the Strait of Hormuz but views a temporary fee as negotiable, hinting that a framework to reopen the chokepoint is possible.","createdAt":"2026-05-31T09:17:57Z","likeCount":29,"retweetCount":8,"replyCount":1},{"id":"2061013610491462101","author":{"name":"Reuters","userName":"Reuters"},"text":"China factory activity stalls in May as demand weakens","summary":"Reuters reports China's factory activity stalled in May as demand weakened, a bearish signal for Chinese oil and commodity demand.","createdAt":"2026-05-31T09:15:11Z","likeCount":23,"retweetCount":7,"replyCount":9},{"id":"2060998519910015038","author":{"name":"Reuters","userName":"Reuters"},"text":"Israel troops capture Beaufort Castle in southern Lebanon push against Hezbollah","summary":"Reuters reports Israeli troops captured Beaufort Castle in southern Lebanon in a push against Hezbollah, keeping Middle East escalation risk and its oil-market premium elevated.","createdAt":"2026-05-31T08:15:13Z","likeCount":19,"retweetCount":7,"replyCount":14},{"id":"2060753123811946506","author":{"name":"Wood Mackenzie","userName":"WoodMackenzie"},"text":"The future of AI development may depend as much on electricity infrastructure as computing power.","summary":"Wood Mackenzie highlights that US AI growth increasingly hinges on power infrastructure, with 90+ GW of collocated generation seeking grid connection as data centers drive 'bring your own generation' models.","createdAt":"2026-05-30T16:00:06Z","likeCount":2,"retweetCount":2,"replyCount":0}]};
+
+// ── Config ──────────────────────────────────────────────────────
+const HANDLE_CATEGORIES = {
+  argusmedia:'pra', opis:'pra', spgenergyoil:'pra',
+  rbnenergy:'analyst', woodmackenzie:'analyst', energyaspects:'analyst',
+  kpler:'flows', vortexa:'flows', tankertrackers:'flows',
+  reuters:'news', reutersvzla:'news', arathysom:'news', mariannaparraga:'news',
+  rory_johnston:'news', javierBlas:'news', jkempenergy:'analyst',
+  ftenergy:'news', oilandenergy:'news',
+  crofthelima:'analyst', staunovo:'analyst', iliabouchouev:'analyst',
+  chigrl:'analyst', andurandpierre:'analyst', energyphilflynn:'analyst', ole_s_hansen:'analyst',
+  gasbuddyguy:'fuel', tomkloza:'fuel',
+  valeroenergy:'refiner', phillips66co:'refiner', marathonpetroco:'refiner',
+  chevron:'refiner', exxonmobil:'refiner', bp_america:'refiner', irvingoil:'refiner',
+  trafigura:'trading', gunvor:'trading', vitolnews:'trading',
+  colpipe:'midstream', energytransfer:'midstream', mansfieldenergy:'midstream',
+  eiagov:'official', iea:'official', opecsecretariat:'official', energy:'official'
+};
+
+const SECTIONS = [
+  { key:'flows',     label:'Flows & Cargo Tracking',   icon:'🚢' },
+  { key:'pra',       label:'Price Reporting Agencies',  icon:'📊' },
+  { key:'analyst',   label:'Research & Analysts',       icon:'🔬' },
+  { key:'news',      label:'News & Journalists',        icon:'📰' },
+  { key:'official',  label:'Official & Institutional',  icon:'🏛️' },
+  { key:'refiner',   label:'Refiners & Majors',         icon:'🏭' },
+  { key:'trading',   label:'Trading Houses',            icon:'🔁' },
+  { key:'fuel',      label:'Retail Fuel & Prices',      icon:'⛽' },
+  { key:'midstream', label:'Midstream & Pipelines',     icon:'🛢️' },
+];
+
+function getCategory(handle) {
+  return HANDLE_CATEGORIES[(handle||'').toLowerCase().replace('@','')] || 'news';
+}
+
+function formatNum(n) {
+  if (!n) return '0';
+  if (n >= 1000) return (n/1000).toFixed(1)+'K';
+  return n.toString();
+}
+
+function timeAgo(dateStr) {
+  if (!dateStr) return '';
+  const diff = Math.floor((Date.now() - new Date(dateStr)) / 60000);
+  if (diff < 60) return diff + 'm ago';
+  if (diff < 1440) return Math.floor(diff/60) + 'h ago';
+  return Math.floor(diff/1440) + 'd ago';
+}
+
+function renderCitgo() {
+  const posts = CITGO_DATA.posts || [];
+  const container = document.getElementById('feed-container');
+
+  const section = document.createElement('div');
+  section.className = 'citgo-section';
+
+  if (!posts.length) {
+    section.innerHTML = `
+      <h2 class="citgo-section-title">
+        <span class="x-cat-pill cat-citgo">🛢️ <span>CITGO &amp; Venezuela</span></span>
+        <span class="citgo-label">Awaiting first scrape</span>
+      </h2>
+      <div class="no-data" style="padding:20px 0;background:transparent;border:none;">
+        <p>No data yet — runs daily at 4:05 AM CT.</p>
+      </div>`;
+  } else {
+    const updatedStr = CITGO_DATA.lastUpdated
+      ? new Date(CITGO_DATA.lastUpdated).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'})
+      : '';
+    section.innerHTML = `
+      <h2 class="citgo-section-title">
+        <span class="x-cat-pill cat-citgo">🛢️ <span>CITGO &amp; Venezuela</span></span>
+        <span class="x-count">${posts.length}</span>
+        ${updatedStr ? `<span class="citgo-label">Updated ${updatedStr}</span>` : ''}
+      </h2>
+      <div class="x-grid">
+        ${posts.map((post, i) => {
+          const handle = (post.author?.userName || '').replace('@','');
+          const url = `https://x.com/${handle}/status/${post.id}`;
+          const eng = `♥ ${formatNum(post.likeCount)} · ↺ ${formatNum(post.retweetCount)}`;
+          const isTop = i === 0;
+          return `
+          <a class="x-item${isTop ? ' top-item' : ''}" href="${url}" target="_blank" rel="noopener">
+            <div class="x-summary">${(post.summary||post.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}${isTop ? '<span class="x-top-badge">Top</span>' : ''}</div>
+            <div class="x-meta">
+              <span class="handle">@${handle}</span>
+              <span class="dot">·</span>
+              <span class="eng">${eng}</span>
+              <span class="dot">·</span>
+              ${timeAgo(post.createdAt)}
+            </div>
+          </a>`;
+        }).join('')}
+      </div>`;
+  }
+
+  container.insertBefore(section, container.firstChild);
+}
+
+function render() {
+  const posts = FEED_DATA.posts || [];
+  if (!posts.length) return;
+
+  // Header meta
+  if (FEED_DATA.lastUpdated) {
+    document.getElementById('last-updated').textContent = new Date(FEED_DATA.lastUpdated).toLocaleString('en-US', {
+      month:'short', day:'numeric', hour:'numeric', minute:'2-digit', timeZoneName:'short'
+    });
+    document.getElementById('post-count-label').textContent = posts.length + ' posts';
+  }
+
+  // Rank by engagement for top badge
+  const sorted = [...posts].sort((a,b) => ((b.likeCount||0)+(b.retweetCount||0)) - ((a.likeCount||0)+(a.retweetCount||0)));
+  const topIds = new Set(sorted.slice(0,3).map(p=>p.id));
+
+  // Group by category
+  const groups = {};
+  posts.forEach(p => {
+    const cat = getCategory(p.author?.userName);
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(p);
+  });
+
+  const container = document.getElementById('feed-container');
+  container.innerHTML = '';
+
+  SECTIONS.forEach(sec => {
+    const items = groups[sec.key];
+    if (!items || items.length === 0) return;
+
+    // Sort within section by engagement
+    items.sort((a,b) => ((b.likeCount||0)+(b.retweetCount||0)) - ((a.likeCount||0)+(a.retweetCount||0)));
+
+    const section = document.createElement('div');
+    section.className = 'x-section';
+    section.innerHTML = `
+      <h2 class="x-section-title">
+        <span class="x-cat-pill cat-${sec.key}">${sec.icon} <span>${sec.label}</span></span>
+        <span class="x-count">${items.length}</span>
+      </h2>
+      <div class="x-grid">
+        ${items.map(post => {
+          const handle = (post.author?.userName || '').replace('@','');
+          const url = `https://x.com/${handle}/status/${post.id}`;
+          const isTop = topIds.has(post.id);
+          const eng = `♥ ${formatNum(post.likeCount)} · ↺ ${formatNum(post.retweetCount)}`;
+          return `
+          <a class="x-item${isTop ? ' top-item' : ''}" href="${url}" target="_blank" rel="noopener">
+            <div class="x-summary">${(post.summary||post.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}${isTop ? '<span class="x-top-badge">Top</span>' : ''}</div>
+            <div class="x-meta">
+              <span class="handle">@${handle}</span>
+              <span class="dot">·</span>
+              <span class="eng">${eng}</span>
+              <span class="dot">·</span>
+              ${timeAgo(post.createdAt)}
+            </div>
+          </a>`;
+        }).join('')}
+      </div>`;
+    container.appendChild(section);
+  });
+
+  document.getElementById('footer-line').textContent =
+    `Morning Oil Brief · Energy X Feed · ${posts.length} posts · Updated daily at 04:00 CT`;
+}
+
+render();
+renderCitgo();
+</script>
+</body>
+</html>

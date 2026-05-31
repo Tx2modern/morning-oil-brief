@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Oil market headlines grouped by topic — geopolitics, OPEC, refining margins, inventory, and prices. Updated daily.">
+<meta name="theme-color" content="#07090d">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🛢️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MOB · Morning Oil Brief">
+<meta property="og:title" content="News · MOB">
+<meta property="og:description" content="Oil market headlines grouped by topic — geopolitics, OPEC, refining margins, inventory, and prices. Updated daily.">
+<meta property="og:url" content="https://eia-dashboard.netlify.app/news">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="News · MOB">
+<meta name="twitter:description" content="Oil market headlines grouped by topic — geopolitics, OPEC, refining margins, inventory, and prices. Updated daily.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News · Morning Oil Brief</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0f1117; --panel: #1a1d24; --panel-2: #232730;
+  --border: #25272e; --border-soft: #1c1e24;
+  --text: #e4e7ec; --muted: #9aa0ac; --muted-2: #c1c5cf;
+  --accent: #f59e0b;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: var(--text); font-size: 15px; line-height: 1.55; }
+.container { max-width: 1500px; margin: 0 auto; padding: 14px; }
+.header {
+  padding: 26px 4px 18px; text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.10) 0%, transparent 55%);
+  border-bottom: 1px solid var(--border); margin-bottom: 22px;
+}
+.header-eyebrow {
+  font-size: 12px; letter-spacing: 0.3px;
+  color: var(--muted); font-weight: 600; margin-bottom: 10px;
+}
+.header h1 {
+  font-size: 40px; font-weight: 700; line-height: 1.05;
+  letter-spacing: -1.0px; margin: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #d8dce4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.header-sub {
+  font-size: 13px; color: var(--muted-2); margin-top: 8px;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+   MOB · 2026 redesign — Inter + JetBrains Mono, deep dark, mono accents
+   ──────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #07090d;
+  --panel: #0e1117;
+  --panel-2: #141821;
+  --border: #1d222d;
+  --border-soft: #161a23;
+  --text: #e6e8ec;
+  --muted: #7c8593;
+  --muted-2: #9aa3b1;
+  --accent: #f5a524;
+  --mob-ai: #5eead4;
+  --mob-text-dim: #c1c5cf;
+  --mob-border-strong: #2a3041;
+}
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  background:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    var(--bg) !important;
+  font-size: 14px !important;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1320px !important; padding: 22px 32px 60px !important; }
+@media (max-width: 720px) { .container { padding: 18px 18px 40px !important; } }
+
+/* ─── Top bar ─────────────────────────────────────────────────────── */
+.top-nav {
+  position: static !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  margin: 0 0 18px !important;
+}
+.top-nav .nav-inner {
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+  padding: 18px 32px 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+@media (max-width: 720px) {
+  .top-nav .nav-inner { padding: 18px 18px 0 !important; }
+}
+.top-nav .nav-links { display: flex; gap: 4px !important; }
+.top-nav .nav-link {
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  padding: 8px 14px !important;
+  color: var(--muted-2) !important;
+  background: transparent !important;
+  border-radius: 6px !important;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+.top-nav .nav-link:hover { color: var(--text) !important; background: var(--panel-2) !important; }
+.top-nav .nav-link.active { color: var(--accent) !important; background: transparent !important; }
+.top-nav .nav-link.nav-disabled { opacity: 0.35 !important; pointer-events: none; }
+
+/* MOB brand (left of top bar) — flat orange barrel + wordmark */
+.mob-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text);
+}
+.mob-brand .mob-mark {
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.mob-brand .mob-mark svg { width: 100%; height: 100%; display: block; }
+.mob-brand .mob-name { color: var(--text); }
+.mob-brand .mob-sep { color: var(--muted); margin: 0 2px; }
+.mob-brand .mob-tagline { color: var(--muted-2); }
+
+/* ─── Page title block (.header) — works for all pages ───────────── */
+.header {
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  border-bottom: 1px solid var(--border-soft) !important;
+  padding: 18px 0 26px !important;
+  margin-bottom: 26px !important;
+  gap: 24px !important;
+}
+.header > div:first-child { min-width: 0; }
+.header h1 {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 56px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1 !important;
+  color: var(--text) !important;
+  margin: 0 !important;
+}
+@media (max-width: 900px) { .header h1 { font-size: 40px !important; } }
+@media (max-width: 560px) { .header h1 { font-size: 32px !important; } }
+.header .subtitle {
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 12px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  margin-top: 10px !important;
+}
+.header .update-info {
+  /* margin-left: auto consumes leftover flex-row space so the block stays
+     pinned to the right edge of the header. Critical when the 56px h1
+     wraps the flex layout to a second row — without this the update-info
+     would land left-aligned on its own row. */
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+  text-align: right !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  line-height: 1.7 !important;
+}
+.header .update-info strong { color: var(--mob-text-dim) !important; font-weight: 500 !important; }
+.header .update-info .pill {
+  background: rgba(94,234,212,0.08) !important;
+  color: var(--mob-ai) !important;
+  border: 1px solid rgba(94,234,212,0.35) !important;
+  border-radius: 4px !important;
+  padding: 4px 10px !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+/* ─── Section panels — softer borders, larger radius ──────────────── */
+.section, .panel, .news-panel, .brief-panel, .insight, .ai-section {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+
+/* ─── Footer ──────────────────────────────────────────────────────── */
+footer {
+  margin-top: 56px !important;
+  padding-top: 18px !important;
+  border-top: 1px solid var(--border-soft) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  text-align: center !important;
+}
+
+/* ─── Interior KPI cards — adopt the MOB landing-card look ──────────
+   Black panel background with a 2px colored top hairline (red for
+   draw, green for build) instead of the full green/red panel fill +
+   left-side accent strip. Text colors adjusted for the dark bg.    */
+.kpi {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease !important;
+}
+.kpi.build { --kpi-status-color: #22c55e; background: var(--panel) !important; border-color: var(--border) !important; }
+.kpi.draw  { --kpi-status-color: #ef4444; background: var(--panel) !important; border-color: var(--border) !important; }
+.kpi.neutral { --kpi-status-color: var(--muted); background: var(--panel) !important; }
+
+/* Replace the gradient ::before tint with a 2px colored top hairline */
+.kpi::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 0 auto 0 !important;
+  height: 2px !important;
+  width: auto !important;
+  background: var(--kpi-status-color, transparent) !important;
+  opacity: 0.9 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+/* Hide the left-side accent strip */
+.kpi::after { display: none !important; }
+
+.kpi:hover {
+  transform: translateY(-2px);
+  border-color: var(--kpi-status-color, var(--mob-border-strong)) !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45) !important;
+}
+
+/* Text inside KPI cards on dark bg */
+.kpi-label {
+  color: var(--muted-2) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+}
+.kpi-value { color: var(--text) !important; }
+.kpi-value-units {
+  color: var(--muted) !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  letter-spacing: 0.12em !important;
+}
+.kpi-change-sub { color: var(--muted) !important; }
+
+/* DRAW / BUILD / UP / DOWN pill — now an outlined pill matching status */
+.kpi-tag {
+  background: transparent !important;
+  color: var(--kpi-status-color, var(--muted)) !important;
+  border: 1px solid var(--kpi-status-color, var(--muted)) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.16em !important;
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+  padding: 3px 9px !important;
+}
+
+/* Change indicator inherits the status color */
+.kpi-change { color: var(--kpi-status-color, var(--muted)) !important; }
+
+/* Position pill (e.g., "Near 5Y high") — keep its own coloring but on dark bg */
+.kpi-position {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  letter-spacing: 0.12em !important;
+}
+
+.news-section { margin-bottom: 28px; }
+.news-section-title {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 12px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.news-cat-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 5px 12px 5px 10px; border-radius: 999px;
+  background: var(--cat-color, rgba(96,165,250,0.18));
+  color: var(--cat-text, #cbd5e1);
+  border: 1px solid var(--cat-border, rgba(96,165,250,0.4));
+  line-height: 1;
+}
+.news-cat-pill svg { display: block; opacity: 0.9; }
+.news-cat-pill .cat-label { letter-spacing: 1px; }
+.cat-top { --cat-color: rgba(251,191,36,0.18); --cat-text: #fde68a; --cat-border: rgba(251,191,36,0.45); }
+.cat-geopolitics-risk { --cat-color: rgba(239,68,68,0.18); --cat-text: #fca5a5; --cat-border: rgba(239,68,68,0.45); }
+.cat-opec-production { --cat-color: rgba(245,158,11,0.18); --cat-text: #fcd34d; --cat-border: rgba(245,158,11,0.45); }
+.cat-refining-margins { --cat-color: rgba(22,163,74,0.18); --cat-text: #86efac; --cat-border: rgba(22,163,74,0.45); }
+.cat-inventory-demand { --cat-color: rgba(167,139,250,0.18); --cat-text: #c4b5fd; --cat-border: rgba(167,139,250,0.45); }
+.cat-markets-prices { --cat-color: rgba(96,165,250,0.18); --cat-text: #93c5fd; --cat-border: rgba(96,165,250,0.45); }
+.cat-companies-deals { --cat-color: rgba(34,211,238,0.18); --cat-text: #67e8f9; --cat-border: rgba(34,211,238,0.45); }
+.cat-transition-macro { --cat-color: rgba(132,204,22,0.18); --cat-text: #bef264; --cat-border: rgba(132,204,22,0.45); }
+.news-count {
+  font-size: 11px; color: var(--muted); font-weight: 500;
+}
+.news-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px;
+}
+@media (max-width: 900px) { .news-grid { grid-template-columns: 1fr; } }
+.news-item {
+  display: block; padding: 12px 14px;
+  text-decoration: none; color: inherit;
+  background: var(--panel); border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--border);
+  border-radius: 6px;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.news-item:hover {
+  background: rgba(96,165,250,0.05);
+  border-left-color: #60a5fa;
+  transform: translateX(2px);
+}
+.news-title {
+  font-size: 14px; font-weight: 500; color: var(--text);
+  line-height: 1.45; margin-bottom: 5px;
+}
+.news-meta {
+  font-size: 11px; color: var(--muted);
+}
+.news-time { color: var(--muted-2); }
+.news-desc {
+  font-size: 12.5px; color: var(--muted-2);
+  margin-top: 8px; line-height: 1.55;
+}
+footer {
+  margin-top: 28px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--muted); text-align: center;
+}
+</style>
+</head>
+<body>
+<nav class="top-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <div class="mob-brand"><span class="mob-mark"><svg width="28" height="32" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;overflow:visible"><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="#f0b056" opacity="0.95"/><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="none" stroke="#f0b056" stroke-width="1.2"/><ellipse cx="14" cy="4.6" rx="10.8" ry="2.2" fill="#07090d" stroke="#f0b056" stroke-width="1.1"/><path d="M 2.5 10.6 Q 14 12.4 25.5 10.6" fill="none" stroke="#07090d" stroke-width="1.1"/><path d="M 2.5 21.4 Q 14 23.2 25.5 21.4" fill="none" stroke="#07090d" stroke-width="1.1"/><text x="14" y="18.2" text-anchor="middle" fill="#07090d" font-family="'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace" font-size="6" font-weight="700" letter-spacing="0.4">OIL</text></svg></span><span class="mob-name">MOB</span><span class="mob-sep">·</span><span class="mob-tagline">Morning Oil Brief</span></div>
+    <div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="margins.html">Cracks · Prices</a><a class="nav-link" href="curves.html">Forward Curves</a><a class="nav-link" href="inventory.html">Inventories</a><a class="nav-link active" href="news.html">News</a><a class="nav-link" href="x_feed.html">X Feed</a></div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="header">
+    <div class="header-eyebrow">SUNDAY, MAY 31, 2026</div>
+    <h1>News</h1>
+    <div class="header-sub">80 headlines from the last 48 hours · grouped by topic</div>
+  </div>
+
+  <div class="news-section"><h2 class="news-section-title"><span class="news-cat-pill cat-top"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true" style="flex:none"><polygon points="8,1.5 10.1,5.8 14.8,6.5 11.4,9.8 12.2,14.5 8,12.3 3.8,14.5 4.6,9.8 1.2,6.5 5.9,5.8"/></svg><span class="cat-label">Top Stories</span></span><span class="news-count">6</span></h2><div class="news-grid"><a class="news-item" href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNYVdCY1dYR2VDLThqdjZJdUM0UGFEbkpIam9UeGxjbnNlcGlRbEtJMnAzb0pCWmdhU1BFVzdfdEtPWVQwUWZDSWw2akt6eUYtWk8tNXl2Ty05Z2tzNzJlRU5oSzFXNnpqYlRoRmNBX2tKMHAxeEhoMHFHQUZxdHF2dnFSQ0xCWVRsNjNUYjQ1cDlzZ2tBSVBLWg?oc=5" target="_blank" rel="noopener"><div class="news-title">Exxon and Chevron Are Warning That Oil Prices Could Skyrocket in the Coming Weeks. Here&#x27;s What That Could Mean for Investors.</div><div class="news-meta">The Motley Fool · <span class="news-time">1h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMimwFBVV95cUxNYUFQMldJWkh6QVJlZG1CbThoVFpJR1JvdVhMLUU1cFRLWTJ3bjh5TkYyLVpZZjRJZ2ZHeGQ2STRYcW81N3FVNm82SDN6VEdLVDltQmFaZURpWnBVVlJITktvUWV2SzczcWZ4RTNHLXY2V25jS1BybDBUUmxUUGdXWFBFcjIyUF9pVlpTTWJINlBPT0NCQW1PcVBiZ9IBoAFBVV95cUxNcHBjeHMzR2xfTUh4eml4SlVuN1dmQVJkMjkza3U1azd0Y1k3Z21jazdIVGxoMGQyazBQckpLSC1DSHNWZzBBMS1nMzdXbkF2MVh6U0hEb3RCOGpaM3lRSFVhWExHdVQtUFc4SDJoTVBHS3BrSHBJLTUwUl9meGlYRklrakFxeWNXTEdtMVhaNmhNcjViZjAtSmZoZk82Y1dn?oc=5" target="_blank" rel="noopener"><div class="news-title">Fuel prices seen to drop by up to P10/liter on June 2</div><div class="news-meta">Cebu Daily News · <span class="news-time">1h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxOblBhQmlyNmxQcWVfUGRESG02enNNVGM1N2owQnZ2bjA0ZlRGck9UeTdBVjB0bjBlV0p3MWYtWmlMOVRmX2pqNFFiOEdKajZjOEp6Q1hkMFpua1RjZkJKaFVnRWREQmRCWGtYQWlYVXNySXY0eng5cU83M0hWdjlPaVhvdDhPcHFuQkU0MXVJbG1nZ092emV1dkZlOFRpUFctLWdTYU9nWTNQMTM0Qlp6M2E3WW1naC1nZWdNczAzSFZOeTUtcTdxZUxwWU96M2ZBbnUtS1l3?oc=5" target="_blank" rel="noopener"><div class="news-title">EU reportedly weighs freeze on Russian oil price cap amid Middle East conflict</div><div class="news-meta">Investing.com · <span class="news-time">1h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMiygFBVV95cUxNRlhJbTd3YUVSQW1abWp3UTJtajFjSmNaUXZwRmRGYlNmYWxfaXc2U2R3UW9fS2M4cWROYVhRTzZfcE9zQ0R0NU5rZHpRQXpxbUtzUVVqTXVSWWlxNE5TNXZMWTg3ZHpwandnM2JINGQ1MU16X3hyVnlRT2tVbnlYWWxPTy0xcTh3VTZtYld5SGlmNVBWWWZwdjVwa2hPY1hxanpxMnhfMnUzUElCeC1qMFE3UGRHdkJKWThVYjFKTEVsdWxEUU1RRnpR?oc=5" target="_blank" rel="noopener"><div class="news-title">EU weighs freezing Russian oil price cap as Middle East war lifts crude prices</div><div class="news-meta">Investing.com · <span class="news-time">1h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxNaWRtZUF0M19wV1RIOG0wcGhkcTJ5d1NFaVdEbTRWWXVTdjNIdmIydnh4a1BzRnlXTllWVVdjTEFndDkwME9UTEVDWjdIQ2JldEJPSUR5ZjdYVTVVdnRJeW9ZSjNjNHRUUTItMXVDM1YyN3RJQ3BPWmt3NHZOa1JYU003T0wwSENEaEktbU90QjN2OWh4bVgzVEtIZUJOSWxqajlLeUJCcnVEZ2pub3VrMGlBbkJRc3hkMGUzVFBVcGd5Wm92V2VQdk1Ya2ZVY1VI?oc=5" target="_blank" rel="noopener"><div class="news-title">How Dangote plans to transform Nigeria from an oil exporter into a global fuel powerhouse</div><div class="news-meta">Business Insider Africa · <span class="news-time">3h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMi0wFBVV95cUxPclBndHE3ZUg3Q1lGdGdfOU5BRk5VTFdZSV82Z3p6YkJlRDdJTUp3dk1HNnE0VXZhUkJYT1VLT19ScGxRNjBnSk5vVVFGaTlZZktQaS1aeXR4R09mSFNmVnBPeFMtc0p5TUF2bGJsMlpKaXZxOUttcW9Oc0FtMVJmV29TNmRiU1VwNWJrX0NET1JfSy1JLWtWVzliN1dkLWZzTHBMWGRXSUNnaEp1elBqT2U3ekVNb2JXUmdwSTQ5MjNfTUVKN2R4OU9sSkE3NXdKTWF3?oc=5" target="_blank" rel="noopener"><div class="news-title">Dangote cuts diesel by 5.6% as Africa’s biggest refinery tightens grip on Nigeria’s fuel market</div><div class="news-meta">Business Insider Africa · <span class="news-time">3h ago</span></div></a></div></div>
+  <div class="news-section"><h2 class="news-section-title"><span class="news-cat-pill cat-geopolitics-risk"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><circle cx="8" cy="8" r="6"/><path d="M2 8h12"/><ellipse cx="8" cy="8" rx="3" ry="6"/></svg><span class="cat-label">Geopolitics &amp; Risk</span></span><span class="news-count">12</span></h2><div class="news-grid"><a class="news-item" href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNYVdCY1dYR2VDLThqdjZJdUM0UGFEbkpIam9UeGxjbnNlcGlRbEtJMnAzb0pCWmdhU1BFVzdfdEtPWVQwUWZDSWw2akt6eUYtWk8tNXl2Ty05Z2tzNzJlRU5oSzFXNnpqYlRoRmNBX2tKMHAxeEhoMHFHQUZxdHF2dnFSQ0xCWVRsNjNUYjQ1cDlzZ2tBSVBLWg?oc=5" target="_blank" rel="noopener"><div class="news-title">Exxon and Chevron Are Warning That Oil Prices Could Skyrocket in the Coming Weeks. Here&#x27;s What That Could Mean for Investors.</div><div class="news-meta">The Motley Fool · <span class="news-time">1h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxOblBhQmlyNmxQcWVfUGRESG02enNNVGM1N2owQnZ2bjA0ZlRGck9UeTdBVjB0bjBlV0p3MWYtWmlMOVRmX2pqNFFiOEdKajZjOEp6Q1hkMFpua1RjZkJKaFVnRWREQmRCWGtYQWlYVXNySXY0eng5cU83M0hWdjlPaVhvdDhPcHFuQkU0MXVJbG1nZ092emV1dkZlOFRpUFctLWdTYU9nWTNQMTM0Qlp6M2E3WW1naC1nZWdNczAzSFZOeTUtcTdxZUxwWU96M2ZBbnUtS1l3?oc=5" target="_blank" rel="noopener"><div class="news-title">EU reportedly weighs freeze on Russian oil price cap amid Middle East conflict</div><div class="news-meta">Investing.com · <span class="news-time">1h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMiygFBVV95cUxNRlhJbTd3YUVSQW1abWp3UTJtajFjSmNaUXZwRmRGYlNmYWxfaXc2U2R3UW9fS2M4cWROYVhRTzZfcE9zQ0R0NU5rZHpRQXpxbUtzUVVqTXVSWWlxNE5TNXZMWTg3ZHpwandnM2JINGQ1MU16X3hyVnlRT2tVbnlYWWxPTy0xcTh3VTZtYld5SGlmNVBWWWZwdjVwa2hPY1hxanpxMnhfMnUzUElCeC1qMFE3UGRHdkJKWThVYjFKTEVsdWxEUU1RRnpR?oc=5" target="_blank" rel="noopener"><div class="news-title">EU weighs freezing Russian oil price cap as Middle East war lifts crude prices</div><div class="news-meta">Investing.com · <span class="news-time">1h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMi4AFBVV95cUxPZ3B0VHBIOEViMDNUV1ZTbEU3a1lkaUFWOTlmZVdzbkhQek5IWjM0cHVORlBkY3NNNW9zVF9IeExwSk5qcUwzblozdkl3QTRBUzNfT21lZ0ZkaU9kYUFPdGZEREhpRUg3SzRyaVB1MVl2V3MxSFFIamhDeUpyNURWQW51NTU3MkZPUzRHXzZibVJEMWJ2NTQyY1pQOUFFV1ZUUHJoc19KMjFsVzFBMUUwVFlQV2VpQmNwYWQ4SHZsUy12SVJkNzcyTllQZ2kxZ0dkeXc5RUt6a1lGb2VZMkJ0bw?oc=5" target="_blank" rel="noopener"><div class="news-title">Oil Prices Plunged 20% in May, Under the Fog of U.S.-Iran Tensions, Where Are Oil Prices Heading?</div><div class="news-meta">TradingKey · <span class="news-time">5h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMisAFBVV95cUxONTJncVRqdXlaTVFwSlVhaUxfRjQ1bjNrQUtqbXY2amNiMmtoUWhWa1VtMnF6V0VEUjJZQ1VFS1kyRVlqYjVQUGtMdWtDTjQxRTBUdnNIT0h6QkpjTnJueEtQaUtYV2xWWExmdFd1S21LXzhmbzVfYjdQYzdldExfOTBFMGl1OTNQc29Tck9mbS1SQnYzazJxd3RjSGxfSWdFQXdjQ0FfTjhUdnJvX1dNaw?oc=5" target="_blank" rel="noopener"><div class="news-title">Brent crude oil wavers on Hyperliquid as Trump seeks edits to his Iran deal</div><div class="news-meta">Invezz · <span class="news-time">6h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMi9wFBVV95cUxQY2Y4Uk9TWmcyS1ptdnAzUkR4N05sRlVPT1hfYUJaTEdTMWs2dER1TU9GV0ZTMFIwazVDVTZidzZlMUxKSzlmeXBvODJXNi16MzI1cDFqZ0oxcVRGel9BV3habWlNLV9kRXM3WFpETGhqRjRYR3UzdmVCemxtVmNGc0dvNFZCcVptN0pTV29zOVJYNU9jOEF0UllQZXBrSnNVTWctTjJLSGFQOE1ZNnRsRVlHR3FCdWVRMW5KNjBDVFlzZ1VHbHBQNzNVcFdoQmFFaHNpXy1tcUd3SHRDb2FOOFJFMEU5ODRDX1VEcV9pVi1ZaVR6YkFN0gH8AUFVX3lxTE1ZWVl4c3ZlRjNTRl9lenNfR2taWHB6TDcyc05iZ3lYMDJsRGE3Unlxc1dTal82TmNhMVpFYTFVcjR2VTA2cVRFRnlZZnhvZFVmdFdRVGtoX0l6UC1qQWR2Nks2dGVuTkMtUFhncW9YVmtXUmJJbEdvNlVYVC1jTVpaRnRwd19DbVhPakVOZUFCcGdwX09NYnk2aFJsTHpKeWQ2NnVsdnk1RkVCUlZPalRLd2g5NVVzblJaSU5FNUdXejE5VTVnUE5oYnk1cUQyZmxOTFQ3TWNVMV8xemxSRmdob0xKY2t4V0VsSFhPei1SX2gxcmpEUVZqeHp1Rg?oc=5" target="_blank" rel="noopener"><div class="news-title">Market Outlook: US-Iran talks, crude oil among 5 factors to drive D-St in first week of June</div><div class="news-meta">The Economic Times · <span class="news-time">8h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPc3BsWFdnYzBEWnhKaUdYanZHYVdPa0JTZVR3OXo0eS1haTlWN1hTUFBFRUNzbW8waG02eWpRNFd1UUl3NWpNUmdHMXVlRjVrTnhCZFhFWmNORUltUXRlY1cwdnp0WUN0R1YwOEZhTU5oRzB1aXRVNER5MDN3QTMxMUQyY2Y2NHJ5c3NuT1VCejllTEFXZ1hoZEk0bHg?oc=5" target="_blank" rel="noopener"><div class="news-title">Goldman Warns Energy Markets Enter Demand Destruction Phase</div><div class="news-meta">Energy News Beat · <span class="news-time">9h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE96QVdMa2loalotT2ZhX3E4VHpYX1RoVkkycWtJUXZNQUxtMTRlUTFnRlpsdHVPZ2sxWVdIaTFzWVZYQWRHR0dIcXdqNGtSMmo5REJ3cUd0cngxaHQ3SS13S1BOUnJaVFFpNnJSTQ?oc=5" target="_blank" rel="noopener"><div class="news-title">ExxonMobil warns crude oil could surge to $160 per barrel as global inventories hit critical lows</div><div class="news-meta">Crypto Briefing · <span class="news-time">9h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMipAFBVV95cUxObHhaaGFBV2w2aHIwU0pha1VPY1E2RHU1b29TbV92MjJQck82OXJ0N2xubXRsQWV2b1RWX0N1ZGxraThEUnBjbTVObkZYN0JvaGJ4d1U0V2FDbnRSaXN1bUY5TWNmMnh3TkRURDYyT2ZoMWhJNFNQNkoxcWpOUGl2bjZhS2hnTmV2ejRNSDY3d29jdkp2MlZtY0IwVC1nOXNRS0xFRQ?oc=5" target="_blank" rel="noopener"><div class="news-title">Oil bosses warn prices will soar within weeks as inventories near &#x27;really, really low levels&#x27;</div><div class="news-meta">Fortune · <span class="news-time">13h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMivwFBVV95cUxPb3pKYjB5X01BOGhGY2tUS3pMWVFZWmg2WFZ4VkV5dUFIQkZZQzlOXzZpM3VMenRLTlN0OE1PanIwRWlaVE1Bb01PUWpvS1RVOGxVbWs3VzMwTTRjd3RMMmhIQlQtNnh1b3prNkd6Zktsa0RxbGgzamQ2ZUZncEtQT0RMV25IOS1qelpVNUJlZlFPNGxPWnlNd2FrckRMeEwwTWdxejJaUy1oN2dxOEZqUTdzX3RBNjhXS3Vod0tDbw?oc=5" target="_blank" rel="noopener"><div class="news-title">Exxon chief warns of skyrocketing energy prices as shareholders approved plan to exit blue state</div><div class="news-meta">Fox Business · <span class="news-time">16h ago</span></div></a>
+<a class="news-item" href="https://oilprice.com/Geopolitics/Europe/Russia-Signs-Military-Cooperation-Deal-With-Afghanistans-Taliban-Government.html" target="_blank" rel="noopener"><div class="news-title">Russia Signs Military Cooperation Deal With Afghanistan’s Taliban Government</div><div class="news-meta">OilPrice.com · <span class="news-time">19h ago</span></div><div class="news-desc">Russia and Afghanistan’s Taliban government have signed a military agreement, in a move that signals deepening cooperation between the sides, experts said. The deal was signed on May 27 by Sergei Shoigu, secretary of Russia’s Security…</div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPNjNCVDliVGZZZnA2RXllbVkweEpmS0RLOTRVZ3EwWFdRSld0QXdFSC1fVDFWbjRfenFSRm5tTmtHcUFFTkNJQnZLMXhDVkt1MGkxclRTdFJVeVp4ODdaVmVNQTN4OC02RU1ReDU3cXNMbnBJODRhZDk0SlJWUWQ3TG5KdmliZjcyTTU4VFN4M3hwdktUWUE2bl9qX0doU2h2NGR6dEhzTmZ1OUxrZlZIVzBMYzE?oc=5" target="_blank" rel="noopener"><div class="news-title">Guyana poised for oil windfall as Iran crisis lifts crude prices</div><div class="news-meta">The Globe and Mail · <span class="news-time">19h ago</span></div></a></div></div>
+  <div class="news-section"><h2 class="news-section-title"><span class="news-cat-pill cat-opec-production"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true" style="flex:none"><path d="M8 1.5C5.5 5 4 7.5 4 10a4 4 0 0 0 8 0c0-2.5-1.5-5-4-8.5z"/></svg><span class="cat-label">OPEC &amp; Production</span></span><span class="news-count">5</span></h2><div class="news-grid"><a class="news-item" href="https://news.google.com/rss/articles/CBMiggFBVV95cUxPb0FreEt4V1ctSERDamRRalBMUWhMb19RV2h6WnQ2RE1YNWpBRmNMLWUtQjNKd3ZNTXU1UzZTYTZ3b1hLc0JoVG9wZTVUS2dpYUIzMFVlSl93VjduRE50b29XSGFjYjNxbWNMREZjbGd4cW1CQnJYOWNqSld2RVZwYkNB0gGcAUFVX3lxTE9lUWZETldZYjJoWVVpTGV0UHM3cE1XdVNTc2ZKaDhTWlF0RnVGbmVLNkJXMEg3WHJpV2d1aHo1SFFfMm5lRTZHWHpBb0w5WHQ2SEk0SHpFVF9EblQzc05ka1dUaXJEOFBNcVhRUjYyaXdTZGtpaHFiYU5XMEtKMFhrTGJDY2Jxczh1bjVidU5jRzBlTzlxYUc0TzhDaQ?oc=5" target="_blank" rel="noopener"><div class="news-title">UAE fuel prices announced for June 2026</div><div class="news-meta">Emirates 24|7 · <span class="news-time">8h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxQa1F3a0ltbXFMVTFQV2tULW1TTkM4ZVZWU1pGM2xFdVpnT0JKYnhQRzVCVmVWWVhYZ0oxWnAzOFJpNXpVeGVOXzhsQURiU2VHdGRjN0stWi1fMkJnaHFDdFRwaFA3Y0Y0WFlyWnpWLVhQY1NhaUZtdWR6RUdleUItaloxR0N3Tkx2LTU1YzhJUTNrdVhjTmk4bWVnTnluYXJDX2tXb1RJanV3Q28?oc=5" target="_blank" rel="noopener"><div class="news-title">UAE’s Exit from OPEC and Its Implications for India’s Energy Security</div><div class="news-meta">India Narrative · <span class="news-time">11h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMitwFBVV95cUxNUE1yYndfN2pXeDZkU3JIeFJkcWQwYWN5S2RvQmRRYzliS0ktSGVYck9ZTjV3M0hGUnA0WGFpRWhKUDk5NXFSUVZFSWkxUTVQUFNqZFIzZFphRElLME9faHNkcTdaYlhGRW1mQVBIUFpaeGdfcm5VWmVramJHTC1EcHBmdnVpQnZrbGNNTk9wakMzRm5PVFNmM1FTZ0tRd05lNUdQdHRIZ1l6bFo3VHo2MkJ0UXBRLVE?oc=5" target="_blank" rel="noopener"><div class="news-title">Unravelling OPEC: The Economics Behind the UAE’s Exit</div><div class="news-meta">thebubble.org.uk · <span class="news-time">yesterday</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxQZGx0cHVsRFpjc0c2X1NMZmluY0FaSXhoeHBRSmZwOU4wOXVSanRyQ04ycll4S0VLb2g0TFRPY0ZETG90WXZXMEpGNG5BY0lDWjVCaUNBdkhUWVdsQ3U2U3d3LVN0U3gzOGVOekdTellqQlVCbDV3NXRoY0RsYjVxUXpScGNMN2pLdUstdWtubGh3cHhlLV94b0xjbEhUYU1YRWhjZGlPQnhhZw?oc=5" target="_blank" rel="noopener"><div class="news-title">Saudi Arabia Expected to Cut July Crude Oil Prices for Asia Amid Weak Demand | Reuters Survey - News and Statistics</div><div class="news-meta">IndexBox · <span class="news-time">yesterday</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE5vSjZZQUp0RVJQdEMtOWN3c1F1VFNWbzA1eVNyX2RTX240ZmM2UWR3WTJxcmlndzh0Xzl6UU5yZXR6LS00REhCQVFUTXBNTXlsa21oMTc3ZEVkS3lBblpFaA?oc=5" target="_blank" rel="noopener"><div class="news-title">Japan “may gain advantages” from the withdrawal of UAE from OPEC: Analyst</div><div class="news-meta">arabnews.jp · <span class="news-time">yesterday</span></div></a></div></div>
+  <div class="news-section"><h2 class="news-section-title"><span class="news-cat-pill cat-refining-margins"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><rect x="2" y="7" width="2.8" height="7"/><rect x="6.6" y="3.5" width="2.8" height="10.5"/><rect x="11.2" y="6" width="2.8" height="8"/><line x1="3.4" y1="5.5" x2="3.4" y2="6.8"/><line x1="8" y1="2" x2="8" y2="3.3"/><line x1="12.6" y1="4.5" x2="12.6" y2="5.8"/></svg><span class="cat-label">Refining &amp; Margins</span></span><span class="news-count">1</span></h2><div class="news-grid"><a class="news-item" href="https://news.google.com/rss/articles/CBMi0wFBVV95cUxPclBndHE3ZUg3Q1lGdGdfOU5BRk5VTFdZSV82Z3p6YkJlRDdJTUp3dk1HNnE0VXZhUkJYT1VLT19ScGxRNjBnSk5vVVFGaTlZZktQaS1aeXR4R09mSFNmVnBPeFMtc0p5TUF2bGJsMlpKaXZxOUttcW9Oc0FtMVJmV29TNmRiU1VwNWJrX0NET1JfSy1JLWtWVzliN1dkLWZzTHBMWGRXSUNnaEp1elBqT2U3ekVNb2JXUmdwSTQ5MjNfTUVKN2R4OU9sSkE3NXdKTWF3?oc=5" target="_blank" rel="noopener"><div class="news-title">Dangote cuts diesel by 5.6% as Africa’s biggest refinery tightens grip on Nigeria’s fuel market</div><div class="news-meta">Business Insider Africa · <span class="news-time">3h ago</span></div></a></div></div>
+  <div class="news-section"><h2 class="news-section-title"><span class="news-cat-pill cat-markets-prices"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><polyline points="2,12 5.5,8.5 8,10.5 13.5,4"/><polyline points="10,4 13.5,4 13.5,7.5"/></svg><span class="cat-label">Markets &amp; Prices</span></span><span class="news-count">12</span></h2><div class="news-grid"><a class="news-item" href="https://news.google.com/rss/articles/CBMimwFBVV95cUxNYUFQMldJWkh6QVJlZG1CbThoVFpJR1JvdVhMLUU1cFRLWTJ3bjh5TkYyLVpZZjRJZ2ZHeGQ2STRYcW81N3FVNm82SDN6VEdLVDltQmFaZURpWnBVVlJITktvUWV2SzczcWZ4RTNHLXY2V25jS1BybDBUUmxUUGdXWFBFcjIyUF9pVlpTTWJINlBPT0NCQW1PcVBiZ9IBoAFBVV95cUxNcHBjeHMzR2xfTUh4eml4SlVuN1dmQVJkMjkza3U1azd0Y1k3Z21jazdIVGxoMGQyazBQckpLSC1DSHNWZzBBMS1nMzdXbkF2MVh6U0hEb3RCOGpaM3lRSFVhWExHdVQtUFc4SDJoTVBHS3BrSHBJLTUwUl9meGlYRklrakFxeWNXTEdtMVhaNmhNcjViZjAtSmZoZk82Y1dn?oc=5" target="_blank" rel="noopener"><div class="news-title">Fuel prices seen to drop by up to P10/liter on June 2</div><div class="news-meta">Cebu Daily News · <span class="news-time">1h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxNaWRtZUF0M19wV1RIOG0wcGhkcTJ5d1NFaVdEbTRWWXVTdjNIdmIydnh4a1BzRnlXTllWVVdjTEFndDkwME9UTEVDWjdIQ2JldEJPSUR5ZjdYVTVVdnRJeW9ZSjNjNHRUUTItMXVDM1YyN3RJQ3BPWmt3NHZOa1JYU003T0wwSENEaEktbU90QjN2OWh4bVgzVEtIZUJOSWxqajlLeUJCcnVEZ2pub3VrMGlBbkJRc3hkMGUzVFBVcGd5Wm92V2VQdk1Ya2ZVY1VI?oc=5" target="_blank" rel="noopener"><div class="news-title">How Dangote plans to transform Nigeria from an oil exporter into a global fuel powerhouse</div><div class="news-meta">Business Insider Africa · <span class="news-time">3h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMivwFBVV95cUxNUVZhQTVvVzVpYzJLekVKMHNhMEhYV2NVMmRRcHBKWFZZUUpoZ0F6X2lCR25zQlZVT2xYNWZ0UkFuVlhHSXZlcXM4cWNsbzhqLWQzaHpQSlR3M1VhTjQzeDRvdC03OVkzXzZWS2ZyZ21wUFBDZ0ZxTEZ1ckl0OHk3QzY2NVNEY2tTWGx0MWpoNm9URGw4eC1PUFltekdRcElMZktBcUlLLTl6QkdWVmo2Q3o2VWc5YVg0OFhMTnAwNA?oc=5" target="_blank" rel="noopener"><div class="news-title">WTI Forex Forecast 31/05: Crude Oil: Optimism and Speculativ</div><div class="news-meta">DailyForex · <span class="news-time">3h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQcHBMVlktQi00ZGw4Y1hHeEtQVW15bU5EU2x5bUhSZzQ1ZGVvMG4xQkF6Q0wwQVZBVV94Njd3N2xFc1QwZ3l6VUdQRmUtOFNlX3J4aEQwbzFTa2o3ZWVBZmNxYTZMU0Fsb0Y0VTBZU0JzRUxtQ2gzVnQ0eW1RT1pDOThzWEdOcDQ4SHN5MmE0eXRBSzd2aHNVSkY1cmROWWVjcW84NTZ3?oc=5" target="_blank" rel="noopener"><div class="news-title">Crude Oil Forecast June 2026: WTI Stays Choppy Near $100</div><div class="news-meta">DailyForex · <span class="news-time">5h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQSXFuQmM2dHRUaWw3VjJoTWJad2t2dXFHRUw0dGYwNV9zWFZQbHByMDZsOV91YUJKQmt3R1NGd1ZXb1ZnS1hZbzRVMXdRN2pvNHRtbC1wQUlDTmV4RDR2VmxwWkM4b01MT3llLTlsZnNLYVROSkVsZTV1WUVsZk9SU0NhWURaMEI4b2t4ZFBiQUdaUUNOVG96TGluY2FTRVZvdlA5R3JMcXFzVTA0VjFTNG5UNjJRMEhLV1o1WjdhcVRYQQ?oc=5" target="_blank" rel="noopener"><div class="news-title">Australia’s truckies were already struggling to survive. Then the fuel crisis hit</div><div class="news-meta">The Guardian · <span class="news-time">5h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMitAJBVV95cUxQLUZZeVlfRF9ocDYwMDJmeW4wQ0NVTzdlSC0zSEFRNWZXa3o5Q0lvMEdIODFZTXhPbnlqTDdlVFY3YklkMVJJclUwOFdtY3l3a3A2c1FiWmt3S3dwZVpuLUNBeHFQUnAyZVF6cWtCVGN2ZkpwUnB5SWl5RU9XQ0YxeDE1LWlTUDRQOEVMLVdxbWNBZFJDMkVPMHFSTWllVUdqMFlON1BnQTBIdWxoQzNQMmJyNkRpYlhWWHlOeEY3a2ZEbU1wckhncXpZNnNNaGg1RDVnTk5aU0l6M0JiVXRUb1ktejVsanBHZ3E2RGVLOXZKUXhjRWdUMUZwVEpHZzV6S01zX3B4X1poTEh2X3cwTUY3MWFfak1PazdHdmhHM0hjQ2h1V011cC1wSlV5aTluS3M1bA?oc=5" target="_blank" rel="noopener"><div class="news-title">Petrol, Diesel Prices on May 31: Has your city&#x27;s fuel rate changed? Check how much you&#x27;ll pay in Delhi, Mumbai, Bengaluru, Kolkata and other cities</div><div class="news-meta">The Economic Times · <span class="news-time">9h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMijAFBVV95cUxOY2lYMWVuWk5Tdlgya1FReURtUGJGMHlBbGdPTndJRkVhVEprRDdJWmZIbC0tOVQ3UkZMQWtqajUzMURsQzVIaHAwX29FN0wxVklwTEhRV2I2WWJieFJTcERfc25lZVgzNWxWQko3eDluSnpsbWZpanlTYlljREp3Rk1UQmcxX0M5dGM2TdIBkgFBVV95cUxQWWRscGNuUGtieXAyVU9lbVhIXy1GNFB6b3pDTEVFMURoMV9hSG1PRGJkVEs5TnQzemdEbW4yamlmRm93emtCdWhxWVI5bVlIQW0yMVQ3QUZENXlfbExZb3Q3M2kyeU5WamJFZGFVakVJSUZJYUJ1X0hVRFdWYXJGNDFtR20yczlscEt6T1NJX256dw?oc=5" target="_blank" rel="noopener"><div class="news-title">China&#x27;s Oil Buying Pause Won&#x27;t Last Forever</div><div class="news-meta">Crude Oil Prices Today | OilPrice.com · <span class="news-time">13h ago</span></div></a>
+<a class="news-item" href="https://oilprice.com/Energy/Crude-Oil/Chinas-Oil-Buying-Pause-Wont-Last-Forever.html" target="_blank" rel="noopener"><div class="news-title">China’s Oil Buying Pause Won’t Last Forever</div><div class="news-meta">OilPrice.com · <span class="news-time">13h ago</span></div><div class="news-desc">China has been cited as an example of a country that has managed to insulate itself relatively well against oil crises. With over a billion barrels in estimated inventories before the war in the Middle East started, China was the poster…</div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMivAFBVV95cUxNYVNYUGxlRnhhM1JNcVFTd2pUR1I4QWdySHItSk00eGJMcnlzTGZ5VXBNTl9pNXZHR3F2NXdqdk1sSWpfSXpFWHA1b2MwdTVOYjdqX3ZRQ3h2bVRNekk1Z2tMWFpPVHVZeTRJVkFRdjFPQ3ZHVTM1ZnZLa1dCSVZrNGl3NVo4LXhhY3AxcERROGtETmFLeWtWSkVkZnk1QjNZbGdFcmROeExCSm1uS01Yd29iam9MUWxFOFc1Tw?oc=5" target="_blank" rel="noopener"><div class="news-title">What lies ahead for the Indian rupee in a higher oil price environment?</div><div class="news-meta">Investing.com · <span class="news-time">14h ago</span></div></a>
+<a class="news-item" href="https://oilprice.com/Energy/Natural-Gas/Americas-LNG-Boom-Is-Real-But-China-Is-Planning-Beyond-It.html" target="_blank" rel="noopener"><div class="news-title">America’s LNG Boom Is Real — But China Is Planning Beyond It</div><div class="news-meta">OilPrice.com · <span class="news-time">15h ago</span></div><div class="news-desc">The Iran war has handed the United States a rare opportunity: a new dawn of energy dominance in an increasingly fractured world. With coordinated US-Israeli strikes disrupting the Strait of Hormuz from late February, roughly 20% of global…</div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9IMUwxSWJUeGtDNHZ6T1FnNTY3RHBRRjhrWkF5SFZ4S184dktHQlM2UkNUMlR0aUxfYzgzNWFNZlpjdUVjWkNqWk41a3QtY1FHcW9IbTFoamV6OUU?oc=5" target="_blank" rel="noopener"><div class="news-title">Crude Oil Price Forecast, Technical Analysis (March 12): WTI, Brent Continue To Be Very Volatile Watkins Glen (kwMeZkPvwl)</div><div class="news-meta">Mshale · <span class="news-time">15h ago</span></div></a>
+<a class="news-item" href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQUU9KWXN6OEx4MjhPR0g2VXN3cVJITF9mbXVWenhEYkJJQXZfTkI2emJ0RU1Ec0JPdHNzUmpwM1BxN18yWl9ZenZMVzViRHlqNkhURlhUR2tVZVBaMXU0em1sUS16cTFvRlVYVGdRSG9YZHAxbUx6NXBNUzdKT2c1RnVpSGRCS1BfUVZjZjZTZnRic0tUWDJBMTNJeEJCT2s2?oc=5" target="_blank" rel="noopener"><div class="news-title">Dangote cuts petrol, diesel ex-depot prices</div><div class="news-meta">Premium Times Nigeria · <span class="news-time">15h ago</span></div></a></div></div>
+  <div class="news-section"><h2 class="news-section-title"><span class="news-cat-pill cat-transition-macro"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M14 2c0 6-4 11-12 12 1-8 6-12 12-12z"/><path d="M3 13c2-2 5-4 8-6"/></svg><span class="cat-label">Transition &amp; Macro</span></span><span class="news-count">2</span></h2><div class="news-grid"><a class="news-item" href="https://oilprice.com/Energy/Energy-General/Cuba-Bets-on-Solar-Power-as-Energy-Crisis-Deepens.html" target="_blank" rel="noopener"><div class="news-title">Cuba Bets on Solar Power as Energy Crisis Deepens</div><div class="news-meta">OilPrice.com · <span class="news-time">17h ago</span></div><div class="news-desc">Cuba has been experiencing a worsening energy crisis for several years, which previously led it to rely heavily on Venezuela for its fuel. Following the United States’ intervention in Venezuela in February, the energy crisis has grown even…</div></a>
+<a class="news-item" href="https://oilprice.com/Energy/Energy-General/Morocco-Is-Emerging-as-a-Renewable-Energy-Superpower.html" target="_blank" rel="noopener"><div class="news-title">Morocco Is Emerging as a Renewable Energy Superpower</div><div class="news-meta">OilPrice.com · <span class="news-time">21h ago</span></div><div class="news-desc">Morocco is rapidly becoming a renewable energy powerhouse thanks to its favourable weather conditions and proximity to Europe. The North African country has rapidly developed its solar energy sector and is now looking to become a major…</div></a></div></div>
+
+  <footer>
+    Last refresh: May 31, 2026 12:03 UTC · Sources: OilPrice.com, Google News (Reuters, Bloomberg, CNBC, FT &amp; trade press)
+  </footer>
+</div>
+</body>
+</html>

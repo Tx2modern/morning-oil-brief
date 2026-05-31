@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="WTI and Brent forward curves, calendar spreads, and crude oil term structure updated daily from NYMEX settlement.">
+<meta name="theme-color" content="#07090d">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🛢️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MOB · Morning Oil Brief">
+<meta property="og:title" content="Forward Curves · MOB">
+<meta property="og:description" content="WTI and Brent forward curves, calendar spreads, and crude oil term structure updated daily from NYMEX settlement.">
+<meta property="og:url" content="https://eia-dashboard.netlify.app/curves">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Forward Curves · MOB">
+<meta name="twitter:description" content="WTI and Brent forward curves, calendar spreads, and crude oil term structure updated daily from NYMEX settlement.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petroleum Intelligence — Forward Curves</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0f1117; --panel: #1a1d24; --panel-2: #232730;
+  --border: #25272e; --border-soft: #1c1e24;
+  --text: #e4e7ec; --muted: #9aa0ac; --muted-2: #c1c5cf;
+  --build: #16a34a; --draw: #dc2626; --accent: #f59e0b;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: var(--text); font-size: 15px; line-height: 1.5; }
+.container { max-width: 1500px; margin: 0 auto; padding: 14px; }
+.header { display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.header h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
+.header .subtitle { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.update-info { text-align: right; font-size: 11px; color: var(--muted); line-height: 1.6; }
+.update-info strong { color: var(--text); font-weight: 500; }
+.update-info .pill { display: inline-block; padding: 2px 9px; background: rgba(22,163,74,0.15);
+  color: #4ade80; border-radius: 10px; font-weight: 500; font-size: 11px; letter-spacing: 0.4px;
+  text-transform: uppercase; margin-bottom: 4px; border: 1px solid rgba(22,163,74,0.35); }
+.kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr) !important; gap: 8px; margin-bottom: 18px; max-width: 1300px; margin-left: auto !important; margin-right: auto !important; }
+@media (max-width: 1100px) { .kpi-strip { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 600px)  { .kpi-strip { grid-template-columns: 1fr !important; } }
+.kpi-row-label {
+  font-size: 13px; font-weight: 700; color: var(--muted-2);
+  letter-spacing: -0.1px;
+  padding: 12px 2px 6px; border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 8px;
+}
+.kpi-row-label + .kpi-strip { margin-bottom: 8px; }
+/* Pair M1-M2 + M1-M12 strips side-by-side on one row */
+.calspread-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.calspread-row .kpi-row-label {
+  padding-top: 8px;
+  font-size: 12px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.calspread-row .kpi-row-label > span { font-size: 11px; }
+.calspread-row .kpi-strip { max-width: none !important; margin: 0 !important; grid-template-columns: repeat(4, 1fr) !important; }
+@media (max-width: 1100px) {
+  .calspread-row { grid-template-columns: 1fr; gap: 0; }
+  .calspread-row .kpi-strip { grid-template-columns: repeat(2, 1fr) !important; margin-bottom: 8px !important; }
+}
+@media (max-width: 600px) {
+  .calspread-row .kpi-strip { grid-template-columns: 1fr !important; }
+}
+.section { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px 18px; margin-bottom: 14px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.section-title { font-size: 14px; font-weight: 600; margin: 0; letter-spacing: -0.1px; }
+.section-subtitle { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: 8px; text-transform: none; letter-spacing: 0; }
+.badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px;
+  vertical-align: 2px; letter-spacing: 0.7px; text-transform: uppercase; margin-left: 6px; }
+.badge-ai { background: linear-gradient(90deg, rgba(167,139,250,0.18), rgba(96,165,250,0.18));
+  color: #c4b5fd; border: 1px solid rgba(167,139,250,0.4); }
+.market-read { font-size: 13.5px; line-height: 1.7; color: var(--muted-2); }
+.market-read strong { color: var(--text); }
+.market-read p { margin: 0 0 10px; }
+.curve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 1000px) { .curve-grid { grid-template-columns: 1fr; } }
+.chart-container { height: 320px; position: relative; }
+.chart-container.tall { height: 420px; }
+/* Minimal-strip styling — used for spread cards (no spark/position/band) */
+/* ─── Redesigned minimal KPI cards (M1-M2 / M1-M12 spread cards) ───
+   Uniform layout: label on top, HIGHER/LOWER chip beneath, large value,
+   then change. Everything nowrap, left-aligned, tabular nums for clean
+   vertical alignment across all 8 cards. */
+.kpi-strip-minimal .kpi-position,
+.kpi-strip-minimal .kpi-spark,
+.kpi-strip-minimal .kpi-band,
+.kpi-strip-minimal .kpi-change-sub { display: none !important; }
+.kpi-strip-minimal .kpi {
+  padding: 12px 14px !important;
+  gap: 6px !important;
+  min-height: 124px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+}
+.kpi-strip-minimal .kpi-row {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 5px !important;
+}
+.kpi-strip-minimal .kpi-label {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.2px !important;
+  line-height: 1.2 !important;
+  color: var(--text) !important;
+}
+.kpi-strip-minimal .kpi-tag {
+  font-size: 9px !important;
+  padding: 2px 7px !important;
+  letter-spacing: 0.5px !important;
+  white-space: nowrap !important;
+  align-self: flex-start !important;
+}
+.kpi-strip-minimal .kpi-value {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  font-variant-numeric: tabular-nums !important;
+  line-height: 1.15 !important;
+  margin-top: auto !important;
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 3px !important;
+}
+.kpi-strip-minimal .kpi-value-units {
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: var(--muted) !important;
+}
+.kpi-strip-minimal .kpi-change-row {
+  font-size: 12px !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.kpi-strip-minimal .kpi-change {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+.curve-table { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.curve-table th, .curve-table td { padding: 5px 10px; border-bottom: 1px solid var(--border-soft); text-align: right; }
+.curve-table th:first-child, .curve-table td:first-child { text-align: left; }
+.curve-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); font-weight: 600; }
+.curve-table td { color: var(--text); }
+.curve-table td.pos { color: #4ade80; font-weight: 500; }
+.curve-table td.neg { color: #f87171; font-weight: 500; }
+
+/* ────────────────────────────────────────────────────────────────────
+   MOB · 2026 redesign — Inter + JetBrains Mono, deep dark, mono accents
+   ──────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #07090d;
+  --panel: #0e1117;
+  --panel-2: #141821;
+  --border: #1d222d;
+  --border-soft: #161a23;
+  --text: #e6e8ec;
+  --muted: #7c8593;
+  --muted-2: #9aa3b1;
+  --accent: #f5a524;
+  --mob-ai: #5eead4;
+  --mob-text-dim: #c1c5cf;
+  --mob-border-strong: #2a3041;
+}
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  background:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    var(--bg) !important;
+  font-size: 14px !important;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1320px !important; padding: 22px 32px 60px !important; }
+@media (max-width: 720px) { .container { padding: 18px 18px 40px !important; } }
+
+/* ─── Top bar ─────────────────────────────────────────────────────── */
+.top-nav {
+  position: static !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  margin: 0 0 18px !important;
+}
+.top-nav .nav-inner {
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+  padding: 18px 32px 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+@media (max-width: 720px) {
+  .top-nav .nav-inner { padding: 18px 18px 0 !important; }
+}
+.top-nav .nav-links { display: flex; gap: 4px !important; }
+.top-nav .nav-link {
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  padding: 8px 14px !important;
+  color: var(--muted-2) !important;
+  background: transparent !important;
+  border-radius: 6px !important;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+.top-nav .nav-link:hover { color: var(--text) !important; background: var(--panel-2) !important; }
+.top-nav .nav-link.active { color: var(--accent) !important; background: transparent !important; }
+.top-nav .nav-link.nav-disabled { opacity: 0.35 !important; pointer-events: none; }
+
+/* MOB brand (left of top bar) — flat orange barrel + wordmark */
+.mob-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text);
+}
+.mob-brand .mob-mark {
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.mob-brand .mob-mark svg { width: 100%; height: 100%; display: block; }
+.mob-brand .mob-name { color: var(--text); }
+.mob-brand .mob-sep { color: var(--muted); margin: 0 2px; }
+.mob-brand .mob-tagline { color: var(--muted-2); }
+
+/* ─── Page title block (.header) — works for all pages ───────────── */
+.header {
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  border-bottom: 1px solid var(--border-soft) !important;
+  padding: 18px 0 26px !important;
+  margin-bottom: 26px !important;
+  gap: 24px !important;
+}
+.header > div:first-child { min-width: 0; }
+.header h1 {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 56px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1 !important;
+  color: var(--text) !important;
+  margin: 0 !important;
+}
+@media (max-width: 900px) { .header h1 { font-size: 40px !important; } }
+@media (max-width: 560px) { .header h1 { font-size: 32px !important; } }
+.header .subtitle {
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 12px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  margin-top: 10px !important;
+}
+.header .update-info {
+  /* margin-left: auto consumes leftover flex-row space so the block stays
+     pinned to the right edge of the header. Critical when the 56px h1
+     wraps the flex layout to a second row — without this the update-info
+     would land left-aligned on its own row. */
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+  text-align: right !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  line-height: 1.7 !important;
+}
+.header .update-info strong { color: var(--mob-text-dim) !important; font-weight: 500 !important; }
+.header .update-info .pill {
+  background: rgba(94,234,212,0.08) !important;
+  color: var(--mob-ai) !important;
+  border: 1px solid rgba(94,234,212,0.35) !important;
+  border-radius: 4px !important;
+  padding: 4px 10px !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+/* ─── Section panels — softer borders, larger radius ──────────────── */
+.section, .panel, .news-panel, .brief-panel, .insight, .ai-section {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+
+/* ─── Footer ──────────────────────────────────────────────────────── */
+footer {
+  margin-top: 56px !important;
+  padding-top: 18px !important;
+  border-top: 1px solid var(--border-soft) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  text-align: center !important;
+}
+
+/* ─── Interior KPI cards — adopt the MOB landing-card look ──────────
+   Black panel background with a 2px colored top hairline (red for
+   draw, green for build) instead of the full green/red panel fill +
+   left-side accent strip. Text colors adjusted for the dark bg.    */
+.kpi {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease !important;
+}
+.kpi.build { --kpi-status-color: #22c55e; background: var(--panel) !important; border-color: var(--border) !important; }
+.kpi.draw  { --kpi-status-color: #ef4444; background: var(--panel) !important; border-color: var(--border) !important; }
+.kpi.neutral { --kpi-status-color: var(--muted); background: var(--panel) !important; }
+
+/* Replace the gradient ::before tint with a 2px colored top hairline */
+.kpi::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 0 auto 0 !important;
+  height: 2px !important;
+  width: auto !important;
+  background: var(--kpi-status-color, transparent) !important;
+  opacity: 0.9 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+/* Hide the left-side accent strip */
+.kpi::after { display: none !important; }
+
+.kpi:hover {
+  transform: translateY(-2px);
+  border-color: var(--kpi-status-color, var(--mob-border-strong)) !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45) !important;
+}
+
+/* Text inside KPI cards on dark bg */
+.kpi-label {
+  color: var(--muted-2) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+}
+.kpi-value { color: var(--text) !important; }
+.kpi-value-units {
+  color: var(--muted) !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  letter-spacing: 0.12em !important;
+}
+.kpi-change-sub { color: var(--muted) !important; }
+
+/* DRAW / BUILD / UP / DOWN pill — now an outlined pill matching status */
+.kpi-tag {
+  background: transparent !important;
+  color: var(--kpi-status-color, var(--muted)) !important;
+  border: 1px solid var(--kpi-status-color, var(--muted)) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.16em !important;
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+  padding: 3px 9px !important;
+}
+
+/* Change indicator inherits the status color */
+.kpi-change { color: var(--kpi-status-color, var(--muted)) !important; }
+
+/* Position pill (e.g., "Near 5Y high") — keep its own coloring but on dark bg */
+.kpi-position {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  letter-spacing: 0.12em !important;
+}
+
+
+/* KPI card redesign — gradient bg, sparkline, band indicator */
+.kpi-strip { grid-template-columns: repeat(6, 1fr); gap: 8px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+@media (max-width: 1280px) { .kpi-strip { grid-template-columns: repeat(3, 1fr) !important; } }
+@media (max-width: 900px)  { .kpi-strip { grid-template-columns: repeat(2, 1fr) !important; } }
+.kpi {
+  border-radius: 8px !important;
+  padding: 12px 13px !important;
+  position: relative; overflow: hidden;
+  background: var(--panel-2) !important;
+  border: 1px solid var(--border) !important;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s !important;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kpi::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--kpi-tint, transparent) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
+}
+.kpi::after {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--kpi-accent, transparent);
+}
+.kpi.build { --kpi-tint: rgba(22,163,74,0.22); --kpi-accent: #16a34a; }
+.kpi.draw  { --kpi-tint: rgba(220,38,38,0.22);  --kpi-accent: #dc2626; }
+.kpi.neutral { --kpi-tint: rgba(120,130,150,0.18); --kpi-accent: #6b7280; }
+.kpi:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.35); border-color: var(--kpi-accent); }
+.kpi > * { position: relative; z-index: 1; }
+.kpi-row { display: flex; justify-content: space-between; align-items: center; }
+.kpi-label {
+  font-size: 12px; font-weight: 700; color: var(--muted-2);
+  letter-spacing: -0.1px;
+}
+.kpi-tag {
+  font-size: 11px; padding: 3px 9px; border-radius: 999px;
+  background: var(--kpi-accent); color: #fff; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase;
+}
+.kpi-value {
+  font-size: 24px; font-weight: 700; color: var(--text);
+  letter-spacing: -0.5px; font-variant-numeric: tabular-nums;
+  line-height: 1; display: flex; align-items: baseline; gap: 4px;
+}
+.kpi-value-units {
+  font-size: 11px; font-weight: 500; color: var(--muted);
+  letter-spacing: 0.3px;
+}
+.kpi-change-row {
+  display: flex; align-items: center; gap: 6px; font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-change {
+  font-weight: 600; color: var(--kpi-accent);
+  display: inline-flex; align-items: center; gap: 3px;
+}
+.kpi-change-sub { color: var(--muted); font-size: 11px; }
+.kpi-position {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.6px;
+  padding: 3px 9px; border-radius: 999px;
+  background: var(--kpi-pos-bg, rgba(255,255,255,0.06));
+  color: var(--kpi-pos-fg, var(--muted-2));
+  border: 1px solid var(--kpi-pos-border, transparent);
+  margin-top: 4px;
+  align-self: flex-start;
+}
+.kpi-position.pos-below { --kpi-pos-bg: rgba(239,68,68,0.18); --kpi-pos-fg: #fca5a5; --kpi-pos-border: rgba(239,68,68,0.45); }
+.kpi-position.pos-near-lo { --kpi-pos-bg: rgba(251,146,60,0.16); --kpi-pos-fg: #fdba74; }
+.kpi-position.pos-mid { --kpi-pos-bg: rgba(255,255,255,0.07); --kpi-pos-fg: var(--muted-2); }
+.kpi-position.pos-near-hi { --kpi-pos-bg: rgba(34,197,94,0.16); --kpi-pos-fg: #86efac; }
+.kpi-position.pos-above { --kpi-pos-bg: rgba(34,197,94,0.18); --kpi-pos-fg: #86efac; --kpi-pos-border: rgba(34,197,94,0.45); }
+.kpi-spark {
+  height: 32px; width: 100%; opacity: 0.95; margin-top: 2px;
+}
+.kpi-band {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 5px;
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.3px;
+}
+.kpi-band-bar {
+  height: 8px; position: relative;
+  display: flex; align-items: center;
+}
+.kpi-band-track {
+  position: absolute; left: 0; right: 0; height: 6px; top: 1px;
+  background: rgba(255,255,255,0.05); border-radius: 3px;
+}
+.kpi-band-fill {
+  position: absolute; left: 0; right: 0; height: 6px; top: 1px;
+  background: linear-gradient(90deg, rgba(252,165,165,0.2), rgba(255,255,255,0.25), rgba(134,239,172,0.2));
+  border-radius: 3px;
+}
+.kpi-band-marker {
+  position: absolute; width: 10px; height: 10px;
+  background: #fbbf24; border-radius: 50%;
+  border: 2px solid #232730; top: -1px;
+  box-shadow: 0 0 8px rgba(251,191,36,0.6);
+  transform: translateX(-50%);
+}
+.kpi-band-marker.out-low {
+  background: #ef4444; left: -4px; transform: none;
+  box-shadow: 0 0 8px rgba(239,68,68,0.7);
+}
+.kpi-band-marker.out-low::before {
+  content: '◄'; position: absolute; left: -10px; top: -4px;
+  color: #ef4444; font-size: 12px;
+}
+.kpi-band-marker.out-high {
+  background: #22c55e; right: -4px; left: auto; transform: none;
+  box-shadow: 0 0 8px rgba(34,197,94,0.7);
+}
+.kpi-band-marker.out-high::after {
+  content: '►'; position: absolute; right: -10px; top: -4px;
+  color: #22c55e; font-size: 12px;
+}
+
+
+/* AI Brief box — mirrors the home-page "Today's Read" hero styling */
+.ai-brief-box {
+  position: relative; overflow: hidden;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px 28px 26px;
+  margin-bottom: 18px;
+}
+.ai-brief-box::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(245,165,36,0.55) 30%, rgba(94,234,212,0.5) 70%, transparent 100%);
+}
+.ai-brief-box-head {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.ai-brief-box-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.ai-brief-box-eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent);
+}
+.ai-brief-box-pill {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px;
+  color: #5eead4;
+  background: rgba(94,234,212,0.08);
+  border: 1px solid rgba(94,234,212,0.35);
+}
+.ai-brief-box .market-read { font-size: 15px; line-height: 1.65; color: var(--muted-2); }
+.ai-brief-box .market-read strong { color: var(--text); font-weight: 600; }
+.ai-brief-box .market-read p { margin: 0 0 12px; }
+.ai-brief-box .market-read p:last-child { margin-bottom: 0; }
+
+footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--muted); text-align: center; }
+footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav class="top-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <div class="mob-brand"><span class="mob-mark"><svg width="28" height="32" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;overflow:visible"><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="#f0b056" opacity="0.95"/><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="none" stroke="#f0b056" stroke-width="1.2"/><ellipse cx="14" cy="4.6" rx="10.8" ry="2.2" fill="#07090d" stroke="#f0b056" stroke-width="1.1"/><path d="M 2.5 10.6 Q 14 12.4 25.5 10.6" fill="none" stroke="#07090d" stroke-width="1.1"/><path d="M 2.5 21.4 Q 14 23.2 25.5 21.4" fill="none" stroke="#07090d" stroke-width="1.1"/><text x="14" y="18.2" text-anchor="middle" fill="#07090d" font-family="'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace" font-size="6" font-weight="700" letter-spacing="0.4">OIL</text></svg></span><span class="mob-name">MOB</span><span class="mob-sep">·</span><span class="mob-tagline">Morning Oil Brief</span></div>
+    <div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="margins.html">Cracks · Prices</a><a class="nav-link active" href="curves.html">Forward Curves</a><a class="nav-link" href="inventory.html">Inventories</a><a class="nav-link" href="news.html">News</a><a class="nav-link" href="x_feed.html">X Feed</a></div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="header">
+    <div>
+      <h1>Forward Curves</h1>
+      <div class="subtitle">12-month strips for WTI, Brent, RBOB, ULSD · contango / backwardation</div>
+    </div>
+    <div class="update-info">
+      <span class="pill">NYMEX SETTLEMENT</span><br>
+      Prices thru: <strong>May 29, 2026</strong><br>
+      Inventories thru: <strong>May 22, 2026</strong><br>
+      Next refresh: <strong>June 2, 2026</strong> · <strong>~5:00 AM ET</strong>
+    </div>
+  </div>
+
+  
+
+  <div class="calspread-row">
+    <div>
+      <div class="kpi-row-label">M1–M2 Calendar Spreads <span style="font-weight:400;text-transform:none;color:var(--muted)"> · prompt-month tightness</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="kpi-strip-m1m2"></div>
+    </div>
+    <div>
+      <div class="kpi-row-label">M1–M12 Calendar Spreads <span style="font-weight:400;text-transform:none;color:var(--muted)"> · overall curve regime</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="kpi-strip-m1m12"></div>
+    </div>
+  </div>
+
+  <section class="ai-brief-box"><div class="ai-brief-box-head"><div class="ai-brief-box-left"><span class="ai-brief-box-eyebrow">AI Curve Brief</span><span class="ai-brief-box-pill">AI Generated</span></div></div><div class="market-read" id="market-read"></div></section>
+
+  <div class="curve-grid">
+    <div class="section">
+      <div class="section-header"><h2 class="section-title">WTI Curve <span class="section-subtitle">$/bbl absolute</span></h2></div>
+      <div class="chart-container"><canvas id="wti-curve" role="img" aria-label="WTI crude oil forward curve chart"></canvas></div>
+      <table class="curve-table" id="wti-table"></table>
+    </div>
+    <div class="section">
+      <div class="section-header"><h2 class="section-title">Brent Curve <span class="section-subtitle">$/bbl absolute</span></h2></div>
+      <div class="chart-container"><canvas id="brent-curve" role="img" aria-label="Brent crude oil forward curve chart"></canvas></div>
+      <table class="curve-table" id="brent-table"></table>
+    </div>
+    <div class="section">
+      <div class="section-header"><h2 class="section-title">RBOB Gasoline Curve <span class="section-subtitle">$/gal absolute</span></h2></div>
+      <div class="chart-container"><canvas id="rbob-curve" role="img" aria-label="RBOB gasoline forward curve chart"></canvas></div>
+      <table class="curve-table" id="rbob-table"></table>
+    </div>
+    <div class="section">
+      <div class="section-header"><h2 class="section-title">ULSD Diesel Curve <span class="section-subtitle">$/gal absolute</span></h2></div>
+      <div class="chart-container"><canvas id="ulsd-curve" role="img" aria-label="ULSD diesel forward curve chart"></canvas></div>
+      <table class="curve-table" id="ulsd-table"></table>
+    </div>
+  </div>
+
+  <footer>
+    Data through May 29, 2026
+  </footer>
+</div>
+
+<script>
+const SNAPSHOT = {"kpi": [{"id": "wti_m12s", "label": "WTI M1\u2013M2", "last": 2.06, "change": -0.05, "units": "$/bbl", "frequency": "daily", "spark": [], "yoy": [], "band_lo": 2.06, "band_hi": 2.06}, {"id": "brt_m12s", "label": "Brent M1\u2013M2", "last": 0.93, "change": -0.08, "units": "$/bbl", "frequency": "daily", "spark": [], "yoy": [], "band_lo": 0.93, "band_hi": 0.93}, {"id": "rb_m12s", "label": "RBOB M1\u2013M2", "last": 0.0749, "change": -0.0106, "units": "$/gal", "frequency": "daily", "spark": [], "yoy": [], "band_lo": 0.0749, "band_hi": 0.0749}, {"id": "ho_m12s", "label": "ULSD M1\u2013M2", "last": 0.0551, "change": -0.0138, "units": "$/gal", "frequency": "daily", "spark": [], "yoy": [], "band_lo": 0.0551, "band_hi": 0.0551}, {"id": "wti_m112", "label": "WTI M1\u2013M12", "last": 13.52, "change": -0.72, "units": "$/bbl", "frequency": "daily", "spark": [], "yoy": [], "band_lo": 13.52, "band_hi": 13.52}, {"id": "brt_m112", "label": "Brent M1\u2013M12", "last": 13.12, "change": -0.52, "units": "$/bbl", "frequency": "daily", "spark": [], "yoy": [], "band_lo": 13.12, "band_hi": 13.12}, {"id": "rb_m112", "label": "RBOB M1\u2013M12", "last": 0.4689, "change": -0.0276, "units": "$/gal", "frequency": "daily", "spark": [], "yoy": [], "band_lo": 0.4689, "band_hi": 0.4689}, {"id": "ho_m112", "label": "ULSD M1\u2013M12", "last": 0.6131, "change": -0.0167, "units": "$/gal", "frequency": "daily", "spark": [], "yoy": [], "band_lo": 0.6131, "band_hi": 0.6131}], "marketRead": "<strong>Headline:</strong> WTI front-month settled at $87.36 and Brent at $92.05 in yesterday's session, with both crude benchmarks locked in steep backwardation following the latest WPSR release that confirmed continued inventory draws. The Brent\u2013WTI spread settled at $4.69, a relatively narrow differential that signals diminished US export economics and likely keeps incremental barrels onshore. RBOB gasoline and ULSD distillate both settled in backwardation, though the product curves show notably different seasonal trajectories as we move deeper into summer.\n<strong>Curve Shape:</strong> The WTI M1\u2013M12 backwardation settled at $13.52/bbl, reflecting aggressive pricing of near-term supply tightness; Brent's M1\u2013M12 at $13.12 tells a similar story of global inventory stress. This steep backwardation structure incentivizes immediate consumption over storage, discourages floating inventory plays, and signals the market expects prompt barrels to command a significant premium. RBOB's M1\u2013M12 sits at just $0.47/gal, a relatively flat summer curve that suggests adequate gasoline supply despite seasonal demand, while ULSD's $0.61/gal backwardation points to moderately tighter middle distillate balances heading into the back half of the year.\n<strong>Calendar Spreads:</strong> The crude curves show month-on-month backwardation erosion through the strip\u2014WTI's July\u2013August spread at over $2/bbl narrows progressively as the forward curve flattens toward 2027, implying the market prices current tightness as transient rather than structural. RBOB exhibits modest backwardation through the summer driving season before flipping into contango in the shoulder months, typical seasonal behavior as refiners ramp gasoline production now and the forward curve prices post-Labor Day demand weakness. ULSD maintains consistent backwardation across the entire strip, a reflection of steady distillate demand and the lack of seasonal demand destruction that gasoline experiences.\n<strong>Watch next week:</strong> The narrow Brent\u2013WTI spread at $4.69 warrants close attention\u2014if weak US export economics persist and domestic production remains elevated, we risk seeing WTI soften relative to Brent as barrels accumulate onshore, which would widen the spread and restore export competitiveness. Any incremental inventory builds at Cushing or along the Gulf Coast could pressure the front end of the WTI curve and begin to erode the current steep backwardation. On the product side, monitor whether RBOB's relatively flat forward curve steepens into contango as refiners maximize gasoline yields ahead of peak summer demand, or if unexpected tightness in distillate keeps ULSD backwardation supported through the injection season.", "wtiCurve": [{"contract": "2026-07", "price": 87.36, "price_1d": 88.9, "price_1w": 96.35, "price_1m": 100.11, "price_1y": 58.83}, {"contract": "2026-08", "price": 85.3, "price_1d": 86.79, "price_1w": 92.9, "price_1m": 93.97, "price_1y": 58.9}, {"contract": "2026-09", "price": 83.19, "price_1d": 84.72, "price_1w": 89.36, "price_1m": 88.86, "price_1y": 58.98}, {"contract": "2026-10", "price": 81.26, "price_1d": 82.76, "price_1w": 86.06, "price_1m": 84.72, "price_1y": 59.07}, {"contract": "2026-11", "price": 79.66, "price_1d": 81.08, "price_1w": 83.38, "price_1m": 81.72, "price_1y": 59.19}, {"contract": "2026-12", "price": 78.29, "price_1d": 79.59, "price_1w": 81.19, "price_1m": 79.49, "price_1y": 59.3}, {"contract": "2027-01", "price": 77.14, "price_1d": 78.33, "price_1w": 79.42, "price_1m": 77.71, "price_1y": 59.35}, {"contract": "2027-02", "price": 76.18, "price_1d": 77.25, "price_1w": 78.03, "price_1m": 76.3, "price_1y": 59.4}, {"contract": "2027-03", "price": 75.39, "price_1d": 76.39, "price_1w": 76.95, "price_1m": 75.22, "price_1y": 59.48}, {"contract": "2027-04", "price": 74.77, "price_1d": 75.67, "price_1w": 76.11, "price_1m": 74.38, "price_1y": 59.58}, {"contract": "2027-05", "price": 74.26, "price_1d": 75.11, "price_1w": 75.47, "price_1m": 73.7, "price_1y": 59.71}, {"contract": "2027-06", "price": 73.84, "price_1d": 74.66, "price_1w": 74.94, "price_1m": 73.14, "price_1y": 59.81}], "brentCurve": [{"contract": "2026-07", "price": 92.05, "price_1d": 93.71, "price_1w": 102.58, "price_1m": 110.44, "price_1y": 62.2}, {"contract": "2026-08", "price": 91.12, "price_1d": 92.7, "price_1w": 99.5, "price_1m": 103.48, "price_1y": 62.28}, {"contract": "2026-09", "price": 89.11, "price_1d": 90.82, "price_1w": 96.0, "price_1m": 97.95, "price_1y": 62.38}, {"contract": "2026-10", "price": 87.22, "price_1d": 88.96, "price_1w": 92.73, "price_1m": 93.44, "price_1y": 62.49}, {"contract": "2026-11", "price": 85.6, "price_1d": 87.31, "price_1w": 90.04, "price_1m": 89.96, "price_1y": 62.62}, {"contract": "2026-12", "price": 84.18, "price_1d": 85.81, "price_1w": 87.81, "price_1m": 87.27, "price_1y": 62.74}, {"contract": "2027-01", "price": 82.94, "price_1d": 84.47, "price_1w": 85.96, "price_1m": 85.12, "price_1y": 62.81}, {"contract": "2027-02", "price": 81.86, "price_1d": 83.29, "price_1w": 84.43, "price_1m": 83.41, "price_1y": 62.88}, {"contract": "2027-03", "price": 80.93, "price_1d": 82.28, "price_1w": 83.17, "price_1m": 82.06, "price_1y": 63.0}, {"contract": "2027-04", "price": 80.15, "price_1d": 81.42, "price_1w": 82.13, "price_1m": 80.95, "price_1y": 63.12}, {"contract": "2027-05", "price": 79.49, "price_1d": 80.69, "price_1w": 81.27, "price_1m": 80.03, "price_1y": 63.27}, {"contract": "2027-06", "price": 78.93, "price_1d": 80.07, "price_1w": 80.55, "price_1m": 79.27, "price_1y": 63.42}], "rbobCurve": [{"contract": "2026-07", "price": 3.0344, "price_1d": 3.1009, "price_1w": 3.2758, "price_1m": 3.4289, "price_1y": 1.9102}, {"contract": "2026-08", "price": 2.9595, "price_1d": 3.0154, "price_1w": 3.1652, "price_1m": 3.2636, "price_1y": 1.8892}, {"contract": "2026-09", "price": 2.8701, "price_1d": 2.9188, "price_1w": 3.0345, "price_1m": 3.0963, "price_1y": 1.8607}, {"contract": "2026-10", "price": 2.6452, "price_1d": 2.6934, "price_1w": 2.7799, "price_1m": 2.7773, "price_1y": 1.7288}, {"contract": "2026-11", "price": 2.5403, "price_1d": 2.5826, "price_1w": 2.645, "price_1m": 2.6194, "price_1y": 1.6963}, {"contract": "2026-12", "price": 2.4575, "price_1d": 2.4969, "price_1w": 2.5402, "price_1m": 2.4962, "price_1y": 1.6775}, {"contract": "2027-01", "price": 2.406, "price_1d": 2.4433, "price_1w": 2.4723, "price_1m": 2.4136, "price_1y": 1.6752}, {"contract": "2027-02", "price": 2.3856, "price_1d": 2.4226, "price_1w": 2.441, "price_1m": 2.3722, "price_1y": 1.6889}, {"contract": "2027-03", "price": 2.3875, "price_1d": 2.4259, "price_1w": 2.4386, "price_1m": 2.3636, "price_1y": 1.7068}, {"contract": "2027-04", "price": 2.5879, "price_1d": 2.6267, "price_1w": 2.6276, "price_1m": 2.5553, "price_1y": 1.9006}, {"contract": "2027-05", "price": 2.5829, "price_1d": 2.6222, "price_1w": 2.6169, "price_1m": 2.5406, "price_1y": 1.9077}, {"contract": "2027-06", "price": 2.5655, "price_1d": 2.6044, "price_1w": 2.594, "price_1m": 2.5147, "price_1y": 1.9107}], "ulsdCurve": [{"contract": "2026-07", "price": 3.4886, "price_1d": 3.5521, "price_1w": 3.7241, "price_1m": 3.9055, "price_1y": 1.9928}, {"contract": "2026-08", "price": 3.4335, "price_1d": 3.4832, "price_1w": 3.6189, "price_1m": 3.7342, "price_1y": 2.0009}, {"contract": "2026-09", "price": 3.3905, "price_1d": 3.4362, "price_1w": 3.536, "price_1m": 3.6038, "price_1y": 2.0098}, {"contract": "2026-10", "price": 3.3459, "price_1d": 3.3943, "price_1w": 3.4647, "price_1m": 3.4894, "price_1y": 2.0182}, {"contract": "2026-11", "price": 3.2848, "price_1d": 3.337, "price_1w": 3.3811, "price_1m": 3.3716, "price_1y": 2.0221}, {"contract": "2026-12", "price": 3.2136, "price_1d": 3.2685, "price_1w": 3.2887, "price_1m": 3.2536, "price_1y": 2.0227}, {"contract": "2027-01", "price": 3.1606, "price_1d": 3.2161, "price_1w": 3.2183, "price_1m": 3.1777, "price_1y": 2.0281}, {"contract": "2027-02", "price": 3.1062, "price_1d": 3.1623, "price_1w": 3.1496, "price_1m": 3.1076, "price_1y": 2.0298}, {"contract": "2027-03", "price": 3.0411, "price_1d": 3.0963, "price_1w": 3.0713, "price_1m": 3.0304, "price_1y": 2.0282}, {"contract": "2027-04", "price": 2.9702, "price_1d": 3.0234, "price_1w": 2.9879, "price_1m": 2.9492, "price_1y": 2.023}, {"contract": "2027-05", "price": 2.9171, "price_1d": 2.9674, "price_1w": 2.9237, "price_1m": 2.8869, "price_1y": 2.0221}, {"contract": "2027-06", "price": 2.8755, "price_1d": 2.9223, "price_1w": 2.8733, "price_1m": 2.8359, "price_1y": 2.026}]};
+// Guard against absent element — in post_eia state the AI Brief section is
+// omitted entirely, so this node won't exist.
+(function() {
+  const el = document.getElementById('market-read');
+  if (!el || !SNAPSHOT.marketRead) return;
+  el.innerHTML = '<p>' + SNAPSHOT.marketRead.split('\n').join('</p><p>') + '</p>';
+})();
+
+// Split KPI strip: first 4 cards → M1-M2 strip, next 4 → M1-M12 strip
+(function splitKpiStrip(){
+  const all = SNAPSHOT.kpi || [];
+  const m1m2 = document.getElementById('kpi-strip-m1m2');
+  const m1m12 = document.getElementById('kpi-strip-m1m12');
+  // The KPI render JS below looks for `kpi-strip` id; we temporarily rename
+  // the M1-M2 strip then run, append cards, then do the same for M1-M12.
+  if (!m1m2 || !m1m12) return;
+  const origGetById = document.getElementById.bind(document);
+  // Render M1-M2 cards
+  SNAPSHOT._kpiBackup = all;
+  SNAPSHOT.kpi = all.slice(0, 4);
+  m1m2.id = 'kpi-strip';
+  redesignKpis();
+  m1m2.id = 'kpi-strip-m1m2';
+  // Render M1-M12 cards
+  SNAPSHOT.kpi = all.slice(4);
+  m1m12.id = 'kpi-strip';
+  redesignKpis();
+  m1m12.id = 'kpi-strip-m1m12';
+  SNAPSHOT.kpi = all;
+});
+
+// Define redesignKpis from the KPI JS body, then call our splitter
+
+// ─── KPI redesign — rebuild cards with sparkline + band indicator ───
+function redesignKpis(){
+  const strip = document.getElementById('kpi-strip');
+  if (!strip || !SNAPSHOT.kpi) return;
+  strip.innerHTML = '';
+  const toRender = [];
+  SNAPSHOT.kpi.forEach(k => {
+    const isBuild = k.change >= 0;
+    const cls = isBuild ? 'build' : 'draw';
+    // Tag wording depends on what the card represents
+    let tag;
+    if (k.id === 'util')                tag = isBuild ? 'UP' : 'DOWN';
+    else if (k.units === 'mil bbl')     tag = isBuild ? 'BUILD' : 'DRAW';
+    else                                tag = isBuild ? 'HIGHER' : 'LOWER';
+    const arrow = isBuild ? '▲' : '▼';
+    // Unit handling: %, mil bbl (→MMbbl), $/bbl, $/gal
+    let valPrefix = '', valSuffix = '', unitsTag = '', chgPrefix = '', chgSuffix = ' mb', valDecimals = 1, chgDecimals = 1;
+    if (k.units === '%') { valSuffix = '%'; unitsTag = 'utilization'; chgSuffix = ' pp'; }
+    else if (k.units === 'mil bbl') { unitsTag = 'MMbbl'; chgSuffix = ' mb'; }
+    else if (k.units === '$/bbl') { valPrefix = '$'; unitsTag = '/bbl'; chgPrefix = '$'; chgSuffix = '/bbl'; valDecimals = 2; chgDecimals = 2; }
+    else if (k.units === '$/gal') { valPrefix = '$'; unitsTag = '/gal'; chgPrefix = '$'; chgSuffix = '/gal'; valDecimals = 4; chgDecimals = 4; }
+    else { unitsTag = k.units || ''; }
+    const unitStr = valSuffix;
+    // Position in 5-yr band: pct (clipped 0..1) plus out-of-band flag and label
+    const range = k.band_hi - k.band_lo;
+    const rawPct = range > 0 ? (k.last - k.band_lo) / range : 0.5;
+    const pct = Math.max(0, Math.min(1, rawPct));
+    let markerCls = '', posLabel = '', posCls = 'pos-mid';
+    // Unit text used in band-position labels
+    let bandUnit = ' mb';
+    if (k.units === '%')      bandUnit = ' pp';
+    else if (k.units === '$/bbl') bandUnit = '/bbl';
+    else if (k.units === '$/gal') bandUnit = '/gal';
+    const isMoney = (k.units === '$/bbl' || k.units === '$/gal');
+    if (k.last < k.band_lo) {
+      markerCls = 'out-low';
+      const dVal = (k.band_lo - k.last);
+      const dStr = (isMoney ? '$' : '') + dVal.toFixed(isMoney ? 2 : 1);
+      posLabel = `${dStr}${bandUnit} below 5Y low`;
+      posCls = 'pos-below';
+    } else if (k.last > k.band_hi) {
+      markerCls = 'out-high';
+      const dVal = (k.last - k.band_hi);
+      const dStr = (isMoney ? '$' : '') + dVal.toFixed(isMoney ? 2 : 1);
+      posLabel = `+${dStr}${bandUnit} above 5Y high`;
+      posCls = 'pos-above';
+    } else if (rawPct < 0.25) {
+      posLabel = 'Near 5Y low';
+      posCls = 'pos-near-lo';
+    } else if (rawPct > 0.75) {
+      posLabel = 'Near 5Y high';
+      posCls = 'pos-near-hi';
+    } else if (k.band_avg && Math.abs(k.last - k.band_avg) < range * 0.08) {
+      posLabel = 'At 5Y avg';
+      posCls = 'pos-mid';
+    } else {
+      posLabel = 'Within 5Y band';
+      posCls = 'pos-mid';
+    }
+    const card = document.createElement('div');
+    card.className = `kpi ${cls}`;
+    card.innerHTML = `
+      <div class="kpi-row">
+        <span class="kpi-label">${k.label}</span>
+        <span class="kpi-tag">${tag}</span>
+      </div>
+      <div class="kpi-value">${valPrefix}${k.last.toFixed(valDecimals)}${unitStr}<span class="kpi-value-units">${unitsTag}</span></div>
+      <div class="kpi-change-row">
+        <span class="kpi-change">${arrow} ${chgPrefix}${Math.abs(k.change).toFixed(chgDecimals)}${chgSuffix}</span>
+        <span class="kpi-change-sub">vs prior ${k.frequency === 'daily' ? 'day' : 'wk'}</span>
+      </div>
+      <canvas class="kpi-spark" data-kpi-spark="${k.id}"></canvas>
+      <div class="kpi-band">
+        <span>${k.band_lo.toFixed(0)}</span>
+        <div class="kpi-band-bar">
+          <div class="kpi-band-track"></div>
+          <div class="kpi-band-fill"></div>
+          <div class="kpi-band-marker ${markerCls}" style="${markerCls ? '' : 'left:'+(pct*100).toFixed(0)+'%'}"></div>
+        </div>
+        <span>${k.band_hi.toFixed(0)}</span>
+      </div>
+      <span class="kpi-position ${posCls}">${posLabel}</span>
+    `;
+    strip.appendChild(card);
+    toRender.push({card, k, isBuild});
+  });
+  // Defer sparkline charts to next frame so layout is computed first
+  requestAnimationFrame(() => {
+    toRender.forEach(({card, k, isBuild}) => {
+      const canvas = card.querySelector('canvas.kpi-spark');
+      if (!canvas) return;
+      // Set explicit pixel dimensions to bypass auto-sizing
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = Math.max(60, Math.floor(rect.width)) * 2;
+      canvas.height = 64;
+      canvas.style.width = '100%';
+      canvas.style.height = '32px';
+      try {
+        const datasets = [];
+        // YoY dotted comparison line (drawn first so it's behind the current line)
+        if (k.yoy && k.yoy.some(v => v != null)) {
+          datasets.push({
+            data: k.yoy,
+            borderColor: 'rgba(180,180,200,0.55)',
+            borderWidth: 1, pointRadius: 0, fill: false, tension: 0.35,
+            borderDash: [3, 3],
+          });
+        }
+        datasets.push({
+          data: k.spark,
+          borderColor: isBuild ? '#16a34a' : '#dc2626',
+          backgroundColor: isBuild ? 'rgba(22,163,74,0.18)' : 'rgba(220,38,38,0.18)',
+          borderWidth: 1.6, pointRadius: 0, fill: true, tension: 0.35,
+        });
+        new Chart(canvas.getContext('2d'), {
+          type: 'line',
+          data: { labels: k.spark.map((_, i) => i), datasets },
+          options: {
+            responsive: false, maintainAspectRatio: false, animation: false,
+            plugins: { legend: { display: false }, tooltip: { enabled: false } },
+            scales: { x: { display: false }, y: { display: false } },
+            elements: { line: { borderJoinStyle: 'round' } },
+          },
+        });
+      } catch(e) { /* silently skip if Chart fails on this card */ }
+    });
+  });
+}
+// Run after window fully loaded so all dimensions are stable
+if (document.readyState === 'complete') redesignKpis();
+else window.addEventListener('load', redesignKpis);
+
+
+// Now actually split the strips (replaces the default redesignKpis call)
+(function(){
+  const m1m2 = document.getElementById('kpi-strip-m1m2');
+  const m1m12 = document.getElementById('kpi-strip-m1m12');
+  if (!m1m2 || !m1m12) return;
+  // The default redesignKpis already ran on document.load and looked for
+  // 'kpi-strip' which doesn't exist on this page, so it did nothing.
+  // We render manually here.
+  const all = SNAPSHOT.kpi || [];
+  function renderInto(strip, cards){
+    const orig = SNAPSHOT.kpi;
+    SNAPSHOT.kpi = cards;
+    const origId = strip.id;
+    strip.id = 'kpi-strip';
+    try { redesignKpis(); } catch(e) {}
+    strip.id = origId;
+    SNAPSHOT.kpi = orig;
+  }
+  renderInto(m1m2, all.slice(0, 4));
+  renderInto(m1m12, all.slice(4));
+})();
+
+// Helper: build a multi-line curve chart with historical overlays
+function buildCurveChart(canvasId, data, color, units) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const labels = data.map(p => p.contract);
+  const today   = data.map(p => p.price);
+  const wkAgo   = data.map(p => p.price_1w);
+  const moAgo   = data.map(p => p.price_1m);
+  const yrAgo   = data.map(p => p.price_1y);
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: '1 yr ago',  data: yrAgo, borderColor: 'rgba(160,170,190,0.55)',
+           borderWidth: 1.2, pointRadius: 0, fill: false, tension: 0.25, borderDash: [4,4], spanGaps: true },
+        { label: '1 mo ago',  data: moAgo, borderColor: 'rgba(96,165,250,0.65)',
+           borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.25, borderDash: [2,3], spanGaps: true },
+        { label: '1 wk ago',  data: wkAgo, borderColor: 'rgba(167,139,250,0.85)',
+           borderWidth: 1.7, pointRadius: 0, fill: false, tension: 0.25, spanGaps: true },
+        { label: 'Today',     data: today, borderColor: color, backgroundColor: color + '15',
+           borderWidth: 2.5, pointRadius: 3, fill: true, tension: 0.25 },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', align: 'end',
+                   labels: { color: '#cbd5e1', boxWidth: 10, font: {size: 10} } },
+        tooltip: { mode: 'index', intersect: false,
+                    callbacks: { label: c => c.dataset.label + ': ' + units + (c.parsed.y != null ? c.parsed.y.toFixed(2) : '—') } },
+      },
+      scales: {
+        x: { ticks: { font: {size: 10}, color: '#9aa0ac' }, grid: { color: 'rgba(255,255,255,0.04)' } },
+        y: { ticks: { font: {size: 10}, color: '#9aa0ac', callback: v => units + v },
+              grid: { color: 'rgba(255,255,255,0.06)' } },
+      },
+    },
+  });
+}
+
+buildCurveChart('wti-curve',   SNAPSHOT.wtiCurve,   '#fbbf24', '$');
+buildCurveChart('brent-curve', SNAPSHOT.brentCurve, '#60a5fa', '$');
+buildCurveChart('rbob-curve',  SNAPSHOT.rbobCurve,  '#ef4444', '$');
+buildCurveChart('ulsd-curve',  SNAPSHOT.ulsdCurve,  '#facc15', '$');
+
+// All Four Curves overlay removed by request
+
+// ─── Populate curve data tables (contract | price | Δ vs prior month) ───
+function fillCurveTable(tableId, curve, units){
+  const t = document.getElementById(tableId);
+  if (!t || !curve.length) return;
+  const dec = (units === '$/gal') ? 4 : 2;
+  const rows = ['<thead><tr><th>Contract</th><th>Price (' + units + ')</th><th>Δ vs prior</th></tr></thead><tbody>'];
+  curve.forEach((pt, i) => {
+    const prev = i === 0 ? null : curve[i - 1].price;
+    const diff = prev === null ? null : pt.price - prev;
+    const diffStr = diff === null ? '—'
+      : (diff >= 0 ? '+' : '') + '$' + diff.toFixed(dec);
+    const diffCls = diff === null ? '' : (diff >= 0 ? 'pos' : 'neg');
+    rows.push(
+      '<tr>' +
+      '<td>' + pt.contract + '</td>' +
+      '<td>$' + pt.price.toFixed(dec) + '</td>' +
+      '<td class="' + diffCls + '">' + diffStr + '</td>' +
+      '</tr>'
+    );
+  });
+  rows.push('</tbody>');
+  t.innerHTML = rows.join('');
+}
+fillCurveTable('wti-table',   SNAPSHOT.wtiCurve,   '$/bbl');
+fillCurveTable('brent-table', SNAPSHOT.brentCurve, '$/bbl');
+fillCurveTable('rbob-table',  SNAPSHOT.rbobCurve,  '$/gal');
+fillCurveTable('ulsd-table',  SNAPSHOT.ulsdCurve,  '$/gal');
+
+// (All Four Curves overlay removed by request)
+</script>
+</body>
+</html>

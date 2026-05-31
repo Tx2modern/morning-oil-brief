@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+venv/
+
+# Environment / secrets — never commit these
+.env.local
+.env.production
+*.env
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Data files with potentially sensitive info
+# (comment out if you want these tracked in git)
+# eia_data.json
+# news_data.json
+# prices_data.json
+# x_feed_data.json
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log

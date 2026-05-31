@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07090d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🛢️</text></svg>">
+<title>Morning Oil Brief · Sign In</title>
+
+<!-- Supabase JS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0f1117;
+    --panel: #1a1d24;
+    --panel-2: #232730;
+    --border: #25272e;
+    --text: #e4e7ec;
+    --muted: #9aa0ac;
+    --accent: #f59e0b;
+    --accent-dim: rgba(245,158,11,0.15);
+    --accent-border: rgba(245,158,11,0.35);
+    --green: #4ade80;
+    --green-bg: rgba(22,163,74,0.15);
+    --green-border: rgba(22,163,74,0.35);
+    --red: #f87171;
+    --red-bg: rgba(220,38,38,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  /* Subtle background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245,158,11,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,158,11,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 40px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .logo-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .logo-text h1 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+
+  .logo-text p {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0;
+    background: var(--panel-2);
+    border-radius: 8px;
+    padding: 3px;
+    margin-bottom: 28px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .tab-btn.active {
+    background: var(--panel);
+    color: var(--text);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+
+  /* Form */
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    width: 100%;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    color: var(--text);
+    font-size: 14px;
+    padding: 10px 13px;
+    outline: none;
+    transition: border-color 0.15s;
+    font-family: inherit;
+  }
+
+  input:focus {
+    border-color: var(--accent);
+  }
+
+  input::placeholder {
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  .btn {
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 11px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: opacity 0.15s, transform 0.1s;
+    font-family: inherit;
+    letter-spacing: 0.2px;
+  }
+
+  .btn:hover { opacity: 0.9; }
+  .btn:active { transform: scale(0.99); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* Alert messages */
+  .alert {
+    border-radius: 7px;
+    padding: 10px 13px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: none;
+  }
+
+  .alert.error {
+    background: var(--red-bg);
+    border: 1px solid rgba(220,38,38,0.35);
+    color: var(--red);
+  }
+
+  .alert.success {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+  }
+
+  .alert.show { display: block; }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Footer note */
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+
+  /* Pill badge */
+  .pill {
+    display: inline-block;
+    padding: 2px 9px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid var(--accent-border);
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* Password toggle */
+  .input-wrap {
+    position: relative;
+  }
+
+  .input-wrap input {
+    padding-right: 40px;
+  }
+
+  .toggle-pw {
+    position: absolute;
+    right: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px;
+    line-height: 1;
+  }
+
+  .toggle-pw:hover { color: var(--text); }
+
+  /* Forgot password link */
+  .forgot {
+    text-align: right;
+    margin-top: -8px;
+    margin-bottom: 16px;
+  }
+
+  .forgot a {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .forgot a:hover { color: var(--accent); }
+
+  @media (max-width: 480px) {
+    .card { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">
+    <div class="logo-icon">🛢️</div>
+    <div class="logo-text">
+      <h1>Morning Oil Brief <span class="pill">Members</span></h1>
+      <p>Daily Petroleum Intelligence</p>
+    </div>
+  </div>
+
+  <!-- Tab switcher -->
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+    <button class="tab-btn" id="tab-signup" onclick="switchTab('signup')">Create Account</button>
+  </div>
+
+  <!-- Alert box -->
+  <div class="alert" id="alert"></div>
+
+  <!-- LOGIN FORM -->
+  <form id="form-login" onsubmit="handleLogin(event)">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="you@example.com" required autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <div class="input-wrap">
+        <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        <button type="button" class="toggle-pw" onclick="togglePw('login-password', this)">👁</button>
+      </div>
+    </div>
+    <div class="forgot">
+      <a href="#" onclick="switchTab('reset'); return false;">Forgot password?</a>
+    </div>
+    <button type="submit" class="btn" id="btn-login">Sign In →</button>
+  </form>
+
+  <!-- SIGNUP FORM -->
+  <form id="form-signup" style="display:none" onsubmit="handleSignup(event)">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="signup-email" placeholder="you@example.com" required autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <div class="input-wrap">
+        <input type="password" id="signup-password" placeholder="Min. 8 characters" required minlength="8" autocomplete="new-password">
+        <button type="button" class="toggle-pw" onclick="togglePw('signup-password', this)">👁</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <div class="input-wrap">
+        <input type="password" id="signup-confirm" placeholder="••••••••" required autocomplete="new-password">
+        <button type="button" class="toggle-pw" onclick="togglePw('signup-confirm', this)">👁</button>
+      </div>
+    </div>
+    <button type="submit" class="btn" id="btn-signup">Create Account →</button>
+  </form>
+
+  <!-- PASSWORD RESET FORM -->
+  <form id="form-reset" style="display:none" onsubmit="handleReset(event)">
+    <p style="font-size:13px; color:var(--muted); margin-bottom:18px;">
+      Enter your email and we'll send you a link to reset your password.
+    </p>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="reset-email" placeholder="you@example.com" required autocomplete="email">
+    </div>
+    <button type="submit" class="btn" id="btn-reset">Send Reset Link →</button>
+    <div style="text-align:center; margin-top:14px;">
+      <a href="#" onclick="switchTab('login'); return false;" style="font-size:12px; color:var(--muted); text-decoration:none;">← Back to Sign In</a>
+    </div>
+  </form>
+</div>
+
+<div class="footer-note">
+  morningoilbrief.com · Petroleum Intelligence for Energy Professionals
+</div>
+
+<script>
+  // ─── SUPABASE CONFIG ────────────────────────────────────────────────────────
+  // Fill in your two values from: Supabase Dashboard → Project Settings → API
+  // The anon key is safe to include here — it's a public key by design and only
+  // allows what your Supabase Row Level Security policies permit.
+  // See SUPABASE_SETUP.md Phase 5 for full instructions.
+  const SUPABASE_URL  = 'YOUR_SUPABASE_PROJECT_URL';   // e.g. https://xyzabc.supabase.co
+  const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';      // starts with eyJ...
+
+  // Where to send users after a successful login
+  const DASHBOARD_URL = 'index.html';
+  // ────────────────────────────────────────────────────────────────────────────
+
+  const { createClient } = supabase;
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  // If already logged in, skip the login page
+  sb.auth.getSession().then(({ data }) => {
+    if (data.session) window.location.href = DASHBOARD_URL;
+  });
+
+  // Handle magic-link / password-reset redirects
+  sb.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN' && session) {
+      window.location.href = DASHBOARD_URL;
+    }
+  });
+
+  // ─── TAB SWITCHING ──────────────────────────────────────────────────────────
+  function switchTab(tab) {
+    hideAlert();
+    document.getElementById('form-login').style.display   = 'none';
+    document.getElementById('form-signup').style.display  = 'none';
+    document.getElementById('form-reset').style.display   = 'none';
+    document.getElementById('tab-login').classList.remove('active');
+    document.getElementById('tab-signup').classList.remove('active');
+
+    if (tab === 'login') {
+      document.getElementById('form-login').style.display = 'block';
+      document.getElementById('tab-login').classList.add('active');
+    } else if (tab === 'signup') {
+      document.getElementById('form-signup').style.display = 'block';
+      document.getElementById('tab-signup').classList.add('active');
+    } else if (tab === 'reset') {
+      document.getElementById('form-reset').style.display = 'block';
+    }
+  }
+
+  // ─── ALERTS ─────────────────────────────────────────────────────────────────
+  function showAlert(msg, type = 'error') {
+    const el = document.getElementById('alert');
+    el.textContent = msg;
+    el.className = `alert ${type} show`;
+  }
+
+  function hideAlert() {
+    const el = document.getElementById('alert');
+    el.className = 'alert';
+  }
+
+  // ─── PASSWORD TOGGLE ────────────────────────────────────────────────────────
+  function togglePw(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁';
+    }
+  }
+
+  // ─── LOGIN ──────────────────────────────────────────────────────────────────
+  async function handleLogin(e) {
+    e.preventDefault();
+    hideAlert();
+    const btn   = document.getElementById('btn-login');
+    const email = document.getElementById('login-email').value.trim();
+    const pw    = document.getElementById('login-password').value;
+
+    btn.disabled = true;
+    btn.textContent = 'Signing in…';
+
+    const { error } = await sb.auth.signInWithPassword({ email, password: pw });
+
+    if (error) {
+      showAlert(error.message === 'Invalid login credentials'
+        ? 'Incorrect email or password. Please try again.'
+        : error.message);
+      btn.disabled = false;
+      btn.textContent = 'Sign In →';
+    }
+    // Success is handled by onAuthStateChange → redirect
+  }
+
+  // ─── SIGNUP ─────────────────────────────────────────────────────────────────
+  async function handleSignup(e) {
+    e.preventDefault();
+    hideAlert();
+    const btn     = document.getElementById('btn-signup');
+    const email   = document.getElementById('signup-email').value.trim();
+    const pw      = document.getElementById('signup-password').value;
+    const confirm = document.getElementById('signup-confirm').value;
+
+    if (pw !== confirm) {
+      showAlert('Passwords do not match.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Creating account…';
+
+    const { error } = await sb.auth.signUp({ email, password: pw });
+
+    if (error) {
+      showAlert(error.message);
+      btn.disabled = false;
+      btn.textContent = 'Create Account →';
+    } else {
+      showAlert('✓ Check your email to confirm your account, then sign in.', 'success');
+      btn.disabled = false;
+      btn.textContent = 'Create Account →';
+    }
+  }
+
+  // ─── PASSWORD RESET ─────────────────────────────────────────────────────────
+  async function handleReset(e) {
+    e.preventDefault();
+    hideAlert();
+    const btn   = document.getElementById('btn-reset');
+    const email = document.getElementById('reset-email').value.trim();
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const { error } = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/login.html'
+    });
+
+    if (error) {
+      showAlert(error.message);
+    } else {
+      showAlert('✓ Reset link sent — check your inbox.', 'success');
+    }
+    btn.disabled = false;
+    btn.textContent = 'Send Reset Link →';
+  }
+</script>
+</body>
+</html>

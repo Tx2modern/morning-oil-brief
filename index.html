@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
+<meta name="theme-color" content="#07090d">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://*.supabase.co;">
+<!-- AUTH GUARD: redirects unauthenticated users to login page -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function() {
+  var SUPABASE_URL  = 'YOUR_SUPABASE_PROJECT_URL';
+  var SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+  sb.auth.getSession().then(function(r) {
+    if (!r.data.session) window.location.href = 'login.html';
+  });
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🛢️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MOB · Morning Oil Brief">
+<meta property="og:title" content="AI Morning Oil Brief · Petroleum Intelligence">
+<meta property="og:description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
+<meta property="og:url" content="https://eia-dashboard.netlify.app/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AI Morning Oil Brief · Petroleum Intelligence">
+<meta name="twitter:description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Morning Oil Brief · Petroleum Intelligence</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0f1117; --panel: #1a1d24; --panel-2: #232730;
+  --border: #25272e; --border-soft: #1c1e24;
+  --text: #e4e7ec; --muted: #9aa0ac; --muted-2: #c1c5cf;
+  --build: #16a34a; --draw: #dc2626; --accent: #f59e0b;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: var(--text); font-size: 15px; line-height: 1.5;
+}
+table, .num { font-variant-numeric: tabular-nums; }
+.container { max-width: 1500px; margin: 0 auto; padding: 14px; }
+.header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.header h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
+.header .subtitle { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.update-info { text-align: right; font-size: 11px; color: var(--muted); line-height: 1.6; }
+.update-info strong { color: var(--text); font-weight: 500; }
+.update-info .pill {
+  display: inline-block; padding: 2px 9px;
+  background: rgba(22,163,74,0.15); color: #4ade80; border-radius: 10px;
+  font-weight: 500; font-size: 11px; letter-spacing: 0.4px; text-transform: uppercase;
+  margin-bottom: 4px; border: 1px solid rgba(22,163,74,0.35);
+}
+.kpi-strip { display: grid; grid-template-columns: repeat(6, 1fr) !important; gap: 8px; margin-bottom: 18px; }
+@media (max-width: 1280px) { .kpi-strip { grid-template-columns: repeat(3, 1fr) !important; } }
+@media (max-width: 900px)  { .kpi-strip { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 600px)  { .kpi-strip { grid-template-columns: 1fr !important; } }
+
+/* Landing minimal KPI cards — keep sparkline only, hide position pill + range bar */
+.kpi-strip-minimal .kpi-position,
+.kpi-strip-minimal .kpi-band { display: none !important; }
+.kpi-strip-minimal .kpi { padding: 16px 18px !important; gap: 10px !important; }
+.kpi-strip-minimal .kpi-value { font-size: 30px !important; }
+.kpi-strip-minimal .kpi-change-row { font-size: 14px !important; gap: 8px !important; }
+.kpi-strip-minimal .kpi-change { font-size: 15px !important; font-weight: 700 !important; }
+.kpi-strip-minimal .kpi-change-sub { font-size: 12px !important; }
+.kpi-strip-minimal .kpi-spark { height: 36px !important; margin-top: 4px; }
+
+/* Center KPI strips across all pages */
+.kpi-strip { max-width: 1300px; margin-left: auto !important; margin-right: auto !important; }
+
+/* KPI card redesign — gradient bg, sparkline, band indicator */
+.kpi-strip { grid-template-columns: repeat(6, 1fr); gap: 8px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+@media (max-width: 1280px) { .kpi-strip { grid-template-columns: repeat(3, 1fr) !important; } }
+@media (max-width: 900px)  { .kpi-strip { grid-template-columns: repeat(2, 1fr) !important; } }
+.kpi {
+  border-radius: 8px !important;
+  padding: 12px 13px !important;
+  position: relative; overflow: hidden;
+  background: var(--panel-2) !important;
+  border: 1px solid var(--border) !important;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s !important;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kpi::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--kpi-tint, transparent) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
+}
+.kpi::after {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--kpi-accent, transparent);
+}
+.kpi.build { --kpi-tint: rgba(22,163,74,0.22); --kpi-accent: #16a34a; }
+.kpi.draw  { --kpi-tint: rgba(220,38,38,0.22);  --kpi-accent: #dc2626; }
+.kpi.neutral { --kpi-tint: rgba(120,130,150,0.18); --kpi-accent: #6b7280; }
+.kpi:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.35); border-color: var(--kpi-accent); }
+.kpi > * { position: relative; z-index: 1; }
+.kpi-row { display: flex; justify-content: space-between; align-items: center; }
+.kpi-label {
+  font-size: 12px; font-weight: 700; color: var(--muted-2);
+  letter-spacing: -0.1px;
+}
+.kpi-tag {
+  font-size: 11px; padding: 3px 9px; border-radius: 999px;
+  background: var(--kpi-accent); color: #fff; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase;
+}
+.kpi-value {
+  font-size: 24px; font-weight: 700; color: var(--text);
+  letter-spacing: -0.5px; font-variant-numeric: tabular-nums;
+  line-height: 1; display: flex; align-items: baseline; gap: 4px;
+}
+.kpi-value-units {
+  font-size: 11px; font-weight: 500; color: var(--muted);
+  letter-spacing: 0.3px;
+}
+.kpi-change-row {
+  display: flex; align-items: center; gap: 6px; font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-change {
+  font-weight: 600; color: var(--kpi-accent);
+  display: inline-flex; align-items: center; gap: 3px;
+}
+.kpi-change-sub { color: var(--muted); font-size: 11px; }
+.kpi-position {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.6px;
+  padding: 3px 9px; border-radius: 999px;
+  background: var(--kpi-pos-bg, rgba(255,255,255,0.06));
+  color: var(--kpi-pos-fg, var(--muted-2));
+  border: 1px solid var(--kpi-pos-border, transparent);
+  margin-top: 4px;
+  align-self: flex-start;
+}
+.kpi-position.pos-below { --kpi-pos-bg: rgba(239,68,68,0.18); --kpi-pos-fg: #fca5a5; --kpi-pos-border: rgba(239,68,68,0.45); }
+.kpi-position.pos-near-lo { --kpi-pos-bg: rgba(251,146,60,0.16); --kpi-pos-fg: #fdba74; }
+.kpi-position.pos-mid { --kpi-pos-bg: rgba(255,255,255,0.07); --kpi-pos-fg: var(--muted-2); }
+.kpi-position.pos-near-hi { --kpi-pos-bg: rgba(34,197,94,0.16); --kpi-pos-fg: #86efac; }
+.kpi-position.pos-above { --kpi-pos-bg: rgba(34,197,94,0.18); --kpi-pos-fg: #86efac; --kpi-pos-border: rgba(34,197,94,0.45); }
+.kpi-spark {
+  height: 32px; width: 100%; opacity: 0.95; margin-top: 2px;
+}
+.kpi-band {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 5px;
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.3px;
+}
+.kpi-band-bar {
+  height: 8px; position: relative;
+  display: flex; align-items: center;
+}
+.kpi-band-track {
+  position: absolute; left: 0; right: 0; height: 6px; top: 1px;
+  background: rgba(255,255,255,0.05); border-radius: 3px;
+}
+.kpi-band-fill {
+  position: absolute; left: 0; right: 0; height: 6px; top: 1px;
+  background: linear-gradient(90deg, rgba(252,165,165,0.2), rgba(255,255,255,0.25), rgba(134,239,172,0.2));
+  border-radius: 3px;
+}
+.kpi-band-marker {
+  position: absolute; width: 10px; height: 10px;
+  background: #fbbf24; border-radius: 50%;
+  border: 2px solid #232730; top: -1px;
+  box-shadow: 0 0 8px rgba(251,191,36,0.6);
+  transform: translateX(-50%);
+}
+.kpi-band-marker.out-low {
+  background: #ef4444; left: -4px; transform: none;
+  box-shadow: 0 0 8px rgba(239,68,68,0.7);
+}
+.kpi-band-marker.out-low::before {
+  content: '◄'; position: absolute; left: -10px; top: -4px;
+  color: #ef4444; font-size: 12px;
+}
+.kpi-band-marker.out-high {
+  background: #22c55e; right: -4px; left: auto; transform: none;
+  box-shadow: 0 0 8px rgba(34,197,94,0.7);
+}
+.kpi-band-marker.out-high::after {
+  content: '►'; position: absolute; right: -10px; top: -4px;
+  color: #22c55e; font-size: 12px;
+}
+
+
+/* ────────────────────────────────────────────────────────────────────
+   MOB · 2026 redesign — Inter + JetBrains Mono, deep dark, mono accents
+   ──────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #07090d;
+  --panel: #0e1117;
+  --panel-2: #141821;
+  --border: #1d222d;
+  --border-soft: #161a23;
+  --text: #e6e8ec;
+  --muted: #7c8593;
+  --muted-2: #9aa3b1;
+  --accent: #f5a524;
+  --mob-ai: #5eead4;
+  --mob-text-dim: #c1c5cf;
+  --mob-border-strong: #2a3041;
+}
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  background:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    var(--bg) !important;
+  font-size: 14px !important;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1320px !important; padding: 22px 32px 60px !important; }
+@media (max-width: 720px) { .container { padding: 18px 18px 40px !important; } }
+
+/* ─── Top bar ─────────────────────────────────────────────────────── */
+.top-nav {
+  position: static !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  margin: 0 0 18px !important;
+}
+.top-nav .nav-inner {
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+  padding: 18px 32px 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+@media (max-width: 720px) {
+  .top-nav .nav-inner { padding: 18px 18px 0 !important; }
+}
+.top-nav .nav-links { display: flex; gap: 4px !important; }
+.top-nav .nav-link {
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  padding: 8px 14px !important;
+  color: var(--muted-2) !important;
+  background: transparent !important;
+  border-radius: 6px !important;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+.top-nav .nav-link:hover { color: var(--text) !important; background: var(--panel-2) !important; }
+.top-nav .nav-link.active { color: var(--accent) !important; background: transparent !important; }
+.top-nav .nav-link.nav-disabled { opacity: 0.35 !important; pointer-events: none; }
+
+/* MOB brand (left of top bar) — flat orange barrel + wordmark */
+.mob-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text);
+}
+.mob-brand .mob-mark {
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.mob-brand .mob-mark svg { width: 100%; height: 100%; display: block; }
+.mob-brand .mob-name { color: var(--text); }
+.mob-brand .mob-sep { color: var(--muted); margin: 0 2px; }
+.mob-brand .mob-tagline { color: var(--muted-2); }
+
+/* ─── Page title block (.header) — works for all pages ───────────── */
+.header {
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  border-bottom: 1px solid var(--border-soft) !important;
+  padding: 18px 0 26px !important;
+  margin-bottom: 26px !important;
+  gap: 24px !important;
+}
+.header > div:first-child { min-width: 0; }
+.header h1 {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 56px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1 !important;
+  color: var(--text) !important;
+  margin: 0 !important;
+}
+@media (max-width: 900px) { .header h1 { font-size: 40px !important; } }
+@media (max-width: 560px) { .header h1 { font-size: 32px !important; } }
+.header .subtitle {
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 12px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  margin-top: 10px !important;
+}
+.header .update-info {
+  /* margin-left: auto consumes leftover flex-row space so the block stays
+     pinned to the right edge of the header. Critical when the 56px h1
+     wraps the flex layout to a second row — without this the update-info
+     would land left-aligned on its own row. */
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+  text-align: right !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  line-height: 1.7 !important;
+}
+.header .update-info strong { color: var(--mob-text-dim) !important; font-weight: 500 !important; }
+.header .update-info .pill {
+  background: rgba(94,234,212,0.08) !important;
+  color: var(--mob-ai) !important;
+  border: 1px solid rgba(94,234,212,0.35) !important;
+  border-radius: 4px !important;
+  padding: 4px 10px !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+/* ─── Section panels — softer borders, larger radius ──────────────── */
+.section, .panel, .news-panel, .brief-panel, .insight, .ai-section {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+
+/* ─── Footer ──────────────────────────────────────────────────────── */
+footer {
+  margin-top: 56px !important;
+  padding-top: 18px !important;
+  border-top: 1px solid var(--border-soft) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  text-align: center !important;
+}
+
+/* ─── Interior KPI cards — adopt the MOB landing-card look ──────────
+   Black panel background with a 2px colored top hairline (red for
+   draw, green for build) instead of the full green/red panel fill +
+   left-side accent strip. Text colors adjusted for the dark bg.    */
+.kpi {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease !important;
+}
+.kpi.build { --kpi-status-color: #22c55e; background: var(--panel) !important; border-color: var(--border) !important; }
+.kpi.draw  { --kpi-status-color: #ef4444; background: var(--panel) !important; border-color: var(--border) !important; }
+.kpi.neutral { --kpi-status-color: var(--muted); background: var(--panel) !important; }
+
+/* Replace the gradient ::before tint with a 2px colored top hairline */
+.kpi::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 0 auto 0 !important;
+  height: 2px !important;
+  width: auto !important;
+  background: var(--kpi-status-color, transparent) !important;
+  opacity: 0.9 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+/* Hide the left-side accent strip */
+.kpi::after { display: none !important; }
+
+.kpi:hover {
+  transform: translateY(-2px);
+  border-color: var(--kpi-status-color, var(--mob-border-strong)) !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45) !important;
+}
+
+/* Text inside KPI cards on dark bg */
+.kpi-label {
+  color: var(--muted-2) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+}
+.kpi-value { color: var(--text) !important; }
+.kpi-value-units {
+  color: var(--muted) !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  letter-spacing: 0.12em !important;
+}
+.kpi-change-sub { color: var(--muted) !important; }
+
+/* DRAW / BUILD / UP / DOWN pill — now an outlined pill matching status */
+.kpi-tag {
+  background: transparent !important;
+  color: var(--kpi-status-color, var(--muted)) !important;
+  border: 1px solid var(--kpi-status-color, var(--muted)) !important;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.16em !important;
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+  padding: 3px 9px !important;
+}
+
+/* Change indicator inherits the status color */
+.kpi-change { color: var(--kpi-status-color, var(--muted)) !important; }
+
+/* Position pill (e.g., "Near 5Y high") — keep its own coloring but on dark bg */
+.kpi-position {
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  letter-spacing: 0.12em !important;
+}
+
+
+.title-block { padding: 14px 0 30px; }
+.title-block h1 {
+  margin: 0; font-size: 84px; font-weight: 600;
+  letter-spacing: -0.035em; line-height: 0.98; color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+@media (max-width: 900px)  { .title-block h1 { font-size: 56px; } }
+@media (max-width: 560px)  { .title-block h1 { font-size: 40px; } }
+.title-block .tagline {
+  margin-top: 18px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted);
+}
+.title-block .tagline strong { color: var(--mob-text-dim); font-weight: 500; }
+
+.mob-hero {
+  position: relative; overflow: hidden;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px 28px 26px;
+  margin-bottom: 44px;
+}
+.mob-hero::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(245,165,36,0.55) 30%, rgba(94,234,212,0.5) 70%, transparent 100%);
+}
+.mob-hero-head {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.mob-hero-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.mob-eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent);
+}
+.mob-pill-ai {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px;
+  color: var(--mob-ai);
+  background: rgba(94,234,212,0.08);
+  border: 1px solid rgba(94,234,212,0.35);
+}
+.mob-hero-stamp {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted);
+}
+.mob-hero-stamp .sep { color: var(--mob-border-strong); margin: 0 8px; }
+.mob-hero-stamp strong { color: var(--mob-text-dim); font-weight: 500; }
+.mob-hero-body { font-size: 15px; line-height: 1.65; color: var(--mob-text-dim); }
+.mob-hero-body strong { color: var(--text); font-weight: 600; }
+.mob-hero-body p { margin: 0 0 12px; }
+.mob-hero-body p:last-child { margin-bottom: 0; }
+
+.mob-section-h {
+  font-size: 22px; font-weight: 600;
+  letter-spacing: -0.012em; color: var(--text);
+  margin: 0 0 18px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.mob-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 1080px) { .mob-cards { grid-template-columns: 1fr; } }
+.mob-card {
+  position: relative; overflow: hidden;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 22px 18px;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.mob-card::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  background: var(--mob-card-accent, var(--muted));
+  opacity: 0.85;
+}
+.mob-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--mob-card-accent, var(--mob-border-strong));
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+}
+.mob-card--draw  { --mob-card-accent: #ef4444; }
+.mob-card--build { --mob-card-accent: #22c55e; }
+.mob-card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.mob-card-eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+}
+.mob-card-eyebrow .num { opacity: 0.55; margin-right: 6px; }
+.mob-card-pill {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px;
+  border: 1px solid var(--mob-card-accent, var(--muted));
+  color: var(--mob-card-accent, var(--muted));
+  background: rgba(255,255,255,0.01);
+  white-space: nowrap;
+}
+.mob-card-sub {
+  font-size: 14px; color: var(--muted-2); line-height: 1.4;
+}
+.mob-card-value-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; margin-top: 2px;
+}
+.mob-card-value {
+  font-size: 44px; font-weight: 600; letter-spacing: -0.025em;
+  color: var(--text); line-height: 1;
+  font-variant-numeric: tabular-nums;
+  display: flex; align-items: baseline; gap: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.mob-card-value .unit {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; font-weight: 500; color: var(--muted);
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.mob-card-change {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--mob-card-accent, var(--muted));
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.mob-card-change--neutral { color: var(--mob-text-dim) !important; }
+.mob-card-spark {
+  height: 64px; width: 100%;
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+  padding: 6px 4px 4px;
+}
+.mob-card-spark svg { width: 100%; height: 100%; display: block; }
+.mob-card-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px;
+  padding-top: 12px; border-top: 1px solid var(--border-soft);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.mob-stat {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+}
+.mob-stat .lbl { color: var(--muted); letter-spacing: 0.04em; }
+.mob-stat .val { color: var(--mob-text-dim); font-weight: 500; }
+.mob-stat .val.up   { color: #22c55e; }
+.mob-stat .val.down { color: #ef4444; }
+
+/* Market Read block */
+.section {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px 18px; margin-bottom: 14px;
+}
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.section-title { font-size: 14px; font-weight: 600; margin: 0; color: var(--text);
+  letter-spacing: -0.1px; display: inline-flex; align-items: center; gap: 10px; }
+.ai-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 999px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: #4ade80;
+  background: rgba(22,163,74,0.15);
+  border: 1px solid rgba(22,163,74,0.35);
+  animation: ai-badge-glow 3.6s ease-in-out infinite;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.ai-badge::before {
+  content: "✦"; font-size: 9px; line-height: 1; display: inline-block;
+  filter: drop-shadow(0 0 1px rgba(74,222,128,0.5));
+}
+@keyframes ai-badge-glow {
+  0%, 100% {
+    box-shadow: 0 0 2px rgba(74,222,128,0.25),
+                0 0 4px rgba(22,163,74,0.15);
+  }
+  50% {
+    box-shadow: 0 0 5px rgba(74,222,128,0.55),
+                0 0 11px rgba(22,163,74,0.30);
+  }
+}
+.section-subtitle { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: 8px; text-transform: none; letter-spacing: 0; }
+.badge { display: inline-block; font-size: 11px; font-weight: 700;
+  padding: 3px 8px; border-radius: 999px; vertical-align: 2px;
+  letter-spacing: 0.7px; text-transform: uppercase; margin-left: 6px; }
+.badge-ai { background: linear-gradient(90deg, rgba(167,139,250,0.18), rgba(96,165,250,0.18));
+  color: #c4b5fd; border: 1px solid rgba(167,139,250,0.4); }
+.market-read { font-size: 13.5px; line-height: 1.7; color: var(--muted-2); }
+.market-read strong { color: var(--text); }
+.market-read p { margin: 0 0 10px; }
+/* Section preview cards */
+.preview-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px;
+}
+@media (max-width: 1000px) { .preview-grid { grid-template-columns: 1fr; } }
+.preview-card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px;
+  text-decoration: none; color: var(--text);
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; overflow: hidden;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+.preview-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--pv-color, var(--accent));
+}
+.preview-crude  { --pv-color: #f59e0b; }
+.preview-margins { --pv-color: #16a34a; }
+.preview-curves  { --pv-color: #a78bfa; }
+.preview-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--pv-color);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.preview-disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+.preview-head { display: flex; justify-content: space-between; align-items: center; }
+.preview-label {
+  font-size: 12px; font-weight: 700; color: var(--pv-color);
+  letter-spacing: -0.1px;
+}
+.preview-arrow { font-size: 18px; color: var(--pv-color); }
+.preview-soon {
+  font-size: 11px; font-weight: 700;
+  padding: 2px 7px; border-radius: 999px;
+  background: rgba(255,255,255,0.08); color: var(--muted-2);
+  letter-spacing: 0.6px;
+}
+.preview-headline {
+  font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.3;
+}
+.preview-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.preview-cta {
+  margin-top: 4px; font-size: 12px; font-weight: 600;
+  color: var(--pv-color); letter-spacing: -0.1px;
+}
+footer {
+  margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--muted); text-align: center;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+/* ─── Hero ──────────────────────────────────────────────────────────── */
+.hero {
+  padding: 30px 4px 18px; text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(167,139,250,0.07) 0%, transparent 50%);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+.hero-eyebrow {
+  font-size: 12px; letter-spacing: 0.3px;
+  color: var(--muted); font-weight: 600; margin-bottom: 10px;
+}
+.hero-title {
+  font-size: 44px; font-weight: 700; line-height: 1.05;
+  letter-spacing: -1.2px; margin: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #d8dce4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media (max-width: 700px) {
+  .hero-title { font-size: 30px; letter-spacing: -0.6px; }
+  .hero { padding: 22px 4px 14px; }
+}
+
+/* ─── Hero numbers strip — 7 cards across, auto-wrap on small ─── */
+.hero-numbers {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 0;
+  padding: 18px 16px; margin-bottom: 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+.hero-stat {
+  text-align: center; padding: 4px 8px;
+  border-right: 1px solid var(--border);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-label {
+  font-size: 12px; letter-spacing: 0;
+  color: var(--muted); font-weight: 600; margin-bottom: 6px;
+}
+.hero-stat-value {
+  font-size: 26px; font-weight: 700; line-height: 1;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.4px;
+  color: var(--text);
+}
+.hero-stat-unit {
+  font-size: 11px; font-weight: 500; color: var(--muted-2);
+  letter-spacing: 0; margin-left: 2px;
+}
+.hero-stat-sub {
+  font-size: 10.5px; color: var(--muted); margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 1280px) { .hero-numbers { grid-template-columns: repeat(4, 1fr); } .hero-stat { border-right: none; border-bottom: 1px solid var(--border-soft); padding: 10px 8px; } }
+@media (max-width: 700px)  { .hero-numbers { grid-template-columns: repeat(2, 1fr); } .hero-stat-value { font-size: 22px; } }
+
+/* ─── Brief row (commentary + 3 stacked sparklines) ───────────────── */
+.brief-row {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 14px; margin-bottom: 26px;
+}
+@media (max-width: 1100px) { .brief-row { grid-template-columns: 1fr; } }
+.brief-panel { margin: 0; }
+.spark-stack { display: flex; flex-direction: column; gap: 10px; }
+.spark-card {
+  margin: 0; padding: 12px 14px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.15s;
+}
+.spark-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--sp-color, var(--accent));
+}
+.spark-inventory { --sp-color: #f59e0b; }
+.spark-margin    { --sp-color: #16a34a; }
+.spark-curve     { --sp-color: #a78bfa; }
+.spark-label {
+  font-size: 12px; letter-spacing: 0;
+  color: var(--muted-2); font-weight: 600; margin-bottom: 6px;
+}
+.spark-canvas-wrap { position: relative; height: 72px; }
+
+/* ─── News list ───────────────────────────────────────────────────── */
+.news-panel { padding: 16px 20px; }
+.news-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; }
+@media (max-width: 800px) { .news-list { grid-template-columns: 1fr; } }
+.news-item {
+  display: block; padding: 10px 12px 11px;
+  border-radius: 6px; text-decoration: none; color: inherit;
+  border: 1px solid transparent; border-left: 3px solid var(--border);
+  background: rgba(255,255,255,0.015);
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.news-item:hover {
+  background: rgba(96,165,250,0.06);
+  border-left-color: #60a5fa; transform: translateX(2px);
+}
+.news-title {
+  display: block; font-size: 13px; font-weight: 500;
+  color: var(--text); line-height: 1.45; margin-bottom: 4px;
+}
+.news-meta {
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.2px;
+}
+.news-time { color: var(--muted-2); }
+
+/* ─── Explore title ───────────────────────────────────────────────── */
+.explore-title {
+  font-size: 15px; letter-spacing: -0.1px;
+  color: var(--muted-2); font-weight: 700; margin: 26px 0 12px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border-soft);
+}
+
+/* ─── Why-this-exists block ───────────────────────────────────────── */
+.why-block {
+  display: flex; align-items: center; gap: 18px;
+  padding: 22px 24px; margin-top: 28px;
+  background: linear-gradient(135deg, rgba(96,165,250,0.08) 0%, rgba(167,139,250,0.04) 100%);
+  border: 1px solid rgba(96,165,250,0.18);
+  border-radius: 12px;
+}
+.why-icon {
+  font-size: 36px; line-height: 1; flex-shrink: 0;
+  filter: drop-shadow(0 0 12px rgba(96,165,250,0.4));
+}
+.why-text {
+  font-size: 13.5px; color: var(--muted-2); line-height: 1.6;
+}
+.why-text strong { color: var(--text); font-weight: 600; }
+
+/* ─── Data sources ────────────────────────────────────────────────── */
+.data-sources {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin-top: 22px; padding: 14px 4px;
+  border-top: 1px solid var(--border-soft);
+}
+.data-source-label {
+  font-size: 12px; letter-spacing: 0;
+  color: var(--muted); font-weight: 600; margin-right: 6px;
+}
+.data-source-pill {
+  font-size: 11px; padding: 4px 10px; border-radius: 999px;
+  background: var(--panel-2); border: 1px solid var(--border);
+  color: var(--muted-2); font-weight: 500;
+}
+</style>
+</head>
+<body>
+<nav class="top-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <div class="mob-brand"><span class="mob-mark"><svg width="28" height="32" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;overflow:visible"><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="#f0b056" opacity="0.95"/><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="none" stroke="#f0b056" stroke-width="1.2"/><ellipse cx="14" cy="4.6" rx="10.8" ry="2.2" fill="#07090d" stroke="#f0b056" stroke-width="1.1"/><path d="M 2.5 10.6 Q 14 12.4 25.5 10.6" fill="none" stroke="#07090d" stroke-width="1.1"/><path d="M 2.5 21.4 Q 14 23.2 25.5 21.4" fill="none" stroke="#07090d" stroke-width="1.1"/><text x="14" y="18.2" text-anchor="middle" fill="#07090d" font-family="'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace" font-size="6" font-weight="700" letter-spacing="0.4">OIL</text></svg></span><span class="mob-name">MOB</span><span class="mob-sep">·</span><span class="mob-tagline">Morning Oil Brief</span></div>
+    <div class="nav-links"><a class="nav-link active" href="index.html">Home</a><a class="nav-link" href="margins.html">Cracks · Prices</a><a class="nav-link" href="curves.html">Forward Curves</a><a class="nav-link" href="inventory.html">Inventories</a><a class="nav-link" href="news.html">News</a><a class="nav-link" href="x_feed.html">X Feed</a></div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ─── Title ──────────────────────────────────────────────── -->
+  <div class="title-block">
+    <h1>Morning Oil Brief</h1>
+    <div class="tagline"><strong>Petroleum intelligence</strong> · Yesterday's NYMEX settlement, decoded each morning</div>
+  </div>
+
+  <!-- ─── Today's Read ───────────────────────────────────────── -->
+  <section class="mob-hero">
+    <div class="mob-hero-head">
+      <div class="mob-hero-left">
+        <span class="mob-eyebrow">Today's Read</span><span class="mob-pill-ai">AI Generated</span>
+      </div>
+      <div class="mob-hero-stamp">
+        <span>Prices thru:</span><span class="sep">·</span><strong>May 29, 2026</strong>
+        <br>
+        <span>Inventories thru:</span><span class="sep">·</span><strong>May 22, 2026</strong>
+        <br>
+        <span>Next refresh</span><span class="sep">·</span><strong>~5:00 AM ET</strong><span class="sep">·</span><strong>June 2, 2026</strong>
+      </div>
+    </div>
+    
+    <div class="mob-hero-body" id="market-read"></div>
+  </section>
+
+  <!-- ─── Explore the data ───────────────────────────────────── -->
+  <h2 class="mob-section-h">Explore the data</h2>
+  <div class="mob-cards">
+
+    <a class="mob-card mob-card--draw" href="margins.html">
+      <div class="mob-card-head">
+        <span class="mob-card-eyebrow"><span class="num">01</span> Cracks · Prices</span>
+        <span class="mob-card-pill">▼ Lower</span>
+      </div>
+      <div class="mob-card-sub">3-2-1 crack $49.71/bbl · WTI $87.36</div>
+      <div class="mob-card-value-row">
+        <div class="mob-card-value">$49.71<span class="unit">3-2-1 / bbl</span></div>
+        <div class="mob-card-change">▼ −1.24 w/w</div>
+      </div>
+      <div class="mob-card-spark"><svg viewBox="0 0 320 56" preserveAspectRatio="none"><defs><linearGradient id="g7e5532" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.32"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path d="M0.0,50.7 L11.0,53.2 L22.1,42.1 L33.1,16.6 L44.1,13.7 L55.2,13.4 L66.2,13.2 L77.2,20.0 L88.3,14.8 L99.3,7.3 L110.3,25.7 L121.4,20.4 L132.4,19.3 L143.4,22.4 L154.5,19.9 L165.5,9.6 L176.6,8.1 L187.6,2.8 L198.6,18.1 L209.7,23.7 L220.7,21.6 L231.7,24.6 L242.8,25.6 L253.8,22.9 L264.8,34.1 L275.9,23.4 L286.9,48.9 L297.9,44.2 L309.0,38.0 L320.0,43.1 L 320.0,56.0 L 0,56.0 Z" fill="url(#g7e5532)"/><path d="M0.0,50.7 L11.0,53.2 L22.1,42.1 L33.1,16.6 L44.1,13.7 L55.2,13.4 L66.2,13.2 L77.2,20.0 L88.3,14.8 L99.3,7.3 L110.3,25.7 L121.4,20.4 L132.4,19.3 L143.4,22.4 L154.5,19.9 L165.5,9.6 L176.6,8.1 L187.6,2.8 L198.6,18.1 L209.7,23.7 L220.7,21.6 L231.7,24.6 L242.8,25.6 L253.8,22.9 L264.8,34.1 L275.9,23.4 L286.9,48.9 L297.9,44.2 L309.0,38.0 L320.0,43.1" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+      <div class="mob-card-stats">
+        <div class="mob-stat"><span class="lbl">WTI</span><span class="val">$87.36</span></div>
+        <div class="mob-stat"><span class="lbl">Gasoline</span><span class="val">$43.96</span></div>
+        <div class="mob-stat"><span class="lbl">Distillate</span><span class="val">$61.21</span></div>
+        <div class="mob-stat"><span class="lbl">3-2-1 w/w</span><span class="val down">▼ −1.24</span></div>
+      </div>
+    </a>
+
+    <a class="mob-card mob-card--draw" href="curves.html">
+      <div class="mob-card-head">
+        <span class="mob-card-eyebrow"><span class="num">02</span> Forward Curves</span>
+        <span class="mob-card-pill">▼ Lower</span>
+      </div>
+      <div class="mob-card-sub">WTI backwardation · M1–M2 $+2.06/bbl</div>
+      <div class="mob-card-value-row">
+        <div class="mob-card-value">$+2.06<span class="unit">M1–M2 / bbl</span></div>
+        <div class="mob-card-change">▼ −1.39 w/w</div>
+      </div>
+      <div class="mob-card-spark"><svg viewBox="0 0 320 56" preserveAspectRatio="none"><defs><linearGradient id="g79bc65" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.32"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path d="M0.0,53.2 L80.0,2.8 L160.0,24.6 L240.0,35.5 L320.0,35.9 L 320.0,56.0 L 0,56.0 Z" fill="url(#g79bc65)"/><path d="M0.0,53.2 L80.0,2.8 L160.0,24.6 L240.0,35.5 L320.0,35.9" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+      <div class="mob-card-stats">
+        <div class="mob-stat"><span class="lbl">Front M1</span><span class="val">$87.36</span></div>
+        <div class="mob-stat"><span class="lbl">M2</span><span class="val">$85.30</span></div>
+        <div class="mob-stat"><span class="lbl">Spread</span><span class="val down">$+2.06</span></div>
+        <div class="mob-stat"><span class="lbl">Shape</span><span class="val">Backwardation</span></div>
+      </div>
+    </a>
+
+    <a class="mob-card mob-card--draw" href="inventory.html">
+      <div class="mob-card-head">
+        <span class="mob-card-eyebrow"><span class="num">03</span> Inventories</span>
+        <span class="mob-card-pill">▼ Draw</span>
+      </div>
+      <div class="mob-card-sub">Total stocks drew 7.3 mb · refinery util 94.5%</div>
+      <div class="mob-card-value-row">
+        <div class="mob-card-value">−7.3<span class="unit">mb Total Draw</span></div>
+        <div class="mob-card-change mob-card-change--neutral">94.5% Refinery Util</div>
+      </div>
+      <div class="mob-card-spark"><svg viewBox="0 0 320 56" preserveAspectRatio="none"><defs><linearGradient id="g6d70f4" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.32"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path d="M0.0,11.3 L29.1,10.9 L58.2,4.7 L87.3,2.8 L116.4,4.6 L145.5,13.2 L174.5,17.0 L203.6,29.6 L232.7,34.8 L261.8,40.7 L290.9,47.6 L320.0,53.2 L 320.0,56.0 L 0,56.0 Z" fill="url(#g6d70f4)"/><path d="M0.0,11.3 L29.1,10.9 L58.2,4.7 L87.3,2.8 L116.4,4.6 L145.5,13.2 L174.5,17.0 L203.6,29.6 L232.7,34.8 L261.8,40.7 L290.9,47.6 L320.0,53.2" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+      <div class="mob-card-stats">
+        <div class="mob-stat"><span class="lbl">Crude</span><span class="val down">▼ 3.3 mb</span></div>
+        <div class="mob-stat"><span class="lbl">Gasoline</span><span class="val down">▼ 2.6 mb</span></div>
+        <div class="mob-stat"><span class="lbl">Distillate</span><span class="val down">▼ 2.1 mb</span></div>
+        <div class="mob-stat"><span class="lbl">Jet</span><span class="val up">▲ +0.7 mb</span></div>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    MOB · Morning Oil Brief · Refreshed MAY 31, 2026 · Trade data through May 29, 2026
+  </footer>
+</div>
+
+<script>
+const SNAPSHOT = {"kpi": [{"id": "wti", "label": "WTI", "last": 87.36, "change": -1.54, "units": "$/bbl", "frequency": "daily", "spark": [83.85, 89.61, 92.13, 92.96, 95.85, 94.4, 96.37, 99.93, 106.88, 105.07, 101.94, 106.42, 102.27, 95.08, 94.81, 95.42, 98.07, 102.18, 101.02, 101.17, 105.42, 108.66, 107.77, 98.26, 96.35, 96.6, 93.89, 88.68, 88.9, 87.36], "yoy": [], "band_lo": 60.79, "band_hi": 118.87, "contract": "2026-07"}, {"id": "brent", "label": "Brent", "last": 92.05, "change": -1.66, "units": "$/bbl", "frequency": "daily", "spark": [90.38, 95.48, 98.48, 101.91, 105.07, 105.33, 108.23, 111.26, 118.03, 114.01, 108.17, 114.44, 109.87, 101.27, 100.06, 101.29, 104.21, 107.77, 105.63, 105.72, 109.26, 112.1, 111.28, 105.02, 102.58, 103.54, 99.58, 94.29, 93.71, 92.05], "yoy": [], "band_lo": 63.9, "band_hi": 119.72, "contract": "2026-07"}, {"id": "crack321", "label": "3-2-1 Crack", "last": 49.71, "change": -1.24, "units": "$/bbl", "frequency": "daily", "spark": [47.85, 47.23, 49.95, 56.19, 56.92, 56.98, 57.02, 55.36, 56.65, 58.47, 53.98, 55.27, 55.53, 54.78, 55.39, 57.92, 58.28, 59.58, 55.84, 54.47, 54.98, 54.24, 54.0, 54.65, 51.92, 54.54, 48.29, 49.43, 50.95, 49.71], "yoy": [], "band_lo": 21.98, "band_hi": 60.12}, {"id": "crackgas", "label": "Gasoline Crack", "last": 43.96, "change": -0.92, "units": "$/bbl", "frequency": "daily", "spark": [42.35, 41.3, 42.68, 48.07, 49.56, 51.03, 50.25, 49.61, 50.25, 53.33, 49.06, 50.58, 49.8, 50.21, 50.34, 52.7, 53.12, 53.12, 50.97, 50.27, 50.06, 49.29, 47.47, 48.21, 45.59, 48.46, 41.37, 42.94, 44.88, 43.96], "yoy": [], "band_lo": 23.26, "band_hi": 59.72}, {"id": "crackdist", "label": "Diesel Crack", "last": 61.21, "change": -1.88, "units": "$/bbl", "frequency": "daily", "spark": [58.84, 59.11, 64.48, 72.43, 71.65, 68.87, 70.57, 66.86, 69.47, 68.74, 63.81, 64.65, 67.0, 63.92, 65.49, 68.34, 68.61, 72.49, 65.58, 62.87, 64.82, 64.15, 67.05, 67.52, 64.58, 66.69, 62.12, 62.41, 63.09, 61.21], "yoy": [], "band_lo": 19.42, "band_hi": 60.9}, {"id": "crackjet", "label": "Jet Crack", "last": 62.68, "change": -4.42, "units": "$/bbl", "frequency": "daily", "spark": [60.61, 65.72, 65.83, 60.8, 60.48, 68.56, 71.56, 71.88, 70.59, 69.24, 66.52, 71.98, 71.41, 66.57, 65.09, 69.98, 65.6, 69.45, 68.79, 71.1, 73.35, 68.39, 66.49, 67.12, 63.77, 69.69, 68.79, 67.76, 67.1, 62.68], "yoy": [], "band_lo": 7.21, "band_hi": 53.4}], "marketRead": "<strong>Headline:</strong> WTI crude settled down $1.54 at $87.36 Friday, marking its largest weekly decline in seven weeks, as reports of an anticipated U.S.-Iran nuclear deal sent markets into risk-off mode despite last week's tight WPSR showing a 3.3 mb crude draw and refinery utilization surging to 94.5%. Investment banks are warning that June\u2013August supply could overwhelm current positioning, particularly if Iranian barrels return to market while U.S. refiners maintain peak runs. The Brent\u2013WTI spread narrowed to $4.69, squeezing the export arbitrage at precisely the wrong moment\u2014domestic crude is clearing via record refinery throughput, but the spread compression will pressure U.S. exports lower and invite builds in the weeks ahead unless WTI falls further to reopen the window.\n<strong>Crude & products:</strong> The weekly EIA report for the week ending May 22, 2026 showed U.S. crude stocks fell 3.3 mb to 441.7 mb, driven by a 2.9 percentage-point jump in refinery utilization to 94.5%\u2014the highest seasonal run rate in over a year. Gasoline inventories dropped 2.6 mb to 211.6 mb and distillate fell 2.1 mb to 100.8 mb despite the refining ramp, signaling robust product clearing into the summer driving season. The utilization spike was concentrated in PADD II and PADD IV, reflecting post-turnaround restarts in the Midwest and Rockies. Jet fuel bucked the trend with a 0.7 mb build to 44.9 mb, though total petroleum stocks shed 7.3 mb to 799.0 mb. API data for the following week (ending May 29) reportedly showed a 2.8 mb crude draw, suggesting the tightness extended into the close of May, though geopolitical headlines quickly overshadowed the inventory fundamentals.\n<strong>Refining margins:</strong> The 3-2-1 crack settled at $49.71, down modestly from earlier in the week but still elevated by historical standards as U.S. refiners capture peak-summer demand. Gasoline crack stood at $43.96 (RBOB settled $3.0344/gal, off 7 cents), while distillate and jet cracks remained robust at $61.21 and $62.68 respectively (ULSD $3.4886/gal, down 6 cents). The strength in middle-distillate cracks reflects tight diesel inventories at 100.8 mb\u2014well below the five-year average\u2014even as run rates hit multi-year highs. However, the forward curve is pricing in relief: ULSD M1\u2013M12 backwardation widened to $25.75/bbl and RBOB to $19.69/bbl, indicating the market expects summer tightness to resolve sharply into autumn as refinery maintenance cycles begin and demand seasonally softens.\n<strong>Curve structure:</strong> WTI M1\u2013M12 backwardation steepened to $13.52, while Brent M1\u2013M12 held at $13.12, underscoring front-month scarcity despite the Iran deal chatter. WTI M1\u2013M2 at $2.06 and Brent M1\u2013M2 at $0.93 signal near-term tightness, though the pronounced steepening in outer months suggests skepticism that spot strength will persist once incremental supply arrives. The narrow Brent\u2013WTI spread of $4.69 reflects WTI strength relative to global benchmarks\u2014a function of domestic refinery demand\u2014but that spread level undermines the U.S. export arbitrage. Gulf Coast loadings will become uneconomic unless WTI falls or Brent rallies, which means incremental barrels will stay onshore, pressuring Cushing and PADD III stocks higher in June absent a sharp WTI correction.\n<strong>News & geopolitics:</strong> The dominant narrative is the anticipated U.S.-Iran deal, with multiple investment banks flagging that markets are \"severely disconnected from reality\" and warning of significant supply pressure June\u2013August if sanctions relief unlocks 1+ mbd of Iranian exports. Oil logged its biggest weekly drop in seven weeks\u2014down 11% by some measures\u2014and hit a six-week low Friday on ceasefire hopes. Meanwhile, Japan's April crude imports plummeted 65.7% to the lowest since 1979 amid Middle East supply disruptions, underscoring the demand destruction already occurring in Asia. Saudi Arabia is expected to cut July OSPs for Asia in response to weak demand, per Reuters surveys, a signal that OPEC+ is reading the same softening tea leaves. On the physical side, Gulf Coast export infrastructure continues to expand\u2014one regional port has become America's crude export capital\u2014but the narrowing Brent\u2013WTI spread threatens to idle that capacity just as Iranian supply looms. The setup for June is asymmetric: geopolitical relief could bring supply, but the refinery-driven inventory draws that supported May's rally are unlikely to repeat at 94.5% utilization, leaving WTI vulnerable to a test of mid-$80s support if the Iran deal materializes.", "shortBrief": "<strong>Headline:</strong> WTI crude settled down $1.54 at $87.36 Friday, marking its largest weekly decline in seven weeks, as reports of an anticipated U.S.-Iran nuclear deal sent markets into risk-off mode despite last week's tight WPSR showing a 3.3 mb crude draw and refinery utilization surging to 94.5%. Investment banks are warning that June\u2013August supply could overwhelm current positioning, particularly if Iranian barrels return to market while U.S. refiners maintain peak runs. The Brent\u2013WTI spread narrowed to $4.69, squeezing the export arbitrage at precisely the wrong moment\u2014domestic crude is clearing via record refinery throughput, but the spread compression will pressure U.S. exports lower and invite builds in the weeks ahead unless WTI falls further to reopen the window.\n<strong>Crude & products:</strong> The weekly EIA report for the week ending May 22, 2026 showed U.S. crude stocks fell 3.3 mb to 441.7 mb, driven by a 2.9 percentage-point jump in refinery utilization to 94.5%\u2014the highest seasonal run rate in over a year. Gasoline inventories dropped 2.6 mb to 211.6 mb and distillate fell 2.1 mb to 100.8 mb despite the refining ramp, signaling robust product clearing into the summer driving season. The utilization spike was concentrated in PADD II and PADD IV, reflecting post-turnaround restarts in the Midwest and Rockies. Jet fuel bucked the trend with a 0.7 mb build to 44.9 mb, though total petroleum stocks shed 7.3 mb to 799.0 mb. API data for the following week (ending May 29) reportedly showed a 2.8 mb crude draw, suggesting the tightness extended into the close of May, though geopolitical headlines quickly overshadowed the inventory fundamentals.\n<strong>Refining margins:</strong> The 3-2-1 crack settled at $49.71, down modestly from earlier in the week but still elevated by historical standards as U.S. refiners capture peak-summer demand. Gasoline crack stood at $43.96 (RBOB settled $3.0344/gal, off 7 cents), while distillate and jet cracks remained robust at $61.21 and $62.68 respectively (ULSD $3.4886/gal, down 6 cents). The strength in middle-distillate cracks reflects tight diesel inventories at 100.8 mb\u2014well below the five-year average\u2014even as run rates hit multi-year highs. However, the forward curve is pricing in relief: ULSD M1\u2013M12 backwardation widened to $25.75/bbl and RBOB to $19.69/bbl, indicating the market expects summer tightness to resolve sharply into autumn as refinery maintenance cycles begin and demand seasonally softens."};
+// Render the (trimmed) market read into the hero body — first 3 paragraphs.
+(function() {
+  const el = document.getElementById('market-read');
+  if (!el) return;
+  const src = SNAPSHOT.shortBrief || SNAPSHOT.marketRead || '';
+  const paras = src.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 3);
+  el.innerHTML = paras.map(p => '<p>' + p + '</p>').join('');
+})();
+</script>
+</body>
+</html>
