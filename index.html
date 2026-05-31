@@ -9,8 +9,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function() {
-  var SUPABASE_URL  = 'YOUR_SUPABASE_PROJECT_URL';
-  var SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
+  var SUPABASE_URL  = 'https://ohagroxyqkoygxdkbjvn.supabase.co';
+  var SUPABASE_ANON = 'sb_publishable_B88mNC5uZLnWjVqShctogg_wDh8QgEw';
   var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
   sb.auth.getSession().then(function(r) {
     if (!r.data.session) window.location.href = 'login.html';
