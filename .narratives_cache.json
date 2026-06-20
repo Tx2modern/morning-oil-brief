@@ -1,0 +1,13 @@
+{
+  "key": "ac5f5147e005546fb768aa9654908724",
+  "value": {
+    "market_read": "<strong>Headline:</strong> Crude -7.97 mb and gasoline +3.36 mb drew while distillate built 1.50 mb and jet built 0.44 mb. U.S. refinery utilization climbed to 94.7% (+0.20 pp w/w).\n<strong>Driver:</strong> PADD IV refinery utilization snapped +12.60 pp to 90.9%, the headline supply-side mover this week. <strong>Cushing fell to 22.4 mb</strong> (-0.58 mb w/w; -6.68 mb over 5 weeks) — operational tank-bottom is ~25 mb. Refiner crude inputs climbed 0.65 mb/d to 16.97 mb/d.\n<strong>Trade flows:</strong> Crude exports averaged 5.07 mb/d on 4-week basis (-0.08 mb/d vs prior 4-week window — multi-year high pace) while crude imports fell to 5.65 mb/d (-0.21 mb/d). Gasoline demand 4-wk avg 8.90 mb/d (-0.05 mb/d w/w) as driving season ramps.\n<strong>Watch next week:</strong> Memorial Day gasoline pull, Cushing trajectory vs 25 mb operational floor (22.4 mb currently — within -2.6 mb of the line), June 1 Atlantic hurricane season start with PADD III running near 98.1% capacity, and whether crude exports can sustain the 5.1 mb/d pace.",
+    "padd": {
+      "padd1": "<strong>Gasoline built 3.40 mb</strong>, refinery utilization eased -1.90 pp to 83.5%. Distillate also drew 1.46 mb. Watch NY Harbor RBOB structure and Colonial Pipeline nominations into Memorial Day.",
+      "padd2": "<strong>Distillate built 1.42 mb</strong>, refinery utilization climbed +1.20 pp to 97.1%. Crude also drew 0.84 mb. <strong>Cushing now at 22.4 mb</strong> (-0.58 mb w/w) — only -2.6 mb above the ~25 mb operational floor; watch WTI prompt structure.",
+      "padd3": "<strong>Crude drew 6.66 mb</strong>; refinery utilization steady at 98.1%. Distillate also built 1.29 mb. Hurricane risk window opens June 1 with refineries near peak; watch LOOP sour differentials and Asian crude buying pace.",
+      "padd4": "<strong>Crude drew 1.03 mb</strong>, refinery utilization climbed +12.60 pp to 90.9%. Bakken/DJ basin differentials should track PADD IV crude demand recovery.",
+      "padd5": "<strong>Crude built 1.02 mb</strong>, refinery utilization climbed +0.70 pp to 82.3%. CARB-spec isolation, ongoing Phillips 66 Rodeo conversion impact, and LA Basin margins remain the swing factors."
+    }
+  }
+}

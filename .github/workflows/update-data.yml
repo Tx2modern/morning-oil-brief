@@ -1,0 +1,47 @@
+name: Update Data & Build
+
+on:
+  schedule:
+    # 7 PM ET weekdays (after NYMEX close ~6:30 PM ET) = 23:00 UTC Mon-Fri
+    - cron: '0 23 * * 1-5'
+    # 11 AM ET Thursdays (after Wednesday EIA WPSR 10:30 AM ET release) = 15:00 UTC Thu
+    - cron: '0 15 * * 4'
+  workflow_dispatch:
+
+jobs:
+  update-and-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install yfinance
+
+      - name: Refresh prices & forward curves
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python3 refresh_prices.py
+
+      - name: Build all HTML pages
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SITE_BASE_URL: https://www.morningoilbrief.com
+          CHAT_ENDPOINT_URL: ${{ vars.CHAT_ENDPOINT_URL }}
+        run: python3 build_index.py
+
+      - name: Commit & push updated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add prices_data.json index.html margins.html curves.html news.html inventory.html .curves_cache.json .margins_cache.json .morning_brief_cache.json .narratives_cache.json
+          git diff --staged --quiet || git commit -m "chore: daily data refresh [skip ci]"
+          git push
