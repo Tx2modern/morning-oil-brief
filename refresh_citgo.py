@@ -100,8 +100,9 @@ def summarize(text, author_name):
 
     prompt = (
         f'This X post by {author_name} mentions CITGO or Venezuela energy:\n\n"{text}"\n\n'
-        'Write exactly 1 sentence, analyst-style, summarizing the key implication '
-        'for CITGO, Venezuelan oil, or US refining. Be factual. No quotes.'
+        'If the post is not in English, translate it to English first. '
+        'Then write exactly 1 sentence, analyst-style, summarizing the key implication '
+        'for CITGO, Venezuelan oil, or US refining. Be factual. No quotes. Always respond in English.'
     )
     payload = json.dumps({
         'model': 'claude-haiku-4-5-20251001',

@@ -97,7 +97,7 @@ TRACKED_ACCOUNTS = {
     'ENERGY':           ('US Dept of Energy',    'Official'),
 }
 
-MAX_POSTS_PER_ACCOUNT = 5
+MAX_POSTS_PER_ACCOUNT = 2
 MAX_TOTAL_POSTS = 60
 
 
