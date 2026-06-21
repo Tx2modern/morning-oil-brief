@@ -334,6 +334,12 @@ function timeAgo(dateStr) {
   return Math.floor(diff/1440) + 'd ago';
 }
 
+function postUrl(post) {
+  if (post.url) return post.url;
+  const handle = (post.author?.userName || '').replace('@', '');
+  return `https://x.com/${handle}/status/${post.id}`;
+}
+
 function renderCitgo() {
   const posts = CITGO_DATA.posts || [];
   const container = document.getElementById('feed-container');
@@ -363,12 +369,12 @@ function renderCitgo() {
       <div class="x-grid">
         ${posts.map((post, i) => {
           const handle = (post.author?.userName || '').replace('@','');
-          const url = `https://x.com/${handle}/status/${post.id}`;
+          const url = postUrl(post);
           const eng = `♥ ${formatNum(post.likeCount)} · ↺ ${formatNum(post.retweetCount)}`;
           const isTop = i === 0;
           return `
           <a class="x-item${isTop ? ' top-item' : ''}" href="${url}" target="_blank" rel="noopener">
-            <div class="x-summary">${(post.summary||post.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}${isTop ? '<span class="x-top-badge">Top</span>' : ''}</div>
+            <div class="x-summary">${(post.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}${isTop ? '<span class="x-top-badge">Top</span>' : ''}</div>
             <div class="x-meta">
               <span class="handle">@${handle}</span>
               <span class="dot">·</span>
@@ -428,7 +434,7 @@ function render() {
       <div class="x-grid">
         ${items.map(post => {
           const handle = (post.author?.userName || '').replace('@','');
-          const url = `https://x.com/${handle}/status/${post.id}`;
+          const url = postUrl(post);
           const isTop = topIds.has(post.id);
           const eng = `♥ ${formatNum(post.likeCount)} · ↺ ${formatNum(post.retweetCount)}`;
           return `
