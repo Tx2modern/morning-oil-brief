@@ -29,7 +29,6 @@ if not BEARER_TOKEN:
     print('ERROR: X_BEARER_TOKEN environment variable not set.', file=sys.stderr)
     sys.exit(1)
 
-# Accounts to track — username: display name
 TRACKED_ACCOUNTS = {
     'JavierBlas':    'Javier Blas',
     'Reuters':       'Reuters',
@@ -73,7 +72,6 @@ def get_recent_tweets(user_id, max_results=10):
 
 
 def summarize(text, display_name):
-    """Generate a 1-2 sentence market-focused summary via Anthropic."""
     if not ANTHROPIC_KEY:
         return text[:200] + ('...' if len(text) > 200 else '')
 
@@ -104,6 +102,27 @@ def summarize(text, display_name):
     except Exception as e:
         print(f'    summary API error: {e}', file=sys.stderr)
         return text[:200]
+
+
+def patch_x_feed_html(payload):
+    if not os.path.exists(X_FEED_HTML):
+        return
+    with open(X_FEED_HTML, 'r', encoding='utf-8') as f:
+        html = f.read()
+    new_const = 'const FEED_DATA = ' + json.dumps(payload, separators=(',', ':')) + ';'
+    patched, count = re.subn(
+        r'const FEED_DATA = \{.*?\};',
+        lambda m: new_const,
+        html,
+        count=1,
+        flags=re.DOTALL,
+    )
+    if count:
+        with open(X_FEED_HTML, 'w', encoding='utf-8') as f:
+            f.write(patched)
+        print(f'Patched {X_FEED_HTML}')
+    else:
+        print('WARNING: FEED_DATA pattern not found in x_feed.html', file=sys.stderr)
 
 
 def main():
@@ -148,23 +167,7 @@ def main():
         json.dump(payload, f, indent=2)
     print(f'\nWrote {OUT_PATH} ({os.path.getsize(OUT_PATH):,} bytes), {len(posts)} posts')
 
-    if os.path.exists(X_FEED_HTML):
-        with open(X_FEED_HTML, 'r', encoding='utf-8') as f:
-            html = f.read()
-             new_const = 'const FEED_DATA = ' + json.dumps(payload, separators=(',', ':')) + ';'
-        patched, count = re.subn(
-            r'const FEED_DATA = \{.*?\};',
-            lambda m: new_const,
-            html,
-            count=1,
-            flags=re.DOTALL,
-        )
-        if count:
-            with open(X_FEED_HTML, 'w', encoding='utf-8') as f:
-                f.write(patched)
-            print(f'Patched {X_FEED_HTML}')
-        else:
-            print('WARNING: FEED_DATA pattern not found in x_feed.html', file=sys.stderr)
+    patch_x_feed_html(payload)
 
     if errors:
         print(f'Failed accounts: {errors}', file=sys.stderr)
