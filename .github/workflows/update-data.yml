@@ -52,6 +52,12 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 refresh_citgo.py
 
+      - name: Refresh wiki context from LLM-wiki
+        continue-on-error: true
+        env:
+          WIKI_GITHUB_TOKEN: ${{ secrets.WIKI_GITHUB_TOKEN }}
+        run: python3 refresh_wiki_context.py --github-repo tx2modern/llm-wiki
+
       - name: Build all HTML pages
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -63,6 +69,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add eia_data.json prices_data.json news_data.json x_feed_data.json index.html margins.html curves.html news.html inventory.html x_feed.html .curves_cache.json .margins_cache.json .morning_brief_cache.json .narratives_cache.json
+          git add eia_data.json prices_data.json news_data.json x_feed_data.json wiki_context.json index.html margins.html curves.html news.html inventory.html x_feed.html .curves_cache.json .margins_cache.json .morning_brief_cache.json .narratives_cache.json
           git diff --staged --quiet || git commit -m "chore: daily data refresh [skip ci]"
           git push
