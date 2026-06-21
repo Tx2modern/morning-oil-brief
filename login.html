@@ -422,17 +422,21 @@
     if (data.session && !isRecoveryRedirect()) window.location.href = DASHBOARD_URL;
   });
 
+  // Flag set when PASSWORD_RECOVERY fires so the subsequent SIGNED_IN event
+  // doesn't auto-redirect before the user sets their new password.
+  let pendingRecovery = isRecoveryRedirect();
+
   // Handle password-reset link clicks and normal sign-ins
   sb.auth.onAuthStateChange((event, session) => {
     if (event === 'PASSWORD_RECOVERY') {
-      // User clicked the reset link — show the new password form
+      pendingRecovery = true;
       switchTab('newpassword');
-    } else if (event === 'SIGNED_IN' && session && !isRecoveryRedirect()) {
+    } else if (event === 'SIGNED_IN' && session && !pendingRecovery) {
       window.location.href = DASHBOARD_URL;
     }
   });
 
-  // Returns true when the URL contains a Supabase password-recovery token
+  // Returns true when the URL still contains a Supabase password-recovery token
   function isRecoveryRedirect() {
     const hash = new URLSearchParams(window.location.hash.replace('#', '?'));
     return hash.get('type') === 'recovery';
