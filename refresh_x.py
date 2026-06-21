@@ -144,9 +144,24 @@ def main():
         'posts': posts,
     }
 
-    with open(OUT_PATH, 'w') as f:
+        with open(OUT_PATH, 'w') as f:
         json.dump(payload, f, indent=2)
     print(f'\nWrote {OUT_PATH} ({os.path.getsize(OUT_PATH):,} bytes), {len(posts)} posts')
+
+    # Patch x_feed.html — replace the baked-in FEED_DATA constant
+    import re as _re
+    x_feed_html = os.path.join(HERE, 'x_feed.html')
+    if os.path.exists(x_feed_html):
+        with open(x_feed_html, 'r', encoding='utf-8') as f:
+            html = f.read()
+        new_const = 'const FEED_DATA = ' + json.dumps(payload, separators=(',', ':')) + ';'
+        patched, count = _re.subn(r'const FEED_DATA = \{.*?\};', new_const, html, count=1, flags=_re.DOTALL)
+        if count:
+            with open(x_feed_html, 'w', encoding='utf-8') as f:
+                f.write(patched)
+            print(f'Patched {x_feed_html}')
+        else:
+            print('WARNING: FEED_DATA pattern not found in x_feed.html', file=sys.stderr)
 
     if errors:
         print(f'Failed accounts: {errors}', file=sys.stderr)
