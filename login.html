@@ -415,11 +415,14 @@
   // ────────────────────────────────────────────────────────────────────────────
 
   const { createClient } = supabase;
-  const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-  // onAuthStateChange fires events in guaranteed order: PASSWORD_RECOVERY before SIGNED_IN.
-  // We rely on this exclusively so there's no race between getSession() and the recovery event.
-  let pendingRecovery = false;
+  // Read the URL hash NOW, before createClient() can consume and clear it.
+  // This is the only reliable way to detect a recovery redirect — Supabase
+  // clears the hash asynchronously so checking it later may return nothing.
+  const _recoveryHash = new URLSearchParams(window.location.hash.replace('#', '?'));
+  let pendingRecovery = _recoveryHash.get('type') === 'recovery';
+
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
   sb.auth.onAuthStateChange((event, session) => {
     if (event === 'PASSWORD_RECOVERY') {
@@ -428,7 +431,6 @@
     } else if (event === 'SIGNED_IN' && session && !pendingRecovery) {
       window.location.href = DASHBOARD_URL;
     } else if (event === 'INITIAL_SESSION' && session && !pendingRecovery) {
-      // Pre-existing session — user is already logged in, skip login page
       window.location.href = DASHBOARD_URL;
     }
   });
