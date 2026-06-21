@@ -637,6 +637,8 @@ footer a { color: var(--accent); text-decoration: none; }
       );
       await _sb.auth.signOut();
     } finally {
+      // Clear session from localStorage so login.html doesn't auto-redirect back
+      Object.keys(localStorage).forEach(k => { if (k.startsWith('sb-')) localStorage.removeItem(k); });
       window.location.href = 'login.html';
     }
   }
