@@ -7,16 +7,25 @@ Run this after ingesting new sources into the LLM-wiki, or as part of your
 morning refresh sequence (before build_index.py).
 
 Usage:
+    # Local filesystem (Obsidian vault):
     python3 refresh_wiki_context.py [--wiki-path /path/to/LLM-wiki]
+
+    # GitHub Actions / remote (fetches from GitHub API):
+    python3 refresh_wiki_context.py --github-repo tx2modern/llm-wiki
+
+    WIKI_GITHUB_TOKEN env var (or GITHUB_TOKEN) is used for authenticated requests.
 
 Outputs:
     wiki_context.json — compact context block for prompt injection
 """
 
+import base64
 import json
 import os
 import re
 import sys
+import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -46,12 +55,6 @@ WIKI_PAGES = [
     'entities/Russia.md',
 ]
 
-# Sections to extract from overview.md (by heading text)
-OVERVIEW_SECTIONS = [
-    'Current state',
-    'Key themes',
-]
-
 # For commodity/concept/entity pages, extract these sections
 PAGE_SECTIONS = [
     'Current price context',
@@ -69,6 +72,10 @@ PAGE_SECTIONS = [
 MAX_CHARS = 4000
 
 
+# ---------------------------------------------------------------------------
+# Text processing helpers (shared between local and GitHub paths)
+# ---------------------------------------------------------------------------
+
 def strip_frontmatter(text):
     """Remove YAML frontmatter block from markdown."""
     if text.startswith('---'):
@@ -84,7 +91,6 @@ def extract_sections(text, section_names):
     results = []
 
     for name in section_names:
-        # Match ## or ### headings that contain the section name (case-insensitive)
         pattern = re.compile(
             r'(#{2,3}\s+' + re.escape(name) + r'.*?)\n(.*?)(?=\n#{1,3}\s|\Z)',
             re.IGNORECASE | re.DOTALL,
@@ -92,7 +98,6 @@ def extract_sections(text, section_names):
         m = pattern.search(stripped)
         if m:
             content = m.group(2).strip()
-            # Trim very long sections to ~500 chars
             if len(content) > 500:
                 content = content[:500].rsplit('\n', 1)[0] + '\n...'
             results.append(f"### {name}\n{content}")
@@ -100,69 +105,40 @@ def extract_sections(text, section_names):
     return '\n\n'.join(results) if results else ''
 
 
-def read_page_summary(wiki_dir, rel_path, max_chars=600):
-    """Read a wiki page and extract the most useful context."""
-    path = os.path.join(wiki_dir, rel_path)
-    if not os.path.exists(path):
-        return None
-
-    with open(path, encoding='utf-8') as f:
-        raw = f.read()
-
+def _summarize_page(raw, rel_path, max_chars=600):
+    """Extract the most useful context from a wiki page's raw markdown text."""
     stripped = strip_frontmatter(raw)
 
-    # Extract title from H1
     title_m = re.search(r'^#\s+(.+)$', stripped, re.MULTILINE)
     title = title_m.group(1).strip() if title_m else os.path.basename(rel_path)
 
-    # Try to extract known sections
     extracted = extract_sections(stripped, PAGE_SECTIONS)
 
-    # If no specific sections found, take the first substantive paragraph
     if not extracted:
         paras = [p.strip() for p in stripped.split('\n\n') if p.strip() and not p.startswith('#')]
         extracted = '\n\n'.join(paras[:3])
 
-    # Trim to budget
     if len(extracted) > max_chars:
         extracted = extracted[:max_chars].rsplit('\n', 1)[0] + '\n...'
 
     return f"## {title}\n{extracted}" if extracted else None
 
 
-def read_overview(wiki_dir, max_chars=1800):
-    """Extract the key themes and current state from overview.md."""
-    path = os.path.join(wiki_dir, 'overview.md')
-    if not os.path.exists(path):
-        return ''
-
-    with open(path, encoding='utf-8') as f:
-        raw = f.read()
-
+def _summarize_overview(raw, max_chars=1800):
+    """Extract current state and key themes from overview.md text."""
     stripped = strip_frontmatter(raw)
-
-    # Extract "Current state" paragraph + "Key themes" section
     result_parts = []
 
-    # Current state paragraph
-    m = re.search(
-        r'## Current state.*?\n(.*?)(?=\n## |\Z)',
-        stripped, re.DOTALL
-    )
+    m = re.search(r'## Current state.*?\n(.*?)(?=\n## |\Z)', stripped, re.DOTALL)
     if m:
         content = m.group(1).strip()
         if len(content) > 600:
             content = content[:600].rsplit('\n', 1)[0] + '\n...'
         result_parts.append(f"### Current state\n{content}")
 
-    # Key themes — grab heading + first paragraph of each numbered theme
-    themes_m = re.search(
-        r'## Key themes(.*?)(?=\n## |\Z)',
-        stripped, re.DOTALL
-    )
+    themes_m = re.search(r'## Key themes(.*?)(?=\n## |\Z)', stripped, re.DOTALL)
     if themes_m:
         themes_text = themes_m.group(1)
-        # Extract each ### theme heading + its first substantive paragraph
         theme_blocks = re.findall(
             r'###\s+\d+\.\s+(.+?)\n(.*?)(?=\n###|\Z)',
             themes_text,
@@ -170,9 +146,7 @@ def read_overview(wiki_dir, max_chars=1800):
         )
         theme_summaries = []
         for theme_title, theme_body in theme_blocks:
-            # Take first 2 sentences / ~200 chars
             body = theme_body.strip()
-            # Remove sub-bullets and warning notes
             body = re.sub(r'\n>.*', '', body)
             body = re.sub(r'\n\*\*.*?\*\*:.*', '', body)
             sentences = re.split(r'(?<=[.!?])\s+', body)
@@ -186,14 +160,56 @@ def read_overview(wiki_dir, max_chars=1800):
     return result
 
 
+def _assemble_context(overview_text, page_texts, source_count, latest_date):
+    """Build the final context text block from extracted pieces."""
+    parts = [
+        f"MARKET INTELLIGENCE CONTEXT (from integrated knowledge base; {source_count} sources ingested through {latest_date})",
+        "Use this background to add depth and continuity to your commentary. These are established themes — integrate naturally, do not contradict with current session data.",
+        "---",
+    ]
+
+    if overview_text:
+        parts.append("# MARKET OVERVIEW\n" + overview_text)
+
+    if page_texts:
+        parts.append("# COMMODITY & CONCEPT CONTEXT\n" + '\n\n'.join(page_texts))
+
+    full_text = '\n\n'.join(parts)
+    if len(full_text) > MAX_CHARS:
+        full_text = full_text[:MAX_CHARS].rsplit('\n', 1)[0] + '\n...'
+
+    return full_text
+
+
+# ---------------------------------------------------------------------------
+# Local filesystem path
+# ---------------------------------------------------------------------------
+
+def read_page_summary(wiki_dir, rel_path, max_chars=600):
+    path = os.path.join(wiki_dir, rel_path)
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding='utf-8') as f:
+        raw = f.read()
+    return _summarize_page(raw, rel_path, max_chars)
+
+
+def read_overview(wiki_dir, max_chars=1800):
+    path = os.path.join(wiki_dir, 'overview.md')
+    if not os.path.exists(path):
+        return ''
+    with open(path, encoding='utf-8') as f:
+        raw = f.read()
+    return _summarize_overview(raw, max_chars)
+
+
 def build_context(wiki_path):
-    """Build the full wiki context text block."""
+    """Build the full wiki context text block from a local filesystem path."""
     wiki_dir = os.path.join(wiki_path, 'wiki')
     if not os.path.isdir(wiki_dir):
         print(f'  → wiki directory not found: {wiki_dir}')
         return '', 0
 
-    # Read log.md to get latest activity date
     log_path = os.path.join(wiki_dir, 'log.md')
     latest_date = 'unknown'
     source_count = 0
@@ -205,57 +221,129 @@ def build_context(wiki_path):
             latest_date = sorted(dates)[-1]
         source_count = log_text.count('] ingest |')
 
-    parts = [
-        f"MARKET INTELLIGENCE CONTEXT (from integrated knowledge base; {source_count} sources ingested through {latest_date})",
-        "Use this background to add depth and continuity to your commentary. These are established themes — integrate naturally, do not contradict with current session data.",
-        "---",
-    ]
+    overview_text = read_overview(wiki_dir)
 
-    # Overview first
-    overview = read_overview(wiki_dir)
-    if overview:
-        parts.append("# MARKET OVERVIEW\n" + overview)
-
-    # Key commodity and concept pages
-    remaining_budget = MAX_CHARS - sum(len(p) for p in parts)
+    remaining_budget = MAX_CHARS - len(overview_text) - 300
     per_page_budget = max(200, remaining_budget // max(1, len(WIKI_PAGES) - 1))
 
-    page_parts = []
-    for rel_path in WIKI_PAGES[1:]:  # skip overview.md — already handled
+    page_texts = []
+    for rel_path in WIKI_PAGES[1:]:
         summary = read_page_summary(wiki_dir, rel_path, max_chars=per_page_budget)
         if summary:
-            page_parts.append(summary)
+            page_texts.append(summary)
 
-    if page_parts:
-        parts.append("# COMMODITY & CONCEPT CONTEXT\n" + '\n\n'.join(page_parts))
+    return _assemble_context(overview_text, page_texts, source_count, latest_date), source_count
 
-    full_text = '\n\n'.join(parts)
 
-    # Final trim
-    if len(full_text) > MAX_CHARS:
-        full_text = full_text[:MAX_CHARS].rsplit('\n', 1)[0] + '\n...'
+# ---------------------------------------------------------------------------
+# GitHub API path (used in CI / GitHub Actions)
+# ---------------------------------------------------------------------------
 
-    return full_text, source_count
+def _github_get(owner_repo, path, token=None):
+    """Fetch a file from GitHub Contents API; returns decoded text or None."""
+    url = f'https://api.github.com/repos/{owner_repo}/contents/wiki/{path}'
+    req = urllib.request.Request(url, headers={
+        'Accept': 'application/vnd.github+json',
+        'User-Agent': 'morning-oil-brief/refresh-wiki',
+    })
+    if token:
+        req.add_header('Authorization', f'Bearer {token}')
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode())
+        if data.get('encoding') == 'base64':
+            return base64.b64decode(data['content']).decode('utf-8')
+        return None
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return None  # page doesn't exist yet — skip silently
+        print(f'  → GitHub API error {e.code} for {path}: {e.reason}')
+        return None
+    except Exception as e:
+        print(f'  → GitHub fetch failed for {path}: {e}')
+        return None
 
+
+def build_context_from_github(owner_repo, token=None):
+    """Build wiki context by fetching pages from the GitHub API."""
+    print(f'  → fetching wiki pages from github.com/{owner_repo}')
+
+    # Parse source stats from log.md
+    latest_date = 'unknown'
+    source_count = 0
+    log_text = _github_get(owner_repo, 'log.md', token)
+    if log_text:
+        dates = re.findall(r'## \[(\d{4}-\d{2}-\d{2})\]', log_text)
+        if dates:
+            latest_date = sorted(dates)[-1]
+        source_count = log_text.count('] ingest |')
+    else:
+        print('  → log.md not found in wiki repo (repo may be empty or still initializing)')
+
+    # Overview
+    overview_raw = _github_get(owner_repo, 'overview.md', token)
+    overview_text = _summarize_overview(overview_raw) if overview_raw else ''
+
+    # Commodity / concept pages
+    remaining_budget = MAX_CHARS - len(overview_text) - 300
+    per_page_budget = max(200, remaining_budget // max(1, len(WIKI_PAGES) - 1))
+
+    page_texts = []
+    for rel_path in WIKI_PAGES[1:]:
+        raw = _github_get(owner_repo, rel_path, token)
+        if raw:
+            summary = _summarize_page(raw, rel_path, max_chars=per_page_budget)
+            if summary:
+                page_texts.append(summary)
+
+    fetched = len(page_texts)
+    print(f'  → fetched {fetched} page(s) from GitHub wiki')
+
+    if not overview_raw and fetched == 0:
+        return '', 0
+
+    return _assemble_context(overview_text, page_texts, source_count, latest_date), source_count
+
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
 
 def main():
+    args = sys.argv[1:]
+    github_repo = None
     wiki_path = DEFAULT_WIKI_PATH
-    for i, arg in enumerate(sys.argv[1:]):
-        if arg == '--wiki-path' and i + 1 < len(sys.argv[1:]):
-            wiki_path = sys.argv[i + 2]
-        elif not arg.startswith('--'):
-            wiki_path = arg
 
-    print(f'refresh_wiki_context: reading from {wiki_path}')
+    i = 0
+    while i < len(args):
+        if args[i] == '--github-repo' and i + 1 < len(args):
+            github_repo = args[i + 1]
+            i += 2
+        elif args[i] == '--wiki-path' and i + 1 < len(args):
+            wiki_path = args[i + 1]
+            i += 2
+        elif not args[i].startswith('--'):
+            wiki_path = args[i]
+            i += 1
+        else:
+            i += 1
 
-    context_text, source_count = build_context(wiki_path)
+    if github_repo:
+        token = os.environ.get('WIKI_GITHUB_TOKEN') or os.environ.get('GITHUB_TOKEN')
+        print(f'refresh_wiki_context: GitHub mode → {github_repo}')
+        context_text, source_count = build_context_from_github(github_repo, token)
+        source_label = github_repo
+    else:
+        print(f'refresh_wiki_context: local mode → {wiki_path}')
+        context_text, source_count = build_context(wiki_path)
+        source_label = wiki_path
 
     if not context_text:
         print('  → no wiki content found; wiki_context.json will be empty')
 
     result = {
         'generated_at': datetime.now(timezone.utc).isoformat(),
-        'wiki_path': wiki_path,
+        'wiki_path': source_label,
         'source_count': source_count,
         'context_text': context_text,
         'char_count': len(context_text),
