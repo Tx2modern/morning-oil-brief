@@ -4,19 +4,7 @@
 <meta charset="UTF-8">
 <meta name="description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
 <meta name="theme-color" content="#07090d">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://*.supabase.co https://cdn.jsdelivr.net;">
-<!-- AUTH GUARD: redirects unauthenticated users to login page -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-(function() {
-  var SUPABASE_URL  = 'https://ohagroxyqkoygxdkbjvn.supabase.co';
-  var SUPABASE_ANON = 'sb_publishable_B88mNC5uZLnWjVqShctogg_wDh8QgEw';
-  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-  sb.auth.getSession().then(function(r) {
-    if (!r.data.session) window.location.href = 'login.html';
-  });
-})();
-</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🛢️</text></svg>">
@@ -24,7 +12,7 @@
 <meta property="og:site_name" content="MOB · Morning Oil Brief">
 <meta property="og:title" content="AI Morning Oil Brief · Petroleum Intelligence">
 <meta property="og:description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
-<meta property="og:url" content="https://eia-dashboard.netlify.app/">
+<meta property="og:url" content="https://www.morningoilbrief.com/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AI Morning Oil Brief · Petroleum Intelligence">
 <meta name="twitter:description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
@@ -56,8 +44,6 @@ table, .num { font-variant-numeric: tabular-nums; }
 .header .subtitle { font-size: 12px; color: var(--muted); margin-top: 3px; }
 .update-info { text-align: right; font-size: 11px; color: var(--muted); line-height: 1.6; }
 .update-info strong { color: var(--text); font-weight: 500; }
-.signout-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 11px; padding: 3px 10px; border-radius: 5px; cursor: pointer; margin-top: 6px; display: inline-block; }
-.signout-btn:hover { color: var(--text); border-color: var(--muted); }
 .update-info .pill {
   display: inline-block; padding: 2px 9px;
   background: rgba(22,163,74,0.15); color: #4ade80; border-radius: 10px;
@@ -850,27 +836,29 @@ footer a { color: var(--accent); text-decoration: none; }
 <div class="container">
 
   <!-- ─── Title ──────────────────────────────────────────────── -->
-  <div class="title-block">
-    <h1>Morning Oil Brief</h1>
-    <div class="tagline"><strong>Petroleum intelligence</strong> · Yesterday's NYMEX settlement, decoded each morning</div>
+  <!-- ─── Title ──────────────────────────────────────────────── -->
+  <div class="header">
+    <div>
+      <h1>Morning Oil Brief</h1>
+      <div class="subtitle">Petroleum intelligence · Yesterday's NYMEX settlement, decoded each morning</div>
+    </div>
+    <div class="update-info">
+      <span class="pill">NYMEX SETTLEMENT</span><br>
+      Prices thru: <strong>June 19, 2026</strong><br>
+      Inventories thru: <strong>May 22, 2026</strong><br>
+      Next refresh: <strong>June 23, 2026</strong> · <strong>~5:00 AM ET</strong>
+    </div>
   </div>
 
   <!-- ─── Today's Read ───────────────────────────────────────── -->
   <section class="mob-hero">
     <div class="mob-hero-head">
       <div class="mob-hero-left">
-        <span class="mob-eyebrow">Today's Read</span><span class="mob-pill-ai">AI Generated</span>
-      </div>
-      <div class="mob-hero-stamp">
-        <span>Prices thru:</span><span class="sep">·</span><strong>May 29, 2026</strong>
-        <br>
-        <span>Inventories thru:</span><span class="sep">·</span><strong>May 22, 2026</strong>
-        <br>
-        <span>Next refresh</span><span class="sep">·</span><strong>~5:00 AM ET</strong><span class="sep">·</span><strong>June 2, 2026</strong>
+        
       </div>
     </div>
+    <div class="eia-fresh-banner" style="margin:14px 0;padding:16px 20px;background:linear-gradient(180deg, rgba(240,176,86,0.10), rgba(240,176,86,0.04));border:1px solid rgba(240,176,86,0.55);border-left:3px solid #f0b056;border-radius:10px;color:var(--text,#e6e6e6);font-size:13px;line-height:1.6;"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:#f0b056;margin-bottom:8px;"><span>● EIA WPSR — Just Released</span><span style="color:var(--muted-2,#9aa0a6);font-weight:500;letter-spacing:0.4px;">Week ending May 22, 2026 · Released Thu May 28, 2026 · 12:00 PM ET</span></div><div style="margin-bottom:8px;">Today's WPSR has refreshed on the <strong>Inventories</strong> tab. Prices and charts below are <strong>last session's NYMEX settle</strong> and do <em>not</em> yet incorporate today's report.</div><div style="color:var(--muted-2,#9aa0a6);"><strong style="color:var(--text,#e6e6e6);">AI commentary is paused for this page.</strong> It will return with tomorrow morning's refresh, once the post-EIA settle prints and we can tie the market's reaction back to today's data.</div></div>
     
-    <div class="mob-hero-body" id="market-read"></div>
   </section>
 
   <!-- ─── Explore the data ───────────────────────────────────── -->
@@ -882,17 +870,17 @@ footer a { color: var(--accent); text-decoration: none; }
         <span class="mob-card-eyebrow"><span class="num">01</span> Cracks · Prices</span>
         <span class="mob-card-pill">▼ Lower</span>
       </div>
-      <div class="mob-card-sub">3-2-1 crack $49.71/bbl · WTI $87.36</div>
+      <div class="mob-card-sub">3-2-1 crack $49.11/bbl · WTI $76.54</div>
       <div class="mob-card-value-row">
-        <div class="mob-card-value">$49.71<span class="unit">3-2-1 / bbl</span></div>
-        <div class="mob-card-change">▼ −1.24 w/w</div>
+        <div class="mob-card-value">$49.11<span class="unit">3-2-1 / bbl</span></div>
+        <div class="mob-card-change">▼ −1.93 w/w</div>
       </div>
-      <div class="mob-card-spark"><svg viewBox="0 0 320 56" preserveAspectRatio="none"><defs><linearGradient id="g7e5532" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.32"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path d="M0.0,50.7 L11.0,53.2 L22.1,42.1 L33.1,16.6 L44.1,13.7 L55.2,13.4 L66.2,13.2 L77.2,20.0 L88.3,14.8 L99.3,7.3 L110.3,25.7 L121.4,20.4 L132.4,19.3 L143.4,22.4 L154.5,19.9 L165.5,9.6 L176.6,8.1 L187.6,2.8 L198.6,18.1 L209.7,23.7 L220.7,21.6 L231.7,24.6 L242.8,25.6 L253.8,22.9 L264.8,34.1 L275.9,23.4 L286.9,48.9 L297.9,44.2 L309.0,38.0 L320.0,43.1 L 320.0,56.0 L 0,56.0 Z" fill="url(#g7e5532)"/><path d="M0.0,50.7 L11.0,53.2 L22.1,42.1 L33.1,16.6 L44.1,13.7 L55.2,13.4 L66.2,13.2 L77.2,20.0 L88.3,14.8 L99.3,7.3 L110.3,25.7 L121.4,20.4 L132.4,19.3 L143.4,22.4 L154.5,19.9 L165.5,9.6 L176.6,8.1 L187.6,2.8 L198.6,18.1 L209.7,23.7 L220.7,21.6 L231.7,24.6 L242.8,25.6 L253.8,22.9 L264.8,34.1 L275.9,23.4 L286.9,48.9 L297.9,44.2 L309.0,38.0 L320.0,43.1" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+      <div class="mob-card-spark"><svg viewBox="0 0 320 56" preserveAspectRatio="none"><defs><linearGradient id="g260d00" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.32"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path d="M0.0,8.0 L11.0,6.9 L22.1,2.8 L33.1,14.5 L44.1,18.8 L55.2,17.2 L66.2,19.5 L77.2,20.3 L88.3,18.2 L99.3,26.8 L110.3,18.6 L121.4,38.1 L132.4,34.6 L143.4,29.8 L154.5,33.7 L165.5,47.9 L176.6,45.1 L187.6,46.7 L198.6,53.2 L209.7,48.5 L220.7,48.2 L231.7,45.3 L242.8,40.2 L253.8,38.1 L264.8,38.5 L275.9,40.6 L286.9,35.9 L297.9,34.6 L309.0,29.5 L320.0,35.6 L 320.0,56.0 L 0,56.0 Z" fill="url(#g260d00)"/><path d="M0.0,8.0 L11.0,6.9 L22.1,2.8 L33.1,14.5 L44.1,18.8 L55.2,17.2 L66.2,19.5 L77.2,20.3 L88.3,18.2 L99.3,26.8 L110.3,18.6 L121.4,38.1 L132.4,34.6 L143.4,29.8 L154.5,33.7 L165.5,47.9 L176.6,45.1 L187.6,46.7 L198.6,53.2 L209.7,48.5 L220.7,48.2 L231.7,45.3 L242.8,40.2 L253.8,38.1 L264.8,38.5 L275.9,40.6 L286.9,35.9 L297.9,34.6 L309.0,29.5 L320.0,35.6" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
       <div class="mob-card-stats">
-        <div class="mob-stat"><span class="lbl">WTI</span><span class="val">$87.36</span></div>
-        <div class="mob-stat"><span class="lbl">Gasoline</span><span class="val">$43.96</span></div>
-        <div class="mob-stat"><span class="lbl">Distillate</span><span class="val">$61.21</span></div>
-        <div class="mob-stat"><span class="lbl">3-2-1 w/w</span><span class="val down">▼ −1.24</span></div>
+        <div class="mob-stat"><span class="lbl">WTI</span><span class="val">$76.54</span></div>
+        <div class="mob-stat"><span class="lbl">Gasoline</span><span class="val">$45.77</span></div>
+        <div class="mob-stat"><span class="lbl">Distillate</span><span class="val">$55.79</span></div>
+        <div class="mob-stat"><span class="lbl">3-2-1 w/w</span><span class="val down">▼ −1.93</span></div>
       </div>
     </a>
 
@@ -901,16 +889,16 @@ footer a { color: var(--accent); text-decoration: none; }
         <span class="mob-card-eyebrow"><span class="num">02</span> Forward Curves</span>
         <span class="mob-card-pill">▼ Lower</span>
       </div>
-      <div class="mob-card-sub">WTI backwardation · M1–M2 $+2.06/bbl</div>
+      <div class="mob-card-sub">WTI backwardation · M1–M2 $+0.92/bbl</div>
       <div class="mob-card-value-row">
-        <div class="mob-card-value">$+2.06<span class="unit">M1–M2 / bbl</span></div>
-        <div class="mob-card-change">▼ −1.39 w/w</div>
+        <div class="mob-card-value">$+0.92<span class="unit">M1–M2 / bbl</span></div>
+        <div class="mob-card-change">▼ −0.72 w/w</div>
       </div>
-      <div class="mob-card-spark"><svg viewBox="0 0 320 56" preserveAspectRatio="none"><defs><linearGradient id="g79bc65" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.32"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path d="M0.0,53.2 L80.0,2.8 L160.0,24.6 L240.0,35.5 L320.0,35.9 L 320.0,56.0 L 0,56.0 Z" fill="url(#g79bc65)"/><path d="M0.0,53.2 L80.0,2.8 L160.0,24.6 L240.0,35.5 L320.0,35.9" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+      <div class="mob-card-spark"><svg viewBox="0 0 320 56" preserveAspectRatio="none"><defs><linearGradient id="g41f6b1" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.32"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path d="M0.0,53.2 L80.0,2.8 L160.0,33.7 L240.0,45.5 L320.0,43.1 L 320.0,56.0 L 0,56.0 Z" fill="url(#g41f6b1)"/><path d="M0.0,53.2 L80.0,2.8 L160.0,33.7 L240.0,45.5 L320.0,43.1" fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
       <div class="mob-card-stats">
-        <div class="mob-stat"><span class="lbl">Front M1</span><span class="val">$87.36</span></div>
-        <div class="mob-stat"><span class="lbl">M2</span><span class="val">$85.30</span></div>
-        <div class="mob-stat"><span class="lbl">Spread</span><span class="val down">$+2.06</span></div>
+        <div class="mob-stat"><span class="lbl">Front M1</span><span class="val">$76.54</span></div>
+        <div class="mob-stat"><span class="lbl">M2</span><span class="val">$75.62</span></div>
+        <div class="mob-stat"><span class="lbl">Spread</span><span class="val down">$+0.92</span></div>
         <div class="mob-stat"><span class="lbl">Shape</span><span class="val">Backwardation</span></div>
       </div>
     </a>
@@ -937,17 +925,12 @@ footer a { color: var(--accent); text-decoration: none; }
   </div>
 
   <footer>
-    MOB · Morning Oil Brief · Refreshed MAY 31, 2026 · Trade data through May 29, 2026
-    &nbsp;·&nbsp; <button class="signout-btn" onclick="signOut()">Sign out</button>
+    MOB · Morning Oil Brief · Refreshed JUN 21, 2026 · Trade data through June 19, 2026
   </footer>
 </div>
 
 <script>
-function signOut() {
-  var sb = supabase.createClient('https://ohagroxyqkoygxdkbjvn.supabase.co','sb_publishable_B88mNC5uZLnWjVqShctogg_wDh8QgEw');
-  sb.auth.signOut().then(function(){ window.location.href = 'login.html'; });
-}
-const SNAPSHOT = {"kpi": [{"id": "wti", "label": "WTI", "last": 87.36, "change": -1.54, "units": "$/bbl", "frequency": "daily", "spark": [83.85, 89.61, 92.13, 92.96, 95.85, 94.4, 96.37, 99.93, 106.88, 105.07, 101.94, 106.42, 102.27, 95.08, 94.81, 95.42, 98.07, 102.18, 101.02, 101.17, 105.42, 108.66, 107.77, 98.26, 96.35, 96.6, 93.89, 88.68, 88.9, 87.36], "yoy": [], "band_lo": 60.79, "band_hi": 118.87, "contract": "2026-07"}, {"id": "brent", "label": "Brent", "last": 92.05, "change": -1.66, "units": "$/bbl", "frequency": "daily", "spark": [90.38, 95.48, 98.48, 101.91, 105.07, 105.33, 108.23, 111.26, 118.03, 114.01, 108.17, 114.44, 109.87, 101.27, 100.06, 101.29, 104.21, 107.77, 105.63, 105.72, 109.26, 112.1, 111.28, 105.02, 102.58, 103.54, 99.58, 94.29, 93.71, 92.05], "yoy": [], "band_lo": 63.9, "band_hi": 119.72, "contract": "2026-07"}, {"id": "crack321", "label": "3-2-1 Crack", "last": 49.71, "change": -1.24, "units": "$/bbl", "frequency": "daily", "spark": [47.85, 47.23, 49.95, 56.19, 56.92, 56.98, 57.02, 55.36, 56.65, 58.47, 53.98, 55.27, 55.53, 54.78, 55.39, 57.92, 58.28, 59.58, 55.84, 54.47, 54.98, 54.24, 54.0, 54.65, 51.92, 54.54, 48.29, 49.43, 50.95, 49.71], "yoy": [], "band_lo": 21.98, "band_hi": 60.12}, {"id": "crackgas", "label": "Gasoline Crack", "last": 43.96, "change": -0.92, "units": "$/bbl", "frequency": "daily", "spark": [42.35, 41.3, 42.68, 48.07, 49.56, 51.03, 50.25, 49.61, 50.25, 53.33, 49.06, 50.58, 49.8, 50.21, 50.34, 52.7, 53.12, 53.12, 50.97, 50.27, 50.06, 49.29, 47.47, 48.21, 45.59, 48.46, 41.37, 42.94, 44.88, 43.96], "yoy": [], "band_lo": 23.26, "band_hi": 59.72}, {"id": "crackdist", "label": "Diesel Crack", "last": 61.21, "change": -1.88, "units": "$/bbl", "frequency": "daily", "spark": [58.84, 59.11, 64.48, 72.43, 71.65, 68.87, 70.57, 66.86, 69.47, 68.74, 63.81, 64.65, 67.0, 63.92, 65.49, 68.34, 68.61, 72.49, 65.58, 62.87, 64.82, 64.15, 67.05, 67.52, 64.58, 66.69, 62.12, 62.41, 63.09, 61.21], "yoy": [], "band_lo": 19.42, "band_hi": 60.9}, {"id": "crackjet", "label": "Jet Crack", "last": 62.68, "change": -4.42, "units": "$/bbl", "frequency": "daily", "spark": [60.61, 65.72, 65.83, 60.8, 60.48, 68.56, 71.56, 71.88, 70.59, 69.24, 66.52, 71.98, 71.41, 66.57, 65.09, 69.98, 65.6, 69.45, 68.79, 71.1, 73.35, 68.39, 66.49, 67.12, 63.77, 69.69, 68.79, 67.76, 67.1, 62.68], "yoy": [], "band_lo": 7.21, "band_hi": 53.4}], "marketRead": "<strong>Headline:</strong> WTI crude settled down $1.54 at $87.36 Friday, marking its largest weekly decline in seven weeks, as reports of an anticipated U.S.-Iran nuclear deal sent markets into risk-off mode despite last week's tight WPSR showing a 3.3 mb crude draw and refinery utilization surging to 94.5%. Investment banks are warning that June\u2013August supply could overwhelm current positioning, particularly if Iranian barrels return to market while U.S. refiners maintain peak runs. The Brent\u2013WTI spread narrowed to $4.69, squeezing the export arbitrage at precisely the wrong moment\u2014domestic crude is clearing via record refinery throughput, but the spread compression will pressure U.S. exports lower and invite builds in the weeks ahead unless WTI falls further to reopen the window.\n<strong>Crude & products:</strong> The weekly EIA report for the week ending May 22, 2026 showed U.S. crude stocks fell 3.3 mb to 441.7 mb, driven by a 2.9 percentage-point jump in refinery utilization to 94.5%\u2014the highest seasonal run rate in over a year. Gasoline inventories dropped 2.6 mb to 211.6 mb and distillate fell 2.1 mb to 100.8 mb despite the refining ramp, signaling robust product clearing into the summer driving season. The utilization spike was concentrated in PADD II and PADD IV, reflecting post-turnaround restarts in the Midwest and Rockies. Jet fuel bucked the trend with a 0.7 mb build to 44.9 mb, though total petroleum stocks shed 7.3 mb to 799.0 mb. API data for the following week (ending May 29) reportedly showed a 2.8 mb crude draw, suggesting the tightness extended into the close of May, though geopolitical headlines quickly overshadowed the inventory fundamentals.\n<strong>Refining margins:</strong> The 3-2-1 crack settled at $49.71, down modestly from earlier in the week but still elevated by historical standards as U.S. refiners capture peak-summer demand. Gasoline crack stood at $43.96 (RBOB settled $3.0344/gal, off 7 cents), while distillate and jet cracks remained robust at $61.21 and $62.68 respectively (ULSD $3.4886/gal, down 6 cents). The strength in middle-distillate cracks reflects tight diesel inventories at 100.8 mb\u2014well below the five-year average\u2014even as run rates hit multi-year highs. However, the forward curve is pricing in relief: ULSD M1\u2013M12 backwardation widened to $25.75/bbl and RBOB to $19.69/bbl, indicating the market expects summer tightness to resolve sharply into autumn as refinery maintenance cycles begin and demand seasonally softens.\n<strong>Curve structure:</strong> WTI M1\u2013M12 backwardation steepened to $13.52, while Brent M1\u2013M12 held at $13.12, underscoring front-month scarcity despite the Iran deal chatter. WTI M1\u2013M2 at $2.06 and Brent M1\u2013M2 at $0.93 signal near-term tightness, though the pronounced steepening in outer months suggests skepticism that spot strength will persist once incremental supply arrives. The narrow Brent\u2013WTI spread of $4.69 reflects WTI strength relative to global benchmarks\u2014a function of domestic refinery demand\u2014but that spread level undermines the U.S. export arbitrage. Gulf Coast loadings will become uneconomic unless WTI falls or Brent rallies, which means incremental barrels will stay onshore, pressuring Cushing and PADD III stocks higher in June absent a sharp WTI correction.\n<strong>News & geopolitics:</strong> The dominant narrative is the anticipated U.S.-Iran deal, with multiple investment banks flagging that markets are \"severely disconnected from reality\" and warning of significant supply pressure June\u2013August if sanctions relief unlocks 1+ mbd of Iranian exports. Oil logged its biggest weekly drop in seven weeks\u2014down 11% by some measures\u2014and hit a six-week low Friday on ceasefire hopes. Meanwhile, Japan's April crude imports plummeted 65.7% to the lowest since 1979 amid Middle East supply disruptions, underscoring the demand destruction already occurring in Asia. Saudi Arabia is expected to cut July OSPs for Asia in response to weak demand, per Reuters surveys, a signal that OPEC+ is reading the same softening tea leaves. On the physical side, Gulf Coast export infrastructure continues to expand\u2014one regional port has become America's crude export capital\u2014but the narrowing Brent\u2013WTI spread threatens to idle that capacity just as Iranian supply looms. The setup for June is asymmetric: geopolitical relief could bring supply, but the refinery-driven inventory draws that supported May's rally are unlikely to repeat at 94.5% utilization, leaving WTI vulnerable to a test of mid-$80s support if the Iran deal materializes.", "shortBrief": "<strong>Headline:</strong> WTI crude settled down $1.54 at $87.36 Friday, marking its largest weekly decline in seven weeks, as reports of an anticipated U.S.-Iran nuclear deal sent markets into risk-off mode despite last week's tight WPSR showing a 3.3 mb crude draw and refinery utilization surging to 94.5%. Investment banks are warning that June\u2013August supply could overwhelm current positioning, particularly if Iranian barrels return to market while U.S. refiners maintain peak runs. The Brent\u2013WTI spread narrowed to $4.69, squeezing the export arbitrage at precisely the wrong moment\u2014domestic crude is clearing via record refinery throughput, but the spread compression will pressure U.S. exports lower and invite builds in the weeks ahead unless WTI falls further to reopen the window.\n<strong>Crude & products:</strong> The weekly EIA report for the week ending May 22, 2026 showed U.S. crude stocks fell 3.3 mb to 441.7 mb, driven by a 2.9 percentage-point jump in refinery utilization to 94.5%\u2014the highest seasonal run rate in over a year. Gasoline inventories dropped 2.6 mb to 211.6 mb and distillate fell 2.1 mb to 100.8 mb despite the refining ramp, signaling robust product clearing into the summer driving season. The utilization spike was concentrated in PADD II and PADD IV, reflecting post-turnaround restarts in the Midwest and Rockies. Jet fuel bucked the trend with a 0.7 mb build to 44.9 mb, though total petroleum stocks shed 7.3 mb to 799.0 mb. API data for the following week (ending May 29) reportedly showed a 2.8 mb crude draw, suggesting the tightness extended into the close of May, though geopolitical headlines quickly overshadowed the inventory fundamentals.\n<strong>Refining margins:</strong> The 3-2-1 crack settled at $49.71, down modestly from earlier in the week but still elevated by historical standards as U.S. refiners capture peak-summer demand. Gasoline crack stood at $43.96 (RBOB settled $3.0344/gal, off 7 cents), while distillate and jet cracks remained robust at $61.21 and $62.68 respectively (ULSD $3.4886/gal, down 6 cents). The strength in middle-distillate cracks reflects tight diesel inventories at 100.8 mb\u2014well below the five-year average\u2014even as run rates hit multi-year highs. However, the forward curve is pricing in relief: ULSD M1\u2013M12 backwardation widened to $25.75/bbl and RBOB to $19.69/bbl, indicating the market expects summer tightness to resolve sharply into autumn as refinery maintenance cycles begin and demand seasonally softens."};
+const SNAPSHOT = {"kpi": [{"id": "wti", "label": "WTI", "last": 76.54, "change": 0.69, "units": "$/bbl", "frequency": "daily", "spark": [95.42, 98.07, 102.18, 101.02, 101.17, 105.42, 108.66, 107.77, 98.26, 96.35, 96.6, 93.89, 88.68, 88.9, 87.36, 92.16, 93.76, 96.02, 93.04, 90.54, 91.3, 88.2, 90.03, 87.71, 84.88, 80.75, 76.05, 76.79, 76.6, 76.54], "yoy": [], "band_lo": 69.16, "band_hi": 107.62, "contract": "2026-08"}, {"id": "brent", "label": "Brent", "last": 80.59, "change": 0.74, "units": "$/bbl", "frequency": "daily", "spark": [101.29, 104.21, 107.77, 105.63, 105.72, 109.26, 112.1, 111.28, 105.02, 102.58, 103.54, 99.58, 94.29, 93.71, 92.05, 94.98, 96.0, 97.81, 95.03, 93.09, 94.25, 91.45, 93.1, 90.38, 87.33, 83.17, 78.96, 79.55, 79.85, 80.59], "yoy": [], "band_lo": 73.85, "band_hi": 113.12, "contract": "2026-08"}, {"id": "crack321", "label": "3-2-1 Crack", "last": 49.11, "change": -1.93, "units": "$/bbl", "frequency": "daily", "spark": [57.92, 58.28, 59.58, 55.84, 54.47, 54.98, 54.24, 54.0, 54.65, 51.92, 54.54, 48.29, 49.43, 50.95, 49.71, 45.16, 46.06, 45.54, 43.47, 44.97, 45.08, 45.98, 47.62, 48.31, 48.18, 47.5, 48.99, 49.4, 51.04, 49.11], "yoy": [], "band_lo": 19.43, "band_hi": 62.23}, {"id": "crackgas", "label": "Gasoline Crack", "last": 45.77, "change": -3.42, "units": "$/bbl", "frequency": "daily", "spark": [52.7, 53.12, 53.12, 50.97, 50.27, 50.06, 49.29, 47.47, 48.21, 45.59, 48.46, 41.37, 42.94, 44.88, 43.96, 37.4, 38.3, 35.51, 34.57, 37.39, 37.67, 38.69, 40.59, 42.55, 43.21, 43.03, 44.93, 45.41, 49.19, 45.77], "yoy": [], "band_lo": 21.03, "band_hi": 55.54}, {"id": "crackdist", "label": "Diesel Crack", "last": 55.79, "change": 1.04, "units": "$/bbl", "frequency": "daily", "spark": [68.34, 68.61, 72.49, 65.58, 62.87, 64.82, 64.15, 67.05, 67.52, 64.58, 66.69, 62.12, 62.41, 63.09, 61.21, 60.69, 61.59, 65.6, 61.26, 60.13, 59.9, 60.56, 61.7, 59.84, 58.1, 56.44, 57.1, 57.38, 54.75, 55.79], "yoy": [], "band_lo": 16.22, "band_hi": 75.62}, {"id": "crackjet", "label": "Jet Crack", "last": 42.32, "change": 6.03, "units": "$/bbl", "frequency": "daily", "spark": [65.09, 69.98, 65.6, 69.45, 68.79, 71.1, 73.35, 68.39, 66.49, 67.12, 63.77, 69.69, 68.79, 67.76, 67.1, 44.83, 44.28, 46.12, 44.79, 45.12, 44.03, 48.84, 43.49, 42.18, 43.18, 43.0, 44.08, 41.6, 36.29, 42.32], "yoy": [], "band_lo": 4.83, "band_hi": 69.56}], "marketRead": "", "shortBrief": ""};
 // Render the (trimmed) market read into the hero body — first 3 paragraphs.
 (function() {
   const el = document.getElementById('market-read');
@@ -957,5 +940,87 @@ const SNAPSHOT = {"kpi": [{"id": "wti", "label": "WTI", "last": 87.36, "change":
   el.innerHTML = paras.map(p => '<p>' + p + '</p>').join('');
 })();
 </script>
+
+<!-- AI Chat Widget -->
+<style>
+#mob-chat-btn{position:fixed;bottom:24px;right:24px;z-index:9000;width:52px;height:52px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(245,158,11,0.45);transition:transform 0.2s,box-shadow 0.2s;font-size:22px;}
+#mob-chat-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(245,158,11,0.6);}
+#mob-chat-panel{position:fixed;bottom:88px;right:24px;z-index:9000;width:380px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 120px);background:var(--panel);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,0.55);transform:translateY(16px) scale(0.97);opacity:0;pointer-events:none;transition:opacity 0.18s ease,transform 0.18s ease;}
+#mob-chat-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+.mob-chat-header{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.mob-chat-header-title{font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:7px;}
+.mob-chat-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;background:rgba(245,158,11,0.18);color:var(--accent);border:1px solid rgba(245,158,11,0.3);letter-spacing:0.5px;text-transform:uppercase;}
+.mob-chat-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;padding:2px 4px;border-radius:4px;}
+.mob-chat-close:hover{color:var(--text);background:var(--panel-2);}
+.mob-chat-messages{flex:1;overflow-y:auto;padding:14px 14px 8px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.mob-chat-msg{display:flex;flex-direction:column;gap:2px;max-width:88%;}
+.mob-chat-msg.user{align-self:flex-end;align-items:flex-end;}
+.mob-chat-msg.assistant{align-self:flex-start;align-items:flex-start;}
+.mob-chat-bubble{padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.5;word-break:break-word;}
+.mob-chat-msg.user .mob-chat-bubble{background:var(--accent);color:#0f1117;border-radius:10px 10px 2px 10px;font-weight:500;}
+.mob-chat-msg.assistant .mob-chat-bubble{background:var(--panel-2);color:var(--text);border:1px solid var(--border);border-radius:10px 10px 10px 2px;}
+.mob-chat-msg.assistant .mob-chat-bubble.thinking{color:var(--muted);font-style:italic;}
+.mob-chat-suggestions{display:flex;flex-direction:column;gap:5px;margin-top:2px;}
+.mob-chat-suggestion{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted-2);font-size:12px;padding:6px 10px;cursor:pointer;text-align:left;transition:border-color 0.15s,color 0.15s,background 0.15s;}
+.mob-chat-suggestion:hover{border-color:var(--accent);color:var(--accent);background:rgba(245,158,11,0.07);}
+.mob-chat-footer{padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;}
+#mob-chat-input{flex:1;background:var(--panel-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;padding:8px 11px;outline:none;resize:none;font-family:inherit;line-height:1.4;max-height:100px;min-height:36px;transition:border-color 0.15s;}
+#mob-chat-input:focus{border-color:rgba(245,158,11,0.5);}
+#mob-chat-input::placeholder{color:var(--muted);}
+#mob-chat-send{background:var(--accent);border:none;border-radius:8px;color:#0f1117;cursor:pointer;font-size:16px;padding:0 12px;flex-shrink:0;transition:opacity 0.15s;}
+#mob-chat-send:disabled{opacity:0.4;cursor:default;}
+#mob-chat-send:not(:disabled):hover{opacity:0.85;}
+</style>
+<button id="mob-chat-btn" title="Ask AI about this data">&#x1F4AC;</button>
+<div id="mob-chat-panel">
+  <div class="mob-chat-header">
+    <div class="mob-chat-header-title">&#x1F6E2;&#xFE0F; MOB Analyst <span class="mob-chat-badge">AI</span></div>
+    <button class="mob-chat-close" id="mob-chat-close">&#x2715;</button>
+  </div>
+  <div class="mob-chat-messages" id="mob-chat-messages">
+    <div class="mob-chat-msg assistant"><div class="mob-chat-bubble">Ask me anything about today's petroleum data &mdash; prices, cracks, inventory, or market outlook.</div></div>
+    <div class="mob-chat-suggestions" id="mob-chat-suggestions">
+      <button class="mob-chat-suggestion">What's driving WTI lower today?</button>
+      <button class="mob-chat-suggestion">How do current crack spreads compare to normal?</button>
+      <button class="mob-chat-suggestion">What does the inventory draw mean for prices?</button>
+    </div>
+  </div>
+  <div class="mob-chat-footer">
+    <textarea id="mob-chat-input" rows="1" placeholder="Ask about the data..." maxlength="800"></textarea>
+    <button id="mob-chat-send">&#x27A4;</button>
+  </div>
+</div>
+<script>
+(function(){
+  var btn=document.getElementById("mob-chat-btn"),panel=document.getElementById("mob-chat-panel"),closeBtn=document.getElementById("mob-chat-close"),msgs=document.getElementById("mob-chat-messages"),input=document.getElementById("mob-chat-input"),send=document.getElementById("mob-chat-send"),suggestions=document.getElementById("mob-chat-suggestions"),open=false,busy=false,history=[];
+  function toggle(){open=!open;panel.classList.toggle("open",open);if(open)input.focus();}
+  btn.addEventListener("click",toggle);
+  closeBtn.addEventListener("click",toggle);
+  suggestions.addEventListener("click",function(e){var c=e.target.closest(".mob-chat-suggestion");if(!c)return;input.value=c.textContent;suggestions.style.display="none";submit();});
+  input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
+  send.addEventListener("click",submit);
+  function buildContext(){
+    var k=(SNAPSHOT.kpi||[]).map(function(x){return x.label+": "+x.last+" "+x.units+" (change: "+(x.change>=0?"+":"")+x.change+")";}).join("\n");
+    var s=(SNAPSHOT.marketRead||SNAPSHOT.shortBrief||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
+    return"=== KPI Snapshot ===\n"+k+"\n\n=== Market Analysis ===\n"+s;
+  }
+  function appendMsg(role,text,thinking){var w=document.createElement("div");w.className="mob-chat-msg "+role;var b=document.createElement("div");b.className="mob-chat-bubble"+(thinking?" thinking":"");b.textContent=text;w.appendChild(b);msgs.appendChild(w);msgs.scrollTop=msgs.scrollHeight;return b;}
+  async function submit(){
+    var text=input.value.trim();if(!text||busy)return;
+    suggestions.style.display="none";input.value="";input.style.height="auto";
+    busy=true;send.disabled=true;
+    appendMsg("user",text);history.push({role:"user",content:text});
+    var tb=appendMsg("assistant","Thinking...",true);
+    try{
+      var r=await fetch("",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history,context:buildContext()})});
+      if(!r.ok){var e=await r.json().catch(function(){return{error:"Unknown error"};});tb.textContent="Error: "+(e.error||r.statusText);}
+      else{var d=await r.json();var rep=d.content||"(no response)";tb.textContent=rep;tb.classList.remove("thinking");history.push({role:"assistant",content:rep});}
+    }catch(e){tb.textContent="Network error.";}
+    busy=false;send.disabled=false;msgs.scrollTop=msgs.scrollHeight;input.focus();
+  }
+  input.addEventListener("input",function(){input.style.height="auto";input.style.height=Math.min(input.scrollHeight,100)+"px";});
+})();
+</script>
+
 </body>
 </html>
