@@ -46,6 +46,7 @@ jobs:
         run: python3 refresh_x.py
 
       - name: Refresh CITGO & Venezuela X feed
+        continue-on-error: true
         env:
           APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
