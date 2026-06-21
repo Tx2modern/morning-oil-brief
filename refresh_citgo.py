@@ -218,9 +218,13 @@ def main():
 
     print(f'  {len(items)} tweets fetched')
 
-    # Filter out retweets, keep originals only
-    originals = [t for t in items if not t.get('isRetweet', False)]
-    print(f'  {len(originals)} original tweets after filtering retweets')
+    # Filter out retweets and posts that don't actually mention CITGO
+    originals = [
+        t for t in items
+        if not t.get('isRetweet', False)
+        and 'citgo' in (t.get('text', '') + t.get('fullText', '')).lower()
+    ]
+    print(f'  {len(originals)} original tweets after filtering retweets and non-CITGO posts')
 
     # Sort by engagement and take top 6
     originals.sort(

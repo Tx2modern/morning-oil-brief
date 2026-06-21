@@ -138,6 +138,8 @@ def summarize(text, display_name):
     prompt = (
         f'{display_name} posted on X:\n\n"{text}"\n\n'
         'Write a 1-2 sentence summary focused on the oil market implications. '
+        'Base your summary ONLY on the text above — do not reference any links or external content. '
+        'If the text is too short or lacks substance, just restate the key point plainly. '
         'Be factual and concise. Do not start with "This post" or use quotes.'
     )
     payload = json.dumps({
@@ -158,7 +160,12 @@ def summarize(text, display_name):
     try:
         with urllib.request.urlopen(req, timeout=20) as r:
             resp = json.loads(r.read())
-        return resp['content'][0]['text'].strip()
+        result = resp['content'][0]['text'].strip()
+        # Fall back to raw text if the model refused or said it can't access content
+        refusal_phrases = ("i don't have access", "i cannot", "i can't", "unable to provide", "no access")
+        if any(result.lower().startswith(p) for p in refusal_phrases):
+            return text[:200] + ('...' if len(text) > 200 else '')
+        return result
     except Exception as e:
         print(f'    summary API error: {e}', file=sys.stderr)
         return text[:200]

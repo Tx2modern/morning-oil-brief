@@ -374,7 +374,7 @@ function renderCitgo() {
           const isTop = i === 0;
           return `
           <a class="x-item${isTop ? ' top-item' : ''}" href="${url}" target="_blank" rel="noopener">
-            <div class="x-summary">${(post.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}${isTop ? '<span class="x-top-badge">Top</span>' : ''}</div>
+            <div class="x-summary">${((t => t.length > 160 ? t.slice(0,157)+'…' : t)((post.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')))}${isTop ? '<span class="x-top-badge">Top</span>' : ''}</div>
             <div class="x-meta">
               <span class="handle">@${handle}</span>
               <span class="dot">·</span>
