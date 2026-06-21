@@ -417,30 +417,21 @@
   const { createClient } = supabase;
   const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-  // If already logged in, skip the login page — but not during a password recovery
-  sb.auth.getSession().then(({ data }) => {
-    if (data.session && !isRecoveryRedirect()) window.location.href = DASHBOARD_URL;
-  });
+  // onAuthStateChange fires events in guaranteed order: PASSWORD_RECOVERY before SIGNED_IN.
+  // We rely on this exclusively so there's no race between getSession() and the recovery event.
+  let pendingRecovery = false;
 
-  // Flag set when PASSWORD_RECOVERY fires so the subsequent SIGNED_IN event
-  // doesn't auto-redirect before the user sets their new password.
-  let pendingRecovery = isRecoveryRedirect();
-
-  // Handle password-reset link clicks and normal sign-ins
   sb.auth.onAuthStateChange((event, session) => {
     if (event === 'PASSWORD_RECOVERY') {
       pendingRecovery = true;
       switchTab('newpassword');
     } else if (event === 'SIGNED_IN' && session && !pendingRecovery) {
       window.location.href = DASHBOARD_URL;
+    } else if (event === 'INITIAL_SESSION' && session && !pendingRecovery) {
+      // Pre-existing session — user is already logged in, skip login page
+      window.location.href = DASHBOARD_URL;
     }
   });
-
-  // Returns true when the URL still contains a Supabase password-recovery token
-  function isRecoveryRedirect() {
-    const hash = new URLSearchParams(window.location.hash.replace('#', '?'));
-    return hash.get('type') === 'recovery';
-  }
 
   // ─── TAB SWITCHING ──────────────────────────────────────────────────────────
   function switchTab(tab) {
