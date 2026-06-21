@@ -151,10 +151,10 @@ def main():
     if os.path.exists(X_FEED_HTML):
         with open(X_FEED_HTML, 'r', encoding='utf-8') as f:
             html = f.read()
-        new_const = 'const FEED_DATA = ' + json.dumps(payload, separators=(',', ':')) + ';'
+             new_const = 'const FEED_DATA = ' + json.dumps(payload, separators=(',', ':')) + ';'
         patched, count = re.subn(
             r'const FEED_DATA = \{.*?\};',
-            new_const,
+            lambda m: new_const,
             html,
             count=1,
             flags=re.DOTALL,
