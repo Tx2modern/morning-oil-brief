@@ -32,7 +32,7 @@ TRACKED_ACCOUNTS = {
     'JavierBlas':    'Javier Blas',
     'Reuters':       'Reuters',
     'WoodMackenzie': 'Wood Mackenzie',
-    'BakerHughes':   'Baker Hughes',
+    'BakerHughes':   
     'EIAgov':        'EIA',
     'OPECnews':      'OPEC',
 }
