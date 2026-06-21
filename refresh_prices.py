@@ -288,8 +288,20 @@ def main():
     print('[3/3] Computing crack spreads (NYMEX/ICE futures-based)...')
     cracks = compute_cracks(eia, curves)
 
+    # Derive prices_as_of from the latest date in futures front_history (NYMEX settle).
+    # This is what build_index.py uses to determine whether prices are current relative
+    # to the EIA WPSR release date. Without it, build_index.py falls into post_eia state
+    # and suppresses all AI commentary on the index/margins/curves pages.
+    futures_dates = [
+        v['front_history'][-1][0]
+        for v in curves.values()
+        if v.get('front_history')
+    ]
+    prices_as_of = max(futures_dates) if futures_dates else None
+
     payload = {
         'generated_at': datetime.utcnow().isoformat() + 'Z',
+        'prices_as_of': prices_as_of,
         'eia_spot': eia,
         'futures': curves,
         'cracks': cracks,
