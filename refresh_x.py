@@ -29,16 +29,76 @@ if not BEARER_TOKEN:
     print('ERROR: X_BEARER_TOKEN environment variable not set.', file=sys.stderr)
     sys.exit(1)
 
+# Crude, Refining & Products — full follow list
+# Format: 'TwitterHandle': ('Display Name', 'Category')
 TRACKED_ACCOUNTS = {
-    'JavierBlas':    'Javier Blas',
-    'Reuters':       'Reuters',
-    'WoodMackenzie': 'Wood Mackenzie',
-    'EIAgov':        'EIA',
-    'OPECnews':      'OPEC',
+    # Price reporting agencies
+    'argusmedia':       ('Argus Media',         'Price Reporting'),
+    'opis':             ('OPIS',                 'Price Reporting'),
+    'SPGEnergyOil':     ('S&P Global Energy',   'Price Reporting'),
+
+    # Research, analytics & data
+    'RBNEnergy':        ('RBN Energy',           'Research & Analytics'),
+    'WoodMackenzie':    ('Wood Mackenzie',        'Research & Analytics'),
+    'EnergyAspects':    ('Energy Aspects',        'Research & Analytics'),
+
+    # Flows & vessel / cargo tracking
+    'kpler':            ('Kpler',                'Flows & Tracking'),
+    'Vortexa':          ('Vortexa',              'Flows & Tracking'),
+    'tankertrackers':   ('Tanker Trackers',      'Flows & Tracking'),
+
+    # News & journalists
+    'ReutersVzla':      ('Reuters Venezuela',    'News'),
+    'ArathySom':        ('Arathy Som',           'News'),
+    'mariannaparraga':  ('Marianna Parraga',     'News'),
+    'Rory_Johnston':    ('Rory Johnston',         'News'),
+    'JavierBlas':       ('Javier Blas',          'News'),
+    'jkempenergy':      ('JKem Energy',          'News'),
+    'ftenergy':         ('FT Energy',            'News'),
+    'OilandEnergy':     ('Oil and Energy',       'News'),
+    'OilandGibbs':      ('Oil and Gibbs',        'News'),
+
+    # Independent analysts & traders
+    'CroftHelima':      ('Helima Croft',         'Analysts & Traders'),
+    'staunovo':         ('Giovanni Staunovo',    'Analysts & Traders'),
+    'IliaBouchouev':    ('Ilia Bouchouev',       'Analysts & Traders'),
+    'chigrl':           ('Tracy Shuchart',       'Analysts & Traders'),
+    'AndurandPierre':   ('Pierre Andurand',      'Analysts & Traders'),
+    'energyphilflynn':  ('Phil Flynn',           'Analysts & Traders'),
+    'Ole_S_Hansen':     ('Ole Hansen',           'Analysts & Traders'),
+
+    # Retail fuel / pump prices
+    'GasBuddyGuy':      ('Patrick De Haan',      'Retail Fuel'),
+    'TomKloza':         ('Tom Kloza',            'Retail Fuel'),
+
+    # Refiners & integrated majors
+    'ValeroEnergy':     ('Valero Energy',        'Refiners & Majors'),
+    'phillips66co':     ('Phillips 66',          'Refiners & Majors'),
+    'MarathonPetroCo':  ('Marathon Petroleum',   'Refiners & Majors'),
+    'Chevron':          ('Chevron',              'Refiners & Majors'),
+    'exxonmobil':       ('ExxonMobil',           'Refiners & Majors'),
+    'bp_America':       ('BP America',           'Refiners & Majors'),
+    'IrvingOil':        ('Irving Oil',           'Refiners & Majors'),
+
+    # Trading houses
+    'trafigura':        ('Trafigura',            'Trading Houses'),
+    'Gunvor':           ('Gunvor',               'Trading Houses'),
+    'vitolnews':        ('Vitol',                'Trading Houses'),
+
+    # Midstream, pipelines & distribution
+    'Colpipe':          ('Colonial Pipeline',    'Midstream'),
+    'EnergyTransfer':   ('Energy Transfer',      'Midstream'),
+    'MansfieldEnergy':  ('Mansfield Energy',     'Midstream'),
+
+    # Official / institutional
+    'eiagov':           ('EIA',                  'Official'),
+    'iea':              ('IEA',                  'Official'),
+    'opecsecretariat':  ('OPEC',                 'Official'),
+    'ENERGY':           ('US Dept of Energy',    'Official'),
 }
 
-MAX_POSTS_PER_ACCOUNT = 10
-MAX_TOTAL_POSTS = 30
+MAX_POSTS_PER_ACCOUNT = 5
+MAX_TOTAL_POSTS = 60
 
 
 def x_get(path, params=None):
@@ -61,7 +121,7 @@ def get_user_id(username):
     return data['data']['id']
 
 
-def get_recent_tweets(user_id, max_results=10):
+def get_recent_tweets(user_id, max_results=5):
     params = {
         'max_results': min(max_results, 100),
         'tweet.fields': 'created_at,public_metrics,text',
@@ -130,8 +190,8 @@ def main():
     posts = []
     errors = []
 
-    for username, display_name in TRACKED_ACCOUNTS.items():
-        print(f'  Fetching @{username}...')
+    for username, (display_name, category) in TRACKED_ACCOUNTS.items():
+        print(f'  Fetching @{username} ({category})...')
         try:
             uid = get_user_id(username)
             tweets = get_recent_tweets(uid, MAX_POSTS_PER_ACCOUNT)
@@ -141,7 +201,7 @@ def main():
                 summary = summarize(tweet['text'], display_name)
                 posts.append({
                     'id': tweet['id'],
-                    'author': {'name': display_name, 'userName': username},
+                    'author': {'name': display_name, 'userName': username, 'category': category},
                     'text': tweet['text'],
                     'summary': summary,
                     'createdAt': tweet.get('created_at', ''),
