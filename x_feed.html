@@ -61,6 +61,14 @@ body {
   border-radius: 6px; text-decoration: none; transition: color 0.15s, background 0.15s;
 }
 .nav-link:hover { color: var(--text); background: var(--panel-2); }
+.nav-signout {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 8px 14px; color: var(--muted); background: transparent;
+  border: 1px solid var(--border-soft, var(--border)); border-radius: 6px; cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-signout:hover { color: #f87171; border-color: rgba(248,113,113,0.45); background: rgba(248,113,113,0.06); }
 .nav-link.active { color: var(--accent); }
 .mob-brand {
   display: flex; align-items: center; gap: 12px;
@@ -226,6 +234,7 @@ footer {
       <a class="nav-link" href="news.html">News</a>
       <a class="nav-link active" href="x_feed.html">X Feed</a>
     </div>
+      <button class="nav-signout" onclick="signOut()">Sign Out</button>
   </div>
 </nav>
 
@@ -256,6 +265,17 @@ footer {
 <footer id="footer-line">Morning Oil Brief · Energy X Feed · Updated daily at 04:00 CT</footer>
 
 <script>
+  async function signOut() {
+    try {
+      const _sb = supabase.createClient(
+        'https://ohagroxyqkoygxdkbjvn.supabase.co',
+        'sb_publishable_B88mNC5uZLnWjVqShctogg_wDh8QgEw'
+      );
+      await _sb.auth.signOut();
+    } finally {
+      window.location.href = 'login.html';
+    }
+  }
 // @@CITGO_DATA_START@@
 // ── CITGO/VENEZUELA DATA (rewritten by citgo-venezuela-x-feed-daily task) ──
 const CITGO_DATA = {"lastUpdated":"2026-05-31T11:05:52Z","posts":[{"id":"2060696040462815610","author":{"name":"Azabacheonline","userName":"Azabacheonline"},"text":"🚨 GUAIDÓ Y LA FALSA OPOSICIÓN: EL GRAN FRACASO\nGuaidó representa exactamente lo que ha fallado en Venezuela: una oposición que nunca desmanteló la organización criminal chavista.\nDurante su momento más fuerte tuvo reconocimiento internacional, control de Citgo, Monómeros y millones de dólares… ¿y qué hizo?","summary":"A widely shared post argues that Juan Guaidó's opposition was a failure, claiming that despite holding control of CITGO, Monómeros and millions of dollars plus international recognition, it never dismantled Venezuela's entrenched chavista power structure.","createdAt":"2026-05-30T12:13:16Z","likeCount":14,"retweetCount":16,"replyCount":3},{"id":"2060836851431227395","author":{"name":"ludapifa","userName":"ludapifa"},"text":"@usembassyve @SecRubio De verdad que cada día me sorprende más. Que coño les dijo María Corina Machado??\n\n@MariaCorinaYA \n\nUstedes creen q en Venezuela no teníamos colegios? Universidades? Institutos?? Cómo creen que logramos ser dueños de Citgo??\n\nCoño respeten a la gente q estudio.","summary":"Replying to the US Embassy and Secretary Rubio, a user defends educated Venezuelans, arguing the country's schools and universities are precisely how Venezuela came to own CITGO and demanding more respect for its professionals.","createdAt":"2026-05-30T21:32:48Z","likeCount":1,"retweetCount":0,"replyCount":0},{"id":"2060516037225824426","author":{"name":"Entornointel","userName":"Entornointel"},"text":"CITGO rechaza demanda de venezolanos por deudas en Delaware\n\nCITGO rechaza demanda de grupo venezolano por deudas, alegando que tribunales ya desestimaron casos similares previamente.\n\nhttps://t.co/iurYzS3y4f\n\n#CITGO #Venezuela #Justicia #BeKind","summary":"CITGO has rejected a debt claim brought by a Venezuelan group in Delaware, arguing that courts have already dismissed similar cases in the past.","createdAt":"2026-05-30T00:18:00Z","likeCount":0,"retweetCount":0,"replyCount":0},{"id":"2060529626959515985","author":{"name":"Entornointel","userName":"Entornointel"},"text":"CITGO rechaza demanda de venezolanos por deudas en Delaware\n\nCITGO rechaza demanda de grupo venezolano por deudas, alegando que tribunales ya desestimaron casos similares previamente.\n\nhttps://t.co/iurYzS3y4f\n\n#CITGO #Venezuela #Demanda #BeKind","summary":"A repeat of the report that CITGO has rejected a Venezuelan group's debt lawsuit in Delaware, citing prior court dismissals of comparable claims.","createdAt":"2026-05-30T01:12:00Z","likeCount":0,"retweetCount":0,"replyCount":0}]};
