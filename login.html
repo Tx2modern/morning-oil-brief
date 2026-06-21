@@ -373,6 +373,28 @@
       <a href="#" onclick="switchTab('login'); return false;" style="font-size:12px; color:var(--muted); text-decoration:none;">← Back to Sign In</a>
     </div>
   </form>
+
+  <!-- SET NEW PASSWORD FORM (shown after clicking reset link in email) -->
+  <form id="form-newpassword" style="display:none" onsubmit="handleNewPassword(event)">
+    <p style="font-size:13px; color:var(--muted); margin-bottom:18px;">
+      Choose a new password for your account.
+    </p>
+    <div class="form-group">
+      <label>New Password</label>
+      <div class="input-wrap">
+        <input type="password" id="newpw-password" placeholder="Min. 8 characters" required minlength="8" autocomplete="new-password">
+        <button type="button" class="toggle-pw" onclick="togglePw('newpw-password', this)">👁</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Confirm New Password</label>
+      <div class="input-wrap">
+        <input type="password" id="newpw-confirm" placeholder="••••••••" required autocomplete="new-password">
+        <button type="button" class="toggle-pw" onclick="togglePw('newpw-confirm', this)">👁</button>
+      </div>
+    </div>
+    <button type="submit" class="btn" id="btn-newpassword">Set New Password →</button>
+  </form>
 </div>
 
 <div class="footer-note">
@@ -395,24 +417,34 @@
   const { createClient } = supabase;
   const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-  // If already logged in, skip the login page
+  // If already logged in, skip the login page — but not during a password recovery
   sb.auth.getSession().then(({ data }) => {
-    if (data.session) window.location.href = DASHBOARD_URL;
+    if (data.session && !isRecoveryRedirect()) window.location.href = DASHBOARD_URL;
   });
 
-  // Handle magic-link / password-reset redirects
+  // Handle password-reset link clicks and normal sign-ins
   sb.auth.onAuthStateChange((event, session) => {
-    if (event === 'SIGNED_IN' && session) {
+    if (event === 'PASSWORD_RECOVERY') {
+      // User clicked the reset link — show the new password form
+      switchTab('newpassword');
+    } else if (event === 'SIGNED_IN' && session && !isRecoveryRedirect()) {
       window.location.href = DASHBOARD_URL;
     }
   });
 
+  // Returns true when the URL contains a Supabase password-recovery token
+  function isRecoveryRedirect() {
+    const hash = new URLSearchParams(window.location.hash.replace('#', '?'));
+    return hash.get('type') === 'recovery';
+  }
+
   // ─── TAB SWITCHING ──────────────────────────────────────────────────────────
   function switchTab(tab) {
     hideAlert();
-    document.getElementById('form-login').style.display   = 'none';
-    document.getElementById('form-signup').style.display  = 'none';
-    document.getElementById('form-reset').style.display   = 'none';
+    document.getElementById('form-login').style.display       = 'none';
+    document.getElementById('form-signup').style.display      = 'none';
+    document.getElementById('form-reset').style.display       = 'none';
+    document.getElementById('form-newpassword').style.display = 'none';
     document.getElementById('tab-login').classList.remove('active');
     document.getElementById('tab-signup').classList.remove('active');
 
@@ -424,6 +456,8 @@
       document.getElementById('tab-signup').classList.add('active');
     } else if (tab === 'reset') {
       document.getElementById('form-reset').style.display = 'block';
+    } else if (tab === 'newpassword') {
+      document.getElementById('form-newpassword').style.display = 'block';
     }
   }
 
@@ -501,6 +535,34 @@
       showAlert('✓ Check your email to confirm your account, then sign in.', 'success');
       btn.disabled = false;
       btn.textContent = 'Create Account →';
+    }
+  }
+
+  // ─── SET NEW PASSWORD (after clicking reset link) ───────────────────────────
+  async function handleNewPassword(e) {
+    e.preventDefault();
+    hideAlert();
+    const btn     = document.getElementById('btn-newpassword');
+    const pw      = document.getElementById('newpw-password').value;
+    const confirm = document.getElementById('newpw-confirm').value;
+
+    if (pw !== confirm) {
+      showAlert('Passwords do not match.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    const { error } = await sb.auth.updateUser({ password: pw });
+
+    if (error) {
+      showAlert(error.message);
+      btn.disabled = false;
+      btn.textContent = 'Set New Password →';
+    } else {
+      showAlert('✓ Password updated! Signing you in…', 'success');
+      setTimeout(() => { window.location.href = DASHBOARD_URL; }, 1500);
     }
   }
 
