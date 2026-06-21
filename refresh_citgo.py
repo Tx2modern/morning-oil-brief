@@ -185,6 +185,18 @@ def patch_html(payload):
     return True
 
 
+def build_tweet_url(tweet, username):
+    """Return the canonical X URL for a tweet.
+
+    Prefer the url field returned by Apify directly; fall back to
+    constructing from tweetId (the actual status ID) or id."""
+    if tweet.get('url'):
+        return tweet['url']
+    # tweetId is the numeric status ID; 'id' may be an Apify internal ID
+    status_id = tweet.get('tweetId') or tweet.get('id', '')
+    return f'https://x.com/{username}/status/{status_id}'
+
+
 def main():
     now = datetime.now(timezone.utc)
     since = (now - timedelta(hours=24)).strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -223,10 +235,12 @@ def main():
         username = author.get('userName', 'unknown')
         display_name = author.get('name', username)
         text = tweet.get('text', tweet.get('fullText', ''))
-        print(f'  Summarizing @{username}...')
+        tweet_url = build_tweet_url(tweet, username)
+        print(f'  Summarizing @{username} → {tweet_url}')
         summary = summarize(text, display_name)
         posts.append({
-            'id': tweet.get('id', ''),
+            'id': tweet.get('tweetId') or tweet.get('id', ''),
+            'url': tweet_url,
             'author': {'name': display_name, 'userName': username},
             'text': text,
             'summary': summary,
