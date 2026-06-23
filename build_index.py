@@ -5112,8 +5112,6 @@ footer {{
 
 <div class="container">
   <div class="header">
-    <div class="header-eyebrow" id="news-today-date"></div>
-    <script>document.getElementById('news-today-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}).toUpperCase();</script>
     <h1>News</h1>
     <div class="header-sub">{total} headlines from the last 48 hours · grouped by topic</div>
   </div>

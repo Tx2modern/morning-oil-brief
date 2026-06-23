@@ -97,9 +97,10 @@ TRACKED_ACCOUNTS = {
     'ENERGY':           ('US Dept of Energy',    'Official'),
 }
 
-MAX_POSTS_PER_ACCOUNT = 5   # fetch up to 5, then select top 2 by engagement
-TOP_POSTS_PER_ACCOUNT = 2  # keep the 2 highest-rated posts per account
+MAX_POSTS_PER_ACCOUNT = 10  # fetch up to 10, select top 2 by likes
+TOP_POSTS_PER_ACCOUNT = 2  # keep the 2 highest-liked posts per account
 MAX_TOTAL_POSTS = 90       # hard cap on combined feed
+LOOKBACK_HOURS = 24        # only posts from the past 24 hours
 
 
 def x_get(path, params=None):
@@ -122,11 +123,13 @@ def get_user_id(username):
     return data['data']['id']
 
 
-def get_recent_tweets(user_id, max_results=5):
+def get_recent_tweets(user_id, max_results=10, since_hours=24):
+    start_time = (datetime.now(timezone.utc) - timedelta(hours=since_hours)).strftime('%Y-%m-%dT%H:%M:%SZ')
     params = {
         'max_results': min(max_results, 100),
         'tweet.fields': 'created_at,public_metrics,text',
         'exclude': 'retweets,replies',
+        'start_time': start_time,
     }
     data = x_get(f'/users/{user_id}/tweets', params)
     return data.get('data', [])
@@ -202,21 +205,12 @@ def main():
         print(f'  Fetching @{username} ({category})...')
         try:
             uid = get_user_id(username)
-            tweets = get_recent_tweets(uid, MAX_POSTS_PER_ACCOUNT)
-            print(f'    {len(tweets)} tweets fetched')
+            tweets = get_recent_tweets(uid, MAX_POSTS_PER_ACCOUNT, LOOKBACK_HOURS)
+            print(f'    {len(tweets)} tweets fetched (last {LOOKBACK_HOURS}h)')
 
-            # Score each tweet by engagement, select top 2
-            scored = []
-            for tweet in tweets:
-                metrics = tweet.get('public_metrics', {})
-                score = (
-                    metrics.get('like_count', 0)
-                    + metrics.get('retweet_count', 0) * 2
-                    + metrics.get('reply_count', 0)
-                )
-                scored.append((score, tweet))
-            scored.sort(key=lambda x: x[0], reverse=True)
-            top_tweets = [t for _, t in scored[:TOP_POSTS_PER_ACCOUNT]]
+            # Select top 2 by likes
+            tweets.sort(key=lambda t: t.get('public_metrics', {}).get('like_count', 0), reverse=True)
+            top_tweets = tweets[:TOP_POSTS_PER_ACCOUNT]
 
             for tweet in top_tweets:
                 metrics = tweet.get('public_metrics', {})
@@ -230,7 +224,6 @@ def main():
                     'likeCount': metrics.get('like_count', 0),
                     'retweetCount': metrics.get('retweet_count', 0),
                     'replyCount': metrics.get('reply_count', 0),
-                    'engagementScore': metrics.get('like_count', 0) + metrics.get('retweet_count', 0) * 2 + metrics.get('reply_count', 0),
                 })
                 time.sleep(0.3)
         except Exception as e:
@@ -238,8 +231,8 @@ def main():
             errors.append(username)
         time.sleep(1)
 
-    # Sort by engagement score descending, then cap
-    posts.sort(key=lambda x: x.get('engagementScore', 0), reverse=True)
+    # Sort by likes descending, then cap
+    posts.sort(key=lambda x: x.get('likeCount', 0), reverse=True)
     posts = posts[:MAX_TOTAL_POSTS]
 
     payload = {

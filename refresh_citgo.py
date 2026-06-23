@@ -30,10 +30,12 @@ APIFY_TOKEN = os.environ.get('APIFY_API_TOKEN')
 ANTHROPIC_KEY = os.environ.get('ANTHROPIC_API_KEY')
 
 ACTOR_ID = 'apidojo~tweet-scraper'
-SEARCH_QUERY = 'CITGO Venezuela'
+SEARCH_QUERY_PRIMARY   = 'CITGO Venezuela'  # first pass — both keywords
+SEARCH_QUERY_FALLBACK  = 'Venezuela oil'    # second pass — Venezuela trending if no CITGO hits
 FETCH_LIMIT = 30
 TOP_N = 6
-LOOKBACK_HOURS = 48  # widened from 24h — CITGO posts are infrequent
+FALLBACK_N = 2          # if primary yields nothing, show top 2 Venezuela posts
+LOOKBACK_HOURS = 48
 
 SENTINEL_START = '// @@CITGO_DATA_START@@'
 SENTINEL_END = '// @@CITGO_DATA_END@@'
@@ -198,45 +200,73 @@ def build_tweet_url(tweet, username):
     return f'https://x.com/{username}/status/{status_id}'
 
 
-def main():
-    now = datetime.now(timezone.utc)
-    since = (now - timedelta(hours=LOOKBACK_HOURS)).strftime('%Y-%m-%dT%H:%M:%SZ')
-
+def _run_search(query, since, limit):
+    """Run Apify tweet search and return raw items."""
     actor_input = {
-        'searchTerms': [SEARCH_QUERY],
-        'maxItems': FETCH_LIMIT,
+        'searchTerms': [query],
+        'maxItems': limit,
         'sort': 'Top',
         'tweetLanguage': 'en',
         'start': since,
     }
+    dataset_id = run_actor_and_wait(ACTOR_ID, actor_input)
+    return fetch_dataset(dataset_id, limit=limit)
 
-    try:
-        dataset_id = run_actor_and_wait(ACTOR_ID, actor_input)
-        items = fetch_dataset(dataset_id, limit=FETCH_LIMIT)
-    except Exception as e:
-        print(f'ERROR: {e}', file=sys.stderr)
-        sys.exit(1)
 
-    print(f'  {len(items)} tweets fetched')
-
-    def _is_relevant(t):
+def _filter_candidates(items, require_both_keywords=False):
+    """Filter to relevant originals, optionally requiring both citgo AND venezuela."""
+    def _relevant(t):
         body = (t.get('text', '') + t.get('fullText', '')).lower()
+        if require_both_keywords:
+            return 'citgo' in body and 'venezuela' in body
         return 'citgo' in body or 'venezuela' in body
 
-    # Prefer originals; fall back to retweets if originals are too few
-    originals = [t for t in items if not t.get('isRetweet', False) and _is_relevant(t)]
-    print(f'  {len(originals)} original tweets mentioning CITGO/Venezuela')
-    if len(originals) < TOP_N:
-        retweets = [t for t in items if t.get('isRetweet', False) and _is_relevant(t)]
-        originals = (originals + retweets)[:FETCH_LIMIT]
-        print(f'  Supplemented with retweets — {len(originals)} total candidates')
+    originals = [t for t in items if not t.get('isRetweet', False) and _relevant(t)]
+    if not originals:
+        # Fall back to including retweets
+        originals = [t for t in items if _relevant(t)]
+    return originals
 
-    # Sort by engagement and take top 6
-    originals.sort(
+
+def main():
+    now = datetime.now(timezone.utc)
+    since = (now - timedelta(hours=LOOKBACK_HOURS)).strftime('%Y-%m-%dT%H:%M:%SZ')
+    is_fallback = False
+
+    # --- Pass 1: CITGO Venezuela ---
+    try:
+        print(f'  Pass 1: searching "{SEARCH_QUERY_PRIMARY}"...')
+        items = _run_search(SEARCH_QUERY_PRIMARY, since, FETCH_LIMIT)
+        print(f'  {len(items)} tweets fetched')
+    except Exception as e:
+        print(f'ERROR (pass 1): {e}', file=sys.stderr)
+        sys.exit(1)
+
+    candidates = _filter_candidates(items)
+    print(f'  {len(candidates)} CITGO/Venezuela candidates')
+
+    # --- Pass 2: Venezuela-only fallback if pass 1 found nothing ---
+    if not candidates:
+        is_fallback = True
+        print(f'  No CITGO/Venezuela posts found — running fallback search "{SEARCH_QUERY_FALLBACK}"...')
+        try:
+            items2 = _run_search(SEARCH_QUERY_FALLBACK, since, FETCH_LIMIT)
+            print(f'  {len(items2)} tweets fetched (fallback)')
+        except Exception as e:
+            print(f'ERROR (pass 2): {e}', file=sys.stderr)
+            sys.exit(1)
+        candidates = _filter_candidates(items2)
+        print(f'  {len(candidates)} Venezuela candidates (fallback)')
+
+    limit = FALLBACK_N if is_fallback else TOP_N
+
+    # Sort by engagement and take top N
+    candidates.sort(
         key=lambda t: (t.get('likeCount', 0) + t.get('retweetCount', 0)),
         reverse=True,
     )
-    top = originals[:TOP_N]
+    top = candidates[:limit]
+    print(f'  Selected {len(top)} posts ({"Venezuela fallback" if is_fallback else "CITGO+Venezuela"})')
 
     posts = []
     for tweet in top:

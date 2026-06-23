@@ -50,7 +50,12 @@ OILPRICE_RSS_FEEDS = [
 ]
 
 # OilPrice.com API endpoint (paid, requires OILPRICE_API_KEY)
-OILPRICE_API_BASE = 'https://oilprice.com/api/v1/articles?api_key={key}&rows=50'
+# Their v1 endpoint; rows/limit param may vary by plan
+OILPRICE_API_URLS = [
+    'https://oilprice.com/api/v1/articles?api_key={key}&rows=50',
+    'https://api.oilprice.com/v1/articles?api_key={key}&rows=50',
+    'https://oilprice.com/api/v1/latest-news?api_key={key}&limit=50',
+]
 
 
 def fetch_feed(query, category):
@@ -188,45 +193,95 @@ def fetch_oilprice_rss(url, category):
     return items
 
 
-def fetch_oilprice_api(api_key, category='Energy Markets'):
-    """Fetch articles from OilPrice.com paid API."""
-    url = OILPRICE_API_BASE.format(key=api_key)
-    req = urllib.request.Request(
-        url,
-        headers={'User-Agent': 'morning-oil-brief/1.0', 'Accept': 'application/json'}
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=15) as r:
-            data = json.loads(r.read())
-    except Exception as e:
-        print(f'  FAIL OilPrice API: {e}', file=sys.stderr)
-        return []
-
-    # API returns {"status":"ok","data":[{"title":..,"link":..,"pubDate":..,"description":..}]}
-    articles = data.get('data', []) if isinstance(data, dict) else []
-    items = []
-    for art in articles:
-        raw_date = art.get('pubDate', '')
-        dt = None
-        pub_str = ''
+def _parse_oilprice_date(art):
+    """Try every known date field name OilPrice API uses across versions."""
+    for field in ('pubDate', 'published_at', 'publishedAt', 'date', 'created_at', 'pub_date'):
+        raw = art.get(field, '')
+        if not raw:
+            continue
         try:
-            dt = parsedate_to_datetime(raw_date) if raw_date else None
-            if dt:
-                pub_str = dt.isoformat()
+            # RFC 2822 (Sat, 21 Jun 2026 12:00:00 +0000)
+            return parsedate_to_datetime(raw), raw
         except Exception:
             pass
+        try:
+            # ISO 8601 (2026-06-21T12:00:00Z or 2026-06-21 12:00:00)
+            normalized = raw.replace(' ', 'T').rstrip('Z') + '+00:00'
+            return datetime.fromisoformat(normalized), raw
+        except Exception:
+            pass
+    return None, ''
 
-        # Map article category from API if present
-        cat = art.get('category', category)
+
+def fetch_oilprice_api(api_key, category='Energy Markets'):
+    """Fetch articles from OilPrice.com paid API, trying multiple known endpoint patterns."""
+    data = None
+    last_err = None
+    for url_template in OILPRICE_API_URLS:
+        url = url_template.format(key=api_key)
+        req = urllib.request.Request(
+            url,
+            headers={'User-Agent': 'morning-oil-brief/1.0', 'Accept': 'application/json'}
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=15) as r:
+                raw_bytes = r.read()
+            data = json.loads(raw_bytes)
+            print(f'  OilPrice API: got response from {url.split("?")[0]}')
+            break
+        except Exception as e:
+            last_err = e
+            print(f'  OilPrice API: {url.split("?")[0]} → {e}', file=sys.stderr)
+
+    if data is None:
+        print(f'  FAIL OilPrice API (all endpoints exhausted): {last_err}', file=sys.stderr)
+        return []
+
+    # Normalise response — API returns various shapes across versions:
+    #   {"data": [...]}
+    #   {"status":"ok", "data": [...]}
+    #   {"articles": [...]}
+    #   {"data": {"articles": [...]}}
+    #   [...]   (bare array)
+    if isinstance(data, list):
+        articles = data
+    elif isinstance(data, dict):
+        inner = data.get('data', data.get('articles', data.get('items', [])))
+        if isinstance(inner, list):
+            articles = inner
+        elif isinstance(inner, dict):
+            articles = inner.get('articles', inner.get('items', []))
+        else:
+            articles = []
+    else:
+        articles = []
+
+    print(f'  OilPrice API: {len(articles)} articles parsed')
+
+    items = []
+    for art in articles:
+        dt, raw_date = _parse_oilprice_date(art)
+        pub_str = dt.isoformat() if dt else ''
+
+        # Link field may be 'link', 'url', or 'article_url'
+        link = art.get('link') or art.get('url') or art.get('article_url') or ''
+        # Category may come from the article itself
+        cat = art.get('category') or art.get('type') or category
+        # Summary/description field
+        desc_raw = art.get('description') or art.get('summary') or art.get('excerpt') or ''
+
+        title = (art.get('title') or '').strip()
+        if not title:
+            continue
 
         items.append({
-            'title':       (art.get('title') or '').strip(),
+            'title':       title,
             'source':      'OilPrice.com',
             'date':        raw_date,
             'datetime':    pub_str,
             'epoch':       dt.timestamp() if dt else 0.0,
-            'link':        art.get('link', ''),
-            'description': re.sub(r'<[^>]+>', '', art.get('description') or '').strip()[:300],
+            'link':        link,
+            'description': re.sub(r'<[^>]+>', '', desc_raw).strip()[:300],
             'category':    cat,
             '_dt':         dt,
         })
