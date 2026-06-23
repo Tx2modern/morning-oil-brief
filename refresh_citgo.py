@@ -31,8 +31,9 @@ ANTHROPIC_KEY = os.environ.get('ANTHROPIC_API_KEY')
 
 ACTOR_ID = 'apidojo~tweet-scraper'
 SEARCH_QUERY = 'CITGO Venezuela'
-FETCH_LIMIT = 20
+FETCH_LIMIT = 30
 TOP_N = 6
+LOOKBACK_HOURS = 48  # widened from 24h — CITGO posts are infrequent
 
 SENTINEL_START = '// @@CITGO_DATA_START@@'
 SENTINEL_END = '// @@CITGO_DATA_END@@'
@@ -199,7 +200,7 @@ def build_tweet_url(tweet, username):
 
 def main():
     now = datetime.now(timezone.utc)
-    since = (now - timedelta(hours=24)).strftime('%Y-%m-%dT%H:%M:%SZ')
+    since = (now - timedelta(hours=LOOKBACK_HOURS)).strftime('%Y-%m-%dT%H:%M:%SZ')
 
     actor_input = {
         'searchTerms': [SEARCH_QUERY],
@@ -218,13 +219,17 @@ def main():
 
     print(f'  {len(items)} tweets fetched')
 
-    # Filter out retweets and posts that don't actually mention CITGO
-    originals = [
-        t for t in items
-        if not t.get('isRetweet', False)
-        and 'citgo' in (t.get('text', '') + t.get('fullText', '')).lower()
-    ]
-    print(f'  {len(originals)} original tweets after filtering retweets and non-CITGO posts')
+    def _is_relevant(t):
+        body = (t.get('text', '') + t.get('fullText', '')).lower()
+        return 'citgo' in body or 'venezuela' in body
+
+    # Prefer originals; fall back to retweets if originals are too few
+    originals = [t for t in items if not t.get('isRetweet', False) and _is_relevant(t)]
+    print(f'  {len(originals)} original tweets mentioning CITGO/Venezuela')
+    if len(originals) < TOP_N:
+        retweets = [t for t in items if t.get('isRetweet', False) and _is_relevant(t)]
+        originals = (originals + retweets)[:FETCH_LIMIT]
+        print(f'  Supplemented with retweets — {len(originals)} total candidates')
 
     # Sort by engagement and take top 6
     originals.sort(

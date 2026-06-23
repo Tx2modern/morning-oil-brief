@@ -1,15 +1,13 @@
-name: Update Data & Build
+name: Midday News & X Feed Refresh
 
 on:
   schedule:
-    # 7 PM ET weekdays (after NYMEX close ~6:30 PM ET) = 23:00 UTC Mon-Fri
-    - cron: '0 23 * * 1-5'
-    # 11 AM ET Thursdays (after Wednesday EIA WPSR 10:30 AM ET release) = 15:00 UTC Thu
-    - cron: '0 15 * * 4'
+    # 12 PM ET daily (all 7 days) = 16:00 UTC
+    - cron: '0 16 * * *'
   workflow_dispatch:
 
 jobs:
-  update-and-build:
+  refresh-news-x:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,19 +20,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install dependencies
-        run: pip install yfinance
-
-      - name: Refresh EIA weekly inventory data
-        env:
-          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
-        run: python3 refresh_eia.py
-
-      - name: Refresh prices & forward curves
-        env:
-          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
-        run: python3 refresh_prices.py
 
       - name: Refresh news headlines
         env:
@@ -54,12 +39,6 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 refresh_citgo.py
 
-      - name: Refresh wiki context from LLM-wiki
-        continue-on-error: true
-        env:
-          WIKI_GITHUB_TOKEN: ${{ secrets.WIKI_GITHUB_TOKEN }}
-        run: python3 refresh_wiki_context.py --github-repo tx2modern/llm-wiki
-
       - name: Build all HTML pages
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -71,6 +50,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add eia_data.json prices_data.json news_data.json x_feed_data.json wiki_context.json index.html margins.html curves.html news.html inventory.html x_feed.html .curves_cache.json .margins_cache.json .morning_brief_cache.json .narratives_cache.json
-          git diff --staged --quiet || git commit -m "chore: daily data refresh [skip ci]"
+          git add news_data.json x_feed_data.json index.html margins.html curves.html news.html inventory.html x_feed.html .morning_brief_cache.json .narratives_cache.json
+          git diff --staged --quiet || git commit -m "chore: midday news & x feed refresh [skip ci]"
           git push

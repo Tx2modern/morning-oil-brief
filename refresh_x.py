@@ -97,8 +97,9 @@ TRACKED_ACCOUNTS = {
     'ENERGY':           ('US Dept of Energy',    'Official'),
 }
 
-MAX_POSTS_PER_ACCOUNT = 5
-MAX_TOTAL_POSTS = 60
+MAX_POSTS_PER_ACCOUNT = 5   # fetch up to 5, then select top 2 by engagement
+TOP_POSTS_PER_ACCOUNT = 2  # keep the 2 highest-rated posts per account
+MAX_TOTAL_POSTS = 90       # hard cap on combined feed
 
 
 def x_get(path, params=None):
@@ -203,7 +204,21 @@ def main():
             uid = get_user_id(username)
             tweets = get_recent_tweets(uid, MAX_POSTS_PER_ACCOUNT)
             print(f'    {len(tweets)} tweets fetched')
+
+            # Score each tweet by engagement, select top 2
+            scored = []
             for tweet in tweets:
+                metrics = tweet.get('public_metrics', {})
+                score = (
+                    metrics.get('like_count', 0)
+                    + metrics.get('retweet_count', 0) * 2
+                    + metrics.get('reply_count', 0)
+                )
+                scored.append((score, tweet))
+            scored.sort(key=lambda x: x[0], reverse=True)
+            top_tweets = [t for _, t in scored[:TOP_POSTS_PER_ACCOUNT]]
+
+            for tweet in top_tweets:
                 metrics = tweet.get('public_metrics', {})
                 summary = summarize(tweet['text'], display_name)
                 posts.append({
@@ -215,6 +230,7 @@ def main():
                     'likeCount': metrics.get('like_count', 0),
                     'retweetCount': metrics.get('retweet_count', 0),
                     'replyCount': metrics.get('reply_count', 0),
+                    'engagementScore': metrics.get('like_count', 0) + metrics.get('retweet_count', 0) * 2 + metrics.get('reply_count', 0),
                 })
                 time.sleep(0.3)
         except Exception as e:
@@ -222,7 +238,8 @@ def main():
             errors.append(username)
         time.sleep(1)
 
-    posts.sort(key=lambda x: x.get('createdAt', ''), reverse=True)
+    # Sort by engagement score descending, then cap
+    posts.sort(key=lambda x: x.get('engagementScore', 0), reverse=True)
     posts = posts[:MAX_TOTAL_POSTS]
 
     payload = {
