@@ -265,18 +265,11 @@ footer {
 <footer id="footer-line">Morning Oil Brief · Energy X Feed · Updated daily at 04:00 CT</footer>
 
 <script>
-  async function signOut() {
-    try {
-      const _sb = supabase.createClient(
-        'https://ohagroxyqkoygxdkbjvn.supabase.co',
-        'sb_publishable_B88mNC5uZLnWjVqShctogg_wDh8QgEw'
-      );
-      await _sb.auth.signOut();
-    } finally {
-      // Clear session from localStorage so login.html doesn't auto-redirect back
-      Object.keys(localStorage).forEach(k => { if (k.startsWith('sb-')) localStorage.removeItem(k); });
-      window.location.href = 'login.html';
-    }
+  function signOut() {
+    Object.keys(localStorage).forEach(function(k) {
+      if (k.startsWith('sb-')) localStorage.removeItem(k);
+    });
+    window.location.href = 'login.html';
   }
 // @@CITGO_DATA_START@@
 // ── CITGO/VENEZUELA DATA (rewritten by citgo-venezuela-x-feed-daily task) ──

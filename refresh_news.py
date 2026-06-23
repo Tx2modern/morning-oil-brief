@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 """
-Refresh news_data.json from Google News RSS feeds.
+Refresh news_data.json from OilPrice.com and Google News RSS.
 
-Fetches energy/oil/petroleum headlines from the past 48 hours,
-deduplicates, categorizes, and writes news_data.json.
+Source priority:
+  1. OilPrice.com RSS (always — high quality, energy-specific)
+  2. OilPrice.com API (if OILPRICE_API_KEY set — adds more articles)
+  3. Google News RSS (US-targeted queries with exclusions)
 
-No API key required.
+Filters out:
+  - Indian/Asian retail fuel price articles (rupee pump prices)
+  - Stock/equity analysis articles (simplywall, Motley Fool, etc.)
+  - Crypto sites repurposing oil as a price hook
+  - Low-quality aggregators and SEO spam
 """
 import json
 import os
@@ -21,45 +27,266 @@ from email.utils import parsedate_to_datetime
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT_PATH = os.path.join(HERE, 'news_data.json')
 
-CUTOFF_HOURS = 72  # keep articles from last 72 hours
+CUTOFF_HOURS = 72
 MAX_ITEMS = 100
 
-# Google News RSS search queries mapped to category labels
-FEEDS = [
-    ('crude oil prices OPEC',             'Crude Oil & OPEC'),
-    ('gasoline diesel fuel prices',        'Refined Products'),
-    ('EIA petroleum inventory report',     'EIA & Inventory'),
-    ('refinery operations capacity',       'Refining'),
-    ('oil natural gas energy market',      'Energy Markets'),
-    ('Middle East geopolitics oil supply', 'Geopolitics & Risk'),
-    ('US shale production drilling',       'US Production'),
-    ('LNG natural gas export import',      'LNG & Gas'),
+OILPRICE_API_KEY = os.environ.get('OILPRICE_API_KEY', '')
+
+# ── OilPrice.com RSS feeds (no API key, always fetched) ──────────────────────
+OILPRICE_RSS_FEEDS = [
+    ('https://oilprice.com/rss/main',            'Crude Oil & OPEC'),
+    ('https://oilprice.com/rss/geopolitics',     'Geopolitics & Risk'),
+    ('https://oilprice.com/rss/energy_general',  'Energy Markets'),
+    ('https://oilprice.com/rss/natural_gas',     'LNG & Gas'),
+    ('https://oilprice.com/rss/oil_prices',      'Crude Oil & OPEC'),
+    ('https://oilprice.com/rss/us_energy',       'US Production'),
 ]
 
+# ── OilPrice.com API (paid, tried if key is set) ─────────────────────────────
+OILPRICE_API_URLS = [
+    'https://oilprice.com/api/v1/articles?api_key={key}&rows=50',
+    'https://api.oilprice.com/v1/articles?api_key={key}&rows=50',
+    'https://oilprice.com/api/v1/latest-news?api_key={key}&limit=50',
+]
+
+# ── Google News RSS — US-targeted with exclusions for junk ───────────────────
+# Append -india -petrol to keep out Asian retail pump price floods
 GNEWS_BASE = 'https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en'
+FEEDS = [
+    # Primary market feeds — add exclusions to suppress retail pump-price spam
+    ('crude oil WTI Brent OPEC -petrol -"pump price" -india -rupee',           'Crude Oil & OPEC'),
+    ('gasoline RBOB diesel ULSD "crack spread" refinery margin -india -petrol', 'Refined Products'),
+    ('EIA "petroleum status report" "weekly inventory" crude stocks',            'EIA & Inventory'),
+    ('refinery utilization capacity turnaround outage -india',                   'Refining'),
+    ('oil market supply demand outlook -india -rupee -petrol',                   'Energy Markets'),
+    ('Middle East Iran Iraq Saudi oil geopolitics supply',                        'Geopolitics & Risk'),
+    ('US shale Permian Eagle Ford Bakken production drilling rig count',          'US Production'),
+    ('LNG "natural gas" export import terminal -india',                          'LNG & Gas'),
+]
+
+# ── Source blocklist — known low-quality or off-topic ────────────────────────
+BLOCKED_SOURCES = {
+    # Indian retail pump price outlets
+    'india.com', 'ndtv profit', 'news18', 'hindustan times', 'the economic times',
+    'times of india', 'deccan herald', 'dt next', 'newsonair', 'the hindu',
+    'financial express', 'livemint', 'business standard', 'moneycontrol',
+    # Philippines / Taiwan / other Asian retail fuel
+    'manila standard', 'gma network', 'philstar', 'businessmirror',
+    'taiwan news', 'focus taiwan', 'cpc',
+    # Crypto / fintech repurposing energy as price hook
+    'cryptorank', 'bitget', 'coindesk', 'cointelegraph', 'decrypt',
+    'beincrypto', 'u.today', 'ambcrypto',
+    # Stock-picker / equity analysis sites
+    'simplywall.st', 'simply wall st', 'the motley fool', 'motley fool',
+    'discovery alert', 'seekingalpha', 'seeking alpha', 'zacks',
+    'marketbeat', 'tipranks', 'gurufocus',
+    # SEO aggregators / press release spam
+    'globenewswire', 'prnewswire', 'businesswire', 'einpresswire',
+    'accesswire', 'indexbox', 'ad hoc news',
+    # Misc low-signal
+    'ipn.md', 'ایران اینترنشنال',
+}
+
+# ── Title pattern blocklist ───────────────────────────────────────────────────
+BLOCKED_TITLE_PATTERNS = [
+    # Indian retail pump prices
+    r'\bpetrol\b.*\bprice[s]?\b.*\b(india|delhi|mumbai|chennai|kolkata|bangalore|hyderabad)\b',
+    r'\bdiesel\b.*\bprice[s]?\b.*\b(india|delhi|mumbai|chennai|kolkata|bangalore|hyderabad)\b',
+    r'\bfuel rate[s]?\b.*\bjune\b',
+    r'\bcity.wise\b',
+    r'(?:rs\.?|rupee)\s*\d+',
+    # Asian retail prices
+    r'\b(taiwan|philippines|manila|cpc)\b.*\b(gasoline|diesel|fuel)\b.*\bprice\b',
+    # Stock analysis
+    r'\bstock[s]?\b.*\b(earnings|growth|risk|balance sheet|funding)\b',
+    r'\b(buy|sell|hold|analyst rating|price target|eps|dividend)\b',
+    r'\bshares?\b.*\b(rise|fall|climb|drop|surge|plunge)\b.*\b(oil|energy)\b',
+    # Crypto
+    r'\b(bitcoin|ethereum|crypto|blockchain|token|defi)\b',
+    # Generic low-value
+    r'\bcheck\s+(out\s+)?(petrol|diesel|fuel|gas)\s+price[s]?\b',
+    r'\btoday[\'s]?\s+(petrol|diesel|fuel|gas)\s+price[s]?\b',
+]
+_BLOCKED_RE = [re.compile(p, re.IGNORECASE) for p in BLOCKED_TITLE_PATTERNS]
+
+# ── Preferred high-quality sources (score boost for ranking) ─────────────────
+PREFERRED_SOURCES = {
+    'reuters', 'bloomberg', 'wall street journal', 'wsj', 'financial times', 'ft',
+    's&p global', 'platts', 'argus', 'opis', 'rbn energy',
+    'oilprice.com', 'oil & gas journal', 'hart energy', 'world oil',
+    'upstream online', 'energy intelligence', 'cnbc', 'the guardian',
+    'associated press', 'ap', 'eia', 'iea', 'opec',
+}
 
 
-def fetch_feed(query, category):
-    url = GNEWS_BASE.format(query=urllib.parse.quote(query))
+def _is_blocked(title, source):
+    """Return True if this article should be filtered out."""
+    src_lower = (source or '').lower().strip()
+    # Exact or partial source match against blocklist
+    if any(b in src_lower for b in BLOCKED_SOURCES):
+        return True
+    # Title pattern match
+    title_lower = (title or '').lower()
+    if any(rx.search(title_lower) for rx in _BLOCKED_RE):
+        return True
+    return False
+
+
+def _quality_score(item):
+    """Higher = better. Used for final sort when epoch is equal."""
+    src_lower = (item.get('source') or '').lower()
+    bonus = 2 if any(p in src_lower for p in PREFERRED_SOURCES) else 0
+    # OilPrice.com articles get a boost since they're curated energy content
+    if 'oilprice' in src_lower:
+        bonus += 3
+    return item.get('epoch', 0) + bonus * 3600  # treat bonus as +hours
+
+
+def _parse_item(title, link, source, pubdate_text, description):
+    """Return a standardised item dict or None if blocked."""
+    title = (title or '').strip()
+    if not title or not link:
+        return None
+    if _is_blocked(title, source):
+        return None
+    dt = None
+    pub_str = ''
+    if pubdate_text:
+        try:
+            dt = parsedate_to_datetime(pubdate_text.strip())
+            pub_str = dt.isoformat()
+        except Exception:
+            pass
+    return {
+        'title':       title,
+        'source':      source or '',
+        'date':        pubdate_text or '',
+        'datetime':    pub_str,
+        'epoch':       dt.timestamp() if dt else 0.0,
+        'link':        link,
+        'description': re.sub(r'<[^>]+>', '', description or '').strip()[:300],
+        '_dt':         dt,
+    }
+
+
+# ── Fetchers ─────────────────────────────────────────────────────────────────
+
+def fetch_oilprice_rss(url, category):
     req = urllib.request.Request(
-        url,
-        headers={'User-Agent': 'Mozilla/5.0 (compatible; morning-oil-brief/1.0)'}
-    )
+        url, headers={'User-Agent': 'Mozilla/5.0 (compatible; morning-oil-brief/1.0)'})
     try:
         with urllib.request.urlopen(req, timeout=15) as r:
             xml_bytes = r.read()
     except Exception as e:
-        print(f'  FAIL {category}: {e}', file=sys.stderr)
+        print(f'  FAIL OilPrice RSS {url}: {e}', file=sys.stderr)
         return []
-
     try:
         root = ET.fromstring(xml_bytes)
     except ET.ParseError as e:
-        print(f'  XML parse error {category}: {e}', file=sys.stderr)
+        print(f'  XML parse error OilPrice RSS: {e}', file=sys.stderr)
         return []
 
     items = []
-    ns = ''
+    for item in root.findall('.//item'):
+        title_el   = item.find('title')
+        link_el    = item.find('link')
+        pubdate_el = item.find('pubDate')
+        desc_el    = item.find('description')
+        link = (link_el.text or '').strip() if link_el is not None else ''
+        if not link:
+            link = item.findtext('link') or ''
+        parsed = _parse_item(
+            title_el.text if title_el is not None else '',
+            link,
+            'OilPrice.com',
+            pubdate_el.text if pubdate_el is not None else '',
+            desc_el.text if desc_el is not None else '',
+        )
+        if parsed:
+            parsed['category'] = category
+            items.append(parsed)
+    return items
+
+
+def _parse_oilprice_date(art):
+    for field in ('pubDate', 'published_at', 'publishedAt', 'date', 'created_at', 'pub_date'):
+        raw = art.get(field, '')
+        if not raw:
+            continue
+        try:
+            return parsedate_to_datetime(raw), raw
+        except Exception:
+            pass
+        try:
+            normalized = raw.replace(' ', 'T').rstrip('Z') + '+00:00'
+            return datetime.fromisoformat(normalized), raw
+        except Exception:
+            pass
+    return None, ''
+
+
+def fetch_oilprice_api(api_key):
+    data = None
+    for url_template in OILPRICE_API_URLS:
+        url = url_template.format(key=api_key)
+        req = urllib.request.Request(
+            url, headers={'User-Agent': 'morning-oil-brief/1.0', 'Accept': 'application/json'})
+        try:
+            with urllib.request.urlopen(req, timeout=15) as r:
+                raw = r.read()
+            data = json.loads(raw)
+            print(f'  OilPrice API: response from {url.split("?")[0]} — raw preview: {str(data)[:200]}')
+            break
+        except Exception as e:
+            print(f'  OilPrice API {url.split("?")[0]}: {e}', file=sys.stderr)
+
+    if data is None:
+        return []
+
+    # Normalise various response shapes
+    if isinstance(data, list):
+        articles = data
+    elif isinstance(data, dict):
+        inner = data.get('data', data.get('articles', data.get('items', [])))
+        articles = inner if isinstance(inner, list) else (inner.get('articles', []) if isinstance(inner, dict) else [])
+    else:
+        articles = []
+
+    print(f'  OilPrice API: {len(articles)} raw articles')
+    items = []
+    for art in articles:
+        dt, raw_date = _parse_oilprice_date(art)
+        link = art.get('link') or art.get('url') or art.get('article_url') or ''
+        cat  = art.get('category') or art.get('type') or 'Energy Markets'
+        desc = art.get('description') or art.get('summary') or art.get('excerpt') or ''
+        parsed = _parse_item(
+            art.get('title', ''), link, 'OilPrice.com', raw_date,
+            re.sub(r'<[^>]+>', '', desc))
+        if parsed:
+            parsed['category'] = cat
+            parsed['epoch'] = dt.timestamp() if dt else 0.0
+            parsed['datetime'] = dt.isoformat() if dt else ''
+            items.append(parsed)
+    return items
+
+
+def fetch_gnews(query, category):
+    url = GNEWS_BASE.format(query=urllib.parse.quote(query))
+    req = urllib.request.Request(
+        url, headers={'User-Agent': 'Mozilla/5.0 (compatible; morning-oil-brief/1.0)'})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            xml_bytes = r.read()
+    except Exception as e:
+        print(f'  FAIL Google News [{category}]: {e}', file=sys.stderr)
+        return []
+    try:
+        root = ET.fromstring(xml_bytes)
+    except ET.ParseError as e:
+        print(f'  XML parse error Google News [{category}]: {e}', file=sys.stderr)
+        return []
+
+    items = []
     for item in root.findall('.//item'):
         title_el   = item.find('title')
         link_el    = item.find('link')
@@ -67,93 +294,106 @@ def fetch_feed(query, category):
         source_el  = item.find('source')
         desc_el    = item.find('description')
 
-        if title_el is None or link_el is None:
-            continue
+        title = (title_el.text or '').strip() if title_el is not None else ''
+        link  = (link_el.text or '').strip() if link_el is not None else ''
 
-        title = (title_el.text or '').strip()
-        link  = (link_el.text or '').strip()
-
-        # Google News embeds "Source - Title"; strip the source prefix
+        # Extract source name
         source = ''
         if source_el is not None and source_el.text:
             source = source_el.text.strip()
         elif ' - ' in title:
-            # fallback: last " - Source" segment
             parts = title.rsplit(' - ', 1)
-            if len(parts) == 2:
+            if len(parts) == 2 and len(parts[1]) <= 60:
                 title = parts[0].strip()
                 source = parts[1].strip()
 
-        dt = None
-        pub_str = ''
-        if pubdate_el is not None and pubdate_el.text:
-            try:
-                dt = parsedate_to_datetime(pubdate_el.text.strip())
-                pub_str = dt.isoformat()
-            except Exception:
-                pass
-
-        description = ''
-        if desc_el is not None and desc_el.text:
-            # Strip HTML tags from description
-            description = re.sub(r'<[^>]+>', '', desc_el.text).strip()
-
-        items.append({
-            'title':       title,
-            'source':      source,
-            'date':        pubdate_el.text.strip() if pubdate_el is not None else '',
-            'datetime':    pub_str,
-            'epoch':       dt.timestamp() if dt else 0.0,
-            'link':        link,
-            'description': description,
-            'category':    category,
-            '_dt':         dt,
-        })
+        parsed = _parse_item(
+            title, link, source,
+            pubdate_el.text if pubdate_el is not None else '',
+            desc_el.text if desc_el is not None else '',
+        )
+        if parsed:
+            parsed['category'] = category
+            items.append(parsed)
     return items
 
+
+# ── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(hours=CUTOFF_HOURS)
-
     all_items = []
     seen_titles = set()
 
-    for query, category in FEEDS:
-        print(f'  Fetching: {category}')
-        items = fetch_feed(query, category)
+    def _add(items):
         added = 0
         for item in items:
             dt = item.get('_dt')
             if dt and dt < cutoff:
                 continue
-            # Deduplicate by normalized title
             key = re.sub(r'\s+', ' ', item['title'].lower().strip())[:80]
             if key in seen_titles:
                 continue
             seen_titles.add(key)
             all_items.append(item)
             added += 1
-        print(f'    → {added} new items ({len(items)} fetched)')
-        time.sleep(0.5)  # be polite
+        return added
 
-    # Sort by date descending, cap at MAX_ITEMS
-    all_items.sort(key=lambda x: x.get('epoch', 0), reverse=True)
+    # 1. OilPrice.com RSS — always fetch (best quality, energy-specific)
+    print('[1/3] OilPrice.com RSS feeds...')
+    op_rss_total = 0
+    for rss_url, rss_cat in OILPRICE_RSS_FEEDS:
+        items = fetch_oilprice_rss(rss_url, rss_cat)
+        n = _add(items)
+        op_rss_total += n
+        print(f'  {rss_url.split("/")[-1]:20} → {n} added ({len(items)} fetched)')
+        time.sleep(0.4)
+    print(f'  OilPrice RSS total: {op_rss_total} new articles')
+
+    # 2. OilPrice.com API — additional articles if key available
+    if OILPRICE_API_KEY:
+        print('[2/3] OilPrice.com API...')
+        api_items = fetch_oilprice_api(OILPRICE_API_KEY)
+        n = _add(api_items)
+        print(f'  OilPrice API: {n} new articles added (after dedup)')
+    else:
+        print('[2/3] OilPrice.com API: skipped (no OILPRICE_API_KEY)')
+
+    # 3. Google News RSS — fills gaps for EIA, refining, geopolitics
+    print('[3/3] Google News RSS...')
+    for query, category in FEEDS:
+        items = fetch_gnews(query, category)
+        n = _add(items)
+        print(f'  {category:30} → {n} added ({len(items)} fetched)')
+        time.sleep(0.5)
+
+    # Sort: quality-adjusted recency (OilPrice + preferred sources float up)
+    all_items.sort(key=_quality_score, reverse=True)
     all_items = all_items[:MAX_ITEMS]
 
-    # Strip internal _dt field
+    # Strip internal fields
     for item in all_items:
         item.pop('_dt', None)
+
+    # Summary stats
+    sources = {}
+    for it in all_items:
+        s = it.get('source', '(none)')
+        sources[s] = sources.get(s, 0) + 1
+    print(f'\nTotal: {len(all_items)} articles')
+    print('Top sources:')
+    for s, c in sorted(sources.items(), key=lambda x: -x[1])[:15]:
+        print(f'  {c:3d}  {s}')
 
     payload = {
         'generated_at': now.isoformat(),
         'cutoff_hours': CUTOFF_HOURS,
         'items': all_items,
     }
-
     with open(OUT_PATH, 'w') as f:
         json.dump(payload, f, indent=2)
-    print(f'\nWrote {OUT_PATH} ({os.path.getsize(OUT_PATH):,} bytes), {len(all_items)} articles')
+    print(f'\nWrote {OUT_PATH} ({os.path.getsize(OUT_PATH):,} bytes)')
 
 
 if __name__ == '__main__':

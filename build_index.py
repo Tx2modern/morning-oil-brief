@@ -445,6 +445,17 @@ def _og_tags(title, description, path=''):
     )
 
 
+_SIGNOUT_JS = """
+  function signOut() {
+    // Clear Supabase session from localStorage then redirect — no CDN needed
+    Object.keys(localStorage).forEach(function(k) {
+      if (k.startsWith('sb-')) localStorage.removeItem(k);
+    });
+    window.location.href = 'login.html';
+  }
+"""
+
+
 def _render_nav(active_href):
     items = []
     for href, label in NAV_PAGES:
@@ -455,6 +466,7 @@ def _render_nav(active_href):
         '  <div class="nav-inner">\n'
         f'    {_MOB_BRAND_HTML}\n'
         '    <div class="nav-links">' + ''.join(items) + '</div>\n'
+        '    <button class="nav-signout" onclick="signOut()">Sign Out</button>\n'
         '  </div>\n'
         '</nav>'
     )
@@ -531,6 +543,14 @@ body {
 .top-nav .nav-link:hover { color: var(--text) !important; background: var(--panel-2) !important; }
 .top-nav .nav-link.active { color: var(--accent) !important; background: transparent !important; }
 .top-nav .nav-link.nav-disabled { opacity: 0.35 !important; pointer-events: none; }
+.nav-signout {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 8px 14px; color: var(--muted); background: transparent;
+  border: 1px solid var(--border-soft, var(--border)); border-radius: 6px; cursor: pointer;
+  transition: color 0.15s, border-color 0.15s; margin-left: 8px;
+}
+.nav-signout:hover { color: #f87171; border-color: rgba(248,113,113,0.45); background: rgba(248,113,113,0.06); }
 
 /* MOB brand (left of top bar) — flat orange barrel + wordmark */
 .mob-brand {
@@ -2786,6 +2806,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
 </div>
 
 <script>
+{_SIGNOUT_JS}
 const SNAPSHOT = {snapshot_kpi_only};
 // Render the (trimmed) market read into the hero body — first 3 paragraphs.
 (function() {{
@@ -2847,6 +2868,7 @@ const SNAPSHOT = {snapshot_kpi_only};
   </div>
 </div>
 <script>
+{_SIGNOUT_JS}
 (function(){{
   var btn=document.getElementById("mob-chat-btn"),panel=document.getElementById("mob-chat-panel"),closeBtn=document.getElementById("mob-chat-close"),msgs=document.getElementById("mob-chat-messages"),input=document.getElementById("mob-chat-input"),send=document.getElementById("mob-chat-send"),suggestions=document.getElementById("mob-chat-suggestions"),open=false,busy=false,history=[];
   function toggle(){{open=!open;panel.classList.toggle("open",open);if(open)input.focus();}}
@@ -3689,6 +3711,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
 </div>
 
 <script>
+{_SIGNOUT_JS}
 const SNAPSHOT = {snapshot_js};
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
@@ -4674,6 +4697,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
 </div>
 
 <script>
+{_SIGNOUT_JS}
 const SNAPSHOT = {snapshot_js};
 // Guard against absent element — in post_eia state the AI Brief section is
 // omitted entirely, so this node won't exist.
@@ -5112,7 +5136,6 @@ footer {{
 
 <div class="container">
   <div class="header">
-    <div class="header-eyebrow">{today_str.upper()}</div>
     <h1>News</h1>
     <div class="header-sub">{total} headlines from the last 48 hours · grouped by topic</div>
   </div>
@@ -6243,6 +6266,8 @@ tr.total-row.total-jet      td { background: rgba(34,211,238,0.06) !important; b
     new_html = new_html.replace('<body>', f'<body>\n{nav_html}', 1)
     # Inject nav CSS
     new_html = new_html.replace('</style>', NAV_CSS + '\n</style>', 1)
+    # Inject signOut function before </body>
+    new_html = new_html.replace('</body>', f'<script>{_SIGNOUT_JS}</script>\n</body>', 1)
 
     with open(OUT_INVENTORY, 'w') as f:
         f.write(new_html)
