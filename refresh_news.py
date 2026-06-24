@@ -351,7 +351,7 @@ def main():
     all_items = []
     seen_titles = set()
 
-    def _add(items, verbose=False):
+    def _add(items, label=''):
         added = 0
         skipped_old = 0
         skipped_dup = 0
@@ -363,18 +363,25 @@ def main():
             key = re.sub(r'\s+', ' ', item['title'].lower().strip())[:80]
             if key in seen_titles:
                 skipped_dup += 1
-                if verbose:
-                    print(f'    dup: {key[:60]}')
                 continue
             seen_titles.add(key)
             all_items.append(item)
             added += 1
-        if (skipped_old or skipped_dup) and not added:
-            print(f'    (skipped: {skipped_old} too old, {skipped_dup} dedup)')
+        if added == 0 and (skipped_old or skipped_dup):
+            print(f'    ({label}skipped: {skipped_old} too old, {skipped_dup} dedup)')
         return added
 
-    # 1. OilPrice.com RSS — always fetch (best quality, energy-specific)
-    print('[1/3] OilPrice.com RSS feeds...')
+    # 1. Google News RSS — run FIRST so quality sources (Reuters, Bloomberg, WSJ)
+    #    claim their titles in seen_titles before OilPrice syndicated copies arrive.
+    print('[1/3] Google News RSS...')
+    for query, category in FEEDS:
+        items = fetch_gnews(query, category)
+        n = _add(items)
+        print(f'  {category:30} → {n} added ({len(items)} fetched)')
+        time.sleep(0.5)
+
+    # 2. OilPrice.com RSS — supplements Google News with energy-specific coverage
+    print('[2/3] OilPrice.com RSS feeds...')
     op_rss_total = 0
     for rss_url, rss_cat in OILPRICE_RSS_FEEDS:
         items = fetch_oilprice_rss(rss_url, rss_cat)
@@ -384,22 +391,14 @@ def main():
         time.sleep(0.4)
     print(f'  OilPrice RSS total: {op_rss_total} new articles')
 
-    # 2. OilPrice.com API — additional articles if key available
+    # 3. OilPrice.com API — additional articles if key available
     if OILPRICE_API_KEY:
-        print('[2/3] OilPrice.com API...')
+        print('[3/3] OilPrice.com API...')
         api_items = fetch_oilprice_api(OILPRICE_API_KEY)
         n = _add(api_items)
         print(f'  OilPrice API: {n} new articles added (after dedup)')
     else:
-        print('[2/3] OilPrice.com API: skipped (no OILPRICE_API_KEY)')
-
-    # 3. Google News RSS — fills gaps for EIA, refining, geopolitics
-    print('[3/3] Google News RSS...')
-    for query, category in FEEDS:
-        items = fetch_gnews(query, category)
-        n = _add(items, verbose=True)
-        print(f'  {category:30} → {n} added ({len(items)} fetched)')
-        time.sleep(0.5)
+        print('[3/3] OilPrice.com API: skipped (no OILPRICE_API_KEY)')
 
     # Sort: quality-adjusted recency (OilPrice + preferred sources float up)
     all_items.sort(key=_quality_score, reverse=True)
