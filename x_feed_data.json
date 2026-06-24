@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T01:57:54Z",
+  "lastUpdated": "2026-06-24T09:55:25Z",
   "posts": [
     {
       "id": "2069425458358169727",
@@ -9,25 +9,11 @@
         "category": "Official"
       },
       "text": "https://t.co/RxtNbAqePs",
-      "summary": "I can see you've shared a URL from a US Department of Energy post on X, but I don't have access to the content of that link. To provide you with an accurate summary of the oil market implications, I would need you to share the actual text or content from that post.",
+      "summary": "https://t.co/RxtNbAqePs",
       "createdAt": "2026-06-23T14:20:51.000Z",
-      "likeCount": 806,
-      "retweetCount": 162,
-      "replyCount": 19
-    },
-    {
-      "id": "2069307297159901673",
-      "author": {
-        "name": "Javier Blas",
-        "userName": "JavierBlas",
-        "category": "News"
-      },
-      "text": "If you are counting Strait of Hormuz barrels, don\u2019t forget to add the bypass pipelines if you want an apples-to-apples comparison to pre-war levels. \n\nWhat matters is not SoH flows, but Persian Gulf flows. As long as the bypass pipelines continue to be used (and they are), SoH",
-      "summary": "When assessing Persian Gulf oil exports, analysts should account for bypass pipelines alongside Strait of Hormuz flows to accurately gauge total supply levels compared to pre-war periods. The critical metric for oil markets is total Persian Gulf output rather than chokepoint transit volumes alone.",
-      "createdAt": "2026-06-23T06:31:20.000Z",
-      "likeCount": 693,
-      "retweetCount": 108,
-      "replyCount": 43
+      "likeCount": 983,
+      "retweetCount": 187,
+      "replyCount": 24
     },
     {
       "id": "2069408176579989518",
@@ -39,9 +25,9 @@
       "text": "Iran-Oman joint statement on the future of the Strait of Hormuz. Note the wording about \u201cservices\u201d and \u201ccosts\u201d https://t.co/9ml4ulx9eV",
       "summary": "Iran-Oman joint statement on the future of the Strait of Hormuz. Note the wording about \u201cservices\u201d and \u201ccosts\u201d https://t.co/9ml4ulx9eV",
       "createdAt": "2026-06-23T13:12:11.000Z",
-      "likeCount": 483,
-      "retweetCount": 195,
-      "replyCount": 32
+      "likeCount": 535,
+      "retweetCount": 222,
+      "replyCount": 37
     },
     {
       "id": "2069440813172391968",
@@ -51,11 +37,25 @@
         "category": "Official"
       },
       "text": "The Energy Department is delivering on President Trump\u2019s Agenda to Reinvigorate the Nuclear Industrial Base:\n\nToday, @DOE_EDF announced financing that will help rebuild America\u2019s nuclear supply chain and accelerate the deployment of 10 new large-scale reactors. https://t.co/1IOyftvUHq",
-      "summary": "The Department of Energy is providing financing to rebuild the nuclear supply chain and deploy 10 new large-scale reactors, which could reduce long-term demand for fossil fuels including oil as nuclear energy expands its role in the U.S. energy mix. The initiative supports nuclear power as an alternative energy source within the Trump administration's energy policy framework.",
+      "summary": "The US Department of Energy announced financing to rebuild America's nuclear supply chain and deploy 10 new large-scale reactors, which could have minimal direct implications for oil markets since nuclear energy primarily competes with natural gas and coal for electricity generation rather than petroleum products.",
       "createdAt": "2026-06-23T15:21:52.000Z",
-      "likeCount": 327,
-      "retweetCount": 100,
-      "replyCount": 9
+      "likeCount": 366,
+      "retweetCount": 113,
+      "replyCount": 11
+    },
+    {
+      "id": "2069359278964535683",
+      "author": {
+        "name": "Javier Blas",
+        "userName": "JavierBlas",
+        "category": "News"
+      },
+      "text": "Iran says the Strait of Hormuz is \u201cfully\u201d open to commercial shipping and that large volumes of oil have been transported through the waterway in recent days, according to the semi-official Iranian Students\u2019 News Agency.",
+      "summary": "Iran claims the Strait of Hormuz remains fully operational with large oil volumes passing through recently, suggesting no disruption to one of the world's most critical oil transit routes. The statement indicates oil supply flows through the chokepoint are unimpeded, which could ease concerns about potential supply constraints.",
+      "createdAt": "2026-06-23T09:57:53.000Z",
+      "likeCount": 355,
+      "retweetCount": 70,
+      "replyCount": 27
     },
     {
       "id": "2069399550092070957",
@@ -65,25 +65,39 @@
         "category": "Flows & Tracking"
       },
       "text": "Kpler's drone-based tank level data is sending a clear warning signal at cushing\n\nThe US crude market's most-watched inventory hub has shed around 11 million barrels since early May, and at the current draw pace, stocks are on course to test operational tank bottoms by mid-July. https://t.co/OHrryNIn62",
-      "summary": "Cushing crude inventories have declined by 11 million barrels since early May and are projected to reach operational tank bottoms by mid-July at current draw rates, signaling potential supply tightness at the US crude market's key storage hub.",
+      "summary": "Cushing crude inventories have declined by approximately 11 million barrels since early May, and if current withdrawal rates persist, stocks could reach operational minimums by mid-July, signaling potential supply tightness in the US crude market's primary storage hub.",
       "createdAt": "2026-06-23T12:37:54.000Z",
-      "likeCount": 149,
-      "retweetCount": 36,
-      "replyCount": 6
+      "likeCount": 186,
+      "retweetCount": 44,
+      "replyCount": 7
     },
     {
-      "id": "2069424463997804850",
+      "id": "2069556136085254253",
       "author": {
-        "name": "Patrick De Haan",
-        "userName": "GasBuddyGuy",
-        "category": "Retail Fuel"
+        "name": "Oil and Energy",
+        "userName": "OilandEnergy",
+        "category": "News"
       },
-      "text": "ALERT: #GasPrices appear to be rising to $3.99/gal in #Ohio today. This is a routine price cycle to an elevated amount due to the ongoing U.S./Iran situation.",
-      "summary": "Gas prices in Ohio are rising to approximately $3.99 per gallon due to a routine price cycle driven by tensions in the U.S./Iran situation. The alert suggests the price increase reflects broader oil market concerns related to geopolitical developments.",
-      "createdAt": "2026-06-23T14:16:54.000Z",
-      "likeCount": 138,
-      "retweetCount": 16,
+      "text": "The Hormuz crisis is triggering a global race to build oil reserves. From India and Australia to Singapore and Pakistan, governments are expanding storage capacity to boost energy security, potentially creating demand for up to 1 billion barrels over the coming years. #Oil",
+      "summary": "Concerns about the Hormuz Strait are prompting multiple governments to increase their oil storage capacity, which could generate demand for up to 1 billion barrels globally over the coming years. This strategic reserve expansion reflects efforts by countries across Asia and beyond to strengthen their energy security.",
+      "createdAt": "2026-06-23T23:00:07.000Z",
+      "likeCount": 186,
+      "retweetCount": 52,
       "replyCount": 8
+    },
+    {
+      "id": "2069585904071581981",
+      "author": {
+        "name": "Tracy Shuchart",
+        "userName": "chigrl",
+        "category": "Analysts & Traders"
+      },
+      "text": "There are tolls for the usage of the  Suez and Panama canals..both are considered international waterways ...just sayin https://t.co/1qAgZyiccq",
+      "summary": "Tracy Shuchart notes that both the Suez and Panama canals charge tolls for usage despite being classified as international waterways, implying a precedent for toll collection on critical shipping routes.",
+      "createdAt": "2026-06-24T00:58:25.000Z",
+      "likeCount": 159,
+      "retweetCount": 17,
+      "replyCount": 24
     },
     {
       "id": "2069430427362775141",
@@ -93,25 +107,25 @@
         "category": "Flows & Tracking"
       },
       "text": "Strait of Hormuz crossings rebound\n\nKpler\u2019s rolling coverage of US-Iran diplomatic developments shows a clear shift in Strait of Hormuz activity across two consecutive weekends. Between 12\u201314 June, total crossings reached 32. One week later, from 19\u201321 June, crossings rose to 93 https://t.co/L03f6wFOx1",
-      "summary": "Strait of Hormuz oil tanker crossings nearly tripled from 32 to 93 between mid-June and late June, suggesting improved diplomatic conditions between the US and Iran may be increasing crude flows through the critical waterway. The rebound in activity could ease supply concerns and potentially moderate oil prices if the trend continues.",
+      "summary": "Strait of Hormuz crossings nearly tripled from 32 to 93 between two consecutive weekends in mid-to-late June, suggesting reduced tensions in US-Iran relations and potentially increased oil flows through this critical chokepoint.",
       "createdAt": "2026-06-23T14:40:36.000Z",
-      "likeCount": 134,
-      "retweetCount": 58,
-      "replyCount": 9
+      "likeCount": 152,
+      "retweetCount": 65,
+      "replyCount": 11
     },
     {
-      "id": "2069328217442250878",
+      "id": "2069424463997804850",
       "author": {
-        "name": "Ole Hansen",
-        "userName": "Ole_S_Hansen",
-        "category": "Analysts & Traders"
+        "name": "Patrick De Haan",
+        "userName": "GasBuddyGuy",
+        "category": "Retail Fuel"
       },
-      "text": "Today's technology-led selloff, which has seen the KOSPI tumble 10% and the Nasdaq retreat below 30,000, has triggered broad-based risk reduction across asset classes, including industrial metals. The weakness has been particularly pronounced in metals linked to the energy https://t.co/kU4N2ASfA3",
-      "summary": "A technology-led market selloff, marked by significant declines in Asian and U.S. equity indices, has triggered broad risk reduction across asset classes including industrial metals linked to energy. The specific oil market implications are not detailed in the available text.",
-      "createdAt": "2026-06-23T07:54:27.000Z",
-      "likeCount": 133,
-      "retweetCount": 34,
-      "replyCount": 10
+      "text": "ALERT: #GasPrices appear to be rising to $3.99/gal in #Ohio today. This is a routine price cycle to an elevated amount due to the ongoing U.S./Iran situation.",
+      "summary": "Gas prices in Ohio are rising to approximately $3.99 per gallon due to a routine price cycle linked to the U.S./Iran geopolitical situation. The increase reflects oil market sensitivity to tensions in the Middle East.",
+      "createdAt": "2026-06-23T14:16:54.000Z",
+      "likeCount": 144,
+      "retweetCount": 17,
+      "replyCount": 8
     },
     {
       "id": "2069421516106633253",
@@ -123,37 +137,9 @@
       "text": "ALERT: #GasPrices appear to be rising to $3.89/gal in #Florida today. This is a routine price cycle to an elevated amount due to the ongoing U.S./Iran situation.",
       "summary": "Gas prices in Florida are rising to $3.89 per gallon due to geopolitical tensions between the U.S. and Iran, which is driving a routine price cycle upward in the oil market.",
       "createdAt": "2026-06-23T14:05:12.000Z",
-      "likeCount": 130,
+      "likeCount": 131,
       "retweetCount": 19,
       "replyCount": 5
-    },
-    {
-      "id": "2069556136085254253",
-      "author": {
-        "name": "Oil and Energy",
-        "userName": "OilandEnergy",
-        "category": "News"
-      },
-      "text": "The Hormuz crisis is triggering a global race to build oil reserves. From India and Australia to Singapore and Pakistan, governments are expanding storage capacity to boost energy security, potentially creating demand for up to 1 billion barrels over the coming years. #Oil",
-      "summary": "Governments across Asia and the Indo-Pacific are rapidly expanding oil storage capacity in response to Hormuz security concerns, with potential demand for up to 1 billion barrels over the coming years. This strategic stockpiling initiative could significantly support global oil demand and prices amid heightened geopolitical risks to a critical shipping chokepoint.",
-      "createdAt": "2026-06-23T23:00:07.000Z",
-      "likeCount": 124,
-      "retweetCount": 36,
-      "replyCount": 8
-    },
-    {
-      "id": "2069329394976387353",
-      "author": {
-        "name": "Tracy Shuchart",
-        "userName": "chigrl",
-        "category": "Analysts & Traders"
-      },
-      "text": "Iran Rushes to Woo Asia\u2019s Largest Oil Importers After US Waiver\n\nSellers including middlemen and representatives from the National Iranian Oil Co. made contact with refiners in India, Japan, South Korea and elsewhere even before the license was officially granted, according to",
-      "summary": "Iran is actively reaching out to major Asian oil refiners in India, Japan, and South Korea following a U.S. waiver, with Iranian oil sellers and representatives initiating contact even before the license was officially approved. This suggests Iran is moving quickly to secure buyers and potentially increase oil exports to key Asian markets.",
-      "createdAt": "2026-06-23T07:59:08.000Z",
-      "likeCount": 99,
-      "retweetCount": 13,
-      "replyCount": 1
     },
     {
       "id": "2069495726892097957",
@@ -163,25 +149,11 @@
         "category": "News"
       },
       "text": "The Strait of Hormuz may be reopening, but tanker markets remain in crisis mode. Daily tanker rates have nearly doubled to over $190,000, while some VLCCs are reportedly earning up to $470,000 per day as vessel shortages persist. #Oil #Tankers #Hormuz #Shipping",
-      "summary": "Tanker rates have surged significantly with daily costs exceeding $190,000 and some VLCCs earning up to $470,000 per day due to vessel shortages, indicating tight shipping capacity despite the potential reopening of the Strait of Hormuz. These elevated transportation costs could add pressure to crude oil prices and upstream economics in the near term.",
+      "summary": "Despite potential reopening of the Strait of Hormuz, tanker rates have surged dramatically\u2014doubling to over $190,000 per day\u2014due to vessel shortages, with some very large crude carriers earning up to $470,000 daily, signaling continued supply-side constraints in global oil shipping markets.",
       "createdAt": "2026-06-23T19:00:05.000Z",
-      "likeCount": 90,
-      "retweetCount": 27,
+      "likeCount": 107,
+      "retweetCount": 31,
       "replyCount": 2
-    },
-    {
-      "id": "2069316078203773149",
-      "author": {
-        "name": "Ole Hansen",
-        "userName": "Ole_S_Hansen",
-        "category": "Analysts & Traders"
-      },
-      "text": "#Commodities \n\n#Gold\u2019s rebound proved short-lived, with prices turning lower towards USD 4,100 as traders and investors continue to adjust to the risk of higher funding costs amid the Fed\u2019s focus on inflation and price stability. A firm dollar and bond yields, and weakness in",
-      "summary": "The post does not contain information about the oil market. It focuses on gold prices declining toward $4,100 due to expectations of higher interest rates, a stronger dollar, and rising bond yields amid Federal Reserve inflation concerns.",
-      "createdAt": "2026-06-23T07:06:13.000Z",
-      "likeCount": 82,
-      "retweetCount": 16,
-      "replyCount": 4
     },
     {
       "id": "2069453798557258116",
@@ -191,10 +163,10 @@
         "category": "News"
       },
       "text": "\ud83c\udf99\ufe0f NEW PODCAST \ud83c\udfa7\n\nOn the latest episode of Oil Ground Up, I was joined by @mercoglianos to talk about the nitty gritty of what drove shipping behaviour through the Hormuz crisis and how long it will take to normalize flows.\nhttps://t.co/MBSYUxUbYJ",
-      "summary": "Rory Johnston discusses shipping behavior patterns during the Hormuz crisis and the timeline for normalizing oil flows in a new episode of his Oil Ground Up podcast featuring a guest analyst.",
+      "summary": "Rory Johnston discussed shipping behavior during the Hormuz crisis and the timeline for normalizing oil flows in the latest episode of his Oil Ground Up podcast. The episode explores the factors that influenced shipping decisions during this period of market disruption.",
       "createdAt": "2026-06-23T16:13:28.000Z",
-      "likeCount": 74,
-      "retweetCount": 11,
+      "likeCount": 81,
+      "retweetCount": 13,
       "replyCount": 6
     },
     {
@@ -205,10 +177,10 @@
         "category": "Analysts & Traders"
       },
       "text": "lets do it! \n\n\u269b\ufe0f\"The $17.5 billion American Nuclear Supply Chain Loans will help finance five eligible projects sponsored by utilities and energy companies nationwide to accelerate the deployment of 10 large-scale commercial nuclear reactors across the United States by up to https://t.co/RSxRyPLosI",
-      "summary": "The U.S. government is providing $17.5 billion in loans to finance nuclear reactor projects across the country, which could reduce demand for oil in the energy sector as nuclear power expands as an alternative energy source.",
+      "summary": "The U.S. government is providing $17.5 billion in loans to finance nuclear reactor projects, which represents a shift toward nuclear energy deployment rather than fossil fuels. This nuclear expansion could reduce long-term demand for oil in the U.S. energy sector.",
       "createdAt": "2026-06-23T17:22:32.000Z",
-      "likeCount": 72,
-      "retweetCount": 12,
+      "likeCount": 78,
+      "retweetCount": 13,
       "replyCount": 2
     },
     {
@@ -219,25 +191,25 @@
         "category": "News"
       },
       "text": "BRENT futures for deliveries next year are falling as traders anticipate there will be plenty of oil available to meet consumer requirements and start refilling depleted inventories. The average of the twelve monthly futures contracts for delivery in 2027 (commonly called the https://t.co/8M93enUQVU",
-      "summary": "Brent crude futures for 2027 deliveries are declining as traders expect adequate oil supply to satisfy demand and replenish depleted inventories. The trend suggests market confidence in future oil availability despite current supply constraints.",
+      "summary": "Brent crude futures for 2027 deliveries are declining as traders expect sufficient oil supply to meet demand and replenish inventory levels. The post references the average of twelve monthly contracts for that delivery year, suggesting market confidence in adequate future availability.",
       "createdAt": "2026-06-23T10:03:08.000Z",
-      "likeCount": 42,
-      "retweetCount": 12,
+      "likeCount": 51,
+      "retweetCount": 14,
       "replyCount": 3
     },
     {
-      "id": "2069303240601047261",
+      "id": "2069662278077583451",
       "author": {
-        "name": "OPEC",
-        "userName": "opecsecretariat",
-        "category": "Official"
+        "name": "Ole Hansen",
+        "userName": "Ole_S_Hansen",
+        "category": "Analysts & Traders"
       },
-      "text": "Global oil trade, including oil, condensate and refined products, is expected to rise by nearly 25% by 2050. \n\nInterregional crude and condensate trade stood at around 37.3 mb/d in 2025. By 2030, it is expected to increase to 41.8 mb/d, supported by rising oil demand in major https://t.co/qjExFbxenp",
-      "summary": "OPEC forecasts global oil trade to grow nearly 25% by 2050, with interregional crude and condensate trade expanding from 37.3 mb/d in 2025 to 41.8 mb/d by 2030, driven by rising oil demand in major markets.",
-      "createdAt": "2026-06-23T06:15:13.000Z",
-      "likeCount": 36,
-      "retweetCount": 18,
-      "replyCount": 2
+      "text": "#Commodities:\n\nThe Bloomberg Commodity Total Return Index is heading for its worst monthly performance since 2022, currently down around 10% in June and reducing its year-to-date gain to 15%. All sectors are trading lower this month, led by a 16% slump in energy and a 12% decline",
+      "summary": "Energy commodities, particularly oil, are experiencing significant declines in June with a 16% monthly slump, contributing to the Bloomberg Commodity Index's worst monthly performance since 2022. Despite year-to-date gains of 15%, the sharp June selloff across all commodity sectors signals weakening demand or market pressures affecting crude prices.",
+      "createdAt": "2026-06-24T06:01:54.000Z",
+      "likeCount": 41,
+      "retweetCount": 12,
+      "replyCount": 1
     },
     {
       "id": "2069427859463041277",
@@ -247,10 +219,10 @@
         "category": "Official"
       },
       "text": "Approvals for new gas-fired power plants rose to a 25-year high last year\n\nUntil 2023, most gas-fired power plant approvals were in gas-importing countries, but the US now dominates orders, driven by data centre demand\n\nLearn more in our report \u27a1\ufe0f https://t.co/8IajZj1gIL https://t.co/DBX0xeI2as",
-      "summary": "Gas-fired power plant approvals reached a 25-year high in 2023, with the US leading approvals due to data center demand, signaling sustained natural gas demand in the near term. This shift in approvals toward gas infrastructure in the US could support energy sector investments and influence commodity pricing, though the direct oil market implications are not specified in this statement.",
+      "summary": "Gas-fired power plant approvals reached a 25-year high in 2023, with the US leading demand driven primarily by data center growth rather than traditional energy needs. This surge in natural gas infrastructure approvals could support sustained demand for natural gas, though direct oil market implications are not addressed in the provided text.",
       "createdAt": "2026-06-23T14:30:24.000Z",
-      "likeCount": 30,
-      "retweetCount": 15,
+      "likeCount": 34,
+      "retweetCount": 18,
       "replyCount": 3
     },
     {
@@ -261,38 +233,10 @@
         "category": "Official"
       },
       "text": "UAE\u2019s exit from OPEC+ reduced the group\u2019s share of crude oil production and capacity. #TodayInEnergy https://t.co/n7FqyRemAh https://t.co/4c2K6dGU95",
-      "summary": "The UAE's departure from OPEC+ has decreased the organization's combined share of global crude oil production and capacity. This development reduces OPEC+'s market influence and production control.",
+      "summary": "The UAE's departure from OPEC+ has decreased the organization's overall share of global crude oil production and capacity. This reduction weakens OPEC+'s market influence and control over oil supply dynamics.",
       "createdAt": "2026-06-23T13:22:46.000Z",
       "likeCount": 22,
       "retweetCount": 15,
-      "replyCount": 1
-    },
-    {
-      "id": "2069412659456262355",
-      "author": {
-        "name": "Oil and Gibbs",
-        "userName": "OilandGibbs",
-        "category": "News"
-      },
-      "text": "\ud83d\udea8 ETHANOL DEMAND 2026: The next leg of growth may not come from Washington.\n\nGenerational blending economics and global energy security concerns create fresh demand opportunities for US ethanol.\n\nOur latest outlook examines where the gallons could actually come from. \ud83d\udc47",
-      "summary": "US ethanol demand growth in 2026 may be driven by favorable blending economics and global energy security concerns rather than domestic policy, suggesting potential market expansion opportunities. The shift toward non-policy-dependent demand drivers could indicate structural support for ethanol volumes in the broader energy market.",
-      "createdAt": "2026-06-23T13:30:00.000Z",
-      "likeCount": 19,
-      "retweetCount": 2,
-      "replyCount": 1
-    },
-    {
-      "id": "2069330977969574055",
-      "author": {
-        "name": "FT Energy",
-        "userName": "ftenergy",
-        "category": "News"
-      },
-      "text": "US and Qatar claim EU methane rules will trigger gas supply crunch https://t.co/kY1awbwAxb",
-      "summary": "The US and Qatar are claiming that EU methane regulations could create gas supply shortages in Europe. This suggests potential concerns about how stricter environmental standards might affect global gas trade dynamics and market availability.",
-      "createdAt": "2026-06-23T08:05:26.000Z",
-      "likeCount": 16,
-      "retweetCount": 9,
       "replyCount": 1
     },
     {
@@ -303,25 +247,25 @@
         "category": "Official"
       },
       "text": "Global oil markets are facing a historic supply disruption amid the war in the Middle East, pushing up prices for consumers.\n\nOur report sets out 10 immediate demand-side options to help governments, businesses &amp; households ease the economic impacts \u2192 https://t.co/OiyU3jpxIq https://t.co/Ta9ZVNcA2O",
-      "summary": "The Middle East conflict is causing a historic disruption to global oil supplies, raising prices for consumers, and the IEA has identified 10 demand-side measures to help governments and businesses mitigate the economic impacts.",
+      "summary": "The IEA warns that the Middle East conflict is causing a historic disruption in global oil supply, resulting in higher prices for consumers, and recommends ten demand-side measures to mitigate the economic impact.",
       "createdAt": "2026-06-23T20:45:26.000Z",
-      "likeCount": 16,
-      "retweetCount": 8,
-      "replyCount": 0
+      "likeCount": 21,
+      "retweetCount": 9,
+      "replyCount": 2
     },
     {
-      "id": "2069338346128622055",
+      "id": "2069412659456262355",
       "author": {
-        "name": "FT Energy",
-        "userName": "ftenergy",
+        "name": "Oil and Gibbs",
+        "userName": "OilandGibbs",
         "category": "News"
       },
-      "text": "Renewable energy group to raise $3.6bn in China\u2019s biggest IPO for 4 years https://t.co/MTq7WpF311",
-      "summary": "A major renewable energy company is raising $3.6 billion in China's largest IPO in four years, signaling continued capital allocation toward clean energy rather than fossil fuels. This reflects ongoing global energy transition trends that could potentially constrain long-term oil demand growth.",
-      "createdAt": "2026-06-23T08:34:42.000Z",
-      "likeCount": 15,
-      "retweetCount": 7,
-      "replyCount": 0
+      "text": "\ud83d\udea8 ETHANOL DEMAND 2026: The next leg of growth may not come from Washington.\n\nGenerational blending economics and global energy security concerns create fresh demand opportunities for US ethanol.\n\nOur latest outlook examines where the gallons could actually come from. \ud83d\udc47",
+      "summary": "US ethanol demand in 2026 may grow through improved blending economics and global energy security needs rather than regulatory mandates from Washington, potentially creating new market opportunities. The shift suggests ethanol could gain competitiveness based on market fundamentals and international factors rather than domestic policy support.",
+      "createdAt": "2026-06-23T13:30:00.000Z",
+      "likeCount": 19,
+      "retweetCount": 2,
+      "replyCount": 1
     },
     {
       "id": "2069466438180434272",
@@ -331,39 +275,11 @@
         "category": "Official"
       },
       "text": "#Highlights from the visit of Women and Energy Association (Saudi Arabia) as part of Saudi Arabia\u2019s Women in Energy Diplomacy Leadership Program (WEDL), to the #OPEC Secretariat in Vienna on 22 June 2026. https://t.co/gHnud1jc5Q",
-      "summary": "OPEC hosted a visit from Saudi Arabia's Women in Energy Association as part of a leadership program focused on women in energy diplomacy, reflecting efforts to strengthen institutional engagement in the energy sector. The visit carries no direct implications for oil markets based on the information provided.",
+      "summary": "OPEC hosted a visit from Saudi Arabia's Women in Energy Association as part of a women's leadership diplomacy program on June 22, 2026, though the post provides no specific information about oil market implications or policy discussions.",
       "createdAt": "2026-06-23T17:03:42.000Z",
-      "likeCount": 14,
-      "retweetCount": 4,
+      "likeCount": 19,
+      "retweetCount": 7,
       "replyCount": 0
-    },
-    {
-      "id": "2069483586747584918",
-      "author": {
-        "name": "Oil and Gibbs",
-        "userName": "OilandGibbs",
-        "category": "News"
-      },
-      "text": "Fuel retailer margins looking STRONG in June releases.\n\nHint, those with blending capabilities raking it in due to RINs. https://t.co/e7Bg9AerrQ",
-      "summary": "Fuel retailers with blending capabilities are achieving particularly strong margins in June due to renewable identification number (RIN) economics. The broader fuel retail sector is showing robust profitability during this period.",
-      "createdAt": "2026-06-23T18:11:50.000Z",
-      "likeCount": 13,
-      "retweetCount": 0,
-      "replyCount": 0
-    },
-    {
-      "id": "2069454572247015641",
-      "author": {
-        "name": "Rory Johnston",
-        "userName": "Rory_Johnston",
-        "category": "News"
-      },
-      "text": "Listen now: https://t.co/PhK07GL7qS",
-      "summary": "Listen now: https://t.co/PhK07GL7qS",
-      "createdAt": "2026-06-23T16:16:33.000Z",
-      "likeCount": 11,
-      "retweetCount": 1,
-      "replyCount": 2
     },
     {
       "id": "2069531619514372386",
@@ -375,9 +291,65 @@
       "text": "Beer and learning time \u2026 https://t.co/u09vLNtF1l",
       "summary": "Beer and learning time \u2026 https://t.co/u09vLNtF1l",
       "createdAt": "2026-06-23T21:22:42.000Z",
-      "likeCount": 10,
+      "likeCount": 15,
       "retweetCount": 0,
       "replyCount": 1
+    },
+    {
+      "id": "2069376861633704396",
+      "author": {
+        "name": "FT Energy",
+        "userName": "ftenergy",
+        "category": "News"
+      },
+      "text": "Could the energy shock kick-start green steelmaking? https://t.co/PszlJaS8QE",
+      "summary": "I can only see the headline from the FT Energy post, which asks whether energy shocks might accelerate green steelmaking adoption. Without access to the article content itself, I cannot provide a meaningful summary of the oil market implications.",
+      "createdAt": "2026-06-23T11:07:45.000Z",
+      "likeCount": 15,
+      "retweetCount": 7,
+      "replyCount": 0
+    },
+    {
+      "id": "2069400888997773406",
+      "author": {
+        "name": "Ole Hansen",
+        "userName": "Ole_S_Hansen",
+        "category": "Analysts & Traders"
+      },
+      "text": "How global oil supplies have readjusted to help fill the huge gap left by the Strait of Hormuz shock \u2013 Analysis - IEA https://t.co/M3uIZFuqrK",
+      "summary": "Ole Hansen shared an IEA analysis examining how global oil supplies have adjusted to compensate for disruptions in the Strait of Hormuz. The post highlights the geopolitical and supply chain dynamics affecting international oil markets.",
+      "createdAt": "2026-06-23T12:43:14.000Z",
+      "likeCount": 15,
+      "retweetCount": 4,
+      "replyCount": 6
+    },
+    {
+      "id": "2069403969923817632",
+      "author": {
+        "name": "FT Energy",
+        "userName": "ftenergy",
+        "category": "News"
+      },
+      "text": "US rare earths miner Energy Fuels buys German magnet group for $1.9bn https://t.co/YUNaAaNNVX",
+      "summary": "Energy Fuels, a US rare earths miner, acquired a German magnet company for $1.9 billion. This acquisition has no direct implications for the oil market, as it involves rare earth elements and magnets rather than petroleum or energy commodities.",
+      "createdAt": "2026-06-23T12:55:28.000Z",
+      "likeCount": 14,
+      "retweetCount": 6,
+      "replyCount": 0
+    },
+    {
+      "id": "2069483586747584918",
+      "author": {
+        "name": "Oil and Gibbs",
+        "userName": "OilandGibbs",
+        "category": "News"
+      },
+      "text": "Fuel retailer margins looking STRONG in June releases.\n\nHint, those with blending capabilities raking it in due to RINs. https://t.co/e7Bg9AerrQ",
+      "summary": "Fuel retailers with blending capabilities are experiencing particularly strong margins in June due to RIN (Renewable Identification Number) economics. The broader fuel retail sector is showing robust margin performance during this period.",
+      "createdAt": "2026-06-23T18:11:50.000Z",
+      "likeCount": 13,
+      "retweetCount": 1,
+      "replyCount": 0
     },
     {
       "id": "2069399884562673924",
@@ -387,11 +359,67 @@
         "category": "Retail Fuel"
       },
       "text": "Keep an eye on European refiners this week. They are NOT configured to operate when ambient temperatures are above 100 degrees Fahrenheit.  Lower yields are likely across the Continent.",
-      "summary": "European refineries face operational constraints during extreme heat, with temperatures exceeding 100\u00b0F expected to reduce processing yields across the continent this week. This supply disruption could tighten crude oil processing capacity and potentially support energy prices in Europe.",
+      "summary": "European refiners face operational constraints during high ambient temperatures above 100\u00b0F, which could reduce fuel yields across the continent this week. This supply constraint may tighten European oil product markets and support prices for refined fuels.",
       "createdAt": "2026-06-23T12:39:14.000Z",
-      "likeCount": 10,
-      "retweetCount": 0,
+      "likeCount": 13,
+      "retweetCount": 1,
       "replyCount": 1
+    },
+    {
+      "id": "2069454572247015641",
+      "author": {
+        "name": "Rory Johnston",
+        "userName": "Rory_Johnston",
+        "category": "News"
+      },
+      "text": "Listen now: https://t.co/PhK07GL7qS",
+      "summary": "Listen now: https://t.co/PhK07GL7qS",
+      "createdAt": "2026-06-23T16:16:33.000Z",
+      "likeCount": 12,
+      "retweetCount": 1,
+      "replyCount": 2
+    },
+    {
+      "id": "2069683421010427942",
+      "author": {
+        "name": "Giovanni Staunovo",
+        "userName": "staunovo",
+        "category": "Analysts & Traders"
+      },
+      "text": "Asian refiners have slowed purchases of Middle Eastern crude after a buying spree over the past three weeks, with oil majors and traders stepping in to take some of the surplus barrels.\n\nPurchases from Abu Dhabi National Oil Co. eased after three rounds of tenders, with a fourth",
+      "summary": "Asian refiners have reduced their purchases of Middle Eastern crude following a period of increased buying, causing oil majors and traders to absorb the remaining supply. This pullback in demand from key Asian buyers suggests a shift in market dynamics for OPEC crude supplies.",
+      "createdAt": "2026-06-24T07:25:55.000Z",
+      "likeCount": 11,
+      "retweetCount": 6,
+      "replyCount": 1
+    },
+    {
+      "id": "2069368399021400419",
+      "author": {
+        "name": "OPEC",
+        "userName": "opecsecretariat",
+        "category": "Official"
+      },
+      "text": "The #OPEC Secretariat was pleased to welcome once again a group of Young Diplomats from the Mediterranean Academy of Diplomatic Studies at the University of Malta for a group visit to the Secretariat last week.\n\nThe delegation explored topics related to OPEC\u2019s mandate, history, https://t.co/HcocpluUTG",
+      "summary": "OPEC welcomed a group of young diplomats from the University of Malta to its headquarters for an educational visit focused on the organization's mandate and history. The post contains no information regarding oil market implications.",
+      "createdAt": "2026-06-23T10:34:07.000Z",
+      "likeCount": 11,
+      "retweetCount": 3,
+      "replyCount": 0
+    },
+    {
+      "id": "2069681594336469094",
+      "author": {
+        "name": "Giovanni Staunovo",
+        "userName": "staunovo",
+        "category": "Analysts & Traders"
+      },
+      "text": "Brent futures curve in USD/bbl (today, one week ago and one month ago) #OOTT https://t.co/tuTkIxhqFG",
+      "summary": "Giovanni Staunovo is tracking changes in the Brent crude oil futures curve across three time periods (today, one week ago, and one month ago), indicating shifts in oil market expectations and pricing dynamics over the short term.",
+      "createdAt": "2026-06-24T07:18:39.000Z",
+      "likeCount": 10,
+      "retweetCount": 5,
+      "replyCount": 0
     },
     {
       "id": "2069495728909496799",
@@ -401,9 +429,9 @@
         "category": "Official"
       },
       "text": "\ud83c\udd95 U.S. average retail prices:\n\u26fd Regular-grade gasoline\n\u26fd On-highway diesel \n\nhttps://t.co/Yw0oW8T7Lb  #gasprices",
-      "summary": "The EIA reported on current U.S. average retail prices for regular-grade gasoline and on-highway diesel, indicating an update on fuel pricing trends relevant to the petroleum market.",
+      "summary": "The EIA has published updated U.S. average retail prices for regular-grade gasoline and on-highway diesel, though specific price levels and trends are not detailed in the post text itself.",
       "createdAt": "2026-06-23T19:00:05.000Z",
-      "likeCount": 8,
+      "likeCount": 9,
       "retweetCount": 2,
       "replyCount": 1
     },
@@ -415,52 +443,24 @@
         "category": "Price Reporting"
       },
       "text": "China to keep clean oil product export curbs in July; policy may shift in Aug\n\n\ud83d\udd37 US-Iran progress may encourage Beijing to relax controls\n\ud83d\udd37 Gasoil exports to Australia resume in May\n\ud83d\udd37 Ample export quotas may boost outflow in H2\n\nhttps://t.co/z36roVR3yu",
-      "summary": "China is maintaining restrictions on clean oil product exports through July but may ease controls in August, potentially influenced by US-Iran diplomatic developments. The resumption of gasoil exports to Australia and ample export quotas could increase Chinese oil product outflows in the second half of the year.",
+      "summary": "China is maintaining restrictions on clean oil product exports through July, though potential US-Iran negotiations and ample export quotas in the second half could lead to increased exports later in the year. The resumption of gasoil shipments to Australia in May signals the beginning of a gradual relaxation in Beijing's export controls.",
       "createdAt": "2026-06-23T15:19:05.000Z",
       "likeCount": 7,
       "retweetCount": 2,
       "replyCount": 1
     },
     {
-      "id": "2069374911421075847",
+      "id": "2069601447222591648",
       "author": {
-        "name": "RBN Energy",
-        "userName": "RBNEnergy",
-        "category": "Research & Analytics"
+        "name": "Argus Media",
+        "userName": "argusmedia",
+        "category": "Price Reporting"
       },
-      "text": "Open seasons are a key part of marketing capacity for gas pipeline and storage projects, but they can also raise several regulatory questions. And the answers depend on what kind of open season it is. Today, we take a deep dive into the ins and outs of a gas project open season. https://t.co/QCrBan0kkp",
-      "summary": "Open seasons for gas pipeline and storage projects involve marketing capacity while navigating regulatory considerations that vary by open season type. The implications for oil markets are not addressed in the provided text.",
-      "createdAt": "2026-06-23T11:00:00.000Z",
+      "text": "\ud835\uddea\ud835\uddf6\ud835\uddf9\ud835\uddf9 \ud835\udddb\ud835\uddfc\ud835\uddff\ud835\uddfa\ud835\ude02\ud835\ude07 \ud835\uddff\ud835\uddf2\ud835\uddfc\ud835\uddfd\ud835\uddf2\ud835\uddfb\ud835\uddf6\ud835\uddfb\ud835\uddf4 \ud835\uddff\ud835\uddf2\ud835\ude00\ud835\uddf2\ud835\ude01 \ud835\ude01\ud835\uddf5\ud835\uddf2 \ud835\uddf4\ud835\uddf9\ud835\uddfc\ud835\uddef\ud835\uddee\ud835\uddf9 \ud835\udddf\ud835\udde3\ud835\uddda \ud835\uddfa\ud835\uddee\ud835\uddff\ud835\uddf8\ud835\uddf2\ud835\ude01?\n\nThe\u00a0US Iran peace deal\u00a0has triggered a sharp pullback in LPG prices as fundamentals reassert themselves.\n\nOur latest insight explores supply flows, Asian demand, and freight dynamics as https://t.co/AnQsrlhiwP",
+      "summary": "A potential US-Iran peace deal is driving LPG prices lower as market fundamentals reassert themselves, with implications for global supply flows, Asian demand, and shipping costs. The reopening of the Hormuz refinery could significantly impact the global LPG market dynamics.",
+      "createdAt": "2026-06-24T02:00:11.000Z",
       "likeCount": 6,
-      "retweetCount": 1,
-      "replyCount": 0
-    },
-    {
-      "id": "2069355177711223066",
-      "author": {
-        "name": "Energy Aspects",
-        "userName": "EnergyAspects",
-        "category": "Research & Analytics"
-      },
-      "text": "European gas markets don't move in isolation. Storage dynamics, shifting LNG flows, pipeline policy, geopolitical risk. It all connects, and it all moves fast.\n\nEA Live Europe Gas brings you real-time updates and expert analysis from our global team, tracking how worldwide https://t.co/6LVy7dp4OY",
-      "summary": "Energy Aspects highlights the interconnected nature of European gas markets, which are influenced by storage levels, LNG flows, pipeline policy, and geopolitical factors\u2014dynamics that can have ripple effects across broader energy markets including oil. The post emphasizes the need for real-time monitoring of these rapidly evolving market conditions through their coverage service.",
-      "createdAt": "2026-06-23T09:41:35.000Z",
-      "likeCount": 6,
-      "retweetCount": 3,
-      "replyCount": 1
-    },
-    {
-      "id": "2069413759756452007",
-      "author": {
-        "name": "Tom Kloza",
-        "userName": "TomKloza",
-        "category": "Retail Fuel"
-      },
-      "text": "Interesting analysis from Goldman on EVs. They estimate total hit to global oil demand of 130,000-320,000 b/d by end-2027 despite accelerated sales that have pushed EV share of vehicle market up 3.4% last month to 26.1% (all-time high).",
-      "summary": "Goldman Sachs estimates that accelerating EV adoption will reduce global oil demand by 130,000-320,000 barrels per day by the end of 2027, even as electric vehicles reach an all-time market share of 26.1%. The analysis suggests EVs' impact on oil consumption remains modest relative to overall demand despite record sales growth.",
-      "createdAt": "2026-06-23T13:34:22.000Z",
-      "likeCount": 6,
-      "retweetCount": 1,
+      "retweetCount": 2,
       "replyCount": 1
     },
     {
@@ -471,39 +471,39 @@
         "category": "Price Reporting"
       },
       "text": "We have more insight than ever. So why are decisions getting harder? \n\nMarkets are more volatile. Decisions more complex. The cost of delay is higher than ever. \n\nThe challenge isn\u2019t knowing more. It\u2019s acting, quickly and with clarity. \n\nCERA Titan: https://t.co/vhIqgYP6tU https://t.co/lt4iZvjVMw",
-      "summary": "S&P Global Energy highlights that despite increased data availability, energy market participants face growing complexity and volatility that demand faster decision-making to avoid costly delays. The post suggests that quick, decisive action rather than additional information is becoming the critical differentiator in today's energy markets.",
+      "summary": "S&P Global Energy highlights that despite increased market data availability, energy decision-makers face growing complexity and volatility, making rapid execution increasingly critical. The implication is that companies need tools to convert data insights into swift, decisive action in an unstable market environment.",
       "createdAt": "2026-06-23T10:47:07.000Z",
-      "likeCount": 5,
-      "retweetCount": 5,
+      "likeCount": 6,
+      "retweetCount": 6,
       "replyCount": 0
     },
     {
-      "id": "2069502162183258420",
+      "id": "2069374911421075847",
       "author": {
-        "name": "Giovanni Staunovo",
-        "userName": "staunovo",
-        "category": "Analysts & Traders"
+        "name": "RBN Energy",
+        "userName": "RBNEnergy",
+        "category": "Research & Analytics"
       },
-      "text": "IAEA has inspected Iranian nuclear plant but not facilities damaged in last year's war https://t.co/2tueoexzQ5",
-      "summary": "# Oil Market Summary\n\nThe IAEA has inspected an Iranian nuclear plant but has not assessed facilities damaged during last year's conflict, which could create uncertainty about Iran's nuclear capabilities and potentially influence geopolitical tensions affecting global energy markets.",
-      "createdAt": "2026-06-23T19:25:39.000Z",
-      "likeCount": 5,
-      "retweetCount": 0,
-      "replyCount": 1
+      "text": "Open seasons are a key part of marketing capacity for gas pipeline and storage projects, but they can also raise several regulatory questions. And the answers depend on what kind of open season it is. Today, we take a deep dive into the ins and outs of a gas project open season. https://t.co/QCrBan0kkp",
+      "summary": "Open seasons are a marketing mechanism for gas pipeline and storage projects that involve regulatory considerations depending on their structure. While primarily relevant to natural gas infrastructure, such projects can have indirect implications for integrated energy markets and project development timelines.",
+      "createdAt": "2026-06-23T11:00:00.000Z",
+      "likeCount": 6,
+      "retweetCount": 1,
+      "replyCount": 0
     },
     {
-      "id": "2069501618228212016",
+      "id": "2069423728618811829",
       "author": {
-        "name": "Giovanni Staunovo",
-        "userName": "staunovo",
-        "category": "Analysts & Traders"
+        "name": "Tom Kloza",
+        "userName": "TomKloza",
+        "category": "Retail Fuel"
       },
-      "text": "Rubio: Iran will not be allowed to charge tolls in Strait of Hormuz under any final deal https://t.co/HuG0Qkr17U",
-      "summary": "Rubio has stated that Iran will not be permitted to impose tolls on shipping through the Strait of Hormuz under any final deal, which could have implications for global oil transit costs and market stability given the waterway's critical role in petroleum transport.",
-      "createdAt": "2026-06-23T19:23:29.000Z",
-      "likeCount": 5,
-      "retweetCount": 2,
-      "replyCount": 2
+      "text": "Gasoline retailers continue to be the quiet beneficiaries of margin expansion thanks to Iran War. Circle K parent (Couche-Tard) saw gross US margins of 52.44cts/gal in the US in the quarter ending April 26, 2026  - - up 9.17cts/gal from last year.",
+      "summary": "Gasoline retailers are experiencing expanded profit margins amid geopolitical tensions, with Circle K's US gross margins reaching 52.44 cents per gallon in Q2 2026, up 9.17 cents year-over-year. The margin expansion suggests retail fuel prices are rising faster than wholesale costs, benefiting convenience store operators during the period of elevated oil prices.",
+      "createdAt": "2026-06-23T14:13:59.000Z",
+      "likeCount": 6,
+      "retweetCount": 1,
+      "replyCount": 1
     },
     {
       "id": "2069362644079841785",
@@ -513,7 +513,7 @@
         "category": "Analysts & Traders"
       },
       "text": "https://t.co/tVR3nZyGDl",
-      "summary": "I can see Phil Flynn posted a link, but I'm unable to access the URL content or view what the link contains. Without being able to see the actual text or content from that link, I cannot provide a summary of the oil market implications.",
+      "summary": "https://t.co/tVR3nZyGDl",
       "createdAt": "2026-06-23T10:11:15.000Z",
       "likeCount": 5,
       "retweetCount": 0,
@@ -527,24 +527,24 @@
         "category": "Refiners & Majors"
       },
       "text": "ICYMI: Three Marathon refineries recently earned some of the industry's highest safety honors from the American Fuel &amp; Petrochemical Manufacturers (@AFPMonline).\n\nDiscover what helped these teams earn industry recognition. \ud83d\udc47\n\nhttps://t.co/rSdTxVgtcG",
-      "summary": "Marathon Petroleum's three refineries recently received top safety honors from the American Fuel & Petrochemical Manufacturers, reflecting strong operational standards across its refining portfolio.",
+      "summary": "Marathon Petroleum's three refineries earned top safety honors from the American Fuel & Petrochemical Manufacturers, reflecting strong operational standards across the company's refining assets.",
       "createdAt": "2026-06-23T20:21:47.000Z",
       "likeCount": 5,
       "retweetCount": 1,
       "replyCount": 0
     },
     {
-      "id": "2069327367462359266",
+      "id": "2069707266064887912",
       "author": {
         "name": "Argus Media",
         "userName": "argusmedia",
         "category": "Price Reporting"
       },
-      "text": "\ud83c\udf99\ufe0f \ud835\udde6\ud835\ude01\ud835\uddff\ud835\uddee\ud835\uddf6\ud835\ude01 \ud835\udde7\ud835\uddee\ud835\uddf9\ud835\uddf8 | \ud835\udddb\ud835\uddfc\ud835\uddff\ud835\uddfa\ud835\ude02\ud835\ude07 \ud835\udde0\ud835\uddfc\ud835\ude03\ud835\uddf6\ud835\uddf2\n\nWhat does the June 2026 agreement mean for energy markets?\n\nArgus experts break down ceasefire terms, shipping access and sanctions outlook, and what to watch next.\n\n\ud83c\udfa5 Watch: https://t.co/mIuT5dMySj\n\n@ncitayim \n@Bacharelhalabi https://t.co/cpfyihoIBQ",
-      "summary": "Argus Media discusses how a June 2026 agreement affects energy markets, examining ceasefire terms, shipping access, and sanctions implications relevant to oil trading.",
-      "createdAt": "2026-06-23T07:51:05.000Z",
-      "likeCount": 4,
-      "retweetCount": 4,
+      "text": "\ud83d\udcca \ud835\udde4\ud835\ude02\ud835\uddfc\ud835\ude01\ud835\uddee\ud835\ude00 \ud835\ude03\ud835\ude00 \ud835\uddd6\ud835\uddd5\ud835\uddd4\ud835\udde0: \ud835\ude04\ud835\uddf5\ud835\uddee\ud835\ude01\u2019\ud835\ude00 \ud835\uddf1\ud835\uddff\ud835\uddf6\ud835\ude03\ud835\uddf6\ud835\uddfb\ud835\uddf4 \ud835\uddd8\ud835\udde8 \ud835\ude00\ud835\ude01\ud835\uddf2\ud835\uddf2\ud835\uddf9 \ud835\uddf6\ud835\uddfa\ud835\uddfd\ud835\uddfc\ud835\uddff\ud835\ude01\ud835\ude00?\n\nEU buyers are prioritising quota access over carbon costs in 2026. See how trade flows, safeguard exemptions and supplier dynamics are evolving.\n\nDownload the infographic: https://t.co/3CqodrCQcl",
+      "summary": "EU steel import dynamics are shifting toward quota availability over carbon costs in 2026, which may influence supplier relationships and trade flows. While primarily a steel market issue, this regulatory shift could have indirect effects on energy demand and refining patterns tied to steel production.",
+      "createdAt": "2026-06-24T09:00:40.000Z",
+      "likeCount": 3,
+      "retweetCount": 3,
       "replyCount": 1
     },
     {
@@ -562,20 +562,6 @@
       "replyCount": 0
     },
     {
-      "id": "2069329878420258841",
-      "author": {
-        "name": "Argus Media",
-        "userName": "argusmedia",
-        "category": "Price Reporting"
-      },
-      "text": "\ud83c\udf99\ufe0f \ud835\uddd7\ud835\uddf6\ud835\uddf2\ud835\ude00\ud835\uddf2\ud835\uddf9 \ud835\ude01\ud835\uddee\ud835\uddf8\ud835\uddf6\ud835\uddfb\ud835\uddf4 \ud835\uddfd\ud835\uddff\ud835\uddf6\ud835\uddfc\ud835\uddff\ud835\uddf6\ud835\ude01\ud835\ude06, \ud835\uddef\ud835\uddee\ud835\ude00\ud835\uddf2 \ud835\uddfc\ud835\uddf6\ud835\uddf9\ud835\ude00 \ud835\uddf3\ud835\uddf2\ud835\uddf2\ud835\uddf9 \ud835\ude01\ud835\uddf5\ud835\uddf2 \ud835\uddfd\ud835\uddff\ud835\uddf2\ud835\ude00\ud835\ude00\ud835\ude02\ud835\uddff\ud835\uddf2\n\nEuropean refiners are prioritising diesel, with clear implications for base oil supply.\n\nHear \ud835\uddda\ud835\uddf2\ud835\uddfc\ud835\uddff\ud835\uddf4\ud835\uddf2 \ud835\udde0\ud835\uddee\ud835\uddf5\ud835\uddf2\ud835\uddff-\ud835\uddd5\ud835\uddfc\ud835\uddfb\ud835\uddfb\ud835\uddf2\ud835\ude01\ud835\ude01 (\ud835\uddd7\ud835\uddf2\ud835\uddfd\ud835\ude02\ud835\ude01\ud835\ude06 \ud835\uddd8\ud835\uddf1\ud835\uddf6\ud835\ude01\ud835\uddfc\ud835\uddff \u2014 \ud835\uddd8\ud835\ude02\ud835\uddff\ud835\uddfc\ud835\uddfd\ud835\uddf2\ud835\uddee\ud835\uddfb https://t.co/AVot1vp93C",
-      "summary": "European refiners are prioritizing diesel production, which is reducing the available supply of base oils and creating market pressure in that segment. The shift in refinery priorities toward diesel has direct implications for base oil availability and pricing in Europe.",
-      "createdAt": "2026-06-23T08:01:03.000Z",
-      "likeCount": 0,
-      "retweetCount": 0,
-      "replyCount": 1
-    },
-    {
       "id": "2069421526156222711",
       "author": {
         "name": "OPIS",
@@ -583,7 +569,7 @@
         "category": "Price Reporting"
       },
       "text": "Stay ahead of #HurricaneSeason with our revamped Interactive U.S. Gulf Coast Refinery &amp; Hurricane Path Map! Track storms, receive instant alerts, and safeguard your supply chain from #GulfCoast disruptions. Register for free access: https://t.co/ykpjmZmczV\n\n#refinery https://t.co/xwCw34F1rd",
-      "summary": "OPIS has launched an updated interactive map tool that allows users to track hurricane paths and monitor U.S. Gulf Coast refineries, helping oil market participants mitigate supply chain disruptions during hurricane season. The free tool provides real-time alerts to help stakeholders protect refining operations from weather-related impacts in a region critical to U.S. petroleum supply.",
+      "summary": "OPIS has launched an updated interactive map tool enabling users to track hurricane paths and monitor U.S. Gulf Coast refinery impacts during hurricane season, helping market participants mitigate supply chain disruptions in a critical oil production region.",
       "createdAt": "2026-06-23T14:05:14.000Z",
       "likeCount": 0,
       "retweetCount": 0,
