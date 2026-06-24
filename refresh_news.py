@@ -324,6 +324,12 @@ def fetch_gnews(query, category):
                 title = parts[0].strip()
                 source = parts[1].strip()
 
+        # Skip OilPrice.com articles — we fetch those directly from their RSS,
+        # and Google News returns many syndicated copies (Yahoo Finance, MSN,
+        # Nasdaq) with identical titles that waste the dedup budget.
+        if 'oilprice' in link.lower() or 'oilprice' in source.lower():
+            continue
+
         # Google News <description> is always "Title&nbsp;&nbsp;Source" — not real
         # article text. Pass empty string so we don't display that noise.
         parsed = _parse_item(

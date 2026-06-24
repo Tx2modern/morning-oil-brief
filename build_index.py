@@ -1761,7 +1761,7 @@ def _generate_morning_brief(inv_ctx, margins_ctx, curves_ctx, inventory_date, pr
                # synced ↔ post_eia transition, so commentary never lags reality.
                'fresh': freshness.get('state', 'synced'),
                # Bump when prompt wording changes materially — forces regen.
-               'prompt_v': '2026-05-29-bw-mechanics',
+               'prompt_v': '2026-06-24-no-cross-refs',
                # Wiki context hash — updating the wiki busts the brief cache.
                'wiki_hash': _wiki_hash}
     key = hashlib.md5(json.dumps(payload, sort_keys=True).encode()).hexdigest()
