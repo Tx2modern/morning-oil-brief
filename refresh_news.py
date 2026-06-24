@@ -52,7 +52,7 @@ OILPRICE_API_URLS = [
 
 # ── Google News RSS — US-targeted with exclusions for junk ───────────────────
 # Append -india -petrol to keep out Asian retail pump price floods
-GNEWS_BASE = 'https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en'
+GNEWS_BASE = 'https://news.google.com/rss/search?q={query}+when:3d&hl=en-US&gl=US&ceid=US:en'
 FEEDS = [
     # Primary market feeds — add exclusions to suppress retail pump-price spam
     ('crude oil WTI Brent OPEC -petrol -"pump price" -india -rupee',           'Crude Oil & OPEC'),
