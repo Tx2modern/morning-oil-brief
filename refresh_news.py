@@ -13,6 +13,7 @@ Filters out:
   - Crypto sites repurposing oil as a price hook
   - Low-quality aggregators and SEO spam
 """
+import html
 import json
 import os
 import re
@@ -142,6 +143,22 @@ def _quality_score(item):
     return item.get('epoch', 0) + bonus * 3600  # treat bonus as +hours
 
 
+def _clean_description(description, title):
+    """Strip HTML tags, decode entities, and discard Google News pseudo-descriptions.
+
+    Google News RSS sets <description> to "ArticleTitle&nbsp;&nbsp;Source" — just a
+    duplicate of the title with the source appended.  Detect this by comparing the
+    cleaned text against the title and return '' in that case so we don't show noise.
+    """
+    text = html.unescape(re.sub(r'<[^>]+>', '', description or '')).strip()
+    text = re.sub(r'\s+', ' ', text)            # collapse whitespace / non-breaking spaces
+    # If the description is just the title (possibly + " Source"), discard it.
+    title_clean = re.sub(r'\s+', ' ', title.strip())
+    if text.startswith(title_clean):
+        return ''
+    return text[:300]
+
+
 def _parse_item(title, link, source, pubdate_text, description):
     """Return a standardised item dict or None if blocked."""
     title = (title or '').strip()
@@ -164,7 +181,7 @@ def _parse_item(title, link, source, pubdate_text, description):
         'datetime':    pub_str,
         'epoch':       dt.timestamp() if dt else 0.0,
         'link':        link,
-        'description': re.sub(r'<[^>]+>', '', description or '').strip()[:300],
+        'description': _clean_description(description, title),
         '_dt':         dt,
     }
 
@@ -307,10 +324,12 @@ def fetch_gnews(query, category):
                 title = parts[0].strip()
                 source = parts[1].strip()
 
+        # Google News <description> is always "Title&nbsp;&nbsp;Source" — not real
+        # article text. Pass empty string so we don't display that noise.
         parsed = _parse_item(
             title, link, source,
             pubdate_el.text if pubdate_el is not None else '',
-            desc_el.text if desc_el is not None else '',
+            '',
         )
         if parsed:
             parsed['category'] = category
