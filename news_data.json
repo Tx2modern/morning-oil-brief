@@ -1,7 +1,117 @@
 {
-  "generated_at": "2026-06-24T09:55:10.713825+00:00",
+  "generated_at": "2026-06-24T17:46:22.956762+00:00",
   "cutoff_hours": 72,
   "items": [
+    {
+      "title": "Canada Building West\u2019s First Grid-Scale SMR",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 12:00:00 -0500",
+      "datetime": "2026-06-24T12:00:00-05:00",
+      "epoch": 1782320400.0,
+      "link": "https://oilprice.com/Energy/Energy-General/Canada-Building-Wests-First-Grid-Scale-SMR.html",
+      "description": "Construction has begun on the Western world\u2019s first grid-scale Small Modular Reactor (SMR), though small is not what comes to mind, considering that the machine will fit on two soccer fields. According to AutoNotion, a 953-tonne slab of steel and concrete was lowered into a 35-meter shaft at Ontario",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Rosneft Proposes Oil Firms to Refine 30% of Crude in Russia to Ease Fuel Crunch",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 11:30:00 -0500",
+      "datetime": "2026-06-24T11:30:00-05:00",
+      "epoch": 1782318600.0,
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Rosneft-Proposes-Oil-Firms-to-Refine-30-of-Crude-in-Russia-to-Ease-Fuel-Crunch.html",
+      "description": "Russia should require its oil companies to refine at least 30% of their crude domestically to ease the fuel supply crunch, according to Igor Sechin, chief executive of Russia\u2019s state-controlled firm Rosneft, which is the biggest oil producer in the country. Sechin sent a letter to Russian President ",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Trump\u2019s Nuclear Gamble Aims to Reshape the U.S. Power Grid",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 11:00:00 -0500",
+      "datetime": "2026-06-24T11:00:00-05:00",
+      "epoch": 1782316800.0,
+      "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/Trumps-Nuclear-Gamble-Aims-to-Reshape-the-US-Power-Grid.html",
+      "description": "With hyperscalers set to spend roughly $800 billion on data-center capex this year alone, alongside reshoring and broader grid electrification, baseload power demand is poised to surge. We have made the case that intermittent solar and wind are no match for the scale and reliability requirements of ",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Moscow Refinery May Stay Offline Until 2027",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 10:30:00 -0500",
+      "datetime": "2026-06-24T10:30:00-05:00",
+      "epoch": 1782315000.0,
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Moscow-Refinery-May-Stay-Offline-Until-2027.html",
+      "description": "The Moscow Oil Refinery is highly unlikely to resume production before 2027 after suffering extensive structural damage from multiple strikes by Ukraine\u2019s long-range drones, dealing a further blow to a country grappling with severe fuel shortages, Reuters reports. Operated by Gazprom Neft, the facil",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "U.S. Crude Inventories Post Another Major Draw",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 09:41:53 -0500",
+      "datetime": "2026-06-24T09:41:53-05:00",
+      "epoch": 1782312113.0,
+      "link": "https://oilprice.com/Energy/Crude-Oil/US-Crude-Inventories-Post-Another-Major-Draw.html",
+      "description": "Crude oil inventories in the United States decreased by 6.1 million barrels during the week ending June 19, according to new data from the U.S. Energy Information Administration (EIA) released on Wednesday. The decrease brings commercial stockpiles to 412.1 million barrels, according to government d",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "UK Climate Panel Urges Faster Electrification to Lower Energy Bills",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 09:30:00 -0500",
+      "datetime": "2026-06-24T09:30:00-05:00",
+      "epoch": 1782311400.0,
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/UK-Climate-Panel-Urges-Faster-Electrification-to-Lower-Energy-Bills.html",
+      "description": "UK\u2019s slower-than-expected electrification exposes households to fossil fuel price shocks, the country\u2019s Climate Change Committee (CCC) said on Wednesday, urging faster electrification and removal of policy costs to lower the energy bills. While the uptake of electric vehicles (EVs) has accelerated a",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Rubio Heads to Gulf as Iran Deal Sparks Anxiety Among U.S. Allies",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 09:00:00 -0500",
+      "datetime": "2026-06-24T09:00:00-05:00",
+      "epoch": 1782309600.0,
+      "link": "https://oilprice.com/Geopolitics/Middle-East/Rubio-Heads-to-Gulf-as-Iran-Deal-Sparks-Anxiety-Among-US-Allies.html",
+      "description": "US Secretary of State Marco Rubio arrived in Abu Dhabi on June 23, opening a high-stakes Gulf tour aimed at reassuring Washington\u2019s closest Arab allies after a fragile cease-fire framework between the United States and Iran raised fresh questions over regional security and Tehran\u2019s future ambitions.",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Euro Sinks To One-Year Low As Oil Price Drop Fuels ECB Rate Cut Bets",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 08:30:00 -0500",
+      "datetime": "2026-06-24T08:30:00-05:00",
+      "epoch": 1782307800.0,
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Euro-Sinks-To-One-Year-Low-As-Oil-Price-Drop-Fuels-ECB-Rate-Cut-Bets.html",
+      "description": "The euro has sunk to a one-year low, with easing of tensions between the United States and Iran helping to cool oil prices and raise expectations that the European Central Bank will turn more dovish. The euro was quoted at $1.135 against the U.S. dollar on Wednesday, down from $1.165 before the U.S.",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "VLCC Earnings Near $470,000 a Day as Hormuz Hopes Drive Tanker Frenzy",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 07:30:00 -0500",
+      "datetime": "2026-06-24T07:30:00-05:00",
+      "epoch": 1782304200.0,
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/VLCC-Earnings-Near-470000-a-Day-as-Hormuz-Hopes-Drive-Tanker-Frenzy.html",
+      "description": "Oil tanker rates have soared since the U.S. and Iran announced the memorandum of understanding as oil importers scramble to charter vessels to pick up Persian Gulf cargoes in the hope these can transit the tentatively reopening Strait of Hormuz. One tanker has been provisionally booked to ship crude",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Adani Targets 10 GW Nuclear Power Capacity in India by 2035",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 06:30:00 -0500",
+      "datetime": "2026-06-24T06:30:00-05:00",
+      "epoch": 1782300600.0,
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Adani-Targets-10-GW-Nuclear-Power-Capacity-in-India-by-2035.html",
+      "description": "Adani Group, the conglomerate of Indian billionaire Gautam Adani, could become India\u2019s biggest private nuclear power capacity developer within a decade, targeting 10 gigawatts (GW) by 2035, as India opened its civil nuclear power sector to private investment. \u201cOur entry into nuclear energy through A",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "China\u2019s Teapot Refineries Cut Operations to Their Lowest Level Since 2017",
+      "source": "OilPrice.com",
+      "date": "Wed, 24 Jun 2026 05:30:00 -0500",
+      "datetime": "2026-06-24T05:30:00-05:00",
+      "epoch": 1782297000.0,
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Chinas-Teapot-Refineries-Cut-Operations-to-Their-Lowest-Level-Since-2017.html",
+      "description": "The independent refiners in China, the so-called teapots, have slashed their refinery run rates to the lowest level since 2017, as high feedstock prices, weak domestic fuel consumption, and restricted exports have hit margins. Refinery runs at the refiners in the Shandong province slumped to just 50",
+      "category": "Crude Oil & OPEC"
+    },
     {
       "title": "India Cuts Coal Imports as Power Plants Turn to Domestic Fuel",
       "source": "OilPrice.com",
@@ -11,6 +121,26 @@
       "link": "https://oilprice.com/Latest-Energy-News/World-News/India-Cuts-Coal-Imports-as-Power-Plants-Turn-to-Domestic-Fuel.html",
       "description": "India is boosting the share of domestic coal used in power plants designated to run on imported fuel, as rising local coal production and expanding renewables have helped to cut coal imports to multi-year lows. India has raised the use of domestic coal to 50% at many power plants that have typically",
       "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Poland to Expand LNG Import Capacity in Push to Develop Natural Gas Hub - Natural Gas Intelligence",
+      "source": "Natural Gas Intelligence",
+      "date": "Wed, 24 Jun 2026 13:45:36 GMT",
+      "datetime": "2026-06-24T13:45:36+00:00",
+      "epoch": 1782308736.0,
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPMnZObXp3N3RTM0NvOEhRTmFOUF9wd3pibVZFWUFpbDUxYmp3czlnTlVSdWpIeWpZelZSaXpGTGRpaHRfRXFwQVJQYU44amJPc1plbktxcnQ2NDBjMHg1TDR4SGlrVks1clFZRkx1ZHdLbXFGLUt4UC1hSTk4NWROVno3Wm8zUVZicXdBNzFUdjB0NXJKZW11UXNIbWVYQ0dwdDl0Y3Ezejk?oc=5",
+      "description": "",
+      "category": "LNG & Gas"
+    },
+    {
+      "title": "Iran War Upends IEA\u2019s Oil Market Outlook as Global Supply and Demand to Contract in 2026 - EnergyNow",
+      "source": "EnergyNow",
+      "date": "Wed, 24 Jun 2026 13:28:29 GMT",
+      "datetime": "2026-06-24T13:28:29+00:00",
+      "epoch": 1782307709.0,
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMDFERTZEdWpqZEFyVXVjd01SelNLVXhmdUphc1RsbWEzQjV2THB0aDIxTk1kR0JGbWswRHVvem0zWEY0OFkweVhDSnkyVzdXX29UaTgxbmtNMjhpYjNPRGlkSmw5WGd2TTFpUnRyYndYQ0Zfc2VEODRTTklzVVEzTG1jamF5MVl6d1dab09HaGF6QS1kaG15RWpfa18wTEJtSlFiWk9mQWNYYVlKOVNUajJaXzJxZEZa?oc=5",
+      "description": "",
+      "category": "Energy Markets"
     },
     {
       "title": "Qatar Says LNG Exports Could Return to Normal Within Weeks",
@@ -23,6 +153,16 @@
       "category": "Crude Oil & OPEC"
     },
     {
+      "title": "Crude extends decline on improving supply outlook - London Business News",
+      "source": "London Business News",
+      "date": "Wed, 24 Jun 2026 12:37:01 GMT",
+      "datetime": "2026-06-24T12:37:01+00:00",
+      "epoch": 1782304621.0,
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNRmMxRW52bW5NLVZHREJTYU9wazZpN2pUOHpwcEdZQTVvMFdKUWJZSjloSnM1VHdJeHpzWVQtb1FMZXR6cmVOTzJqc0U5cUloZ1owU2czeE0xaVpfeUVnV3BXOUZDM0Y3Y1JTRGRKU2R1Rks3WWNZU00yN1JpVFloNjMtZkdob3NmSlE?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
       "title": "Malaysian Major Makes Gas Discovery in Suriname",
       "source": "OilPrice.com",
       "date": "Wed, 24 Jun 2026 02:00:00 -0500",
@@ -31,6 +171,26 @@
       "link": "https://oilprice.com/Latest-Energy-News/World-News/Malaysian-Major-Makes-Gas-Discovery-in-Suriname.html",
       "description": "Malaysia\u2019s state energy firm Petronas has made a natural gas discovery offshore Suriname, the country\u2019s president said this week, as quoted by Reuters, expecting the Malaysian major to make the final investment decision on the development of Block 52 by the end of the year. \u201cTo date, we have made ei",
       "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "United Kingdom Joins Belgium, Denmark, France, Germany, Ireland, Luxembourg, the Netherlands and Norway to Drive North Sea Clean Energy and Offshore Power Reset as Russia, Ukraine, Iran and United States Fuel Security Pressures Put Aviation, Ferri - Travel And Tour World",
+      "source": "Travel And Tour World",
+      "date": "Wed, 24 Jun 2026 11:22:58 GMT",
+      "datetime": "2026-06-24T11:22:58+00:00",
+      "epoch": 1782300178.0,
+      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1LUEo3bnM4MTNoT28yYU1YbVJFbWpUUGlacEhtQ0tpWW1GZUNWdHBEMDZxOXEydE1UNFNBZV9kUnF3Q2pwRXUzX1VXNVFiR3FzRXdJNGh0TmlKT05KWjhQcDQxZ3lCU09IZFNTcWVB?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
+    },
+    {
+      "title": "Goldman Sees Softer Oil Demand, Flags Two-Sided Risks to 2026 Price Outlook - EnergyNow",
+      "source": "EnergyNow",
+      "date": "Wed, 24 Jun 2026 10:30:57 GMT",
+      "datetime": "2026-06-24T10:30:57+00:00",
+      "epoch": 1782297057.0,
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNOFRWZ0QxeHZ6RTV2VVFla2ttd3BKN2JFeGYwajRpMFdxblZreWlncWktTHBvMFctTkhmWmpRV0FfWVhUM01ZWVJsNlotek8zSWdIa19IbWdtTEtBVW43VGNVSWJ6aEJrWDBoYWZZOEJQUjl2cW02RWpqeWN4S2E1WG55NW5rRXB2M3FLTk9WTGVqUGFOd2JRYVROQ3pfYm82cUZFalNyWQ?oc=5",
+      "description": "",
+      "category": "Energy Markets"
     },
     {
       "title": "Trump Orders Gas Price Gouging Probe",
@@ -43,6 +203,46 @@
       "category": "Crude Oil & OPEC"
     },
     {
+      "title": "Bahrain Joins UAE, Saudi Arabia, Oman, Qatar, Israel and Others in Witnessing Strong Regional Tourism Recovery as Canada, UK, France, Germany, Australia, Japan and More Ease Middle East Travel Advisory Amid US-Iran Peace Talks Boosting Traveler - Travel And Tour World",
+      "source": "Travel And Tour World",
+      "date": "Wed, 24 Jun 2026 10:17:47 GMT",
+      "datetime": "2026-06-24T10:17:47+00:00",
+      "epoch": 1782296267.0,
+      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBfRUtNLUhDckl3Rm4tSG04Nl94MVlJMVdaTmNKajJ2b0JxUTlhbDFWNGlKWGhodXFhMGswSERldWhSanhJMlJzS2JwTFVrNTV2di1ET3RoeU5la2xaQjAxN1hHYnBSN0NQd1loYlJR?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
+    },
+    {
+      "title": "Major energy project in Lake Charles scrapped - MSN",
+      "source": "MSN",
+      "date": "Wed, 24 Jun 2026 09:37:43 GMT",
+      "datetime": "2026-06-24T09:37:43+00:00",
+      "epoch": 1782293863.0,
+      "link": "https://news.google.com/rss/articles/CBMitAJBVV95cUxORW1mWHlHYjNzMEljVHVTLXFPT25QdlV5UVNkY2dQNVVsTC15T1lrVmstNVhxbkp1N0s3aVMxQTRfd3Y3QnJtb3BkbDRrS2FXTmZfVXZNdHVkUEtZTi05TEN2TjVpNUh2WlpqRjFWTUM3REJndTdBam1MTEVMRHhCSnhCcjJ5UEpaTzN2OV9jRGdaRV9aSkFqOExIempNcWtSam5mbFlEQi1IVkF3QV9KNmVXZUxtY3o5bmpNal9LTERtTXBBaEV2UlYtS1E0dkJlYW1icUVTZ1lNTGNhQ1B0Y3ktQS05dURBTzNnTzBuZERaWUhvaVRueDVuU1NQMTg0MTBzNGlxSGdMc09EaDZRekM0Q3hUVVBsaXNUMWNoTGNmbERJdDhBTHFyYm9LOWlESzVabw?oc=5",
+      "description": "",
+      "category": "LNG & Gas"
+    },
+    {
+      "title": "Trump attacks oil companies - He denounces price gouging and threatens an investigation - Bankingnews",
+      "source": "Bankingnews",
+      "date": "Wed, 24 Jun 2026 09:12:12 GMT",
+      "datetime": "2026-06-24T09:12:12+00:00",
+      "epoch": 1782292332.0,
+      "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQWGkySkZNeDNQbzZkVlRZaDRMVXBQd1ZSLUZmYnNnY0dFbU5VZnljbHltYlV3OUU1SENJRDJxTXBHMXhyY3FzOUQzWGJ0aEpnS2puTjBUaEYwTk1ZV2tVcE5SM3Q4eGNhYUlnSkNmVUF3Y1p6ZkQyYndRZFRORXRqUFN1cUFsVEJqWlZIYWdBVlNGc3duMllvbVFYSl9JUmZLOEFGVWZMS29jbDFOZ1RHSWxLWlhwaHpyM3ZOX3pMWHFZd1lOMkxIQ3dzVmdYSGpkZkxsUnJXQVh4cHN4WUZ1OUQ1dVEtUExWei1KbGdaQVo?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
+    },
+    {
+      "title": "Zacks Industry Outlook APA , W&T and Ring - TradingView",
+      "source": "TradingView",
+      "date": "Wed, 24 Jun 2026 08:45:00 GMT",
+      "datetime": "2026-06-24T08:45:00+00:00",
+      "epoch": 1782290700.0,
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQeFRxVUNRMm1ENUFURW1VNG9WU1ZzeGZDTDVmRXUyak1aN2pJM1dfYjBQQm02N3gtMGdfYkJJT254eTR6cF9YS1k1Y2ZRYTBwc3VZYWNwVVNiYzBWLXo5MVJ1YjNxbWFCVzlFNUxBWUticjdXNGVWU1F3VzNodXY1dzVHelFPbkNGWXEzVnFrMjdWcjE1eWEtRTRDMA?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
       "title": "Macquarie cuts oil price outlook as Middle East supply risks ease - Indonesia Business Post",
       "source": "Indonesia Business Post",
       "date": "Wed, 24 Jun 2026 08:37:20 GMT",
@@ -51,6 +251,16 @@
       "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPVmYzLVhyX09TazhiQ0RBa1ktMFRlTVBMR1JBbDAyQUYwX05Land4N1dUcTFTdXV0YzNfRkZuOTE0TlFTZEZjY1dIbWNEUEJzTXFfQ0lvWFExeG91QlRwTzZaRkhEQUVjXzNvVE16LUM5RHkwVUlPMTVxeGtBM0QwVmtFMVZMcFNxXzZzdGNOQ3VSNUU2RVgzbzh0b0g0YUZpMkRaX0pCU3pOWjhaT2ZfWU5sNTB3OEFHTS1Ja0ZoY0ZOZw?oc=5",
       "description": "",
       "category": "Energy Markets"
+    },
+    {
+      "title": "Govt launches \u2018RELIEF\u2019 Scheme to support exporters amid West Asia logistics disruptions - DD News",
+      "source": "DD News",
+      "date": "Wed, 24 Jun 2026 07:15:49 GMT",
+      "datetime": "2026-06-24T07:15:49+00:00",
+      "epoch": 1782285349.0,
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZmZqanZTdE1NUG1KY1lUeTFXUGVvR2NCWDQybHhnM3N3cGlTVFpVbnBwUm11TjRKQmtHcWRqb1pTMnlZbWhiRXE0T1luOVlza2hBNnA2MTMyVmg2MzFtWDVHZVA4Zjhpdm9ERm1TcUExTW5sVkJOSkpGN1lHSXRGM3czQzZRRHRkeS1IWDgtcjduRURyeTVTQzkxYnktSUNhVjdDblF2SndsajJEYVRVXw?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
     },
     {
       "title": "Brent Crude Oil Price Today (June 24): Brent Falls Below $77 as Strait of Hormuz Shipping Eases, Iran Supply Outlook Weighs on Oil Markets | Check Latest Brent Crude & WTI Oil Rates Today - The Sunday Guardian",
@@ -83,26 +293,6 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "2026 Iran war | Deal, Explained, United States, Israel, Strait of Hormuz, Map, & Conflict - Britannica",
-      "source": "Britannica",
-      "date": "Wed, 24 Jun 2026 05:00:00 GMT",
-      "datetime": "2026-06-24T05:00:00+00:00",
-      "epoch": 1782277200.0,
-      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5nTzlhOGZTS180cWNtVG91c2VWRVJFYlk0cW5Ba1RHUEFOSEtldU15QktQT0EzRVY1ZVdZZ0VTRHVWTVhyN1IzeU1wbmlDMUhrQ3Roc1YxcmdMUQ?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "The Trillion-Dollar AI Shockwave Nobody Is Ready For",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 19:00:00 -0500",
-      "datetime": "2026-06-23T19:00:00-05:00",
-      "epoch": 1782259200.0,
-      "link": "https://oilprice.com/Energy/Energy-General/The-Trillion-Dollar-AI-Shockwave-Nobody-Is-Ready-For.html",
-      "description": "The biggest investment opportunity of the AI era has very little to do with software or chips. The market has already priced both. The real story is power: who owns it, where it sits and how cheaply it can be delivered to AI workloads at scale. A small data center company that almost no one on Wall ",
-      "category": "Crude Oil & OPEC"
-    },
-    {
       "title": "Oil prices extend slide: Brent crude falls below $77 as Iran ceasefire holds, Strait of Hormuz fears ease - Gulf News",
       "source": "Gulf News",
       "date": "Wed, 24 Jun 2026 04:09:37 GMT",
@@ -110,76 +300,6 @@
       "epoch": 1782274177.0,
       "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQYk1UVlFvSFc0akY5YWVnRU9BYWppTmFmQ1lhcEZZWGVCZDN6dkpxMnpSN2NnckFiZldFZHNTSmNyeTFiTVNGQndBeXBLN01ydms0eG5Rc18zLU4wMFc1aDR1cktVX0txV0NBYW5KQnVYS2ozdGVEcXlsb0ZKZUdvd083WUJRTVRkSmg3RDJ3aXd0TFQ5ZVNNUjZFWUl2bjQtb05UaXpKUEIzcDdaSjRZOW1BX1pGN05vM3dxV3Noem81TXdpLUFpUFNERzAza3hHX09Wb3dGQVNqaTRPV1VOU0p0dkt4UdIB-AFBVV95cUxOUE9TMm9PYkhpWmdMUFhZT0hfdDZDZzh4MEJMaVpJME5KdEgtbzhJM2o1OXVFQThOWUQzUm9xUWJGUkoyNGtTNmh4YkZZQURwcXBwdDdPenN6dEgwNWIyOVUzWElMS3ZNQU95RDlaNnNLLW9ZN3IxYVY4MGswSkxXMXJQMHh4TzVwN1VBSFhmUjdJZEpoWEl0Z0dYXzJPaXNreU1rSElodHE0Z21LRkJVeUVHd3RiY0xyNlZwT1V3V3ZoZ2poV2lTeGxueFhsVkFyRUlwc2N6bFRwSGRKNVU1eHZMZ0x3ZHNBX1BKNzdsYUo2OHZNLVV2SA?oc=5",
       "description": "",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Why the Next Billion Barrels of Oil Demand Could Come From Storage",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 18:00:00 -0500",
-      "datetime": "2026-06-23T18:00:00-05:00",
-      "epoch": 1782255600.0,
-      "link": "https://oilprice.com/Energy/Crude-Oil/Why-the-Next-Billion-Barrels-of-Oil-Demand-Could-Come-From-Storage.html",
-      "description": "The closure of the Strait of Hormuz and the stranding of more than 10 million barrels per day (bpd) of crude oil in the Persian Gulf was a wake-up call for import-dependent countries to expand their capacity to hold strategic and commercial reserves. Many countries, especially in the Asia Pacific, a",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Trump Admin Takes Aim at Oil, Gas Drilling Costs",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 17:00:00 -0500",
-      "datetime": "2026-06-23T17:00:00-05:00",
-      "epoch": 1782252000.0,
-      "link": "https://oilprice.com/Energy/Energy-General/Trump-Admin-Takes-Aim-at-Oil-Gas-Drilling-Costs.html",
-      "description": "The U.S. federal government will reduce costs for oil and gas drillers by slashing red tape for the industry, aiming to tempt drillers to expand on federal lands. In a news release this week, the Interior Department said it would revise the Bureau of Land Management\u2019s rule for federal land leasing f",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "The AI Boom Is Set to Fast-Track China's Coming Nuclear Energy Dominance",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 16:00:00 -0500",
-      "datetime": "2026-06-23T16:00:00-05:00",
-      "epoch": 1782248400.0,
-      "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/The-AI-Boom-Is-Set-to-Fast-Track-Chinas-Coming-Nuclear-Energy-Dominance.html",
-      "description": "The United States is still the largest producer of nuclear energy in the world \u2013 but probably not for long. Decades of political ambivalence have left the domestic nuclear sector in a state of neglect. Far more reactors are aging out than being constructed, and the country\u2019s few attempts at building",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "US Crude Oil Inventories Continue To Falter, SPR Struggling To Pick Up the Slack",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 15:51:00 -0500",
-      "datetime": "2026-06-23T15:51:00-05:00",
-      "epoch": 1782247860.0,
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/US-Crude-Oil-Inventories-Continue-To-Falter-SPR-Struggling-To-Pick-Up-the-Slack.html",
-      "description": "The American Petroleum Institute (API) estimated that crude oil inventories in the United States fell by 765,000 barrels in the week ending June 19. In the week prior, US crude oil inventories fell by 8.33 million barrels. Although commercial crude oil inventories excluding the SPR have been falling",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Pemex Wants Petrobras' Deepwater Magic",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 15:30:00 -0500",
-      "datetime": "2026-06-23T15:30:00-05:00",
-      "epoch": 1782246600.0,
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Pemex-Wants-Petrobras-Deepwater-Magic.html",
-      "description": "When you're drowning in debt, plagued by declining production, and running a refining business that seems chronically allergic to profits, buddying up with a more successful partner starts looking like a sound strategy. That's essentially what just happened between Mexico's Pemex and Brazil's Petrob",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "SpaceX Taps Bond Market for $20 Billion to Fuel AI Expansion",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 15:00:00 -0500",
-      "datetime": "2026-06-23T15:00:00-05:00",
-      "epoch": 1782244800.0,
-      "link": "https://oilprice.com/Energy/Energy-General/SpaceX-Taps-Bond-Market-for-20-Billion-to-Fuel-AI-Expansion.html",
-      "description": "Elon Musk\u2019s SpaceX has begun selling investment grade bonds for the first time in what is anticipated to be a mass borrowing spree in order to fund the company\u2019s ambitious AI plans following its blockbuster Nasdaq listing. Bank of America, Citigroup, Goldman Sachs, JPMorgan Chase & Co and Morgan Sta",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "China Eyes $2 Billion Uzbek Mining Bet as Central Asia Courtship Accelerates",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 14:00:00 -0500",
-      "datetime": "2026-06-23T14:00:00-05:00",
-      "epoch": 1782241200.0,
-      "link": "https://oilprice.com/Energy/Energy-General/China-Eyes-2-Billion-Uzbek-Mining-Bet-as-Central-Asia-Courtship-Accelerates.html",
-      "description": "The head of China\u2019s National Energy Administration, Wang Hongzhi, visited Kazakhstan to participate in the inaugural meeting of the Kazakhstan-China Joint Working Group on Cooperation in Civil Nuclear Energy. Participants approved a protocol that defines future cooperation in the nuclear energy sphe",
       "category": "Crude Oil & OPEC"
     },
     {
@@ -193,42 +313,12 @@
       "category": "Energy Markets"
     },
     {
-      "title": "Tanker Owners Are Having the Best Week of the Hormuz Crisis",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 13:30:00 -0500",
-      "datetime": "2026-06-23T13:30:00-05:00",
-      "epoch": 1782239400.0,
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Tanker-Owners-Are-Having-the-Best-Week-of-the-Hormuz-Crisis.html",
-      "description": "The Strait of Hormuz may be reopening, but don't tell tanker owners the crisis is over. They're making too much money. As Middle Eastern producers scramble to move crude that has spent months stranded in the Persian Gulf, tanker rates have exploded higher, turning a slow return to normal into a wind",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "El Ni\u00f1o, War, and Fertilizer Costs Create a Dangerous Inflation Cocktail",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 13:00:00 -0500",
-      "datetime": "2026-06-23T13:00:00-05:00",
-      "epoch": 1782237600.0,
-      "link": "https://oilprice.com/Energy/Energy-General/El-Nio-War-and-Fertilizer-Costs-Create-a-Dangerous-Inflation-Cocktail.html",
-      "description": "Rory Green, TS Lombard's chief China economist, is the latest Wall Street strategist to warn of the mounting macro and food inflation risks that a super El Ni\u00f1o could release on certain regions of the world. In a note titled \"Super El Ni\u00f1o: Famine Follows War?\" Green warns that war-related disruptio",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Saudi Arabia\u2019s Decided Who Its Future Superpower Partner Is, And It\u2019s Not the US",
-      "source": "OilPrice.com",
-      "date": "Tue, 23 Jun 2026 12:00:00 -0500",
-      "datetime": "2026-06-23T12:00:00-05:00",
-      "epoch": 1782234000.0,
-      "link": "https://oilprice.com/Energy/Crude-Oil/Saudi-Arabias-Decided-Who-Its-Future-Superpower-Partner-Is-And-Its-Not-Ameri.html",
-      "description": "Since the replacement of Russia by China as the primary would-be superpower rival to the U.S., Saudi Arabia has sought to balance its relationships with Beijing and Washington -- sometimes leaning more one way, and sometimes the other. Until the 2014-2016 Oil Price War, the U.S. was the core relatio",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Iran War Upends IEA\u2019s Oil Market Outlook as Global Supply and Demand to Contract in 2026 - EnergyNow",
-      "source": "EnergyNow",
-      "date": "Tue, 23 Jun 2026 20:00:55 GMT",
-      "datetime": "2026-06-23T20:00:55+00:00",
-      "epoch": 1782244855.0,
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMDFERTZEdWpqZEFyVXVjd01SelNLVXhmdUphc1RsbWEzQjV2THB0aDIxTk1kR0JGbWswRHVvem0zWEY0OFkweVhDSnkyVzdXX29UaTgxbmtNMjhpYjNPRGlkSmw5WGd2TTFpUnRyYndYQ0Zfc2VEODRTTklzVVEzTG1jamF5MVl6d1dab09HaGF6QS1kaG15RWpfa18wTEJtSlFiWk9mQWNYYVlKOVNUajJaXzJxZEZa?oc=5",
+      "title": "US Stock Market Trends (June 24): South Korea\u2019s Stock Market Plunge Rattles Global Chip Sector; Micron Drops Over 10%; Long-Term Supply Certainty Under \u201cHard Test\u201d - \u6df1\u6f6eTechFlow",
+      "source": "\u6df1\u6f6eTechFlow",
+      "date": "Tue, 23 Jun 2026 21:55:49 GMT",
+      "datetime": "2026-06-23T21:55:49+00:00",
+      "epoch": 1782251749.0,
+      "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE56akdEM3plZkdSbWJmU1Vvd2R6WmkzS3ppY25sX3J6SmV5c19jUGtxUUVxVExNd0dveEtPbVpHbW4xank4ME80dkxHTWJDNzdldVE?oc=5",
       "description": "",
       "category": "Energy Markets"
     },
@@ -283,14 +373,34 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "Hedge Funds Increase Bearish Oil Bets to Highest Level in Five Months - bloomingbit",
-      "source": "bloomingbit",
-      "date": "Tue, 23 Jun 2026 15:28:42 GMT",
-      "datetime": "2026-06-23T15:28:42+00:00",
-      "epoch": 1782228522.0,
-      "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9INEo2TTdiMmw0Q0F1NGJOT184OHQ1aUtTdkk4MWRFaEh1bG5ubExzaEl2WEhuWFM5dER2Yy1MMlRua2lZZnhpSGJzcWxWWXZhUV95dA?oc=5",
+      "title": "Current price of oil as of June 23, 2026 - Fortune",
+      "source": "Fortune",
+      "date": "Tue, 23 Jun 2026 16:19:10 GMT",
+      "datetime": "2026-06-23T16:19:10+00:00",
+      "epoch": 1782231550.0,
+      "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5Ya0VoQ2RWa21zMFhrRUxycVdBcURienJTSDlHc09yUkNOVGp6a3BiS2pibkFVZTNUSnl3QjJ6Q0RNS09ERm11NHkxeS1YejVNdmQ3Uk9qb0FOajd5RFJmUDd3?oc=5",
       "description": "",
       "category": "Energy Markets"
+    },
+    {
+      "title": "WTI Crude Edges Higher but Remains Under Pressure Near $72.50 After Recent Low - Markets.com",
+      "source": "Markets.com",
+      "date": "Tue, 23 Jun 2026 16:02:00 GMT",
+      "datetime": "2026-06-23T16:02:00+00:00",
+      "epoch": 1782230520.0,
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQVGxaMmh3Ul9YN0hWV2hvd1RKUmU0VjJ6VkJobi15Vmtad0lvVXlzY19kdUE2bzZmVWtfVUMyczBiZVhFREFBM0ZING5RdDJOR051Y1RKU2QyNWdGdllTUGFtS0EyZUVtZUZ5YVVZb1Fvanc2elExZFZCblYzY1RSY2o2UE5qb2ZpeHhUWWk4Mkg?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "Certainty or uncertainty? - Trinidad Guardian",
+      "source": "Trinidad Guardian",
+      "date": "Tue, 23 Jun 2026 15:28:17 GMT",
+      "datetime": "2026-06-23T15:28:17+00:00",
+      "epoch": 1782228497.0,
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNGRwNzJjN0pGclNtSl9UaVA4UnQ4MUN6am5uMk9SakVyS0c2UThvWlF3UEdYXzUta2luTmYyVFMzWHJZUzFqcVAwRVJjU1RnNWVxWE90WG55SDBhY3lBNkU5UlhZb2lTYWpTREVaallaUXotWHZaV0dweTkyUFd5b0NTcGV5RHVk?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
     },
     {
       "title": "Rubio faces tough task of selling Iran reset to wary Gulf allies - politiko.com.ph",
@@ -391,16 +501,6 @@
       "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPT1JrLTVEVlFlMTdKenFPajl1OVZybjZEQ3pIWkZJdjE0aTFZTkJqN3JlUC0xNkZoa3NpS2lwRDY1djhYQWdOTzRodWtTdktNT0Y5OFZQcDZhN2NlZnM3VDZtM1M5cWIwLUNPYS1aeWxpS1ROWksxN0ZrS0dNaEFnMHctdGhLTV9vVXlVUHFGbUFtemdtUW5ocVVhYTJRWGN0V2JMQ2ZqbFVUOFd6dXMzQW5tWHl5cTNrcmhaeDV2MA?oc=5",
       "description": "",
       "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Team Korea throws gas project to sweeten sub pitch to Canada - Aju Press",
-      "source": "Aju Press",
-      "date": "Tue, 23 Jun 2026 07:41:06 GMT",
-      "datetime": "2026-06-23T07:41:06+00:00",
-      "epoch": 1782200466.0,
-      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9YalJVbU9mRFRReHFCTjJpcTN4WkZHVmJmOHBmeDZ3amwydHlDVHpxbUlXOEt2Y1BlYmk5QkxRa2xNbGlweW1NSnBGNFJJWndMRHAyRHpSQXVCWnPSAVdBVV95cUxQUUV4ZlBvZFRBY2lUVTRuQ18ybTkzMEJYTnpZTEozb0F5TXg0RVJUbG1yRXFGcjM0RVhXdWVrUUxndmpKMnhUQ2NiNXBQcnF6aG9mSWpNXzQ?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
     },
     {
       "title": "WTI (USOIL) Drops on Jun 23: What Lie behind the Move? - TradingKey",
@@ -533,16 +633,6 @@
       "category": "Energy Markets"
     },
     {
-      "title": "Certainty or uncertainty? - Trinidad Guardian",
-      "source": "Trinidad Guardian",
-      "date": "Mon, 22 Jun 2026 20:21:28 GMT",
-      "datetime": "2026-06-22T20:21:28+00:00",
-      "epoch": 1782159688.0,
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNGRwNzJjN0pGclNtSl9UaVA4UnQ4MUN6am5uMk9SakVyS0c2UThvWlF3UEdYXzUta2luTmYyVFMzWHJZUzFqcVAwRVJjU1RnNWVxWE90WG55SDBhY3lBNkU5UlhZb2lTYWpTREVaallaUXotWHZaV0dweTkyUFd5b0NTcGV5RHVk?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
       "title": "Natural Gas Futures Price Forecast \u2014 Henry Hub Climbs to $3.26 on Summer Heat and a Record Fund Short, but Supply Growth Caps the Squeeze - TradingNEWS",
       "source": "TradingNEWS",
       "date": "Mon, 22 Jun 2026 20:00:40 GMT",
@@ -585,10 +675,10 @@
     {
       "title": "Crude oil forecast: How much further can WTI fall? - FOREX.com",
       "source": "FOREX.com",
-      "date": "Mon, 22 Jun 2026 15:22:37 GMT",
-      "datetime": "2026-06-22T15:22:37+00:00",
-      "epoch": 1782141757.0,
-      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQN0F2THNxMGo5aWFVanRJWTFTemNUQXVpTkY0RkRQQ3NKUmJVSExqd1VoMUl6bVZHaHRfa3BsMXdxbjJBSWhYdDlrd0gtdDZRWUw1Qk5CV0RyeWgwVk0zRFdXcnFjVV9NWHR2a2ZkQnh4aGxZd25KdVhCMmJCdW9jNk5hNE50SjV1b3FRdE1hRTB3VGdIOTJJVjJINUhSWEFhYXB2M0tJd9IBpwFBVV95cUxQN0F2THNxMGo5aWFVanRJWTFTemNUQXVpTkY0RkRQQ3NKUmJVSExqd1VoMUl6bVZHaHRfa3BsMXdxbjJBSWhYdDlrd0gtdDZRWUw1Qk5CV0RyeWgwVk0zRFdXcnFjVV9NWHR2a2ZkQnh4aGxZd25KdVhCMmJCdW9jNk5hNE50SjV1b3FRdE1hRTB3VGdIOTJJVjJINUhSWEFhYXB2M0tJdw?oc=5",
+      "date": "Mon, 22 Jun 2026 17:29:41 GMT",
+      "datetime": "2026-06-22T17:29:41+00:00",
+      "epoch": 1782149381.0,
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQOXdvVnhwTk9YNUJMMDM1ZGhZOEpLT0x2bjg2M2xFMTVycHVXNlEzeVpZZTZwZHFuYkZuSWpDbndVUkt6NjYwLXRValAzNmlkbEg3NF94aTJjdGRyQlllMGE3bXBMeDRublBubGxJZlF6cVllZWlyWkg0R1FQWFo2aEZPOV9mblAtNGl6ekxwNk5teUNjQ25pZW9QRzUzOENhbzBmMXhHY9IBpwFBVV95cUxQOXdvVnhwTk9YNUJMMDM1ZGhZOEpLT0x2bjg2M2xFMTVycHVXNlEzeVpZZTZwZHFuYkZuSWpDbndVUkt6NjYwLXRValAzNmlkbEg3NF94aTJjdGRyQlllMGE3bXBMeDRublBubGxJZlF6cVllZWlyWkg0R1FQWFo2aEZPOV9mblAtNGl6ekxwNk5teUNjQ25pZW9QRzUzOENhbzBmMXhHYw?oc=5",
       "description": "",
       "category": "Energy Markets"
     },
@@ -643,16 +733,6 @@
       "category": "LNG & Gas"
     },
     {
-      "title": "Qatar LNG hub blast kills 13 as restart effort prompts safety, export reassurances - CHOSUNBIZ - Chosunbiz",
-      "source": "Chosunbiz",
-      "date": "Mon, 22 Jun 2026 14:00:00 GMT",
-      "datetime": "2026-06-22T14:00:00+00:00",
-      "epoch": 1782136800.0,
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVG82V29lNkpjdmpxbkJRNk9jcFBjcmVVemhtRFpDV1Y3YzNuRWpqTm45WDRKYUFNalc5dmV5cHdNRGxXb2tLWVZwVGhFR0lzX1ZacXFVMlpmMmVCaGlZai0xbVhGUllSN25JRGdFMzJSQlU2UmgxUVJud3BDbUZYVFcxTVR6MURB0gGcAUFVX3lxTE1ZVmlqNVNpSTRoM1djWk80YmpFeEJ4VDU1LTkwZ3FKb3VfcC1tazVYN2FDbWUwdEJIZFFSN0VMRGVLMVlQOEo3SVo3aVBqVlJiNW1EdDBEQTFjdThuR3VvTFBKa0x2bW1pTTJ2OW9zQ2R0UDFtVXJYNzg5LXE1czZ3a2NPbFl1aHJTZ2lfSnNwdlFzRmJFMlRUSUpXMw?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
-    },
-    {
       "title": "U.S.-Iran MOU and Negotiations: Expert Perspectives - Gulf International Forum",
       "source": "Gulf International Forum",
       "date": "Mon, 22 Jun 2026 13:28:36 GMT",
@@ -661,16 +741,6 @@
       "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9sMGlKWl9NZ3o3N1dqVjZlT2QyYm5ja0RhRjdpWjRGUERldTVvMzdjWUNNb012aTVMcHFwQ1NkUTNlQ0pTb053dEkzM3JaNEV6Wlo5YWNGbWJWNU56N1V5ODhHUG1TWXVkX3JTSnVMaXZHM2ZZZzNuLQ?oc=5",
       "description": "",
       "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Oil prices down as diplomatic progress improves supply outlook - London Business News",
-      "source": "London Business News",
-      "date": "Mon, 22 Jun 2026 13:19:01 GMT",
-      "datetime": "2026-06-22T13:19:01+00:00",
-      "epoch": 1782134341.0,
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQRkQtcVA4YVJyX21yZldGc0ZmQ3R2VVpfMXoxcW9Pc210Q1JlNWtuOGpvOFJZU1E1b0NPS09EU0NMQ0RrbTh2V2ZxTWd2U1o4T25FZ0t5Yzk5eVQ1TU9QdDg3dXdtWklrTzNTdlowRlphdnQzLVdoaGV1clRvU05qVnBIMno2ZjVzYW5YcFhQM19qejBpU1hTTnlxZw?oc=5",
-      "description": "",
-      "category": "Energy Markets"
     },
     {
       "title": "Fastmarkets Says Lithium Is Entering a New Phase as Demand Outpaces Supply - Panorama Minero",
@@ -743,6 +813,16 @@
       "category": "Energy Markets"
     },
     {
+      "title": "Iraq's export crisis: Hormuz and pipeline uncertainty - Vortexa",
+      "source": "Vortexa",
+      "date": "Mon, 22 Jun 2026 10:00:11 GMT",
+      "datetime": "2026-06-22T10:00:11+00:00",
+      "epoch": 1782122411.0,
+      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBLSEhITm52TDFnckVwZGl6SzZza3ZGaHZVc1lLdlF5UUd3SG10LVRvdU1EaWdFdm5ESTlQQ2UtZDlScFQ0YkV0bndVVlBpeUNiXzJGazhYODBwM05SaE5SWXdyclFpR01XSDREVHk1a1lZdHJsQkU4SXNJa3U?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
+    },
+    {
       "title": "Global energy costs soar as Iran crisis disrupts shipping, oil and gas production - DD News",
       "source": "DD News",
       "date": "Mon, 22 Jun 2026 07:27:09 GMT",
@@ -781,16 +861,6 @@
       "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE90TFp0QWFESWNDM1NraHRQNmpOV2RNWk1sTGFZY2RMYnljT2gtbWh1TzY5TFZVU2dIazc4T3JCUExuTmZ6ZnJpUEpwZnRUckVIV2xNRkF2RWZ2V0ZaVmloNWhBQ2tvVW1WZG91R0t3?oc=5",
       "description": "",
       "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Why Is Woodside Energy (ASX:WDS) Back in the Spotlight Across Energy Markets? - Kalkine Media",
-      "source": "Kalkine Media",
-      "date": "Mon, 22 Jun 2026 04:05:00 GMT",
-      "datetime": "2026-06-22T04:05:00+00:00",
-      "epoch": 1782101100.0,
-      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxONmdzbUhmV0h3Y2NoVW9IbUEza2tLb2ljSDNlR21INDJtUEEya2Fwc3JLbXVKdXNpSmdPUVJvaV9sTTJFX3BGRTA5Q0IxV0wtSnRsT254M3lJQkszaXJaOGZfUVBNdjJRWFYxLUtsOHg0cS1XSFl0amN2SXhHb2JuM0t0VWU0TWQ2bDZTRkl4aWE2WlRXbTZ5NHFZekRpUC1HeVBxc0tRQzMxd3VUM052bzZ2dEZYQQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
     },
     {
       "title": "US.-Iran peace deal could bring big oil glut next year, IEA says - MSN",
@@ -849,46 +919,6 @@
       "datetime": "2026-06-21T18:17:00+00:00",
       "epoch": 1782065820.0,
       "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE0ybndIYkRDZFNmN0FDMXRoaVAyVmVrY1dRR0NhTnB5dmw2cFByV2hLSFRWY0VuaW9OSlgzcEhRMnpaZnJ6S2V5NGR6MFR2SlRjUjYzd1NVbGxyc3ljX2ZNakdablc2RURNc3RtcFFTTHFKMVFaZndiazlJUzNoZw?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "President Trump Tells Fox News: The US Will Be the Guardian of the Strait of Hormuz - Energy News Beat",
-      "source": "Energy News Beat",
-      "date": "Sun, 21 Jun 2026 13:29:07 GMT",
-      "datetime": "2026-06-21T13:29:07+00:00",
-      "epoch": 1782048547.0,
-      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPdjBiM01JR1B5OTdBV1plMTFqaXZGVWRVTnl3RElvZlF6dXJ3QmpuMUl6V2RncFhqTzZaZGZrT0tSSzdXQ19RbEx5cGFOTFlTRURWdUZpNlZ2RmFrSEZTV0FSVi1JRUdYYXVleU5kS1phVkRaaHRNWnA0a3RobUJPWHRoV1Y2VHNTczBzM1lBN2FzdTUyTFBDN2RiN2xyNXRXTVN2OXNFSHJIV2Q0ZVpCWnJyNjZQbEtmQXU0?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "OPEC Secretary General Rejects IEA's Oil Supply Glut Forecast - \u0635\u062d\u064a\u0641\u0629 \u0645\u0627\u0644",
-      "source": "\u0635\u062d\u064a\u0641\u0629 \u0645\u0627\u0644",
-      "date": "Sun, 21 Jun 2026 12:34:52 GMT",
-      "datetime": "2026-06-21T12:34:52+00:00",
-      "epoch": 1782045292.0,
-      "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1Td1JlakJIR0w0clBiR0R1REowLUt0bGNpQnpwbkVKUWljRVVKdVNIV2dpVTFzXzJFLUtGWDF0Wk5CSnE1MUF1aG5RN3hIbDhmek5Fa2hKXzZQZnZoZTFucHp3X2ZZXy1MLTdNSA?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Iraq Joins Kuwait, Saudi Arabia, Qatar, UAE, Oman, Turkey, Jordan, Egypt, Bahrain, and More Nations in the Global Spotlight as Iran Threatens Middle Eastern Economy and Tourism Recovery by Closing the Strait of Hormuz on the Third Day of Reopening Ov - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Sun, 21 Jun 2026 11:54:13 GMT",
-      "datetime": "2026-06-21T11:54:13+00:00",
-      "epoch": 1782042853.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5FTWs3c0xiN1ExVWl5NkFOT2dXdTNNbU5hZnNkZHhjZEtiaGdBTUdUd01kbm5xRW54TjFGYkRqUzdrMC0zTkV3Yk1WeThOMWgtQnFQUmlLVDBWVU9JcGZ1ekl0eTcyNDgzdVJsLVZR?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "United States Signs Preliminary Versailles Accord to Stabilize Strait of Hormuz, Transforming Aviation and Cruise Operations in the Gulf: New Travel Alert - Nomad Lawyer",
-      "source": "Nomad Lawyer",
-      "date": "Sun, 21 Jun 2026 10:29:20 GMT",
-      "datetime": "2026-06-21T10:29:20+00:00",
-      "epoch": 1782037760.0,
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTlVBZnZJUC02Z1cxWTc1OHNxX0lVWVhFc2k2UlM1RlBFbmZNYzlUYjJPZERTQjhkTUtQNGdCZkZ0WmRMUFRJT0l6RlNQcVV4ekJUUHdSTU9QTTR5YnkzbEt0SEdFRUtxc0h0TGNFVnhOcGltUnNDN2RRYWlDRGVUZExpOGxRbS12?oc=5",
       "description": "",
       "category": "Geopolitics & Risk"
     }
