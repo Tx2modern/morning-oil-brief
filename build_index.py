@@ -1064,6 +1064,13 @@ BUILD/DRAW vs DEMAND LOGIC — GET THIS RIGHT:
   a BEARISH factor (e.g., weak demand, high imports). Match the word to the logic.
 - ARITHMETIC CHECK: soft demand + normal supply → build. Firm demand + normal supply → draw.
 
+SELF-CONTAINED TEXT — NO CROSS-REFERENCES:
+- NEVER write "see below", "see above", "as shown below", "as noted above", "as discussed
+  below", or any phrase that references another part of the page. This narrative block
+  renders in isolation — there is no "below" or "above" visible to the reader.
+- If you want to mention a topic (e.g. Russia supply disruption, export data), state the
+  fact directly in the sentence rather than pointing the reader elsewhere.
+
 {wiki_context_block}
 
 Return STRICT JSON with this exact shape (no markdown, no commentary outside JSON):
@@ -2971,6 +2978,12 @@ LOGICAL-CONSISTENCY CHECK:
   re-read each "X therefore Y" claim and verify the mechanism actually works
   that direction. If you can't state the mechanism in one short sentence,
   rewrite or drop the claim.
+
+SELF-CONTAINED TEXT — NO CROSS-REFERENCES:
+- NEVER write "see below", "see above", "as shown below", "as noted above", "as discussed
+  below", or any phrase that references another part of the page. This narrative block
+  renders in isolation — there is no "below" or "above" visible to the reader.
+- State facts inline; do not point the reader elsewhere.
 
 Return STRICT JSON with this shape (no markdown outside JSON):
 
