@@ -351,18 +351,26 @@ def main():
     all_items = []
     seen_titles = set()
 
-    def _add(items):
+    def _add(items, verbose=False):
         added = 0
+        skipped_old = 0
+        skipped_dup = 0
         for item in items:
             dt = item.get('_dt')
             if dt and dt < cutoff:
+                skipped_old += 1
                 continue
             key = re.sub(r'\s+', ' ', item['title'].lower().strip())[:80]
             if key in seen_titles:
+                skipped_dup += 1
+                if verbose:
+                    print(f'    dup: {key[:60]}')
                 continue
             seen_titles.add(key)
             all_items.append(item)
             added += 1
+        if (skipped_old or skipped_dup) and not added:
+            print(f'    (skipped: {skipped_old} too old, {skipped_dup} dedup)')
         return added
 
     # 1. OilPrice.com RSS — always fetch (best quality, energy-specific)
@@ -389,7 +397,7 @@ def main():
     print('[3/3] Google News RSS...')
     for query, category in FEEDS:
         items = fetch_gnews(query, category)
-        n = _add(items)
+        n = _add(items, verbose=True)
         print(f'  {category:30} → {n} added ({len(items)} fetched)')
         time.sleep(0.5)
 

@@ -1172,6 +1172,22 @@ def _generate_via_claude(ctx):
     return json.loads(raw[start:end + 1])
 
 
+_CROSS_REF_RE = re.compile(
+    r'\b(see\s+(below|above|the\s+(chart|table|graph|section|figure|data)\s*(below|above)?)'
+    r'|as\s+(shown|noted|discussed|detailed|described|mentioned)\s+(below|above)'
+    r'|as\s+shown\s+in\s+the\s+(chart|table|graph|figure)\s*(below|above)?'
+    r'|refer\s+to\s+the\s+(chart|table|graph|figure|section)\s*(below|above)?'
+    r'|in\s+the\s+(chart|table|graph|figure)\s*(below|above))',
+    re.IGNORECASE,
+)
+
+def _strip_cross_refs(text: str) -> str:
+    """Remove phrases like 'see below', 'as shown above', etc. from LLM output."""
+    if not text:
+        return text
+    return _CROSS_REF_RE.sub('', text)
+
+
 def _fallback_market_read(ctx):
     us = ctx['us']
     trade = ctx['trade_4wk_mbd']
@@ -1399,6 +1415,7 @@ def generate_narratives(ctx):
             print('  → calling Anthropic API for narratives...')
             out = _generate_via_claude(ctx)
             if 'market_read' in out and 'padd' in out and len(out['padd']) >= 5:
+                out['market_read'] = _strip_cross_refs(out['market_read'])
                 print('  → AI-generated narratives received')
                 return out
             print('  → API returned malformed JSON, falling back to template')
@@ -1761,7 +1778,7 @@ def _generate_morning_brief(inv_ctx, margins_ctx, curves_ctx, inventory_date, pr
                # synced ↔ post_eia transition, so commentary never lags reality.
                'fresh': freshness.get('state', 'synced'),
                # Bump when prompt wording changes materially — forces regen.
-               'prompt_v': '2026-06-24-no-cross-refs',
+               'prompt_v': '2026-06-24-strip-cross-refs',
                # Wiki context hash — updating the wiki busts the brief cache.
                'wiki_hash': _wiki_hash}
     key = hashlib.md5(json.dumps(payload, sort_keys=True).encode()).hexdigest()
@@ -1849,7 +1866,7 @@ def _generate_morning_brief(inv_ctx, margins_ctx, curves_ctx, inventory_date, pr
             if obj:
                 parsed = json.loads(obj)
                 if 'morning_brief' in parsed and parsed['morning_brief'].strip():
-                    value = parsed['morning_brief']
+                    value = _strip_cross_refs(parsed['morning_brief'])
                     print('  → morning brief received')
                     try:
                         # Persist both the keyed cache and the sticky
@@ -3096,6 +3113,7 @@ def _generate_margins_narratives(ctx):
             if start >= 0 and end > start:
                 parsed = json.loads(raw[start:end + 1])
                 if 'market_read' in parsed:
+                    parsed['market_read'] = _strip_cross_refs(parsed['market_read'])
                     print('  → margins narratives received')
                     try:
                         with open(cache_path, 'w') as f:
@@ -4185,6 +4203,7 @@ def _generate_curves_narratives(ctx):
             if obj:
                 parsed = json.loads(obj)
                 if 'market_read' in parsed:
+                    parsed['market_read'] = _strip_cross_refs(parsed['market_read'])
                     print('  → curves narratives received')
                     try:
                         with open(cache_path, 'w') as f:
