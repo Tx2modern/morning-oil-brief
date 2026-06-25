@@ -104,7 +104,7 @@ ALLOWED_GNEWS_SOURCES = {
     # Wire services
     'reuters', 'associated press', 'ap news', 'bloomberg', 'bloomberg.com', 'bnn bloomberg',
     # Financial press
-    'wall street journal', 'wsj', 'financial times', 'ft', 'barron\'s',
+    'wall street journal', 'wsj', 'financial times', 'barron\'s',
     'the new york times', 'nytimes', 'new york times',
     'washington post', 'the economist',
     # Energy trade press
@@ -115,7 +115,7 @@ ALLOWED_GNEWS_SOURCES = {
     # Mainstream business / finance
     'cnbc', 'cnn business', 'bbc', 'bbc news', 'the guardian',
     'axios', 'politico', 'the hill', 'npr', 'pbs',
-    'fortune', 'time', 'business insider',
+    'fortune', 'time magazine', 'business insider',
     'yahoo finance',  # syndicates reuters/bloomberg articles
     'marketwatch', 'seeking alpha',  # keep for price/market context
     # Shipping / tanker / freight
@@ -127,7 +127,6 @@ ALLOWED_GNEWS_SOURCES = {
     'u.s. energy information administration (eia) (.gov)',
     # Regional energy-specific
     'oilnow', 'rigzone', 'energy monitor', 'energymonitor', 'natural gas intelligence',
-    'new voice of ukraine', 'kyiv independent', 'ukrainska pravda',
     'middle east eye', 'al monitor', 'al jazeera',
     'arab news', 'the national', 'gulf news',
     # Canada / Americas energy
@@ -173,6 +172,24 @@ PREFERRED_SOURCES = {
     'upstream online', 'energy intelligence', 'cnbc', 'the guardian',
     'associated press', 'ap', 'eia', 'iea', 'opec',
 }
+
+
+def _oilprice_category_from_url(link):
+    """Infer OilPrice.com article category from URL path."""
+    link_lower = link.lower()
+    if '/energy/natural-gas/' in link_lower or '/energy/lng/' in link_lower:
+        return 'LNG & Gas'
+    if '/energy/crude-oil/' in link_lower or '/energy/oil-prices/' in link_lower:
+        return 'Crude Oil & OPEC'
+    if '/energy/gasoline/' in link_lower or '/energy/diesel/' in link_lower:
+        return 'Refined Products'
+    if '/geopolitics/' in link_lower:
+        return 'Geopolitics & Risk'
+    if '/us-energy/' in link_lower:
+        return 'US Production'
+    if '/energy/renewables/' in link_lower or '/alternative-energy/' in link_lower:
+        return 'Energy Markets'
+    return None  # fall back to feed-level default
 
 
 def _is_blocked(title, source):
@@ -275,7 +292,7 @@ def fetch_oilprice_rss(url, category):
             desc_el.text if desc_el is not None else '',
         )
         if parsed:
-            parsed['category'] = category
+            parsed['category'] = _oilprice_category_from_url(link) or category
             items.append(parsed)
     return items
 
@@ -388,8 +405,12 @@ def fetch_gnews(query, category):
         # Only accept articles from recognized quality outlets. Google News
         # search surfaces a long tail of travel blogs, local TV, and SEO spam
         # that happen to mention oil. Drop anything not on the allowlist.
+        # Use word-boundary regex so 'time' doesn't match 'times kuwait', etc.
         src_lower = source.lower().strip()
-        if src_lower and not any(a in src_lower for a in ALLOWED_GNEWS_SOURCES):
+        if src_lower and not any(
+            re.search(r'\b' + re.escape(a) + r'\b', src_lower)
+            for a in ALLOWED_GNEWS_SOURCES
+        ):
             continue
 
         # Google News <description> is always "Title&nbsp;&nbsp;Source" — not real
