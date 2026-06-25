@@ -54,15 +54,15 @@ OILPRICE_API_URLS = [
 # Append -india -petrol to keep out Asian retail pump price floods
 GNEWS_BASE = 'https://news.google.com/rss/search?q={query}+when:3d&hl=en-US&gl=US&ceid=US:en'
 FEEDS = [
-    # Primary market feeds — add exclusions to suppress retail pump-price spam
-    ('crude oil WTI Brent OPEC -petrol -"pump price" -india -rupee',           'Crude Oil & OPEC'),
-    ('gasoline RBOB diesel ULSD "crack spread" refinery margin -india -petrol', 'Refined Products'),
-    ('EIA "petroleum status report" "weekly inventory" crude stocks',            'EIA & Inventory'),
-    ('refinery utilization capacity turnaround outage -india',                   'Refining'),
-    ('oil market supply demand outlook -india -rupee -petrol',                   'Energy Markets'),
-    ('Middle East Iran Iraq Saudi oil geopolitics supply',                        'Geopolitics & Risk'),
-    ('US shale Permian Eagle Ford Bakken production drilling rig count',          'US Production'),
-    ('LNG "natural gas" export import terminal -india',                          'LNG & Gas'),
+    # Broad queries so Google News returns enough results; allowlist handles quality filtering
+    ('crude oil price Brent WTI OPEC',                       'Crude Oil & OPEC'),
+    ('gasoline diesel fuel price refinery',                  'Refined Products'),
+    ('EIA petroleum inventory oil stocks',                   'EIA & Inventory'),
+    ('oil refinery capacity utilization',                    'Refining'),
+    ('oil energy market supply demand',                      'Energy Markets'),
+    ('Middle East Iran Saudi Arabia oil supply geopolitics', 'Geopolitics & Risk'),
+    ('US oil shale production Permian drilling',             'US Production'),
+    ('LNG natural gas export import',                        'LNG & Gas'),
 ]
 
 # ── Source blocklist — known low-quality or off-topic ────────────────────────
@@ -88,7 +88,7 @@ BLOCKED_SOURCES = {
     'travel and tour world', 'travelandtourworld', 'tourism review',
     'travel daily media', 'eturbonews', 'travelweekly',
     # Low-signal aggregators and local TV
-    'oilprice.net', 'rigzone', 'naturalgasintel',
+    'oilprice.net',
     'scanx.trade', 'stockanalysis.com',
     'fxempire', 'fx empire', 'fxstreet', 'investing.com nigeria',
     'quantum commodity intelligence',  # paywalled, summaries are thin
@@ -102,7 +102,7 @@ BLOCKED_SOURCES = {
 # are accepted from Google News. This keeps the feed to real journalism.
 ALLOWED_GNEWS_SOURCES = {
     # Wire services
-    'reuters', 'associated press', 'ap news', 'bloomberg', 'bloomberg.com',
+    'reuters', 'associated press', 'ap news', 'bloomberg', 'bloomberg.com', 'bnn bloomberg',
     # Financial press
     'wall street journal', 'wsj', 'financial times', 'ft', 'barron\'s',
     'the new york times', 'nytimes', 'new york times',
@@ -126,7 +126,7 @@ ALLOWED_GNEWS_SOURCES = {
     'u.s. energy information administration (eia)',
     'u.s. energy information administration (eia) (.gov)',
     # Regional energy-specific
-    'oilnow', 'rigzone', 'energy monitor', 'energymonitor',
+    'oilnow', 'rigzone', 'energy monitor', 'energymonitor', 'natural gas intelligence',
     'new voice of ukraine', 'kyiv independent', 'ukrainska pravda',
     'middle east eye', 'al monitor', 'al jazeera',
     'arab news', 'the national', 'gulf news',
