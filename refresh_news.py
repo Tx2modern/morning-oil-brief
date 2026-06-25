@@ -84,8 +84,63 @@ BLOCKED_SOURCES = {
     # SEO aggregators / press release spam
     'globenewswire', 'prnewswire', 'businesswire', 'einpresswire',
     'accesswire', 'indexbox', 'ad hoc news',
+    # Travel / tourism clickbait that references oil tangentially
+    'travel and tour world', 'travelandtourworld', 'tourism review',
+    'travel daily media', 'eturbonews', 'travelweekly',
+    # Low-signal aggregators and local TV
+    'oilprice.net', 'rigzone', 'naturalgasintel',
+    'scanx.trade', 'stockanalysis.com',
+    'fxempire', 'fx empire', 'fxstreet', 'investing.com nigeria',
+    'quantum commodity intelligence',  # paywalled, summaries are thin
+    '富途牛牛',  # Chinese retail brokerage
     # Misc low-signal
     'ipn.md', 'ایران اینترنشنال',
+}
+
+# ── Source allowlist — Google News articles from unlisted sources are dropped ──
+# Only articles from these outlets (or OilPrice.com which has its own feed)
+# are accepted from Google News. This keeps the feed to real journalism.
+ALLOWED_GNEWS_SOURCES = {
+    # Wire services
+    'reuters', 'associated press', 'ap news', 'bloomberg', 'bloomberg.com',
+    # Financial press
+    'wall street journal', 'wsj', 'financial times', 'ft', 'barron\'s',
+    'the new york times', 'nytimes', 'new york times',
+    'washington post', 'the economist',
+    # Energy trade press
+    'oil & gas journal', 'ogj', 'upstream online', 'energy intelligence',
+    'hart energy', 'world oil', 'platts', 's&p global', 's&p global commodity insights',
+    'argus media', 'argus', 'opis', 'rbn energy', 'icis',
+    'natural gas intelligence', 'lng world news', 'naturalgasworld',
+    # Mainstream business / finance
+    'cnbc', 'cnn business', 'bbc', 'bbc news', 'the guardian',
+    'axios', 'politico', 'the hill', 'npr', 'pbs',
+    'fortune', 'time', 'business insider',
+    'yahoo finance',  # syndicates reuters/bloomberg articles
+    'marketwatch', 'seeking alpha',  # keep for price/market context
+    # Shipping / tanker / freight
+    'gcaptain', 'tradewinds', 'seatrade maritime', 'lloyds list',
+    'hellenic shipping news',
+    # Government / official
+    'eia', 'u.s. energy information administration', 'iea',
+    'u.s. energy information administration (eia)',
+    'u.s. energy information administration (eia) (.gov)',
+    # Regional energy-specific
+    'oilnow', 'rigzone', 'energy monitor', 'energymonitor',
+    'new voice of ukraine', 'kyiv independent', 'ukrainska pravda',
+    'middle east eye', 'al monitor', 'al jazeera',
+    'arab news', 'the national', 'gulf news',
+    # Canada / Americas energy
+    'financial post', 'globe and mail', 'calgary herald',
+    'oil sands magazine', 'resources magazine',
+    'mining.com', 'oilweek',
+    # Other recognized outlets
+    'foreign policy', 'foreign affairs', 'the intercept',
+    'propublica', 'bloomberg law', 'law360', 'icis',
+    'visual capitalist',  # good data journalism
+    'isicds', 's&p capital iq',
+    # Paywalled but recognizable headline value
+    'bloomberg businessweek', 'wsj pro', 'ft energy',
 }
 
 # ── Title pattern blocklist ───────────────────────────────────────────────────
@@ -328,6 +383,13 @@ def fetch_gnews(query, category):
         # and Google News returns many syndicated copies (Yahoo Finance, MSN,
         # Nasdaq) with identical titles that waste the dedup budget.
         if 'oilprice' in link.lower() or 'oilprice' in source.lower():
+            continue
+
+        # Only accept articles from recognized quality outlets. Google News
+        # search surfaces a long tail of travel blogs, local TV, and SEO spam
+        # that happen to mention oil. Drop anything not on the allowlist.
+        src_lower = source.lower().strip()
+        if src_lower and not any(a in src_lower for a in ALLOWED_GNEWS_SOURCES):
             continue
 
         # Google News <description> is always "Title&nbsp;&nbsp;Source" — not real
