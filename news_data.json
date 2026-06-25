@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T13:30:37.849139+00:00",
+  "generated_at": "2026-06-25T13:58:59.400046+00:00",
   "cutoff_hours": 72,
   "items": [
     {
@@ -61,16 +61,6 @@
       "link": "https://oilprice.com/Latest-Energy-News/World-News/Trump-Singles-Out-Exxon-Chevron-Shell-and-BP-Over-High-Gas-Prices.html",
       "description": "President Donald Trump has listed Exxon, Chevron, Shell, and BP as being among companies responsible for excessively high fuel prices, following the announcement of a federal government probe into price-gouging earlier in the week. \u201cOil prices have come down so much and we are not seeing anything at",
       "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "EU\u2019s Top Oil, Natural Gas Suppliers Urge Delay, Rewrite of Methane Regulations - Natural Gas Intelligence",
-      "source": "Natural Gas Intelligence",
-      "date": "Thu, 25 Jun 2026 12:48:01 GMT",
-      "datetime": "2026-06-25T12:48:01+00:00",
-      "epoch": 1782391681.0,
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQYzZ1MkVIMGNqX2podTRWRkY4b0V5QUxkVGw1ODRQa0psOWwtUWpZZTZwVkVJR3psTFhvT205VEEwY1Myam54TnRtNUhnYWNTRzZFRkNXdWszUF8xT0N6Rl9ld1M4eEl4WlB6dVZDX01scXA1dzFmc0l5RXdUcFlSWWMxUVoyREtDSGh6ZHlmdXdEQ2VOY3ZNcXRDbGFxanhrTjRVRlVsY2lzVzJMcGhhS0VMcw?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
     },
     {
       "title": "Qatar Signs Crude Deal With Taiwan as Gulf Oil Trade Recovers",
@@ -143,14 +133,14 @@
       "category": "Energy Markets"
     },
     {
-      "title": "Oil touches pre-war levels on rising Middle East supply - Reuters",
+      "title": "Oil falls to pre-war levels on rising Middle East supply - Reuters",
       "source": "Reuters",
       "date": "Thu, 25 Jun 2026 01:35:00 GMT",
       "datetime": "2026-06-25T01:35:00+00:00",
       "epoch": 1782351300.0,
       "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQVkdDYmZFSTkwNFU4TGw0UDItS3RmdzdoR0hYUjRhYVUtaWRpWjFueDBQSUlQQklKZzdoTWJlQ1phYXRWaHMtZU5jNnNmOVZPalE2eExoaE5ESEJOcW9RN1l3VjFFTXNPLUJvdWFfTWVOTno3SEdlMHNJQjMxM0hJcXM1WHFtVG9NeHZtSGtZQlY4b21GZ3pqWjFn?oc=5",
       "description": "",
-      "category": "Crude Oil & OPEC"
+      "category": "Energy Markets"
     },
     {
       "title": "Global Battery Storage Boom Is A Boon for Tesla",
@@ -273,6 +263,16 @@
       "category": "Energy Markets"
     },
     {
+      "title": "Energy outlook to 2050 based on today\u2019s policy settings \u2013 Southeast Asia Energy Outlook 2026 \u2013 Analysis - IEA \u2013 International Energy Agency",
+      "source": "IEA \u2013 International Energy Agency",
+      "date": "Wed, 24 Jun 2026 19:26:02 GMT",
+      "datetime": "2026-06-24T19:26:02+00:00",
+      "epoch": 1782329162.0,
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQMUFJS1N3SWF5WGlLZzd5M0tQTUI3SlFoSjJjMl8xYUpUZEFvSWpiRGFoeHd5a0Ribk1OcjVBWmU2YVFBT3owMm9rVlJYU1pSV3B1S0ROSS04NXVGeWI3cDdJa2ZTeVF6WHJxcVMwekJreTlwNmVVcFNxeWNrMlFzNWQ0anVTU0dZRjM0bDQtb1F4RXhCd09qNm52bUlQdm12R3lpMzBWUzlNcm1JWVVwUjNGRExBRklWUnc?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
       "title": "U.S. commercial crude oil inventories have decreased in June - U.S. Energy Information Administration (EIA) (.gov)",
       "source": "U.S. Energy Information Administration (EIA) (.gov)",
       "date": "Wed, 24 Jun 2026 18:14:26 GMT",
@@ -301,16 +301,6 @@
       "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPMnZObXp3N3RTM0NvOEhRTmFOUF9wd3pibVZFWUFpbDUxYmp3czlnTlVSdWpIeWpZelZSaXpGTGRpaHRfRXFwQVJQYU44amJPc1plbktxcnQ2NDBjMHg1TDR4SGlrVks1clFZRkx1ZHdLbXFGLUt4UC1hSTk4NWROVno3Wm8zUVZicXdBNzFUdjB0NXJKZW11UXNIbWVYQ0dwdDl0Y3Ezejk?oc=5",
       "description": "",
       "category": "LNG & Gas"
-    },
-    {
-      "title": "Oil prices extend slide: Brent crude falls below $77 as Iran ceasefire holds, Strait of Hormuz fears ease - Gulf News",
-      "source": "Gulf News",
-      "date": "Wed, 24 Jun 2026 04:09:37 GMT",
-      "datetime": "2026-06-24T04:09:37+00:00",
-      "epoch": 1782274177.0,
-      "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQYk1UVlFvSFc0akY5YWVnRU9BYWppTmFmQ1lhcEZZWGVCZDN6dkpxMnpSN2NnckFiZldFZHNTSmNyeTFiTVNGQndBeXBLN01ydms0eG5Rc18zLU4wMFc1aDR1cktVX0txV0NBYW5KQnVYS2ozdGVEcXlsb0ZKZUdvd083WUJRTVRkSmg3RDJ3aXd0TFQ5ZVNNUjZFWUl2bjQtb05UaXpKUEIzcDdaSjRZOW1BX1pGN05vM3dxV3Noem81TXdpLUFpUFNERzAza3hHX09Wb3dGQVNqaTRPV1VOU0p0dkt4UdIB-AFBVV95cUxOUE9TMm9PYkhpWmdMUFhZT0hfdDZDZzh4MEJMaVpJME5KdEgtbzhJM2o1OXVFQThOWUQzUm9xUWJGUkoyNGtTNmh4YkZZQURwcXBwdDdPenN6dEgwNWIyOVUzWElMS3ZNQU95RDlaNnNLLW9ZN3IxYVY4MGswSkxXMXJQMHh4TzVwN1VBSFhmUjdJZEpoWEl0Z0dYXzJPaXNreU1rSElodHE0Z21LRkJVeUVHd3RiY0xyNlZwT1V3V3ZoZ2poV2lTeGxueFhsVkFyRUlwc2N6bFRwSGRKNVU1eHZMZ0x3ZHNBX1BKNzdsYUo2OHZNLVV2SA?oc=5",
-      "description": "",
-      "category": "Crude Oil & OPEC"
     },
     {
       "title": "Mapped: Where Diesel Prices Have Surged Since the Iran War - Visual Capitalist",
