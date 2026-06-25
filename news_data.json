@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T01:29:12.039214+00:00",
+  "generated_at": "2026-06-25T01:49:31.513476+00:00",
   "cutoff_hours": 72,
   "items": [
     {
@@ -73,16 +73,6 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "JP Morgan cuts Brent forecast to $78 year-end as demand miss and inventory lag bite - investingLive",
-      "source": "investingLive",
-      "date": "Wed, 24 Jun 2026 22:33:54 GMT",
-      "datetime": "2026-06-24T22:33:54+00:00",
-      "epoch": 1782340434.0,
-      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNMVAzQ1A5MU9jdnBYWDF2VmZMUlVLcHNTWFNLZ1p3SVBBWTdWdC1JRW9QYmxFcmItRnJETk5QNzVZOW1LZG9VS0JDNGxjNmlmQlN5WDlBbklzaXl0MTI5UXU1YV9oaGdsSThwR2lkNk5sZDcxWGFTb0Z5ZElSenBXQUpxdFJZU0pUcWFBQ1Nta1pJQWd2cUdPRG96V3VWWGVHcGNxSDJVaTJoZ3RZTXdtLVlYSVpYX3dBcGVyemp6T1N1ZHlZZ3dXNXR3?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
       "title": "Canada Building West\u2019s First Grid-Scale SMR",
       "source": "OilPrice.com",
       "date": "Wed, 24 Jun 2026 12:00:00 -0500",
@@ -111,16 +101,6 @@
       "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/Trumps-Nuclear-Gamble-Aims-to-Reshape-the-US-Power-Grid.html",
       "description": "With hyperscalers set to spend roughly $800 billion on data-center capex this year alone, alongside reshoring and broader grid electrification, baseload power demand is poised to surge. We have made the case that intermittent solar and wind are no match for the scale and reliability requirements of ",
       "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Iran War Upends IEA\u2019s Oil Market Outlook as Global Supply and Demand to Contract in 2026 - EnergyNow",
-      "source": "EnergyNow",
-      "date": "Wed, 24 Jun 2026 20:38:43 GMT",
-      "datetime": "2026-06-24T20:38:43+00:00",
-      "epoch": 1782333523.0,
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMDFERTZEdWpqZEFyVXVjd01SelNLVXhmdUphc1RsbWEzQjV2THB0aDIxTk1kR0JGbWswRHVvem0zWEY0OFkweVhDSnkyVzdXX29UaTgxbmtNMjhpYjNPRGlkSmw5WGd2TTFpUnRyYndYQ0Zfc2VEODRTTklzVVEzTG1jamF5MVl6d1dab09HaGF6QS1kaG15RWpfa18wTEJtSlFiWk9mQWNYYVlKOVNUajJaXzJxZEZa?oc=5",
-      "description": "",
-      "category": "Energy Markets"
     },
     {
       "title": "Moscow Refinery May Stay Offline Until 2027",
@@ -173,16 +153,6 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "Can ConocoPhillips (NYSE:COP) Ride the Crude Wave? - Kalkine Media",
-      "source": "Kalkine Media",
-      "date": "Wed, 24 Jun 2026 18:52:00 GMT",
-      "datetime": "2026-06-24T18:52:00+00:00",
-      "epoch": 1782327120.0,
-      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxON3ZoQkJDcXdzSVU0dWE0YkRFYnpVdGk2VUlsQnVMZjNkc1lBU3NKOGFHOER1d3NzWU9XSlVpNTBYM29mLTJWaFpwRl9HUlZUZWR1eUo2ekV6REprdGRMSW1wekZQN3NJb1VXelphU1Y4UVFNdTB5VVhacnFfS3ExcEJIcV9SQktJWlVOTUNnenZMU00?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
       "title": "Euro Sinks To One-Year Low As Oil Price Drop Fuels ECB Rate Cut Bets",
       "source": "OilPrice.com",
       "date": "Wed, 24 Jun 2026 08:30:00 -0500",
@@ -190,36 +160,6 @@
       "epoch": 1782307800.0,
       "link": "https://oilprice.com/Latest-Energy-News/World-News/Euro-Sinks-To-One-Year-Low-As-Oil-Price-Drop-Fuels-ECB-Rate-Cut-Bets.html",
       "description": "The euro has sunk to a one-year low, with easing of tensions between the United States and Iran helping to cool oil prices and raise expectations that the European Central Bank will turn more dovish. The euro was quoted at $1.135 against the U.S. dollar on Wednesday, down from $1.165 before the U.S.",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Oil prices slide to four-month low as easing tensions boost supply outlook - Dunya News",
-      "source": "Dunya News",
-      "date": "Wed, 24 Jun 2026 18:23:48 GMT",
-      "datetime": "2026-06-24T18:23:48+00:00",
-      "epoch": 1782325428.0,
-      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNeHhPNG0tdkRfTGl6aWpteUt1LUJsWDdRdkhzUmM3TnUwMVI4QkNmVGItVkVmUFZhVG9INTdXcWlVQ0xvOF85eXd0MGt1R01GdjVxYVROWVVlVW9OU2R1TTREenFpaHVCUWNIRERrdFk3VzZyel9zakplNkJkaVJFZ0ZhZUhQXzZnWDljenk1NkdNckNqSUw0WTdfSnRwN09mZ1lMSGc0OGV5dFJscFHSAVZBVV95cUxOSm1IakM3a1h4U2N0aFNnT0VUZElUeVdUSExWNllkNl93MWVvY0dDWG5sbGx3WXRnSklaT0FIX0ZSQWVLcWhuQVlvby01X0JZU21RdE9Jdw?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "US Natural Gas Supply Outlook Hinges on Three Key Shale Basins: Maguire - EnergyNow.com",
-      "source": "EnergyNow.com",
-      "date": "Wed, 24 Jun 2026 17:39:03 GMT",
-      "datetime": "2026-06-24T17:39:03+00:00",
-      "epoch": 1782322743.0,
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOVHd1cDZxMlE1R21OTV83anNHRk9abEg4ZE9Vdm1QZ0xRNGxmdng5MEdwbVhRYXg2M0dhZjFjb2l5dm5NS2hDMktZVy1heDJPRV9KM0RxRXBiblBnd1FzSlpZamJSM0FWTzdCemFRS09ZWnRUWHFYNXdwTVpuQ0RiQldvd2tkZmluTlVqbFFuZEgyMEttUFhuNWNBbHlnU0hWVlJr?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Crude Oil Prices Sink as Global Oil Supplies Recover - TradingView",
-      "source": "TradingView",
-      "date": "Wed, 24 Jun 2026 15:45:21 GMT",
-      "datetime": "2026-06-24T15:45:21+00:00",
-      "epoch": 1782315921.0,
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPYll2UzdydmhTNGRFVUZMM2lOMERTQmVqcmRTVGpQd0ZzNnlJdU1paE1LbDE2YmZ6V1JTSUM4UVB3b0QtQzA4VFpqSDBVcTR0Vzd5eXczTGtjcUlxbnlZS2NzX0JRelJBQUNpUmxzRVg5clhOS3BBaklxSm5VRmdwSkRDS2ZxYU0yVEZicnpWTWJvMDZnX3VkWjRJVVlhckR6U0RXWWM2eWx4aHFzYVNJcA?oc=5",
-      "description": "",
       "category": "Crude Oil & OPEC"
     },
     {
@@ -233,66 +173,6 @@
       "category": "LNG & Gas"
     },
     {
-      "title": "Crude extends decline on improving supply outlook - London Business News",
-      "source": "London Business News",
-      "date": "Wed, 24 Jun 2026 12:37:01 GMT",
-      "datetime": "2026-06-24T12:37:01+00:00",
-      "epoch": 1782304621.0,
-      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNRmMxRW52bW5NLVZHREJTYU9wazZpN2pUOHpwcEdZQTVvMFdKUWJZSjloSnM1VHdJeHpzWVQtb1FMZXR6cmVOTzJqc0U5cUloZ1owU2czeE0xaVpfeUVnV3BXOUZDM0Y3Y1JTRGRKU2R1Rks3WWNZU00yN1JpVFloNjMtZkdob3NmSlE?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Oil Prices Decline as Tanker Movement Through Hormuz Improves, Reducing Supply Disruption Concerns - ChemAnalyst",
-      "source": "ChemAnalyst",
-      "date": "Wed, 24 Jun 2026 12:28:47 GMT",
-      "datetime": "2026-06-24T12:28:47+00:00",
-      "epoch": 1782304127.0,
-      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOWnZ2X0tEbkJGQXFDTWIxTnlKNDB1Q0o2U0VhS2hpOWJCeUd6T3dBT0lVeGJZZFlRNnR1eUlfbkJyRVhZRVRLZlRIZlkxR0RZZzM0bVpQWmpDd0J0TjQ4aXFodTctUVRzeFpWZEJhT3llYk5IN2dBaVR1LTZsaF94a3RWQzZHc3BKVFkzbVYwNVdNSmVhOUNoekF4ckhULUw2NHY4akctcVoteEtObTJSbG1mUHdWX0hPVmo3MQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "United Kingdom Joins Belgium, Denmark, France, Germany, Ireland, Luxembourg, the Netherlands and Norway to Drive North Sea Clean Energy and Offshore Power Reset as Russia, Ukraine, Iran and United States Fuel Security Pressures Put Aviation, Ferri - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Wed, 24 Jun 2026 11:22:58 GMT",
-      "datetime": "2026-06-24T11:22:58+00:00",
-      "epoch": 1782300178.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1LUEo3bnM4MTNoT28yYU1YbVJFbWpUUGlacEhtQ0tpWW1GZUNWdHBEMDZxOXEydE1UNFNBZV9kUnF3Q2pwRXUzX1VXNVFiR3FzRXdJNGh0TmlKT05KWjhQcDQxZ3lCU09IZFNTcWVB?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Goldman Sees Softer Oil Demand, Flags Two-Sided Risks to 2026 Price Outlook - EnergyNow",
-      "source": "EnergyNow",
-      "date": "Wed, 24 Jun 2026 10:30:57 GMT",
-      "datetime": "2026-06-24T10:30:57+00:00",
-      "epoch": 1782297057.0,
-      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNOFRWZ0QxeHZ6RTV2VVFla2ttd3BKN2JFeGYwajRpMFdxblZreWlncWktTHBvMFctTkhmWmpRV0FfWVhUM01ZWVJsNlotek8zSWdIa19IbWdtTEtBVW43VGNVSWJ6aEJrWDBoYWZZOEJQUjl2cW02RWpqeWN4S2E1WG55NW5rRXB2M3FLTk9WTGVqUGFOd2JRYVROQ3pfYm82cUZFalNyWQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Bahrain Joins UAE, Saudi Arabia, Oman, Qatar, Israel and Others in Witnessing Strong Regional Tourism Recovery as Canada, UK, France, Germany, Australia, Japan and More Ease Middle East Travel Advisory Amid US-Iran Peace Talks Boosting Traveler - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Wed, 24 Jun 2026 10:17:47 GMT",
-      "datetime": "2026-06-24T10:17:47+00:00",
-      "epoch": 1782296267.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBfRUtNLUhDckl3Rm4tSG04Nl94MVlJMVdaTmNKajJ2b0JxUTlhbDFWNGlKWGhodXFhMGswSERldWhSanhJMlJzS2JwTFVrNTV2di1ET3RoeU5la2xaQjAxN1hHYnBSN0NQd1loYlJR?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Trump attacks oil companies - He denounces price gouging and threatens an investigation - Bankingnews",
-      "source": "Bankingnews",
-      "date": "Wed, 24 Jun 2026 09:12:12 GMT",
-      "datetime": "2026-06-24T09:12:12+00:00",
-      "epoch": 1782292332.0,
-      "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQWGkySkZNeDNQbzZkVlRZaDRMVXBQd1ZSLUZmYnNnY0dFbU5VZnljbHltYlV3OUU1SENJRDJxTXBHMXhyY3FzOUQzWGJ0aEpnS2puTjBUaEYwTk1ZV2tVcE5SM3Q4eGNhYUlnSkNmVUF3Y1p6ZkQyYndRZFRORXRqUFN1cUFsVEJqWlZIYWdBVlNGc3duMllvbVFYSl9JUmZLOEFGVWZMS29jbDFOZ1RHSWxLWlhwaHpyM3ZOX3pMWHFZd1lOMkxIQ3dzVmdYSGpkZkxsUnJXQVh4cHN4WUZ1OUQ1dVEtUExWei1KbGdaQVo?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
       "title": "Zacks Industry Outlook APA , W&T and Ring - Yahoo Finance",
       "source": "Yahoo Finance",
       "date": "Wed, 24 Jun 2026 08:45:00 GMT",
@@ -301,66 +181,6 @@
       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQN1gzTXpTUkUzM3IxdE9SU3RLa1piZldWN0g4Z3lSc3BfdVVqdHlfN2ZMNXp4djVCSzFRaXpOYklhaENwbzhOM2pOU3lfZVBTd0JiSjkzbHhENktjcjZYMkwxQVFuZVVveG9rb0VMWTZTcWRKUUNuaDRxOTFMVXVqa2lzaExfa0xLSjQ2cEpn?oc=5",
       "description": "",
       "category": "Energy Markets"
-    },
-    {
-      "title": "Macquarie cuts oil price outlook as Middle East supply risks ease - Indonesia Business Post",
-      "source": "Indonesia Business Post",
-      "date": "Wed, 24 Jun 2026 08:37:20 GMT",
-      "datetime": "2026-06-24T08:37:20+00:00",
-      "epoch": 1782290240.0,
-      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPVmYzLVhyX09TazhiQ0RBa1ktMFRlTVBMR1JBbDAyQUYwX05Land4N1dUcTFTdXV0YzNfRkZuOTE0TlFTZEZjY1dIbWNEUEJzTXFfQ0lvWFExeG91QlRwTzZaRkhEQUVjXzNvVE16LUM5RHkwVUlPMTVxeGtBM0QwVmtFMVZMcFNxXzZzdGNOQ3VSNUU2RVgzbzh0b0g0YUZpMkRaX0pCU3pOWjhaT2ZfWU5sNTB3OEFHTS1Ja0ZoY0ZOZw?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "WTI Oil drifts below $72.00 as Iran eases the grip on the Strait of Hormuz - FXStreet",
-      "source": "FXStreet",
-      "date": "Wed, 24 Jun 2026 08:23:25 GMT",
-      "datetime": "2026-06-24T08:23:25+00:00",
-      "epoch": 1782289405.0,
-      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOWJnZDhCZ1hPRU00MDBNa2V3VTFkYkl5RmRWTnJJcFJ0Q3pjbnVlNHo5eTd6MGYtcG14ZzlPVnBpYWdaM3d2QVdMSFNETlpNRHVBTm84UUt0UVVWUl9TeFd1cXpQdzV6Qmdva2JEYzBtOTdIcUNiVmwxQndPaGhGZVRrX2IyTElqeUtXVmZRUU1kdVNCak9QZmQ2LUswNmpEOTMzZnkwVWRfSVdwdDZwSmFoOHpfZw?oc=5",
-      "description": "",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Govt launches \u2018RELIEF\u2019 Scheme to support exporters amid West Asia logistics disruptions - DD News",
-      "source": "DD News",
-      "date": "Wed, 24 Jun 2026 07:15:49 GMT",
-      "datetime": "2026-06-24T07:15:49+00:00",
-      "epoch": 1782285349.0,
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZmZqanZTdE1NUG1KY1lUeTFXUGVvR2NCWDQybHhnM3N3cGlTVFpVbnBwUm11TjRKQmtHcWRqb1pTMnlZbWhiRXE0T1luOVlza2hBNnA2MTMyVmg2MzFtWDVHZVA4Zjhpdm9ERm1TcUExTW5sVkJOSkpGN1lHSXRGM3czQzZRRHRkeS1IWDgtcjduRURyeTVTQzkxYnktSUNhVjdDblF2SndsajJEYVRVXw?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Brent Crude Oil Price Today (June 24): Brent Falls Below $77 as Strait of Hormuz Shipping Eases, Iran Supply Outlook Weighs on Oil Markets | Check Latest Brent Crude & WTI Oil Rates Today - The Sunday Guardian",
-      "source": "The Sunday Guardian",
-      "date": "Wed, 24 Jun 2026 07:05:44 GMT",
-      "datetime": "2026-06-24T07:05:44+00:00",
-      "epoch": 1782284744.0,
-      "link": "https://news.google.com/rss/articles/CBMizwJBVV95cUxQeFNJbm1MTkVxS1J2c0kzeWVGWkRHSmd0Sk5oNm1CMnh2OXVLUXU2U0NSUEhFTW9FdG9mSlZ4Q0NRU0hQWlc5OUtNZnFNcUpnSXpNRnJabHp1N3c5ZERQZEdZbHRDbVZ2MDZ1U1dhenlUYVZiTjhhdVVXZVpWZ1BtMk0tMWZ1WVZZSXMzUjFEcXZqa0hzdzVGR3A5MHRON3NDVXp0LXlYVTZrU3NEZk5veHgwRnpmb2hodDFhR25mWXdEa1NtWTl1ZGJiZEczMEdIOFN0c1JoWUtUejFwS2dxa0tBejdRUWplRWFtdmZzLUdrYlFqcUVNRzlHYWlEUHREZU9lUXROLVFaQ3d5YkVmNTV4d2JPT2Q2LXF1WXdBcXN6LVd5akpaSjBjWGdzQkd0MzRlY0V1NHF3UkhfcEViNnptVzRXM29CZEZXOWM0QdIBzwJBVV95cUxQeFNJbm1MTkVxS1J2c0kzeWVGWkRHSmd0Sk5oNm1CMnh2OXVLUXU2U0NSUEhFTW9FdG9mSlZ4Q0NRU0hQWlc5OUtNZnFNcUpnSXpNRnJabHp1N3c5ZERQZEdZbHRDbVZ2MDZ1U1dhenlUYVZiTjhhdVVXZVpWZ1BtMk0tMWZ1WVZZSXMzUjFEcXZqa0hzdzVGR3A5MHRON3NDVXp0LXlYVTZrU3NEZk5veHgwRnpmb2hodDFhR25mWXdEa1NtWTl1ZGJiZEczMEdIOFN0c1JoWUtUejFwS2dxa0tBejdRUWplRWFtdmZzLUdrYlFqcUVNRzlHYWlEUHREZU9lUXROLVFaQ3d5YkVmNTV4d2JPT2Q2LXF1WXdBcXN6LVd5akpaSjBjWGdzQkd0MzRlY0V1NHF3UkhfcEViNnptVzRXM29CZEZXOWM0QQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Natural Gas and Oil Forecast: Truce Stability vs Oil Weakness \u2014 Can NatGas Lead? - FXEmpire",
-      "source": "FXEmpire",
-      "date": "Wed, 24 Jun 2026 06:33:00 GMT",
-      "datetime": "2026-06-24T06:33:00+00:00",
-      "epoch": 1782282780.0,
-      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNSWZlMmxCSm9TUF83dExncVZpM1FDeUpDS2hDT2R4dV9jbXZIMEplNzhBaFhaNDI5R1BEZUZ4UlFXVTV4cGdCQlVQRDUtWG15U1A2aWhYeTc0OE9GM05WMkJIQ3NPN2FZYjFQV3NEaGFMeTFoN2h0UFN3WTRvMmIwT0hiM09HeXRycHB1dEFHRVZzdGs4SGZUeGY1MVhJdmJ5NGFSbE80Zm1jSWNWY0pkSzNtRGRBQmdHbUlhSVFGX3B6RVlOeWc?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Trump Demands DOJ Probe Into Big Oil 'Price Gouging' As Crude Tumbles - streamlinefeed.co.ke",
-      "source": "streamlinefeed.co.ke",
-      "date": "Wed, 24 Jun 2026 05:29:21 GMT",
-      "datetime": "2026-06-24T05:29:21+00:00",
-      "epoch": 1782278961.0,
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQemFvYmtTWGljVWpoeDVHRm95bi1hLWVGbDlfbUQ0QzJVWmlHLWNOZTRDOE5ZLWpYSGZfQTdHUGE1YnJodjktamVZZGRrRVdNTjQzQzdMSENOVnhMdWVOd0pGcHdRam94UEtBZVRIa241N0FiTmR1STZOdmpVZFF4Y3R5b2RyMkVMS0FBMlFyRDBkMnBIV1ZqYUY4NnhTSlU2clc0?oc=5",
-      "description": "",
-      "category": "Crude Oil & OPEC"
     },
     {
       "title": "Oil prices extend slide: Brent crude falls below $77 as Iran ceasefire holds, Strait of Hormuz fears ease - Gulf News",
@@ -373,312 +193,12 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "Reopening of Hormuz Rewrites Inflation Narrative! Macquarie Slashes Brent Crude Outlook After Calling for $200 Oil - \u5bcc\u9014\u725b\u725b",
-      "source": "\u5bcc\u9014\u725b\u725b",
-      "date": "Tue, 23 Jun 2026 23:56:36 GMT",
-      "datetime": "2026-06-23T23:56:36+00:00",
-      "epoch": 1782258996.0,
-      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxONExnZmNsUEdXRUFVZU5pZkFhU0Y3elFHSnRhNGFaVUpzQlFUX0xSMFdLWHoyZkZodG1yc3VKQUdoVEpVaDVUZEtSYmp2VVd3M1NHaXNHMHVvS1VhSklldTNLTV9ETk03NkFlSVhPRzlZTTRiUEdyVmd0WlF2Y0ozZDR6dHc2OC1LOG5zY0htRDFDdjJaWUZqbF9HRE10d092Yl9rcDdieWg3aEJsRmhFb0JFUV9vWm90cTRn?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Oil Market Calm Masks a Host of Unknowns: Bousso - EnergyNow.com",
-      "source": "EnergyNow.com",
-      "date": "Tue, 23 Jun 2026 20:09:50 GMT",
-      "datetime": "2026-06-23T20:09:50+00:00",
-      "epoch": 1782245390.0,
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQQVNETldWZ3dya1NyNzZOLWhwRzVFNFYzSUFpdEJjMmFVQk4zUWVIVVRJNGFkUS1CVWpMdXVvcUUwMGFCZG5adENSajZfcnAwd2Fub2pfcloxT1NxenlOM2llaWJzTEMwMUk0TU1PdXZHajhjaFN4ZE1RMTB5dDRpaUc1T2Y?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Morgan Stanley Maintains Oil Price Forecasts and Predicts Slow Recovery in Supply - EnergyNow.com",
-      "source": "EnergyNow.com",
-      "date": "Tue, 23 Jun 2026 19:57:56 GMT",
-      "datetime": "2026-06-23T19:57:56+00:00",
-      "epoch": 1782244676.0,
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOcVY3RWdLY082Q013ZXJCODVJdGV2NnpfZWlNT2hlZWsxR3Z5WktpNUkyN0lBd0pmNFd2dUxmTDAzQWNkMGY1RnBkT1JRcUkwQUQ0VHN2VjVIM21mTDBXVk9ha19obWRBSHdsX05NbnNWcEVxVXI0Y2ZfVHFLcm9sdDRtUFAyZkJGMXpLX0FRUUZrMUdrVmJONmdTMTF6UXNHcUQ0dDRxVVRmZlQyZkhmcmln?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Crude Oil Prices Settle Lower as Supply Concerns Subside - TradingView",
-      "source": "TradingView",
-      "date": "Tue, 23 Jun 2026 19:17:12 GMT",
-      "datetime": "2026-06-23T19:17:12+00:00",
-      "epoch": 1782242232.0,
-      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQWmx1c19vdi0zVEl6WkxZWHdzajc1TlR4aTdsVXh4R253S3Y2dGxEYTBSQmJudFlfZkkxRllXMDZjNVMxTF9aTkR5R0YxY2RhMlZTVGI3dmpvQXpkbE1sbUJSSlZBbTFqRHc3eGlYSXlRNXdaMUNHamtDOG81VldHUDQ5YkVRU1pJRzgxNEZGdVRKNzNQUVdIdTZLWk84SFBsYXVBN3FsM21CaG5vQWtCOF9RT3ZGdw?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Why Indian Refiners Are Treating the New Trump Iran Oil Waiv - Lavender Hotel",
-      "source": "Lavender Hotel",
-      "date": "Tue, 23 Jun 2026 18:37:29 GMT",
-      "datetime": "2026-06-23T18:37:29+00:00",
-      "epoch": 1782239849.0,
-      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNb2lkRHAxVlNRd1JxQS1idEpVV3N5SHY2UXpzbHlwZHdZQ295WXpkRWliV1pFRHlrYmxmWGFER2NTSmc0RG0tTDZnS0hFN3ZZVy1uQkpBRWNrWS1ibnp2Qm1YRVRJNXBVRERIeE9jWS1UZGNpcDNqVFQwckVJRWNtZXlUUHdVc1dsSzhqa2c1Mm52bTZwb3RaYVlKa1NjVkx3cWFQWTlycw?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Oil Prices Face Limited Downside as Sanctions Ease, Commerzbank Says - MEXC",
-      "source": "MEXC",
-      "date": "Tue, 23 Jun 2026 18:04:23 GMT",
-      "datetime": "2026-06-23T18:04:23+00:00",
-      "epoch": 1782237863.0,
-      "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFB2T2JZc0tJVDFpWmltbnMxb2hMWFh4bmdWWHF3TmJISE5SWWhYa3U5U29RWURSVnhVN1NVTzV2V1JNQ3V0TjBHOQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Oil Prices Up Over 3% Over Concerns About Prolonged Hormuz Disruption - EnergyNow",
-      "source": "EnergyNow",
-      "date": "Tue, 23 Jun 2026 17:59:16 GMT",
-      "datetime": "2026-06-23T17:59:16+00:00",
-      "epoch": 1782237556.0,
-      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOODd3TTNncHlPazlzTldQN2ZPNXI5blFLYlBrUXE3VU1lRmNlMWxXNlVodU9LQUZCRlkzcnpyeC00OVMzcENDQjZfLTJSSG9QVXQ3MVpmYjhCSEFqUEdnd1I3SXF1M2dEdE5XYlA3akg3ZThCRjhuc0NEd3M3b0dBQ3hQWGFRMUhON1NmTDR1TklxQjl1M2dFSjA1SnkwVUk?oc=5",
-      "description": "",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Oil Price Forecast \u2014 WTI ($73) and Brent ($77) Hit 3-Month Lows as US-Iran Deal Floods the Market; $70 in Focus - TradingNEWS",
-      "source": "TradingNEWS",
-      "date": "Tue, 23 Jun 2026 16:46:48 GMT",
-      "datetime": "2026-06-23T16:46:48+00:00",
-      "epoch": 1782233208.0,
-      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQeDR4VERnV1U4T3l5bUNlTXZwbTNVQ1VGYWltQ3JlYmRoVndCVzhTS0ttbEhmcEFnTlc0Z1VWUldKSjJlNWJhOHlBUEZidERzZUFXQmpRWFhBQUpfMWh6VEdwYnctNWZTTlpHX1p2bG11U0h6Z0lFcXZhVi05RktFVHVKQkZLNkVjSjc4NnhaVHRjSU1BQUxqVzVqdy0yclJmblJyX0lkOTh2TGdMejRZM3B6b1BpbTdYelU5aEZabw?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "WTI Oil retreats as lower Middle East risk, Iran supply return weigh on prices - FXStreet",
-      "source": "FXStreet",
-      "date": "Tue, 23 Jun 2026 16:19:31 GMT",
-      "datetime": "2026-06-23T16:19:31+00:00",
-      "epoch": 1782231571.0,
-      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNSXBjS0t3Y2dTVGQxQncxZHByLU5SVDIyRW1mbm8wVHp3UlZnRjR5MGo1YlRQSWZ3am91VEtEMGhaSTZDOE9rVldEOUE1Z2hvVDFyOEl0c2lkQ3drOVNJOFBhaThGa29EUFdCcUNFbWNIYkljZE5kRF9WeXlYVGZJQzJZS2pBaDlqQnJsQU5vQ3gwTUJHYlNhUElidVRlcXNUN2NJUkdDQ3ctbnBSQWZpSmEtYXNPZmZQR1BuRw?oc=5",
-      "description": "",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "WTI Crude Edges Higher but Remains Under Pressure Near $72.50 After Recent Low - Markets.com",
-      "source": "Markets.com",
-      "date": "Tue, 23 Jun 2026 16:02:00 GMT",
-      "datetime": "2026-06-23T16:02:00+00:00",
-      "epoch": 1782230520.0,
-      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQVGxaMmh3Ul9YN0hWV2hvd1RKUmU0VjJ6VkJobi15Vmtad0lvVXlzY19kdUE2bzZmVWtfVUMyczBiZVhFREFBM0ZING5RdDJOR051Y1RKU2QyNWdGdllTUGFtS0EyZUVtZUZ5YVVZb1Fvanc2elExZFZCblYzY1RSY2o2UE5qb2ZpeHhUWWk4Mkg?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Certainty or uncertainty? - Trinidad Guardian",
-      "source": "Trinidad Guardian",
-      "date": "Tue, 23 Jun 2026 15:28:17 GMT",
-      "datetime": "2026-06-23T15:28:17+00:00",
-      "epoch": 1782228497.0,
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNGRwNzJjN0pGclNtSl9UaVA4UnQ4MUN6am5uMk9SakVyS0c2UThvWlF3UEdYXzUta2luTmYyVFMzWHJZUzFqcVAwRVJjU1RnNWVxWE90WG55SDBhY3lBNkU5UlhZb2lTYWpTREVaallaUXotWHZaV0dweTkyUFd5b0NTcGV5RHVk?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Rubio faces tough task of selling Iran reset to wary Gulf allies - politiko.com.ph",
-      "source": "politiko.com.ph",
-      "date": "Tue, 23 Jun 2026 14:59:26 GMT",
-      "datetime": "2026-06-23T14:59:26+00:00",
-      "epoch": 1782226766.0,
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPYV82MjNJS055UFFJMl9wTzRJU1ZSS0dvblFZN3J1VmNJTy1CWTlsUnlQU3hYLVNmV1FwLXotd0hjeXlTcmEzeUxuYXE2UGdrRXg1TVNSQmRUYnVrVzY2MGVxbUZMQ2hZcDQwU2tFbG1LWXc2UXJOcl9Ia0w0bTZqX1Bicl9BNldsU0dtVjhXM3JDc2xGOVRHc2JybGZoSkNoOHJYb3MydklGenlKbDg4djdibUE4d00?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "US-Iran Peace Terms Shift Biofuel Market Assumptions - ResourceWise",
-      "source": "ResourceWise",
-      "date": "Tue, 23 Jun 2026 13:37:38 GMT",
-      "datetime": "2026-06-23T13:37:38+00:00",
-      "epoch": 1782221858.0,
-      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNdnVtLUExZXJUOVFVZUFaQTk2QmpqaS1zeDNSSUdZYzNlQUxqYWl0Ukt1X3EzWHE3V0hwQ0NCYk9Pb0FZZ2U2eGFaR2E0MzFaRTBXZXRNVG1JZ2lWS2NFemExT2J5RXJ6VjctYVl3WGd6TzRHVmgtV2VaUmdOYWczWkxjbDZEV3lSRzNLMDNlcXdqVEJtejl2TWhkVDh3YWfSAZ8BQVVfeXFMTXZ1bS1BMWVyVDlRVWVBWkE5NkJqamktc3gzUklHWWMzZUFMamFpdFJLdV9xM1hxN1dIcENDQmJPT29BWWdlNnhhWkdhNDMxWkUwV2V0TVRtSWdpVktjRXphMU9ieUVyelY3LWFZd1hnek80R1ZoLVdlWlJnTmFnM1pMY2w2RFd5UkczSzAzZXF3alRCbXo5dk1oZFQ4d2Fn?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Oil: Softer path for Brent and WTI as Hormuz reopens \u2013 Rabobank - FXStreet",
-      "source": "FXStreet",
-      "date": "Tue, 23 Jun 2026 12:13:10 GMT",
-      "datetime": "2026-06-23T12:13:10+00:00",
-      "epoch": 1782216790.0,
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPUnhtNS1VcXFjSmZSckJPLTRxaXJrenEtbFRPeFVrZXRSUHZsbWh4RzZfRTZNZEpabS1CWmtBbHY5YjFHQXhrbUxxYUh0OXYzMnd4MXlEbzctNXVJaVdaOS1zN1BYWE0yVmNjbFJIdEM3bFE2ZU5EZGRUZ1FDRFJQY1JiNUsyYU1EeGZfbFhaR3BrYXZ6N1BOWWpfeEdkNmhndS1xdU5n?oc=5",
-      "description": "",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "US Grants Surprise Oil Lifeline to Iran: What It Means for India\u2019s Energy Security - nktv.in",
-      "source": "nktv.in",
-      "date": "Tue, 23 Jun 2026 12:08:49 GMT",
-      "datetime": "2026-06-23T12:08:49+00:00",
-      "epoch": 1782216529.0,
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNZURrWWxRbnRHZGRLMjdCajhVNHg5T1h1NExjY01leTNOOENqY1R3eVpqcVVpSzNVeW9URTJZRmN2YTVFMjRUNU9QZURqUmhmV0tkTzgteVlBTDRJZEFlcGlkMmpDWWFnNHk4NmU2ZEFRZjR0VU5ac29fMm1xZC1EZXB4SWNtUkVpVTR4WE91aHZKNmk3QVV0b3hpUE9iN0Jsc1M4?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Qatar Joins UAE, Saudi Arabia, Italy, Spain, China, Japan and Others as Iran Agrees to Launch Telephone Hotline and Coordination Centre for Strait of Hormuz Amid Shipping Recovery Boosting to Global Oil Flows, Trade Stability, Tourism and Maritime Safet - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Tue, 23 Jun 2026 11:14:50 GMT",
-      "datetime": "2026-06-23T11:14:50+00:00",
-      "epoch": 1782213290.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5GNTlpOExqREVFSjBsUXpVQWpzM0twQko4MXQtZ1BDY3llM0c3bC10RzdDSGhUaEpKejVXMTNZSEpLbmxfTldRSXFzNEZyQWdnZkVyQThXQm03cWFfSms3dWJQaEdSMTF3VFcwejN3?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Explainer: Strait of Hormuz: Global Energy Security and Geopolitics - Security Risks Asia",
-      "source": "Security Risks Asia",
-      "date": "Tue, 23 Jun 2026 10:27:00 GMT",
-      "datetime": "2026-06-23T10:27:00+00:00",
-      "epoch": 1782210420.0,
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQcDJveG9SRHRfendpUHBjSnVYdTNPa1ZYQVBSODdySzBoVXpJcl9oRnNQbE5PVVRVVTg4RjlzaDhXb1prOWE4WmpJRy1yOGFFaG1zUzcycUFRaFRxSFM0T0p2Y29lWTl0WDh5Y2Y2a1hwRUxnZ2Q2Tkl5eXRRd1RQRGlOSWt2bGNFUE4tenVUQzJHc3JzRl9KSmVqYXdJSHRZeW5F?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Saudi Arabia Joins Iran, UAE, Qatar, Kuwait, Oman, Iraq and Others in Massive Oil and LNG Export Surge as Strait of Hormuz Reopens, Triggering Global Shipping Rebound, Middle East Economic Revival, Tourism Recovery and Jet Fuel Supply Stabilization - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Tue, 23 Jun 2026 09:19:13 GMT",
-      "datetime": "2026-06-23T09:19:13+00:00",
-      "epoch": 1782206353.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1IY2Rqamp5RTNvTEwyZmhmbTlibjJKd2FRNjFlRl92MGdFV3lfd2JkanFwUnJCSXlfWTdDTDZlLUs3ZGlEYlBZTFJjRllkNkw5Y2FMcFNDZDVUMnpQSno0UFBacENkMUpuTWk0Q3ZB?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Crude Oil Slips on US-Iran Deal Boosting Supply Outlook - TradingPedia",
-      "source": "TradingPedia",
-      "date": "Tue, 23 Jun 2026 08:19:17 GMT",
-      "datetime": "2026-06-23T08:19:17+00:00",
-      "epoch": 1782202757.0,
-      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQc0Zya1Zwa0VCZTNySGVsWFdoc2tRT0Qyekhqa2tUTzFmVV9XckZlcndjak9YbF9KeXRjYkF4SVFuLVgxVGp1aEYtdjdMQkFIT09lVjJtVjJyeXhyM3Y5M0ozYUdLSTRpOUZxQzN6ZmNQZ0lCYzQ5NXNsem1HLVRxQzlpbnBYYmVlZE1qS05vVldrOW54V3l2dU1BVjQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "US Lifts Iran Oil Sanctions: What It Means For India And Why It Matters - Oneindia",
-      "source": "Oneindia",
-      "date": "Tue, 23 Jun 2026 07:51:32 GMT",
-      "datetime": "2026-06-23T07:51:32+00:00",
-      "epoch": 1782201092.0,
-      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPT1JrLTVEVlFlMTdKenFPajl1OVZybjZEQ3pIWkZJdjE0aTFZTkJqN3JlUC0xNkZoa3NpS2lwRDY1djhYQWdOTzRodWtTdktNT0Y5OFZQcDZhN2NlZnM3VDZtM1M5cWIwLUNPYS1aeWxpS1ROWksxN0ZrS0dNaEFnMHctdGhLTV9vVXlVUHFGbUFtemdtUW5ocVVhYTJRWGN0V2JMQ2ZqbFVUOFd6dXMzQW5tWHl5cTNrcmhaeDV2MA?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Team Korea throws gas project to sweeten sub pitch to Canada - Aju Press",
-      "source": "Aju Press",
-      "date": "Tue, 23 Jun 2026 07:41:06 GMT",
-      "datetime": "2026-06-23T07:41:06+00:00",
-      "epoch": 1782200466.0,
-      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9YalJVbU9mRFRReHFCTjJpcTN4WkZHVmJmOHBmeDZ3amwydHlDVHpxbUlXOEt2Y1BlYmk5QkxRa2xNbGlweW1NSnBGNFJJWndMRHAyRHpSQXVCWnPSAVdBVV95cUxQUUV4ZlBvZFRBY2lUVTRuQ18ybTkzMEJYTnpZTEozb0F5TXg0RVJUbG1yRXFGcjM0RVhXdWVrUUxndmpKMnhUQ2NiNXBQcnF6aG9mSWpNXzQ?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
-    },
-    {
-      "title": "WTI (USOIL) Drops on Jun 23: What Lie behind the Move? - TradingKey",
-      "source": "TradingKey",
-      "date": "Tue, 23 Jun 2026 07:30:28 GMT",
-      "datetime": "2026-06-23T07:30:28+00:00",
-      "epoch": 1782199828.0,
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNTTh6alc4dHlUWlY2R1dnQ2hUbGxpX1Qwd0VuWV9jd3h5T3ljdzdaSk9BNFNPRUJObll6U2JEdDZFZ3dYZjZNckVlekhqdkttRFpabEF3WWhvM3ZRUHhrVF9sRkJuMGl2bVF0SzhjWUJjVmdLU1hkZEptaEdzRUo1a0hPRVp6cFdITVcxcA?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "From supply shock to oil glut: IEA flags scale of demand destruction caused by Iran war - MSN",
-      "source": "MSN",
-      "date": "Tue, 23 Jun 2026 07:28:22 GMT",
-      "datetime": "2026-06-23T07:28:22+00:00",
-      "epoch": 1782199702.0,
-      "link": "https://news.google.com/rss/articles/CBMijgNBVV95cUxQbElBNm9VX2RNYmFqTDlmNGN4eUt2bWJFOE9aWmRtZ1RoMXMzN0J3Rk45RG1SU2VfZlJISDlSaUhkeF9feWNuU0pvRXlXMUxNeXZRaWw3dU1tMzNuQUxja3ZhWmk1eU9aZnBSQzdDQUNxRWJ1YUk4STV4Um9DV0IzaDd1X2FPRlh0THlfSUlHUkFIbC1xa2FEQ01vbTBlRWJpcEY1N2xsMGJwU3gxcEU1SnM2QkpwSGZPLVpoZWowZDdBWkEteldxbU1YRFJBT2xraklRemZOUWJWSUtEN3VIR1Z2aHBNWlFYVlYxak5QckRmeFEyOFJNY20yeDFmbmJrZ1ByNHVock5sbmkxUkdGZ2tEdEduQXFNUEdmT25ZekRYVXJvRWxVbXVZZHFERmNOU3RaRndabC1SUkJiNmNpQ3I3ck95M05yOE9yY0xuUndfbFYwZ0hSUmk1N2tMd1dFYVdOdk9FdXdTaXVuRjZPYkgtbkxINVhpcXlSU0dmWFBPYXhfSlItSzFyY3FoQQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "2026 Brent Crude Price Outlook: Falling Below $80, Where Is the Next Key Level? - TradingKey",
-      "source": "TradingKey",
-      "date": "Tue, 23 Jun 2026 07:22:25 GMT",
-      "datetime": "2026-06-23T07:22:25+00:00",
-      "epoch": 1782199345.0,
-      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPMjJuZUZodEhIbnVJR2dYODZBRDItTWdtbUZ2Z3FuYzFDOTZudDZkOFZhQ0dYR1JucjVJOElSVG5qYVBnUVhxY1JJZEw1OVZmLWdRSHYxUUNCRDZoX3AzdkE2TG9rT0RFc0ZnM0RzUE5naXRRVFNScDAwYlpuSlZJVlBnNlNTQjBTaVFxcFdiX0hvZ3M?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Oil Falls 1% as Investors Focus on Hormuz Flows after Peace Talks - \u0634\u0628\u0643\u0629 \u062a\u0648\u0627\u0635\u0644 \u0627\u0644\u0625\u062e\u0628\u0627\u0631\u064a\u0629",
-      "source": "\u0634\u0628\u0643\u0629 \u062a\u0648\u0627\u0635\u0644 \u0627\u0644\u0625\u062e\u0628\u0627\u0631\u064a\u0629",
-      "date": "Tue, 23 Jun 2026 07:00:45 GMT",
-      "datetime": "2026-06-23T07:00:45+00:00",
-      "epoch": 1782198045.0,
-      "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9Pd2ZfTzltT0F4My13dGVMakY5U1IzdWdNMWxONnppUHJQYkxtUUNTRmJ1ZjkxS0NyZzFZVFpqQ3hpcUpPcHQtd09RQl8zQ3ZleXFj?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
-    },
-    {
-      "title": "China Lines Up Second LNG Terminal For Sanctioned Russian Cargoes - \u0634\u0628\u0643\u0629 \u062a\u0648\u0627\u0635\u0644 \u0627\u0644\u0625\u062e\u0628\u0627\u0631\u064a\u0629",
-      "source": "\u0634\u0628\u0643\u0629 \u062a\u0648\u0627\u0635\u0644 \u0627\u0644\u0625\u062e\u0628\u0627\u0631\u064a\u0629",
-      "date": "Tue, 23 Jun 2026 05:34:46 GMT",
-      "datetime": "2026-06-23T05:34:46+00:00",
-      "epoch": 1782192886.0,
-      "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE15SEd2MU42eUNQQXJlU1ZVeWtfSWNjeUNaRDB4S3NUR3RoQjhQRkhJdl9pMzNKMkFxMGJZcEFrUDVkODB4SGs2UEx4R2ZITzhncFJz?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
-    },
-    {
-      "title": "UAE Joins Bahrain, Oman, Saudi Arabia, Qatar, Kuwait, Iraq, Jordan, Egypt, India, Pakistan, Turkey, Azerbaijan and Others as Strait of Hormuz Tensions and Iran\u2019s New Renewed Shipping Restrictions Trigger Fresh Travel and Tourism Uncertainty Across the - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Tue, 23 Jun 2026 04:26:49 GMT",
-      "datetime": "2026-06-23T04:26:49+00:00",
-      "epoch": 1782188809.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5wWmtsZE9WLTduNjF0dng5eHdSck9PdW9hT2pLd0ZXTi1UbHgtOTBxN2JmQVFWRzJHWlo3Sy1lVFQ5LWU3cURlNmREUUZxQ1d1djhKeDNmVlBCeklVSnZHRnNrZURkb215UnNUR3Jn?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Once Hormuz reopens, can Pakistan hit India's Basmati feast in the Middle East? - India Today",
-      "source": "India Today",
-      "date": "Tue, 23 Jun 2026 02:30:00 GMT",
-      "datetime": "2026-06-23T02:30:00+00:00",
-      "epoch": 1782181800.0,
-      "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOWU5uOHp0b2NSd2l5U2x4bTF3WG11TlR2SXFSWWhXTVlVeWFtXzdyTHZxNHY2M0pVeWpTTUp0S3lSVmxrQ1pVeXlfMDFvRmk1MldydmV1emtiTXk2WWJVNXhISmt3S2hyZkNVRnlEU0x2QlZKZnNUYTlMV09QTnZRY21CUllUSlY4MkhsSGZCMG1pRFdXUWxDZ3hVUmpUU2tTT0ZtVG8tNXAzT19XVmVqaGhpYWZhZzBxWVladS1ROFUzYnAzNFBzaTh4WEZDWExNbk5DdFVPaGJMWWU3VXfSAeMBQVVfeXFMTTE2TkoyZ3FUR3VObS0xWktFQTBuZm1Sa01EUFZQd0Z0ajlmNDZHZHpNQm40SERYQ1JycmhwaEx5ZnVGb0J0b1J4T3pObzI3c1NzR3VTSUstRXdhX3dVd0ZWZHMzVTVQQXZwT3lkMjJPaFktV01vRi1vZWNZWlN5Qk5QeUNPZXlHQ3Y3cFRoX0pyYlQzcEZmemFHN0JpZDZuWjloaU95Vk5LcGFuMWd4Q0l5VVo1di1oZ0pqYlkzUmtHWlJHSjl3QnhNRFd3WDdtSlJfbHN0MEV3MGNRQ3JYZVgwTDQ?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Wood Mackenzie cuts brent oil price forecast to US$78/bbl in 2027 following US Iran agreement - Green Building Africa",
-      "source": "Green Building Africa",
-      "date": "Tue, 23 Jun 2026 01:36:00 GMT",
-      "datetime": "2026-06-23T01:36:00+00:00",
-      "epoch": 1782178560.0,
-      "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOZTNDd1ZKc0IxVXRyQnFpYV9XMEdNcXN3SUV1Y0dpcmlsSHA0aHk5eEYwal9KcEJCWE1iY1UtNUZNY0RXekxZZ2xNdFNnSW1nSFhUU2hBOUxGUFRGN3ZNUzRKdUZvSjhqU3hHQVEyaW1pSEdhekgxVmRhOHBoQWFMTDc2b0NQc0pIUFFhWmxPaU44VE9ucF9qYVVDSDg1emdILXFNcWJublRtcE80UC0yYnoyaDg3RUVCa25TQ3l1OTA5MHM2YzJwcjFoMA?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Outlook for Crude Oil Prices: How Much Further Can WTI Crude Fall? - \u5bcc\u9014\u725b\u725b",
-      "source": "\u5bcc\u9014\u725b\u725b",
-      "date": "Mon, 22 Jun 2026 23:23:53 GMT",
-      "datetime": "2026-06-22T23:23:53+00:00",
-      "epoch": 1782170633.0,
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQdjE0djlxOFdBUnlQQnFpdmR3M2ZjSWZUUDlERkhOa0lSUVZaLWlEMTdSSGx1TGY3b0xKZzc5RmtPeC1GenZfLUxoNjctNFM0d1JvczFXZW1SbzVVR29Yd2NKZ0VuZTVpSC1SSHFFdy1ITW00ZjcySk0yZ2UybS1LeEFSekRUT2N4dXhHaS10TU9oZXp6d1FFelBB?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "US EIA Concedes Middle East Supply Disruptions are Far Worse Than Prior Estimates - EnergyNow.com",
-      "source": "EnergyNow.com",
-      "date": "Mon, 22 Jun 2026 22:45:44 GMT",
-      "datetime": "2026-06-22T22:45:44+00:00",
-      "epoch": 1782168344.0,
-      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPekx1eUJvRlR6akREWjF0NnFZT2RhMTRGWFV0T051cGJEYUhBR0RQWDFhOXpkbXBLTEZGaHNrc0c2VXRwV05URGRvSUZoOVRiZWhrbkVJZ0N3Sm82Sm5saWxwbUxZUzRLMGJKZFZBbms1ZkxWQU1WYk9DblJtc0RUS1JIdWFlTmZvdjJiZmZsRVN6U1NSUURRTVM2cHFRTWFGMDZNWDZJdmFDTUpWUmpVNmhHNjk?oc=5",
+      "title": "Current price of oil as of June 23, 2026 - Fortune",
+      "source": "Fortune",
+      "date": "Tue, 23 Jun 2026 12:48:00 GMT",
+      "datetime": "2026-06-23T12:48:00+00:00",
+      "epoch": 1782218880.0,
+      "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5Ya0VoQ2RWa21zMFhrRUxycVdBcURienJTSDlHc09yUkNOVGp6a3BiS2pibkFVZTNUSnl3QjJ6Q0RNS09ERm11NHkxeS1YejVNdmQ3Uk9qb0FOajd5RFJmUDd3?oc=5",
       "description": "",
       "category": "Energy Markets"
     },
@@ -693,62 +213,12 @@
       "category": "Energy Markets"
     },
     {
-      "title": "Natural Gas Futures Price Forecast \u2014 Henry Hub Climbs to $3.26 on Summer Heat and a Record Fund Short, but Supply Growth Caps the Squeeze - TradingNEWS",
-      "source": "TradingNEWS",
-      "date": "Mon, 22 Jun 2026 20:00:40 GMT",
-      "datetime": "2026-06-22T20:00:40+00:00",
-      "epoch": 1782158440.0,
-      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQcGNINzFBX0hrMmRRd2MwOE5WVnJzbDNJdWhKSGZuWERZUFN0WC1lVmdQdzFZZ0l2bHlVSjZmc1BLZXk1RG5sVTdweVA5amlJQWJsVXRFdmQ2ZjdqM2plcDVyZlhtOFhYbG5zdG5jWU5wblAxSXhPMUd0WTd4enAtY2hLNVhaQ3M?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Oil traders revive bearish bets, with the AXEJ trading down - thebull.com.au",
-      "source": "thebull.com.au",
-      "date": "Mon, 22 Jun 2026 19:25:05 GMT",
-      "datetime": "2026-06-22T19:25:05+00:00",
-      "epoch": 1782156305.0,
-      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA0ajdoVFJ5aEYyVlJ6YXhUUHN0bDQyWTQtWXU1WUZEN2lvNmdGaERGaFdHNzVvZGJNbXVwYjdHWDY1N3d0ZFBlMG1vMmt5eGc5eFRRTmhCaUtWcW4wWUhQTEU1cnBOcEp6NjM5WFBETlIzdjkxZGtpbnZ1aDNNVFk?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
       "title": "What\u2019s Affecting Oil Prices This Week? (June 22, 2026) - Hart Energy",
       "source": "Hart Energy",
       "date": "Mon, 22 Jun 2026 16:25:00 GMT",
       "datetime": "2026-06-22T16:25:00+00:00",
       "epoch": 1782145500.0,
       "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOcDNvNzBOdGwtMkg2bFdVSWVrc3BsNTItd2NIWXhXVXBJTmtZTjd0T2t5UmM0dVZNbzhxSUx6X1VZZ1hnaHpZbV84R2JwVjJ3UGQ1WlU1bDhrTGFCY3lqcnFtWW12WTdZdHB1RGhXQUhTa2NJYnpnTExfdzMwZmYyUDdzM1V0RTdGRTZwYTNHak9SdUl3eE9v?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "What is behind oil's decline after U.S.-Iran talks conclude? - Latest news from Azerbaijan",
-      "source": "Latest news from Azerbaijan",
-      "date": "Mon, 22 Jun 2026 17:54:42 GMT",
-      "datetime": "2026-06-22T17:54:42+00:00",
-      "epoch": 1782150882.0,
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQamMwZEtQS0FsZFdQdVFod1FxSFZpc0RnU29rb0xJc3NlekdyUm1NWFkwNWNiRGF1eU53eWZHbENXNlBXRFhkSy0wWk9TVmdoZFM5NHBqXzVpb1k3WTQ3eW1hb0d0QkRGNkc5SzAwVlk4ZlN2Q1pwV0pPTW83U1J3MzVlQy0?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Crude oil forecast: How much further can WTI fall? - FOREX.com",
-      "source": "FOREX.com",
-      "date": "Mon, 22 Jun 2026 17:29:41 GMT",
-      "datetime": "2026-06-22T17:29:41+00:00",
-      "epoch": 1782149381.0,
-      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQOXdvVnhwTk9YNUJMMDM1ZGhZOEpLT0x2bjg2M2xFMTVycHVXNlEzeVpZZTZwZHFuYkZuSWpDbndVUkt6NjYwLXRValAzNmlkbEg3NF94aTJjdGRyQlllMGE3bXBMeDRublBubGxJZlF6cVllZWlyWkg0R1FQWFo2aEZPOV9mblAtNGl6ekxwNk5teUNjQ25pZW9QRzUzOENhbzBmMXhHY9IBpwFBVV95cUxQOXdvVnhwTk9YNUJMMDM1ZGhZOEpLT0x2bjg2M2xFMTVycHVXNlEzeVpZZTZwZHFuYkZuSWpDbndVUkt6NjYwLXRValAzNmlkbEg3NF94aTJjdGRyQlllMGE3bXBMeDRublBubGxJZlF6cVllZWlyWkg0R1FQWFo2aEZPOV9mblAtNGl6ekxwNk5teUNjQ25pZW9QRzUzOENhbzBmMXhHYw?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Global Energy Show: The 2026 Executive Conference Program Is Now Live - EnergyNow.com",
-      "source": "EnergyNow.com",
-      "date": "Mon, 22 Jun 2026 15:13:14 GMT",
-      "datetime": "2026-06-22T15:13:14+00:00",
-      "epoch": 1782141194.0,
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOLTNheFRPM0VtbnhDWXcwcWlTNlVwV0QwaUd5NlZ6U0tpRzhXSFdsM3hvSVdLZFpmd3pxX1lvdFUzNmJHeUhPZmRPTFVOcVFjZXBkRWtjcTBOVjA1ZGM4elJOS1hmX3lnZFp6blhjR0hJenRxeFhIVXV6V2s0WThlcHNlM3JsMzVKUEhrNmdlcjZUVWpPd3MtVVlXYXM2S1cy?oc=5",
       "description": "",
       "category": "Energy Markets"
     },
@@ -763,26 +233,6 @@
       "category": "LNG & Gas"
     },
     {
-      "title": "Is Easy Oil, Really Gone? Latest Analysis! - Energy News Beat",
-      "source": "Energy News Beat",
-      "date": "Mon, 22 Jun 2026 14:49:13 GMT",
-      "datetime": "2026-06-22T14:49:13+00:00",
-      "epoch": 1782139753.0,
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQUkZ1WkZFV3N2akp5SkRoZ0F4SUFGX1VaSERmc1h6b25LQWxxMUFoSEhzSHYzcXJKcjZ1Sl9HYjU4VGtWT1pxWk9SczVaci1pY1RwLUZ0S0RMbEExZUVVQjJnWHBNczRDbnBLakxnNzQ4SnVLQXl2SUtPV2RrV3ZmUThpVUJCQmo2?oc=5",
-      "description": "",
-      "category": "US Production"
-    },
-    {
-      "title": "US Treasury Opens Iran 60-Day Oil Sales Authorization, Oil Market Supply Expectations Ease Again, WTI Crude Futures Fall Over 3% - TradingKey",
-      "source": "TradingKey",
-      "date": "Mon, 22 Jun 2026 14:36:57 GMT",
-      "datetime": "2026-06-22T14:36:57+00:00",
-      "epoch": 1782139017.0,
-      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWk44U3o4U3pncEJZVVMtYXdBcGZuQ0dyWHF2VTc2N2gycXI1N3hoWXQwZURoX2ZJUkd5cDF0VHpVRHdBa1prMXZqRklRaThIRnF4Wk1DWHJscWM2ZTAzQ09iTGZjd0Z6TXl6aG00ODNILUdxdEVqUEZGVGJpLVMyQ2ZER3VJNENsS3VtcTlQdll2d054RUlhMTFKdk9NWVlRNUpvUmVRMGV2T1dicWFXSlg5OHc2UVcwVklF?oc=5",
-      "description": "",
-      "category": "Crude Oil & OPEC"
-    },
-    {
       "title": "China Lines Up Second LNG Terminal for Sanctioned Russian Cargoes, Sources Say - gCaptain",
       "source": "gCaptain",
       "date": "Mon, 22 Jun 2026 12:08:38 GMT",
@@ -791,146 +241,6 @@
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQcmF6d2gyR1p1WHU0WWJpaFNoRjVkMVVWYlZCSlR5SGdfaGJjUjBDTHVoU18yc0NVQ0x4ZEgyeW5JX3pVLWJXZ2VrVm1RR0tIa2laZjUyNVM3VnJwaFROUHE4UkgwMWFyNHg2WFdnQUQwclNaSDN6REZBalV6TDlGTVU3UjRKbnptcXZUQWNXekpyTDlJYkJLNDdiU0gzMzRf?oc=5",
       "description": "",
       "category": "LNG & Gas"
-    },
-    {
-      "title": "Qatar LNG hub blast kills 13 as restart effort prompts safety, export reassurances - CHOSUNBIZ - Chosunbiz",
-      "source": "Chosunbiz",
-      "date": "Mon, 22 Jun 2026 14:00:00 GMT",
-      "datetime": "2026-06-22T14:00:00+00:00",
-      "epoch": 1782136800.0,
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVG82V29lNkpjdmpxbkJRNk9jcFBjcmVVemhtRFpDV1Y3YzNuRWpqTm45WDRKYUFNalc5dmV5cHdNRGxXb2tLWVZwVGhFR0lzX1ZacXFVMlpmMmVCaGlZai0xbVhGUllSN25JRGdFMzJSQlU2UmgxUVJud3BDbUZYVFcxTVR6MURB0gGcAUFVX3lxTE1ZVmlqNVNpSTRoM1djWk80YmpFeEJ4VDU1LTkwZ3FKb3VfcC1tazVYN2FDbWUwdEJIZFFSN0VMRGVLMVlQOEo3SVo3aVBqVlJiNW1EdDBEQTFjdThuR3VvTFBKa0x2bW1pTTJ2OW9zQ2R0UDFtVXJYNzg5LXE1czZ3a2NPbFl1aHJTZ2lfSnNwdlFzRmJFMlRUSUpXMw?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
-    },
-    {
-      "title": "U.S.-Iran MOU and Negotiations: Expert Perspectives - Gulf International Forum",
-      "source": "Gulf International Forum",
-      "date": "Mon, 22 Jun 2026 13:28:36 GMT",
-      "datetime": "2026-06-22T13:28:36+00:00",
-      "epoch": 1782134916.0,
-      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9sMGlKWl9NZ3o3N1dqVjZlT2QyYm5ja0RhRjdpWjRGUERldTVvMzdjWUNNb012aTVMcHFwQ1NkUTNlQ0pTb053dEkzM3JaNEV6Wlo5YWNGbWJWNU56N1V5ODhHUG1TWXVkX3JTSnVMaXZHM2ZZZzNuLQ?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Fastmarkets Says Lithium Is Entering a New Phase as Demand Outpaces Supply - Panorama Minero",
-      "source": "Panorama Minero",
-      "date": "Mon, 22 Jun 2026 13:03:46 GMT",
-      "datetime": "2026-06-22T13:03:46+00:00",
-      "epoch": 1782133426.0,
-      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOQkx6NlFidlRaSERtR0Q2dFhmb0dlVW9GM192VG9hWmx0Vm5ISnliSTZ6TVZBenBQZF9Sdk42M29Ka3NsZzY4eW1GMkI5UmpzLTRMVmRiSnFZcFZpcGZSQzVISUxackNHWmo1ZG0wSEcwMm1LcTdzRVlhZXh6LXJRZHRfMVhTN285SnVUN2tTRy1lcTdNSnh6eVhGSTRLd3dwMXAzaXBpMTN6Qm1Ja1dhSXpTeHY?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "A checkmate move for Russian energy \u2013 China opens a second gateway for LNG under Western sanctions - Bankingnews",
-      "source": "Bankingnews",
-      "date": "Mon, 22 Jun 2026 13:01:39 GMT",
-      "datetime": "2026-06-22T13:01:39+00:00",
-      "epoch": 1782133299.0,
-      "link": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOVnFxVVlHT1A1N2FQNUc5Zy1xNk5ZMVVnU09NTTlOLU9iUUpYZHlCR3NKLVFjd0h5d1V3Mm8tSlEydkVmdzdLclZNamhiRDhXeGx5WGp4aXB4cU9zLUdYWUdBU3hHYXJYMENXS1l0Y0VjcS1TdWZiMU5KUldsazZFQmo1QjlZVkpjRmd4cWloUEFhNnZMNnVyT0w0cDl4UHZYTWkzUGh5SEtpYjA1OHFxU3lwQjR3V3FFU2JmcUNQX0FNU2QzWDhQZGxlMnFQUXdxamVOeTV1bDJEUFpUWHFWT0FQYVpRX1ZLV2lwX09VdXVJS2FFMHNuNS11TzlDM1U?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
-    },
-    {
-      "title": "Brent (UKOIL) Volatility Intensified on Jun 22: What to Watch - TradingKey",
-      "source": "TradingKey",
-      "date": "Mon, 22 Jun 2026 12:25:20 GMT",
-      "datetime": "2026-06-22T12:25:20+00:00",
-      "epoch": 1782131120.0,
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNXzV2Q3M0R2RlYnB1cnRiWkM3aWlTQjFvWnA3U0loOVBXOE82SEl1VGtaaTZXZ0xmZXphZ3VpekpmdDZTcmZsb2QyTTllMXlJYklqNXg4X1NORGl1U24wVFlIYUVQRXMteHJIWGNMVHYtY0thbk1nQWtuRVh1OVk3cFJveWdsSGdSOFF0VA?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Energy Markets Retreat: Pakistan Benefits From Sharp Correction in Oil Prices - ProPakistani",
-      "source": "ProPakistani",
-      "date": "Mon, 22 Jun 2026 11:25:51 GMT",
-      "datetime": "2026-06-22T11:25:51+00:00",
-      "epoch": 1782127551.0,
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPS1FoWDY1WFRWWmNUWHVGN1NKUnlmd25fUG1wVGpXb0ZKNlVrcEFmbHpuc1JWbEZkQkk3czhkTmZqRUNKT1VTYVZ1LXdONWQtSE5faVhBNUl2cjRXWDBwM20taWI4OUJWcFM5YjlIdlBONmcyMVFiMk9OVC1OX0RkYkZLTlV2enlfUjBnaWcwb1ZVUHEtam9zaXk5cUVMNHF1UmdHVXFGLVdHNWFhTWZOM3lLUQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Iceland Joins Germany, Sweden, Poland, Italy, Hungary, France, And All Other Countries Throughout Europe In Emergency Push To Rein In Runaway Inflation, Fuel Supply Shocks, And Record-Breaking Airfare Explosions As Middle East Conflicts In Israel, U - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Mon, 22 Jun 2026 10:26:03 GMT",
-      "datetime": "2026-06-22T10:26:03+00:00",
-      "epoch": 1782123963.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE54V21ody1MaW96WVktcDdnSTU4Z1VaQzZrMG1sQkJ1bmoyWGpVUlNsVjJYVlNHMW93YlVVZE1ZTEprUFZadU5tUzZJWXNWR3RJbTVCdk9zVlpYdlFoZ2xFaHVBdFZydUE3M1hfaUtB?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Iraq's export crisis: Hormuz and pipeline uncertainty - Vortexa",
-      "source": "Vortexa",
-      "date": "Mon, 22 Jun 2026 10:00:11 GMT",
-      "datetime": "2026-06-22T10:00:11+00:00",
-      "epoch": 1782122411.0,
-      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBLSEhITm52TDFnckVwZGl6SzZza3ZGaHZVc1lLdlF5UUd3SG10LVRvdU1EaWdFdm5ESTlQQ2UtZDlScFQ0YkV0bndVVlBpeUNiXzJGazhYODBwM05SaE5SWXdyclFpR01XSDREVHk1a1lZdHJsQkU4SXNJa3U?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Iran Joins United States, Israel, Saudi Arabia, UAE, Qatar, Kuwait, Iraq, Bahrain, Oman, China, India And More In A New Global Travel Cost Shock As Strait Of Hormuz Oil Risk Fuels Airline Cost Pressure, Fare Concerns And Tourism Uncertainty - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Mon, 22 Jun 2026 07:10:33 GMT",
-      "datetime": "2026-06-22T07:10:33+00:00",
-      "epoch": 1782112233.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9IS0pXOFp5TlEtVmwtbVNIdXo3UjJ3YTRkN0VLZFd0Z2FEbDBhbmRSeXVLbzFUdVY3bjBrb2ZNR1o1TEg5UjZJdks4b0RrTm9keHI5MkROOUFfck1YcDhRQVB3cVEyWEhXd0ppbGFR?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Iran\u2019s War With Israel and the United States | Global Conflict Tracker - Council on Foreign Relations",
-      "source": "Council on Foreign Relations",
-      "date": "Mon, 22 Jun 2026 07:00:00 GMT",
-      "datetime": "2026-06-22T07:00:00+00:00",
-      "epoch": 1782111600.0,
-      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQMWduRExjZXhMUjFuYjV4Zzc0LS11OHVKUEhXSlpUNUdFMm9MVGlJeFd5eGh1ZWpEWWhFNEdJX0tOVTlJbnZ5NmpBQ3dYeGNpSTBOSWtISUduak5WSHhfQUhQcHBKbVpLdG1IVi1ySWVGd05NM18yektrem1TM3ZvaV9xVjR2eC04cE9RZ3FZajNCZWFHNzBaS0hhSS02dw?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Saudi Arabia Joins Kuwait, Bahrain, Jordan, UAE, Oman, Iraq, And More In Confusion As US And Iran Peace Talks Stall, Strait Of Hormuz Naval Blockade Fear Escalates, Crude Oil Supply Shock, Trade Chaos And Travel Disruption Risk Deepens Across Midd - Travel And Tour World",
-      "source": "Travel And Tour World",
-      "date": "Mon, 22 Jun 2026 05:25:29 GMT",
-      "datetime": "2026-06-22T05:25:29+00:00",
-      "epoch": 1782105929.0,
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE90TFp0QWFESWNDM1NraHRQNmpOV2RNWk1sTGFZY2RMYnljT2gtbWh1TzY5TFZVU2dIazc4T3JCUExuTmZ6ZnJpUEpwZnRUckVIV2xNRkF2RWZ2V0ZaVmloNWhBQ2tvVW1WZG91R0t3?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "US.-Iran peace deal could bring big oil glut next year, IEA says - MSN",
-      "source": "MSN",
-      "date": "Mon, 22 Jun 2026 03:39:14 GMT",
-      "datetime": "2026-06-22T03:39:14+00:00",
-      "epoch": 1782099554.0,
-      "link": "https://news.google.com/rss/articles/CBMijgNBVV95cUxNZk0xZ0lEVlVZN0VxNHZGQmgwSDhOOE45QlBJZ0VSNWpZUTA1TFpQazNMcHlTT3JzTVo5OXowOGQwd09hbzA1Mk5HbXJ1UkZhV28yeGF3LUFhUWlXdzg2YU1nVXVUZWo0MWtMWWF2bVpVTTFJby05X0ljbmJxcWZMQk1sckFrRUR5UUZLd0VQVHk4eXlONnBnTmF3TzJEejdJUjlKSUJpdTNWcFVjVVVUMzktTHV5XzQ2dkFYZ19PelhNclJsaUlONXpwdEZ0andXOTVaWmlveUFXd1BQNzlsdzVlN0pfNUx2ak4zUzBBR2lELUVLNEJlWk5ybVNqQ2VVa2NBQ2VOSlBJNGdZa3hoX252T0dfWWNuVTZFWDhTR3RlclB1WnFta09aSjdkZ1J0VEVqd1NEb0F5M2szMmFxejVpS1FJdFg4dWdFZE5UNkdza2dnUVgtb2FhTi1BVTh1OFc5Vl9rUmFBWDZERXpSWFh6Y3pXYTlVclRtQVpyNjJXV2NJdDdVTUJqaEFZUQ?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
-      "title": "Brent crude drops to $79: Oil markets mixed as Iran, Israel announce halt of offensive, easing war fears - Gulf News",
-      "source": "Gulf News",
-      "date": "Mon, 22 Jun 2026 01:48:56 GMT",
-      "datetime": "2026-06-22T01:48:56+00:00",
-      "epoch": 1782092936.0,
-      "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQMFprSjJ4bHVBdDFKdE1lRndjeVQ0UWJoV1FvaElab081WnlhdG4wTGNZQThabVBiNUhUTDV1ZzVpYXViV0NaS19ObDFTb2NwcWZZek5TS1VOcGlZTk14dEl1N2Q2RFlkdkxEQUQ3eTNwcE1vRk95WHBPSG5IUVU5d0taQW9DQjZuNUlBc2ZxQTQ1bW5SN1VNSUJhYWhmR3ZYTS1MNl9nN1ZNOGs3ZktZWTY4TFNlY1pCbEtzdHlxTGNJVVdRMWFCNUtWc1lQLVRYN2hiMEo3VDhFY3JSS3g1VDlfY9IB9gFBVV95cUxOdUk1YjcyZ3NkNWF4dmZJTzZhY0RCV3Y4ZEUxaklHbkJNNDItUjlLMkhCODdwdm5qUzEyMVBXQW4xeEpqVkptaXpMY2laZEtSMENYeVZMUjY2UllwQ2FmSkM4eFZMSDktZlRLdDJwYkhsT2ZrSDJHc3JLbmd6T2w0bTdMeEVKcUx6UjR6OE93T19nZ1RFZEZsdXpBNjFBZEx3WU5YVGtJVy1jTWNLcnh2YjdSQzZQaWhBZFphQmtVakdBTUFPMVJnNXZIbHBOYlBhMFJtcjZ5bTYta0hTT0d1V010ZmI3T2xyOW9IS1F4bDFMV1R3S0E?oc=5",
-      "description": "",
-      "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "IEA Sounds The Alarm: Oil Market Headed For Massive Glut By 2027 As Gulf Supply Returns After US-Iran Deal - Yahoo Finance",
-      "source": "Yahoo Finance",
-      "date": "Mon, 22 Jun 2026 01:31:00 GMT",
-      "datetime": "2026-06-22T01:31:00+00:00",
-      "epoch": 1782091860.0,
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNZEVEZEFkaWtpZ1BhU19kb2poUzVJZFJIa3hLNmhkeEtZX3pyVDl6dFVFSU9JeHVzdmVmVVp2VG4zMDVzREFzYVFFTUJZZEhHZEdRb3RJQWRrVndIV3p0NnFudTVUdk5fczl0NzdBN2drTmlUdDFGS3RqX3NqQVRTeUtuRUtqakFOd2FnUg?oc=5",
-      "description": "",
-      "category": "Energy Markets"
     }
   ]
 }
