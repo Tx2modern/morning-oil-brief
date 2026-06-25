@@ -54,15 +54,15 @@ OILPRICE_API_URLS = [
 # Append -india -petrol to keep out Asian retail pump price floods
 GNEWS_BASE = 'https://news.google.com/rss/search?q={query}+when:3d&hl=en-US&gl=US&ceid=US:en'
 FEEDS = [
-    # Primary market feeds — add exclusions to suppress retail pump-price spam
-    ('crude oil WTI Brent OPEC -petrol -"pump price" -india -rupee',           'Crude Oil & OPEC'),
-    ('gasoline RBOB diesel ULSD "crack spread" refinery margin -india -petrol', 'Refined Products'),
-    ('EIA "petroleum status report" "weekly inventory" crude stocks',            'EIA & Inventory'),
-    ('refinery utilization capacity turnaround outage -india',                   'Refining'),
-    ('oil market supply demand outlook -india -rupee -petrol',                   'Energy Markets'),
-    ('Middle East Iran Iraq Saudi oil geopolitics supply',                        'Geopolitics & Risk'),
-    ('US shale Permian Eagle Ford Bakken production drilling rig count',          'US Production'),
-    ('LNG "natural gas" export import terminal -india',                          'LNG & Gas'),
+    # Broad queries so Google News returns enough results; allowlist handles quality filtering
+    ('crude oil price Brent WTI OPEC',                       'Crude Oil & OPEC'),
+    ('gasoline diesel fuel price refinery',                  'Refined Products'),
+    ('EIA petroleum inventory oil stocks',                   'EIA & Inventory'),
+    ('oil refinery capacity utilization',                    'Refining'),
+    ('oil energy market supply demand',                      'Energy Markets'),
+    ('Middle East Iran Saudi Arabia oil supply geopolitics', 'Geopolitics & Risk'),
+    ('US oil shale production Permian drilling',             'US Production'),
+    ('LNG natural gas export import',                        'LNG & Gas'),
 ]
 
 # ── Source blocklist — known low-quality or off-topic ────────────────────────
@@ -88,7 +88,7 @@ BLOCKED_SOURCES = {
     'travel and tour world', 'travelandtourworld', 'tourism review',
     'travel daily media', 'eturbonews', 'travelweekly',
     # Low-signal aggregators and local TV
-    'oilprice.net', 'rigzone', 'naturalgasintel',
+    'oilprice.net',
     'scanx.trade', 'stockanalysis.com',
     'fxempire', 'fx empire', 'fxstreet', 'investing.com nigeria',
     'quantum commodity intelligence',  # paywalled, summaries are thin
@@ -102,9 +102,9 @@ BLOCKED_SOURCES = {
 # are accepted from Google News. This keeps the feed to real journalism.
 ALLOWED_GNEWS_SOURCES = {
     # Wire services
-    'reuters', 'associated press', 'ap news', 'bloomberg', 'bloomberg.com',
+    'reuters', 'associated press', 'ap news', 'bloomberg', 'bloomberg.com', 'bnn bloomberg',
     # Financial press
-    'wall street journal', 'wsj', 'financial times', 'ft', 'barron\'s',
+    'wall street journal', 'wsj', 'financial times', 'barron\'s',
     'the new york times', 'nytimes', 'new york times',
     'washington post', 'the economist',
     # Energy trade press
@@ -115,7 +115,7 @@ ALLOWED_GNEWS_SOURCES = {
     # Mainstream business / finance
     'cnbc', 'cnn business', 'bbc', 'bbc news', 'the guardian',
     'axios', 'politico', 'the hill', 'npr', 'pbs',
-    'fortune', 'time', 'business insider',
+    'fortune', 'time magazine', 'business insider',
     'yahoo finance',  # syndicates reuters/bloomberg articles
     'marketwatch', 'seeking alpha',  # keep for price/market context
     # Shipping / tanker / freight
@@ -126,8 +126,7 @@ ALLOWED_GNEWS_SOURCES = {
     'u.s. energy information administration (eia)',
     'u.s. energy information administration (eia) (.gov)',
     # Regional energy-specific
-    'oilnow', 'rigzone', 'energy monitor', 'energymonitor',
-    'new voice of ukraine', 'kyiv independent', 'ukrainska pravda',
+    'oilnow', 'rigzone', 'energy monitor', 'energymonitor', 'natural gas intelligence',
     'middle east eye', 'al monitor', 'al jazeera',
     'arab news', 'the national', 'gulf news',
     # Canada / Americas energy
@@ -173,6 +172,24 @@ PREFERRED_SOURCES = {
     'upstream online', 'energy intelligence', 'cnbc', 'the guardian',
     'associated press', 'ap', 'eia', 'iea', 'opec',
 }
+
+
+def _oilprice_category_from_url(link):
+    """Infer OilPrice.com article category from URL path."""
+    link_lower = link.lower()
+    if '/energy/natural-gas/' in link_lower or '/energy/lng/' in link_lower:
+        return 'LNG & Gas'
+    if '/energy/crude-oil/' in link_lower or '/energy/oil-prices/' in link_lower:
+        return 'Crude Oil & OPEC'
+    if '/energy/gasoline/' in link_lower or '/energy/diesel/' in link_lower:
+        return 'Refined Products'
+    if '/geopolitics/' in link_lower:
+        return 'Geopolitics & Risk'
+    if '/us-energy/' in link_lower:
+        return 'US Production'
+    if '/energy/renewables/' in link_lower or '/alternative-energy/' in link_lower:
+        return 'Energy Markets'
+    return None  # fall back to feed-level default
 
 
 def _is_blocked(title, source):
@@ -275,7 +292,7 @@ def fetch_oilprice_rss(url, category):
             desc_el.text if desc_el is not None else '',
         )
         if parsed:
-            parsed['category'] = category
+            parsed['category'] = _oilprice_category_from_url(link) or category
             items.append(parsed)
     return items
 
@@ -388,8 +405,12 @@ def fetch_gnews(query, category):
         # Only accept articles from recognized quality outlets. Google News
         # search surfaces a long tail of travel blogs, local TV, and SEO spam
         # that happen to mention oil. Drop anything not on the allowlist.
+        # Use word-boundary regex so 'time' doesn't match 'times kuwait', etc.
         src_lower = source.lower().strip()
-        if src_lower and not any(a in src_lower for a in ALLOWED_GNEWS_SOURCES):
+        if src_lower and not any(
+            re.search(r'\b' + re.escape(a) + r'\b', src_lower)
+            for a in ALLOWED_GNEWS_SOURCES
+        ):
             continue
 
         # Google News <description> is always "Title&nbsp;&nbsp;Source" — not real
