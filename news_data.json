@@ -1,7 +1,17 @@
 {
-  "generated_at": "2026-06-25T12:41:57.070791+00:00",
+  "generated_at": "2026-06-25T13:30:37.849139+00:00",
   "cutoff_hours": 72,
   "items": [
+    {
+      "title": "ADNOC Cuts Murban Crude Price to $101.48 as Hormuz Tensions Ease",
+      "source": "OilPrice.com",
+      "date": "Thu, 25 Jun 2026 08:30:00 -0500",
+      "datetime": "2026-06-25T08:30:00-05:00",
+      "epoch": 1782394200.0,
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/ADNOC-Cuts-Murban-Crude-Price-to-10148-as-Hormuz-Tensions-Ease.html",
+      "description": "ADNOC, the national oil company of Abu Dhabi, has cut the official selling price for July for its flagship Murban crude to $101.48 per barrel, down from $104.44 a barrel for June, amid weakening international and Middle Eastern benchmark oil prices. ADNOC\u2019s recent pricing list for July, reported by ",
+      "category": "Crude Oil & OPEC"
+    },
     {
       "title": "China to Increase Fuel Export Allowances for July",
       "source": "OilPrice.com",
@@ -53,6 +63,16 @@
       "category": "Crude Oil & OPEC"
     },
     {
+      "title": "EU\u2019s Top Oil, Natural Gas Suppliers Urge Delay, Rewrite of Methane Regulations - Natural Gas Intelligence",
+      "source": "Natural Gas Intelligence",
+      "date": "Thu, 25 Jun 2026 12:48:01 GMT",
+      "datetime": "2026-06-25T12:48:01+00:00",
+      "epoch": 1782391681.0,
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQYzZ1MkVIMGNqX2podTRWRkY4b0V5QUxkVGw1ODRQa0psOWwtUWpZZTZwVkVJR3psTFhvT205VEEwY1Myam54TnRtNUhnYWNTRzZFRkNXdWszUF8xT0N6Rl9ld1M4eEl4WlB6dVZDX01scXA1dzFmc0l5RXdUcFlSWWMxUVoyREtDSGh6ZHlmdXdEQ2VOY3ZNcXRDbGFxanhrTjRVRlVsY2lzVzJMcGhhS0VMcw?oc=5",
+      "description": "",
+      "category": "LNG & Gas"
+    },
+    {
       "title": "Qatar Signs Crude Deal With Taiwan as Gulf Oil Trade Recovers",
       "source": "OilPrice.com",
       "date": "Thu, 25 Jun 2026 02:30:00 -0500",
@@ -61,6 +81,16 @@
       "link": "https://oilprice.com/Latest-Energy-News/World-News/Qatar-Signs-Crude-Deal-With-Taiwan-as-Gulf-Oil-Trade-Recovers.html",
       "description": "In the latest sign of recovering oil flows in the Persian Gulf, Qatar inked a deal with a Taiwanese refiner for the sale of a cargo of Al-Shaheen crude, Bloomberg reported today, citing unnamed trading sources. The deal follows the sale of Marine and Land Qatari crude to an Indian refiner last week,",
       "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "How the Iran War Is Reshaping Global Energy Security and Geopolitics - The National Interest",
+      "source": "The National Interest",
+      "date": "Thu, 25 Jun 2026 12:20:43 GMT",
+      "datetime": "2026-06-25T12:20:43+00:00",
+      "epoch": 1782390043.0,
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPM1pXdHQwSW1jLTZJZ2VMU2ZxY1RqRnpuWWcxRS1EUWdLb0czSDN6V1daVFR3Sk54R2NnV1hIN2ZFTEVncENibXdKVG9UZEdLdS0tNl9OR0tLbmxVTVR2Y0ZBcGQyTERJSHJnakdjWlIwSks1QWJZOFVEOFd3VjBrQXF6SURrUm4wbUh6OXNwQUNuUG54MlJEZjFhNzlXY2NhX0sxM1ZrOVlJbW1PQXlsQW5FMTREQQ?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
     },
     {
       "title": "Natural Gas Prices Set to Ease as Qatar Restores LNG Output",
@@ -73,12 +103,12 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "Oil prices fall as Strait of Hormuz supply fears ease, tankers resume exit routes - Times Kuwait",
-      "source": "Times Kuwait",
-      "date": "Thu, 25 Jun 2026 09:10:51 GMT",
-      "datetime": "2026-06-25T09:10:51+00:00",
-      "epoch": 1782378651.0,
-      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPU0ZXc1FIOGRhR3BWX2JWQkZQbWR2ZEZhQXFIc1lZUEd4Ql80YWdGVGhsalZqeWQ2ZUQ1QUgzYms0RzdhRTNCd1dWamlDV05wSmVNNUtnLTEzNUdUUTY1VlZ6QlExYWFvWlZ1WTNWc01LcjM0TnFUV3ZQYU9DeE8xbUZrUFdBdVYxbW1mRFZkejVBWW1yOTdGaHNuR04wRTF3enZ3YnhPVEw?oc=5",
+      "title": "Aggression cannot impose 'new geopolitical realities' on Gulf, says Dr Gargash - The National",
+      "source": "The National",
+      "date": "Thu, 25 Jun 2026 10:07:26 GMT",
+      "datetime": "2026-06-25T10:07:26+00:00",
+      "epoch": 1782382046.0,
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQM0VKV1ZVTXBxNDhXdHJaMHJfNmRqbDlaZW41OFA1Y0lROVp1YmtQR25lQ1d0WExaMFM2VXZ6cGVzMWVfSmRjSXdPbkJVYTVRR1V3N2E4dnRTMGVmb3hvVHhOaHdKSFdVbVVoNENQc2hxdHBocjczMlpHQWEtNTkwcmpUM0hwMnlpU2w1MkdyWUxfSEV2aWZrZF9LTkptX202TWVxZzlfZTFtT0FmTTREQmNJczk0a0d3cVB5TlRQYkZFVUpJN2dEUw?oc=5",
       "description": "",
       "category": "Geopolitics & Risk"
     },
@@ -100,6 +130,26 @@
       "epoch": 1782342000.0,
       "link": "https://oilprice.com/Energy/Natural-Gas/Qatar-and-the-US-Warn-EU-of-Gas-Crunch-Over-Methane-Regulation.html",
       "description": "The United States and Qatar have once again warned the European Union against doubling down on climate policies seeking to penalize the LNG industry, saying that if it continues on this course, the EU will face a gas crunch and higher prices. \u201cThere is no viable path to compliance with the regulatio",
+      "category": "LNG & Gas"
+    },
+    {
+      "title": "Executive summary \u2013 Southeast Asia Energy Outlook 2026 \u2013 Analysis - IEA \u2013 International Energy Agency",
+      "source": "IEA \u2013 International Energy Agency",
+      "date": "Thu, 25 Jun 2026 01:45:50 GMT",
+      "datetime": "2026-06-25T01:45:50+00:00",
+      "epoch": 1782351950.0,
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNdXA0NmV2RUkxVGNtXzVob1hvZzlVMGNUTUJWTzhSX3FLVE9yUFRvbE1lajRDM09zbWVCUlg0d0p4RmotYmFWZDI0YnBua0ZOZkNDa3gtNmJaMmVPcjVaMXhMVjZQeU5aR3MtZmRqd1RLTjFMM21KcFkzaFliYTFMaFZGWUlXRkE?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "Oil touches pre-war levels on rising Middle East supply - Reuters",
+      "source": "Reuters",
+      "date": "Thu, 25 Jun 2026 01:35:00 GMT",
+      "datetime": "2026-06-25T01:35:00+00:00",
+      "epoch": 1782351300.0,
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQVkdDYmZFSTkwNFU4TGw0UDItS3RmdzdoR0hYUjRhYVUtaWRpWjFueDBQSUlQQklKZzdoTWJlQ1phYXRWaHMtZU5jNnNmOVZPalE2eExoaE5ESEJOcW9RN1l3VjFFTXNPLUJvdWFfTWVOTno3SEdlMHNJQjMxM0hJcXM1WHFtVG9NeHZtSGtZQlY4b21GZ3pqWjFn?oc=5",
+      "description": "",
       "category": "Crude Oil & OPEC"
     },
     {
@@ -133,6 +183,46 @@
       "category": "Crude Oil & OPEC"
     },
     {
+      "title": "What Makes Waha Work? - Hart Energy",
+      "source": "Hart Energy",
+      "date": "Wed, 24 Jun 2026 22:50:00 GMT",
+      "datetime": "2026-06-24T22:50:00+00:00",
+      "epoch": 1782341400.0,
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOa1R3Yy1UMFhYWFh4bEJ2WlBoSFRrRTZRMURRQ3FEYnZMZGlDMWJQeGNqZG92bnNKbl96bEsxZXNWUHVWVjBXMWdvd2NXZzBVMFIzWU9YN2IyTlNGU3VVNUlKbDZ0aHIwOGVSNEFIVWlvTHJJOWpaVE1FSzQyenhGei1iUQ?oc=5",
+      "description": "",
+      "category": "US Production"
+    },
+    {
+      "title": "From Permian to Jafurah: Move Early or Follow in Global Shale - Hart Energy",
+      "source": "Hart Energy",
+      "date": "Wed, 24 Jun 2026 22:47:00 GMT",
+      "datetime": "2026-06-24T22:47:00+00:00",
+      "epoch": 1782341220.0,
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOdjVnTzZKbGh2aGdZemw4aEc4bi1fV0htN3lkWmYxXzl2Nl9pTWlPUVpZUGFTSWhGS0xVY3hRYkhGNHY1UmlKNEZ4UXliWnlrYzU2MEF1cVpadC1wX0k5aHRQRVRnNlhrWFdYNllMSUJIMFFaWFNPalhHd2tVcTdhaVdjaTRjak42cEMtUGJaY1owVEprYXk2blhySloxNDlPNmJXeTFPcHlFZw?oc=5",
+      "description": "",
+      "category": "US Production"
+    },
+    {
+      "title": "Power Supply and Demand Dynamics Open New Market for Natural Gas Producers - Hart Energy",
+      "source": "Hart Energy",
+      "date": "Wed, 24 Jun 2026 22:29:00 GMT",
+      "datetime": "2026-06-24T22:29:00+00:00",
+      "epoch": 1782340140.0,
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQQy10TThZcDQwTHdDeGtoaUlUVXVQd0pHeHNqSDN5aUh5QmU4UGlHYzR0UGZ5RGxYVmxxQ1A2UlR5TWI4ZndWOUdxWDBmNVVPWXhRRWt2cDZFN3R6bGExUmVlSXBDamVhTU5GWl9ndE1FZERSWjd5UVBCYzNpQk1JOUhoUWptOG9KeDNJMmhiejQ?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "US oil prices briefly fall below $70 even as stocks dwindle at storage hub - Reuters",
+      "source": "Reuters",
+      "date": "Wed, 24 Jun 2026 22:11:12 GMT",
+      "datetime": "2026-06-24T22:11:12+00:00",
+      "epoch": 1782339072.0,
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPRUFFcFIyVnplczVYaDVFU0lMQ0xfRUU0S0I1UGpsMnFtbWFXSHVzSjBuZXpoMXMzUTRhbVFtSlIwY0puSkZzZlQ1RkpVbnZPRW5ILU85ZFdXWlctbDA0WnFrc3Z4YnlKblBiMmpBbWpwVU1URzdjTnBqVktsY2VKcmhubHIyelBCcWktbnlXeGdDeWFkRXk3SkZGeUo1TDVwNkZVWXZQaV85cm5yWkNpR0w5Tm81RUNNNGJ3?oc=5",
+      "description": "",
+      "category": "EIA & Inventory"
+    },
+    {
       "title": "Norway's Oil Output Beats Forecasts Again Despite Pullback from April Highs",
       "source": "OilPrice.com",
       "date": "Wed, 24 Jun 2026 14:00:00 -0500",
@@ -141,6 +231,16 @@
       "link": "https://oilprice.com/Energy/Crude-Oil/Norways-Oil-Output-Beats-Forecasts-Again-Despite-Pullback-from-April-Highs.html",
       "description": "Norwegian petroleum production eased in May after April's exceptionally strong performance, but the country's offshore sector continued to outperform expectations. Crude oil production came in 7.2% above official forecasts even as both oil and gas output declined from the previous month, reinforcing",
       "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Global natural gas markets to stabilize after Middle East war, says GECF Secretary General - Reuters",
+      "source": "Reuters",
+      "date": "Wed, 24 Jun 2026 21:37:23 GMT",
+      "datetime": "2026-06-24T21:37:23+00:00",
+      "epoch": 1782337043.0,
+      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNZVUzRjVPQk0wMzhkNUl4cElrYVJkazBzUDhLY3VYWm5VeVdrTDQxRFJMQ0JLdWJsdWNENkJKYU95MGoxTUlrbkdQeDVQeDQ0c1FMODBLai1hM2FxTkNKc1g4b1RXNGo5REpvQU1pUTk2SzlKWmM4RVBiMXVqelRPM1FhVlBKclgtVGdIa2ZzTkpwVUJDX2ZUS3FYQzRmU3JUczNEWkhPUHJqOUFmT0RSNnRZT0xhYXRERDd4OXQ5akptdXFwbVE?oc=5",
+      "description": "",
+      "category": "LNG & Gas"
     },
     {
       "title": "Trade Is Slowly Opening One of the World's Most Isolated Nations",
@@ -153,24 +253,44 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "Canada Building West\u2019s First Grid-Scale SMR",
-      "source": "OilPrice.com",
-      "date": "Wed, 24 Jun 2026 12:00:00 -0500",
-      "datetime": "2026-06-24T12:00:00-05:00",
-      "epoch": 1782320400.0,
-      "link": "https://oilprice.com/Energy/Energy-General/Canada-Building-Wests-First-Grid-Scale-SMR.html",
-      "description": "Construction has begun on the Western world\u2019s first grid-scale Small Modular Reactor (SMR), though small is not what comes to mind, considering that the machine will fit on two soccer fields. According to AutoNotion, a 953-tonne slab of steel and concrete was lowered into a 35-meter shaft at Ontario",
-      "category": "Crude Oil & OPEC"
-    },
-    {
-      "title": "Market Outlook: U.S. concentration risks rise as leadership broadens - BNN Bloomberg",
-      "source": "BNN Bloomberg",
-      "date": "Wed, 24 Jun 2026 18:02:45 GMT",
-      "datetime": "2026-06-24T18:02:45+00:00",
-      "epoch": 1782324165.0,
-      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNR3o3N2FLZmpqM21pRm1jSE5Oakw4S0llUXl3ckh6TzFZWmlxS3BPVmkzQnFtWEVyaWxyWmdXV281ZG16TVk2VHNVbm1jMkNTa1ZVeVJ5ZXlUSzZkVlVIaDdjTzVIYUswWUFTVTVtTERUWHgwd0dfY1lRci1TRW5pTGZSQTU0ZVRFeXFtZm5HdjJmUU0yR05rU2QxcUR4aF81YWxGRXg2RFhhN3diRld6TldPSWR5UEV2N1g4ZlllZnNONnRUSzBsZExB?oc=5",
+      "title": "Hormuz Reopening Is Quickly Flooding Oil Markets With Supply - Hart Energy",
+      "source": "Hart Energy",
+      "date": "Wed, 24 Jun 2026 20:03:00 GMT",
+      "datetime": "2026-06-24T20:03:00+00:00",
+      "epoch": 1782331380.0,
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPbHFsRU4zdVdseEVCaEpsT2JnNmNTUG43SkdVdE83NVlCNG1qY1ZiU1pHX0Q3TlRyLWh3MjdPQ1FvSDVqOERxbkpRbnNtOUpwYk5BbW8yTnIyaXBZZzFlN0RtRFRQUFpFNEpMRWhQR213eWFvWkQ3TmtrNVJaNURKVjVsTldISi1Bck8zRmFvVUQza0E2R28yVFJGaTBIaWk2U1E?oc=5",
       "description": "",
       "category": "Energy Markets"
+    },
+    {
+      "title": "Energy in Southeast Asia \u2013 Southeast Asia Energy Outlook 2026 \u2013 Analysis - IEA \u2013 International Energy Agency",
+      "source": "IEA \u2013 International Energy Agency",
+      "date": "Wed, 24 Jun 2026 19:46:22 GMT",
+      "datetime": "2026-06-24T19:46:22+00:00",
+      "epoch": 1782330382.0,
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOaEVRVVR6Y0drbG42ekh0MDB0VXJVZ3VqZ0VHeXIwZnpMUWNXSDRNZllBTUR1UHRIVUJpcjJsNm1iMG52MmI1VW5ydXQxZk9LTnlncURreEtHX1o4U2Z6X2RBR3BJcUwtMnFZQWhvcDR4OXJoTWFCQXBzV25aV3FoMjRuejRDZk1tWDZtX3pGcDg?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "U.S. commercial crude oil inventories have decreased in June - U.S. Energy Information Administration (EIA) (.gov)",
+      "source": "U.S. Energy Information Administration (EIA) (.gov)",
+      "date": "Wed, 24 Jun 2026 18:14:26 GMT",
+      "datetime": "2026-06-24T18:14:26+00:00",
+      "epoch": 1782324866.0,
+      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5LdWV5N0xXTjUycTh3T3N1QVpya0hkRVVpSVlvcXgwbjJxNUUwcW8zdjVOMTlUeUpGY3VZNWlWaFQ5SkcycDh4STE2RlB5ZDNlRFFyMV9WUk96MWY3NFQ5cXprdw?oc=5",
+      "description": "",
+      "category": "EIA & Inventory"
+    },
+    {
+      "title": "U.S. Crude Oil Inventories Fall, Product Stocks Rise - WSJ",
+      "source": "WSJ",
+      "date": "Wed, 24 Jun 2026 15:15:00 GMT",
+      "datetime": "2026-06-24T15:15:00+00:00",
+      "epoch": 1782314100.0,
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOMEVaRHF0aVNwUnUxWnctcUxBdU9kN2FNZEpheVMxdGJ1VXFVR3hYY2RONUVCVEhmOFBpR252LXc4QUdyYzd2S01kZ3BKY3BpZVhJbEVvWjJkaVNGcmhzb25GNjhSSENVUTZObDJ4d2pEcjlJeGlnQmdKeFdEYTZuQUhENW5HWHRFbXVEUjZQcmcweDBJNmtST1BaemppclBD?oc=5",
+      "description": "",
+      "category": "EIA & Inventory"
     },
     {
       "title": "Poland to Expand LNG Import Capacity in Push to Develop Natural Gas Hub - Natural Gas Intelligence",
@@ -183,16 +303,6 @@
       "category": "LNG & Gas"
     },
     {
-      "title": "Zacks Industry Outlook APA , W&T and Ring - Yahoo Finance",
-      "source": "Yahoo Finance",
-      "date": "Wed, 24 Jun 2026 08:45:00 GMT",
-      "datetime": "2026-06-24T08:45:00+00:00",
-      "epoch": 1782290700.0,
-      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQN1gzTXpTUkUzM3IxdE9SU3RLa1piZldWN0g4Z3lSc3BfdVVqdHlfN2ZMNXp4djVCSzFRaXpOYklhaENwbzhOM2pOU3lfZVBTd0JiSjkzbHhENktjcjZYMkwxQVFuZVVveG9rb0VMWTZTcWRKUUNuaDRxOTFMVXVqa2lzaExfa0xLSjQ2cEpn?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
       "title": "Oil prices extend slide: Brent crude falls below $77 as Iran ceasefire holds, Strait of Hormuz fears ease - Gulf News",
       "source": "Gulf News",
       "date": "Wed, 24 Jun 2026 04:09:37 GMT",
@@ -203,44 +313,84 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "China continues investing in LNG infrastructure - The New Voice of Ukraine",
-      "source": "The New Voice of Ukraine",
-      "date": "Tue, 23 Jun 2026 21:44:00 GMT",
-      "datetime": "2026-06-23T21:44:00+00:00",
-      "epoch": 1782251040.0,
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxONjkxc1J4UDA0RmhKNUlUU3Jwc0tXcmh2N1k0UG1Xdkc3eDgyblRVMmFraC04S0dzNVlSZTJ4Q2lYQ0gwZWJHUHF6S3RURFVGckRwZFVmLVFwb3Nnc3B4ZzR2MG94ZjluZXFab3BWMTlVYnVQVFd0RzhlUnptcXZLZVVadjRxTUJIamJvSzBhZ19mbW5rVE1R0gGQAUFVX3lxTE5kaW1QN3dTZDhXMHNfZmNpS0psNFBjWTBBR2VXaklDZjh1SU9kV2xReGVMemR3M0h1eUUtRlp0X1k1ZDFUQk83el9KQnd1TlJqejNmWTNaODc3X3hNbW1VdFhDVC1VVVJJWENzR1VsNVR5R3I2VFVYcE1jbFFTMmE4bG16QmFDMWFxaTVobFBzVQ?oc=5",
+      "title": "Mapped: Where Diesel Prices Have Surged Since the Iran War - Visual Capitalist",
+      "source": "Visual Capitalist",
+      "date": "Wed, 24 Jun 2026 00:43:01 GMT",
+      "datetime": "2026-06-24T00:43:01+00:00",
+      "epoch": 1782261781.0,
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxON2l0djY3YTdaQ3ByMlNXcnlKbjBfVHd0WUprQ3h4MUtuSC1hdTZfZ3FEd0doUThaY3p0dzJRbnd3YVAxOUVYd2dEdHgxYkRpbWdSQU9Ed2NjOTdXZlhDUzBTUERLbDg4ZEEybEM1YV9uWDBGdU9qQVIzWXlnZGg5VUVfZWctNlc2QnZpU195VEhFbHZJT0oybXlB?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
+    },
+    {
+      "title": "Russia eyes diesel export ban, fuel imports amid Ukrainian strikes; Crimea restricts public life - Reuters",
+      "source": "Reuters",
+      "date": "Tue, 23 Jun 2026 20:36:09 GMT",
+      "datetime": "2026-06-23T20:36:09+00:00",
+      "epoch": 1782246969.0,
+      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNbkNXakFCOW90OVo1RkRPcDg3Z2pHV1VhamJRLWlQU05rbzh2V1lkTzhGNlpHdDlJMDIyZnhjUS1GeHAxYWdCcGc4VGlPSVJqV1c3dnI2a3hrUWFwNlJ2cXNfenlUZDg5LUFoVnZxNXFaX0lMTFF0YnVvU0lJMGJIdGNraXhKcEdSUUVBNkNERl9RSWY1RXcySGU4Y0M1YmtlYjR1amRtS1RjQ0o0dEdfamZXTVgwM3R4QkRxbkJR?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "How China Turned the Strait of Hormuz Crisis into an Advantage - The National Interest",
+      "source": "The National Interest",
+      "date": "Tue, 23 Jun 2026 12:37:30 GMT",
+      "datetime": "2026-06-23T12:37:30+00:00",
+      "epoch": 1782218250.0,
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPZmtlN1RiNmxpcTVUenA3WlpmRUpadjR6NWdzQkxycnBheURWQ1JRZ1R3WjFwOThJUmJ0RGxYbGFoaXNHSVZGSHJFdWVDSWZRS0p6UDlBaFNYTmRvUFd0MGpIb0d0ZTV0U05qWXozV1ZfSTB5cU5oOGxDQU1zd2ZlWWdzaFJZRUlsb290Q29uTUIta0huZ2Mtekc0aTR1TTR6TDgzV0pZa3JYcjFyb3c?oc=5",
+      "description": "",
+      "category": "Refining"
+    },
+    {
+      "title": "Brent crude could fall below $70 as OPEC+ grip on supply weakens: Matrix Global - CNBC TV18",
+      "source": "CNBC TV18",
+      "date": "Tue, 23 Jun 2026 05:44:26 GMT",
+      "datetime": "2026-06-23T05:44:26+00:00",
+      "epoch": 1782193466.0,
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxON1k2V3VhNUdlblR5VUlMUjdva19yOUNwRlZEeUJnSWgtZDBZb0YxNEZsNmVaLVNrN290ZFlDSW94Q0lZVUliZW1CZGFuamFCaWgzc3NRV3Nvb0hHMnQwajhSbDY5M2UyNnV5cHNraGExd2hUUC1YakVIQXN1cUZNTmxLLWpoRndrNnI2cDZaSkxTa3NleEJTX25IQ1RpUzJaQXN2VjgzaFV1Q1nSAbABQVVfeXFMUHdNRDJXUUcySE1oajBXdWFMR1pFeU1xLXRsR05nMmF0YXZKWWs0eEVPaUhzVWJWeTRvNXpwNVV0MDRkZThLM1ExbXdnTW9BM2dSMXdVOEQxM1BJRmNoel84N2RyQVMwbnBkM2dMV0kycEphWXczNEdIVVJMQWFxZHJvWmw5Y2Rqdk81aTU4cXAyLUtTbnNvWXV6anNTQnVRN1AxaEViSm1DWkxtSElnU3c?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
+    },
+    {
+      "title": "FG to audit LPG market as import hits 26,700MT amid export by Chevron - The Guardian Nigeria News",
+      "source": "The Guardian Nigeria News",
+      "date": "Tue, 23 Jun 2026 04:14:00 GMT",
+      "datetime": "2026-06-23T04:14:00+00:00",
+      "epoch": 1782188040.0,
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNS0pHeXBBQ1FLdm41MXNfb01vNVJTTFFFVGNfdzhsNDVKNjB6VkRRUXplUUliTTQ1RUNNYkJHMU5HUGxoYlhZNXpFSUswZkVpQ3hhXzROeDFSV1BaWGE3ZHBSMXp1dTFFcl95Y1RKX2w0UUstaE1XS3JYaXByV0xrb3o1VTYzSVpnRkF0SndQUE51Qll3Ykp2VVBn?oc=5",
       "description": "",
       "category": "LNG & Gas"
     },
     {
-      "title": "Current price of oil as of June 23, 2026 - Fortune",
-      "source": "Fortune",
-      "date": "Tue, 23 Jun 2026 12:48:00 GMT",
-      "datetime": "2026-06-23T12:48:00+00:00",
-      "epoch": 1782218880.0,
-      "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5Ya0VoQ2RWa21zMFhrRUxycVdBcURienJTSDlHc09yUkNOVGp6a3BiS2pibkFVZTNUSnl3QjJ6Q0RNS09ERm11NHkxeS1YejVNdmQ3Uk9qb0FOajd5RFJmUDd3?oc=5",
+      "title": "URTeC 2026: Second revolution for shale - World Oil",
+      "source": "World Oil",
+      "date": "Tue, 23 Jun 2026 03:32:42 GMT",
+      "datetime": "2026-06-23T03:32:42+00:00",
+      "epoch": 1782185562.0,
+      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5MRzc3TXIzRVo3WEFjMUNYLTBObU1kUW9uU2R4UkE2bTZLRnZOUm1QY3o5c0lfdVhzdzFJek1lSDFvbEYzOVNWMV9QUDBqSVBzMlE4Z1NLdE05RXI1ckJSczBGQTFadGQ2WktuWjFJMG9iLXNxSlR6TXBBS2t3VTg?oc=5",
       "description": "",
-      "category": "Energy Markets"
+      "category": "US Production"
     },
     {
-      "title": "Market Outlook: Falling oil prices and earnings strength support equities - BNN Bloomberg",
-      "source": "BNN Bloomberg",
-      "date": "Mon, 22 Jun 2026 19:22:49 GMT",
-      "datetime": "2026-06-22T19:22:49+00:00",
-      "epoch": 1782156169.0,
-      "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQXzhfSk55dkFhaVFUNDliMkprRGE5WWU5Y1FsUlJzdFBxSmxxOU1zSnZxWVVWWVo4YW43bG1HWFJ5dlpCemo1UHE5ZklBX2tlLU0tdDlkRFpWYUVwQ1dwaHJCVTFWMlJTaVNZS2VvZ2s1MUdhdVNMSlpIN3dGT1I0eTBXVHc0VkczTTdKSkJ4M0ptM2ZicGpFMGRFQk9mdzdDaFJzVTFYQmlhb1ltMTBEcEJsaG9Fb2J4M09sWUhjVUdtNTJYTzhmTnFHRzhPRVhlQ0xR?oc=5",
+      "title": "US proposes to slash costs for energy drillers on federal lands - Reuters",
+      "source": "Reuters",
+      "date": "Mon, 22 Jun 2026 18:33:43 GMT",
+      "datetime": "2026-06-22T18:33:43+00:00",
+      "epoch": 1782153223.0,
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQYk02aFhyX21iVlpKUkZwREEtTWRWR0Uwbl9jSDM2RnNoTWV6VWU0cERUZ2lpLXBHOXQ4WDhqTTluUlRISmh0SEd5OWZJdnRwTUJpUENRd1R1WDVxVnJMZXFKeG9RWDRqRWdYVl9pU0I1ZzFEZlhORXd0bGpmaE5NZEptczM3YmkzWTRySjc3Q0toUkl6V0c1bTMxS3FJc18zc1hRWGtyODM?oc=5",
       "description": "",
-      "category": "Energy Markets"
+      "category": "US Production"
     },
     {
-      "title": "China prepares new LNG terminal to expand imports from sanctioned Russian plant - The New Voice of Ukraine",
-      "source": "The New Voice of Ukraine",
-      "date": "Mon, 22 Jun 2026 15:04:00 GMT",
-      "datetime": "2026-06-22T15:04:00+00:00",
-      "epoch": 1782140640.0,
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOZ05ZLTBRSjdUTjhpM0hwN09uQUlYZXU2TnZYZVhsZl92RllnSTZzNlE2Y3FNQWpRRUNSTC1vcWd0Yk1ubUJwMXZNNDRudkVEY2hjNHhCY0NRT2w1azlXZS10b3dEQVltbXlHS3ZSTVpoNjc4aS01cU82WmxBVUJQWVlFaGVxdklocTdhQ2FLR0tOTE1QSFN3YWE3LW0tRW1XakRkLXNtV0xrUDdzQnVR0gGoAUFVX3lxTFBTR1J5UlozeXZyS0dFd0tTR1JGNWNCbzBGOEg2a3dfTnYyNkFLLUhtTmp6ck94cWc3b005anVWcmRuYUcyRFU2Q2hKU1I0MkR4LUJ5WVZaX2ZLdmJLTTd3SUE3c2hYLUVIOWY2anRzTzhibDE0VEtJLXpmcXNFN1haQnM4aDdMNjFvR0pCTmxLVFREWmNUMzBMT3BGNXBxX0xOc1A5VWpnRg?oc=5",
+      "title": "U.S. Oil Is Skipping the Chance to Grab Market Share From the Gulf - The New York Times",
+      "source": "The New York Times",
+      "date": "Mon, 22 Jun 2026 14:14:10 GMT",
+      "datetime": "2026-06-22T14:14:10+00:00",
+      "epoch": 1782137650.0,
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNWm5OaG5UVFc5OGRoZ0h6Tl9YUUphQ3pzLTdiRndnNWU2c2QzQzB0eTUxYkZ1bjZvMVhsckR3SEdVYUx3QjFBaHRzYWZpdnpCVEVtTXN4M2dFdC05NTlrYkkwVkc5X0kzSmplV0tKZXhwbHZpSVdScGYzVVl6TmRsVTVvanBTcmNfdW5tdzhObHBFd0ZjeWY3VQ?oc=5",
       "description": "",
-      "category": "LNG & Gas"
+      "category": "US Production"
     }
   ]
 }
