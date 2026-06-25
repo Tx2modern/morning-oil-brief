@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   workflow_run:
-    workflows: ["Update Data & Build"]
+    workflows: ["Update Data & Build", "Midday News & X Feed Refresh"]
     types: [completed]
     branches: [main]
   workflow_dispatch:
