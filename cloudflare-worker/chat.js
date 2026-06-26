@@ -10,8 +10,13 @@
 
 export default {
   async fetch(request, env) {
+    const origin = request.headers.get('Origin') || '';
+    const allowedOrigins = [
+      'https://morningoilbrief.com',
+      'https://www.morningoilbrief.com',
+    ];
     const corsHeaders = {
-      'Access-Control-Allow-Origin': 'https://www.morningoilbrief.com',
+      'Access-Control-Allow-Origin': allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
     };
