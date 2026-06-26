@@ -52,7 +52,7 @@ OILPRICE_API_URLS = [
 
 # ── Google News RSS — US-targeted with exclusions for junk ───────────────────
 # Append -india -petrol to keep out Asian retail pump price floods
-GNEWS_BASE = 'https://news.google.com/rss/search?q={query}+when:3d&hl=en-US&gl=US&ceid=US:en'
+GNEWS_BASE = 'https://news.google.com/rss/search?q={query}+when:5d&hl=en-US&gl=US&ceid=US:en'
 FEEDS = [
     # Broad queries so Google News returns enough results; allowlist handles quality filtering
     ('crude oil price Brent WTI OPEC',                       'Crude Oil & OPEC'),
@@ -87,6 +87,9 @@ BLOCKED_SOURCES = {
     # Travel / tourism clickbait that references oil tangentially
     'travel and tour world', 'travelandtourworld', 'tourism review',
     'travel daily media', 'eturbonews', 'travelweekly',
+    # Regional variants of otherwise-allowlisted outlets
+    'cnbc tv18', 'cnbc awaaz', 'cnbc africa',
+    'the guardian nigeria', 'guardian nigeria', 'the guardian ghana',
     # Low-signal aggregators and local TV
     'oilprice.net',
     'scanx.trade', 'stockanalysis.com',
