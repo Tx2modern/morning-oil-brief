@@ -212,9 +212,9 @@ def _quality_score(item):
     """Higher = better. Used for final sort when epoch is equal."""
     src_lower = (item.get('source') or '').lower()
     bonus = 2 if any(p in src_lower for p in PREFERRED_SOURCES) else 0
-    # OilPrice.com articles get a boost since they're curated energy content
+    # Small OilPrice boost — don't let it crowd out wire services in Top Stories
     if 'oilprice' in src_lower:
-        bonus += 3
+        bonus += 1
     return item.get('epoch', 0) + bonus * 3600  # treat bonus as +hours
 
 
