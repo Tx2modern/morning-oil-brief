@@ -4874,26 +4874,32 @@ fillCurveTable('ulsd-table',  SNAPSHOT.ulsdCurve,  '$/gal');
 # ─────────────────────────────────────────────────────────────────────────────
 
 NEWS_CATEGORIES_ORDER = [
+    'Crude Oil & OPEC',
     'Geopolitics & Risk',
-    'OPEC & Production',
-    'Refining & Margins',
-    'Inventory & Demand',
-    'Markets & Prices',
-    'Companies & Deals',
-    'Transition & Macro',
+    'Energy Markets',
+    'EIA & Inventory',
+    'Refined Products',
+    'Refining',
+    'US Production',
+    'LNG & Gas',
 ]
 
 
 # ─── Inline SVG glyphs for the news category pills.  Each one is a 13x13
 # stroke-based icon using currentColor so it inherits the pill's text color.
-# Functional symbols (globe, oil drop, distillation columns, storage tanks,
-# trend line, briefcase, leaf) — not decorative clip art.
 NEWS_CATEGORY_ICONS = {
     'Top Stories': (
         '<svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" '
         'aria-hidden="true" style="flex:none">'
         '<polygon points="8,1.5 10.1,5.8 14.8,6.5 11.4,9.8 12.2,14.5 8,12.3 '
         '3.8,14.5 4.6,9.8 1.2,6.5 5.9,5.8"/></svg>'
+    ),
+    'Crude Oil & OPEC': (
+        # Oil drop
+        '<svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" '
+        'aria-hidden="true" style="flex:none">'
+        '<path d="M8 1.5C5.5 5 4 7.5 4 10a4 4 0 0 0 8 0c0-2.5-1.5-5-4-8.5z"/>'
+        '</svg>'
     ),
     'Geopolitics & Risk': (
         # Globe
@@ -4904,14 +4910,24 @@ NEWS_CATEGORY_ICONS = {
         '<path d="M2 8h12"/>'
         '<ellipse cx="8" cy="8" rx="3" ry="6"/></svg>'
     ),
-    'OPEC & Production': (
-        # Oil drop
-        '<svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" '
-        'aria-hidden="true" style="flex:none">'
-        '<path d="M8 1.5C5.5 5 4 7.5 4 10a4 4 0 0 0 8 0c0-2.5-1.5-5-4-8.5z"/>'
-        '</svg>'
+    'Energy Markets': (
+        # Trending line chart
+        '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" '
+        'stroke="currentColor" stroke-width="1.5" stroke-linecap="round" '
+        'stroke-linejoin="round" aria-hidden="true" style="flex:none">'
+        '<polyline points="2,12 5.5,8.5 8,10.5 13.5,4"/>'
+        '<polyline points="10,4 13.5,4 13.5,7.5"/></svg>'
     ),
-    'Refining & Margins': (
+    'EIA & Inventory': (
+        # Storage tank
+        '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" '
+        'stroke="currentColor" stroke-width="1.4" stroke-linecap="round" '
+        'stroke-linejoin="round" aria-hidden="true" style="flex:none">'
+        '<ellipse cx="8" cy="3.5" rx="5" ry="1.5"/>'
+        '<path d="M3 3.5v9c0 .8 2.2 1.5 5 1.5s5-.7 5-1.5v-9"/>'
+        '<path d="M3 7.5c0 .8 2.2 1.5 5 1.5s5-.7 5-1.5"/></svg>'
+    ),
+    'Refined Products': (
         # Distillation columns
         '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" '
         'stroke="currentColor" stroke-width="1.4" stroke-linecap="round" '
@@ -4923,25 +4939,20 @@ NEWS_CATEGORY_ICONS = {
         '<line x1="8" y1="2" x2="8" y2="3.3"/>'
         '<line x1="12.6" y1="4.5" x2="12.6" y2="5.8"/></svg>'
     ),
-    'Inventory & Demand': (
-        # Storage tank
+    'Refining': (
+        # Distillation columns (same icon)
         '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" '
         'stroke="currentColor" stroke-width="1.4" stroke-linecap="round" '
         'stroke-linejoin="round" aria-hidden="true" style="flex:none">'
-        '<ellipse cx="8" cy="3.5" rx="5" ry="1.5"/>'
-        '<path d="M3 3.5v9c0 .8 2.2 1.5 5 1.5s5-.7 5-1.5v-9"/>'
-        '<path d="M3 7.5c0 .8 2.2 1.5 5 1.5s5-.7 5-1.5"/></svg>'
+        '<rect x="2" y="7" width="2.8" height="7"/>'
+        '<rect x="6.6" y="3.5" width="2.8" height="10.5"/>'
+        '<rect x="11.2" y="6" width="2.8" height="8"/>'
+        '<line x1="3.4" y1="5.5" x2="3.4" y2="6.8"/>'
+        '<line x1="8" y1="2" x2="8" y2="3.3"/>'
+        '<line x1="12.6" y1="4.5" x2="12.6" y2="5.8"/></svg>'
     ),
-    'Markets & Prices': (
-        # Trending line chart
-        '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" '
-        'stroke="currentColor" stroke-width="1.5" stroke-linecap="round" '
-        'stroke-linejoin="round" aria-hidden="true" style="flex:none">'
-        '<polyline points="2,12 5.5,8.5 8,10.5 13.5,4"/>'
-        '<polyline points="10,4 13.5,4 13.5,7.5"/></svg>'
-    ),
-    'Companies & Deals': (
-        # Briefcase
+    'US Production': (
+        # Briefcase / rig silhouette
         '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" '
         'stroke="currentColor" stroke-width="1.4" stroke-linecap="round" '
         'stroke-linejoin="round" aria-hidden="true" style="flex:none">'
@@ -4949,8 +4960,8 @@ NEWS_CATEGORY_ICONS = {
         '<path d="M6 5V3.5h4V5"/>'
         '<line x1="2" y1="9" x2="14" y2="9"/></svg>'
     ),
-    'Transition & Macro': (
-        # Leaf
+    'LNG & Gas': (
+        # Leaf / flame
         '<svg viewBox="0 0 16 16" width="13" height="13" fill="none" '
         'stroke="currentColor" stroke-width="1.4" stroke-linecap="round" '
         'stroke-linejoin="round" aria-hidden="true" style="flex:none">'
