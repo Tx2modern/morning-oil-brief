@@ -1054,7 +1054,7 @@ const SNAPSHOT = {"kpi": [{"id": "wti", "label": "WTI", "last": 71.5, "change": 
     appendMsg("user",text);history.push({role:"user",content:text});
     var tb=appendMsg("assistant","Thinking...",true);
     try{
-      var r=await fetch("",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history,context:buildContext()})});
+      var r=await fetch("https://mob-chat.brad-95b.workers.dev",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history,context:buildContext()})});
       if(!r.ok){var e=await r.json().catch(function(){return{error:"Unknown error"};});tb.textContent="Error: "+(e.error||r.statusText);}
       else{var d=await r.json();var rep=d.content||"(no response)";tb.textContent=rep;tb.classList.remove("thinking");history.push({role:"assistant",content:rep});}
     }catch(e){tb.textContent="Network error.";}
