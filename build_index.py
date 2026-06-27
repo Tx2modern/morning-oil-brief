@@ -2426,9 +2426,24 @@ def _build_landing_page(raw, kpi_data, narratives, latest_date, prices=None, new
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+(function(){{{{
+  var ok=false;
+  try {{{{
+    for(var i=0;i<localStorage.length;i++){{{{
+      var k=localStorage.key(i);
+      if(k&&k.startsWith('sb-')&&k.endsWith('-auth-token')){{{{
+        var d=JSON.parse(localStorage.getItem(k));
+        if(d&&d.access_token&&d.expires_at>Date.now()/1000){{{{ok=true;break;}}}}
+      }}}}
+    }}}}
+  }}}}catch(e){{{{}}}}
+  if(!ok)window.location.replace('login.html');
+}})();
+</script>
 <meta name="description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
 <meta name="theme-color" content="#07090d">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://mob-chat.brad-95b.workers.dev;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {_FAVICON}
@@ -2914,7 +2929,7 @@ const SNAPSHOT = {snapshot_kpi_only};
     appendMsg("user",text);history.push({{role:"user",content:text}});
     var tb=appendMsg("assistant","Thinking...",true);
     try{{
-      var r=await fetch("{CHAT_ENDPOINT_URL}",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{messages:history,context:buildContext()}})}});
+      var r=await fetch("https://mob-chat.brad-95b.workers.dev",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{messages:history,context:buildContext()}})}});
       if(!r.ok){{var e=await r.json().catch(function(){{return{{error:"Unknown error"}};}});tb.textContent="Error: "+(e.error||r.statusText);}}
       else{{var d=await r.json();var rep=d.content||"(no response)";tb.textContent=rep;tb.classList.remove("thinking");history.push({{role:"assistant",content:rep}});}}
     }}catch(e){{tb.textContent="Network error.";}}
@@ -3533,7 +3548,7 @@ def _build_margins_page(prices, latest_date, raw=None):
 <meta charset="UTF-8">
 <meta name="description" content="Crack spread seasonality charts — 3-2-1, gasoline, distillate, jet cracks and Brent–WTI spread vs 5-year bands.">
 <meta name="theme-color" content="#07090d">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://mob-chat.brad-95b.workers.dev;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {_FAVICON}
@@ -4514,7 +4529,7 @@ def _build_curves_page(prices, latest_date):
 <meta charset="UTF-8">
 <meta name="description" content="WTI and Brent forward curves, calendar spreads, and crude oil term structure updated daily from NYMEX settlement.">
 <meta name="theme-color" content="#07090d">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://mob-chat.brad-95b.workers.dev;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {_FAVICON}
@@ -5070,7 +5085,7 @@ def _build_news_page(news_items, refreshed_str):
 <meta charset="UTF-8">
 <meta name="description" content="Oil market headlines grouped by topic — geopolitics, OPEC, refining margins, inventory, and prices. Updated daily.">
 <meta name="theme-color" content="#07090d">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://mob-chat.brad-95b.workers.dev;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {_FAVICON}
