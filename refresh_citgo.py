@@ -18,6 +18,7 @@ Requires:
 """
 import json
 import os
+import re
 import sys
 import time
 import urllib.parse
@@ -31,11 +32,11 @@ APIFY_TOKEN = os.environ.get('APIFY_API_TOKEN')
 ANTHROPIC_KEY = os.environ.get('ANTHROPIC_API_KEY')
 
 ACTOR_ID = 'apidojo~tweet-scraper'
-SEARCH_QUERY_PRIMARY   = 'CITGO Venezuela'  # first pass — both keywords
-SEARCH_QUERY_FALLBACK  = 'Venezuela oil'    # second pass — Venezuela trending if no CITGO hits
+SEARCH_QUERY_PRIMARY   = 'CITGO Venezuela'
+ SEARCH_QUERY_FALLBACK  = 'Venezuela oil refinery'
 FETCH_LIMIT = 30
 TOP_N = 6
-FALLBACK_N = 2          # if primary yields nothing, show top 2 Venezuela posts
+FALLBACK_N = 2
 LOOKBACK_HOURS = 48
 
 SENTINEL_START = '// @@CITGO_DATA_START@@'
@@ -44,6 +45,27 @@ SENTINEL_END = '// @@CITGO_DATA_END@@'
 if not APIFY_TOKEN:
     print('ERROR: APIFY_API_TOKEN environment variable not set.', file=sys.stderr)
     sys.exit(1)
+
+# Oil/energy anchor keywords — a tweet must contain at least one to be kept
+_OIL_ANCHOR_RE = re.compile(
+    r'\b(oil|crude|refin|gasoline|diesel|fuel|barrel[s]?|bbl|pdvsa|citgo|'
+    r'petroleum|energy|lng|pipeline|tanker|cargo|export|import|sanction|'
+    r'production|output|supply|downstream|upstream|petrole|combust)\b',
+    re.IGNORECASE,
+)
+
+# AI refusal phrases — if summary starts with one of these, skip the post
+_REFUSAL_STARTS = (
+    "i cannot", "i can't", "i don't have", "i am unable", "i'm unable",
+    "unable to provide", "no specific", "this post does not", "this post contains no",
+    "the post does not", "the post contains no", "there is no", "there are no",
+    "no direct", "no oil", "no energy", "no operational", "no implication",
+)
+
+
+def _is_oil_relevant(text):
+    """Return True only if the tweet text contains an oil/energy anchor keyword."""
+    return bool(_OIL_ANCHOR_RE.search(text))
 
 
 def apify_post(path, payload):
@@ -99,6 +121,7 @@ def fetch_dataset(dataset_id, limit=100):
 
 
 def summarize(text, author_name):
+    """Return an English analyst summary, or None if the post lacks oil content."""
     if not ANTHROPIC_KEY:
         return text[:200] + ('...' if len(text) > 200 else '')
 
@@ -106,11 +129,12 @@ def summarize(text, author_name):
         f'This X post by {author_name} mentions CITGO or Venezuela energy:\n\n"{text}"\n\n'
         'If the post is in Spanish or another language, translate it to English first. '
         'Then write exactly 1 sentence, analyst-style, summarizing the key implication '
-        'for CITGO, Venezuelan oil, or US refining. Be factual. No quotes.'
+        'for CITGO, Venezuelan oil, or US refining. Be factual. No quotes. '
+        'If the post contains no oil or energy market information, reply with exactly: SKIP'
     )
     payload = json.dumps({
         'model': 'claude-haiku-4-5-20251001',
-        'max_tokens': 100,
+        'max_tokens': 120,
         'messages': [{'role': 'user', 'content': prompt}],
     }).encode()
     req = urllib.request.Request(
@@ -125,7 +149,15 @@ def summarize(text, author_name):
     try:
         with urllib.request.urlopen(req, timeout=20) as r:
             resp = json.loads(r.read())
-        return resp['content'][0]['text'].strip()
+        result = resp['content'][0]['text'].strip()
+        # Drop explicit SKIP signal
+        if result.upper() == 'SKIP':
+            return None
+        # Drop any refusal-style response
+        result_lower = result.lower()
+        if any(result_lower.startswith(p) for p in _REFUSAL_STARTS):
+            return None
+        return result
     except Exception as e:
         print(f'    summary error: {e}', file=sys.stderr)
         return text[:200]
@@ -144,8 +176,6 @@ def patch_html(payload):
 
     if start_idx == -1 or end_idx == -1:
         print('ERROR: sentinel comments not found in x_feed.html', file=sys.stderr)
-        print(f'  Looking for: {SENTINEL_START!r}', file=sys.stderr)
-        print(f'  and:         {SENTINEL_END!r}', file=sys.stderr)
         return False
 
     if end_idx <= start_idx:
@@ -166,7 +196,7 @@ def patch_html(payload):
     with open(X_FEED_HTML, 'w', encoding='utf-8') as f:
         f.write(patched)
 
-    # Verify the written JSON is valid by parsing it back
+    # Verify the written JSON is valid
     with open(X_FEED_HTML, 'r', encoding='utf-8') as f:
         written = f.read()
     verify_start = written.find(SENTINEL_START)
@@ -191,24 +221,17 @@ def patch_html(payload):
 
 
 def build_tweet_url(tweet, username):
-    """Return the canonical X URL for a tweet.
-
-    Prefer the url field returned by Apify directly; fall back to
-    constructing from tweetId (the actual status ID) or id."""
     if tweet.get('url'):
         return tweet['url']
-    # tweetId is the numeric status ID; 'id' may be an Apify internal ID
     status_id = tweet.get('tweetId') or tweet.get('id', '')
     return f'https://x.com/{username}/status/{status_id}'
 
 
 def _run_search(query, since, limit):
-    """Run Apify tweet search and return raw items."""
     actor_input = {
         'searchTerms': [query],
         'maxItems': limit,
         'sort': 'Top',
-        'tweetLanguage': 'en',
         'start': since,
     }
     dataset_id = run_actor_and_wait(ACTOR_ID, actor_input)
@@ -216,16 +239,18 @@ def _run_search(query, since, limit):
 
 
 def _filter_candidates(items, require_both_keywords=False):
-    """Filter to relevant originals, optionally requiring both citgo AND venezuela."""
+    """Filter to oil-relevant originals, optionally requiring both citgo AND venezuela."""
     def _relevant(t):
         body = (t.get('text', '') + t.get('fullText', '')).lower()
-        if require_both_keywords:
-            return 'citgo' in body and 'venezuela' in body
-        return 'citgo' in body or 'venezuela' in body
+        keyword_match = (
+            ('citgo' in body and 'venezuela' in body)
+            if require_both_keywords
+            else ('citgo' in body or 'venezuela' in body)
+        )
+        return keyword_match and _is_oil_relevant(t.get('text', '') + t.get('fullText', ''))
 
     originals = [t for t in items if not t.get('isRetweet', False) and _relevant(t)]
     if not originals:
-        # Fall back to including retweets
         originals = [t for t in items if _relevant(t)]
     return originals
 
@@ -245,12 +270,12 @@ def main():
         sys.exit(1)
 
     candidates = _filter_candidates(items)
-    print(f'  {len(candidates)} CITGO/Venezuela candidates')
+    print(f'  {len(candidates)} oil-relevant CITGO/Venezuela candidates')
 
-    # --- Pass 2: Venezuela-only fallback if pass 1 found nothing ---
+    # --- Pass 2: fallback if pass 1 found nothing oil-relevant ---
     if not candidates:
         is_fallback = True
-        print(f'  No CITGO/Venezuela posts found — running fallback search "{SEARCH_QUERY_FALLBACK}"...')
+        print(f'  No oil-relevant posts found — running fallback search "{SEARCH_QUERY_FALLBACK}"...')
         try:
             items2 = _run_search(SEARCH_QUERY_FALLBACK, since, FETCH_LIMIT)
             print(f'  {len(items2)} tweets fetched (fallback)')
@@ -258,20 +283,19 @@ def main():
             print(f'ERROR (pass 2): {e}', file=sys.stderr)
             sys.exit(1)
         candidates = _filter_candidates(items2)
-        print(f'  {len(candidates)} Venezuela candidates (fallback)')
+        print(f'  {len(candidates)} Venezuela oil candidates (fallback)')
 
     limit = FALLBACK_N if is_fallback else TOP_N
 
-    # Sort by engagement and take top N
     candidates.sort(
         key=lambda t: (t.get('likeCount', 0) + t.get('retweetCount', 0)),
         reverse=True,
     )
-    top = candidates[:limit]
-    print(f'  Selected {len(top)} posts ({"Venezuela fallback" if is_fallback else "CITGO+Venezuela"})')
 
     posts = []
-    for tweet in top:
+    for tweet in candidates:
+        if len(posts) >= limit:
+            break
         author = tweet.get('author', {})
         username = author.get('userName', 'unknown')
         display_name = author.get('name', username)
@@ -279,6 +303,9 @@ def main():
         tweet_url = build_tweet_url(tweet, username)
         print(f'  Summarizing @{username} → {tweet_url}')
         summary = summarize(text, display_name)
+        if summary is None:
+            print(f'    Skipped (no oil content in summary)')
+            continue
         posts.append({
             'id': tweet.get('tweetId') or tweet.get('id', ''),
             'url': tweet_url,
@@ -291,6 +318,8 @@ def main():
             'replyCount': tweet.get('replyCount', 0),
         })
         time.sleep(0.3)
+
+    print(f'  {len(posts)} posts kept after summarization filter')
 
     payload = {
         'lastUpdated': now.strftime('%Y-%m-%dT%H:%M:%SZ'),
