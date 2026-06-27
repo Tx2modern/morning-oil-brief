@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>(function(){var sb=supabase.createClient('https://ohagroxyqkoygxdkbjvn.supabase.co','sb_publishable_B88mNC5uZLnWjVqShctogg_wDh8QgEw');sb.auth.getSession().then(function(r){if(!r.data.session)window.location.href='login.html';});})()</script>
+<meta name="description" content="Curated energy X (Twitter) feed — tanker trackers, price reporting agencies, analysts, and official sources. Updated daily.">
+<meta name="theme-color" content="#07090d">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🛢️</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MOB · Morning Oil Brief">
+<meta property="og:title" content="X Feed · MOB">
+<meta property="og:description" content="Curated energy X (Twitter) feed — tanker trackers, price reporting agencies, analysts, and official sources. Updated daily.">
+<meta property="og:url" content="https://eia-dashboard.netlify.app/x_feed">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="X Feed · MOB">
+<meta name="twitter:description" content="Curated energy X (Twitter) feed — tanker trackers, price reporting agencies, analysts, and official sources.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X Feed · Morning Oil Brief</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg: #07090d; --panel: #0e1117; --panel-2: #141821;
+  --border: #1d222d; --border-soft: #161a23;
+  --text: #e6e8ec; --muted: #7c8593; --muted-2: #9aa3b1;
+  --accent: #f5a524; --mob-ai: #5eead4; --mob-text-dim: #c1c5cf;
+  --mob-border-strong: #2a3041;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    var(--bg);
+  color: var(--text); font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1320px; margin: 0 auto; padding: 22px 32px 60px; }
+@media (max-width: 720px) { .container { padding: 18px 18px 40px; } }
+
+/* ─── Nav ───────────────────────────────────────────────────────── */
+.top-nav { margin: 0 0 18px; }
+.nav-inner {
+  max-width: 1320px; margin: 0 auto; padding: 18px 32px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 24px; flex-wrap: wrap;
+}
+@media (max-width: 720px) { .nav-inner { padding: 18px 18px 0; } }
+.nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav-link {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 8px 14px; color: var(--muted-2); background: transparent;
+  border-radius: 6px; text-decoration: none; transition: color 0.15s, background 0.15s;
+}
+.nav-link:hover { color: var(--text); background: var(--panel-2); }
+.nav-signout {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 8px 14px; color: var(--muted); background: transparent;
+  border: 1px solid var(--border-soft, var(--border)); border-radius: 6px; cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-signout:hover { color: #f87171; border-color: rgba(248,113,113,0.45); background: rgba(248,113,113,0.06); }
+.nav-link.active { color: var(--accent); }
+.mob-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text);
+}
+.mob-mark { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; }
+.mob-mark svg { width: 100%; height: 100%; display: block; }
+.mob-sep { color: var(--muted); margin: 0 2px; }
+.mob-tagline { color: var(--muted-2); }
+
+/* ─── Header ────────────────────────────────────────────────────── */
+.header {
+  display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between;
+  border-bottom: 1px solid var(--border-soft); padding: 18px 0 26px; margin-bottom: 26px; gap: 24px;
+}
+.header h1 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 56px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; color: var(--text); margin: 0;
+}
+@media (max-width: 900px) { .header h1 { font-size: 40px; } }
+@media (max-width: 560px) { .header h1 { font-size: 32px; } }
+.header .subtitle {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 10px;
+}
+.update-info {
+  margin-left: auto; flex-shrink: 0; text-align: right;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); line-height: 1.7;
+}
+.update-info strong { color: var(--mob-text-dim); font-weight: 500; }
+.update-info .pill {
+  display: inline-block; background: rgba(94,234,212,0.08); color: var(--mob-ai);
+  border: 1px solid rgba(94,234,212,0.35); border-radius: 4px; padding: 4px 10px;
+  font-size: 10.5px; letter-spacing: 0.18em; margin-bottom: 4px;
+}
+
+/* ─── Section ───────────────────────────────────────────────────── */
+.x-section { margin-bottom: 30px; }
+.x-section-title {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 12px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.x-cat-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 5px 12px 5px 10px; border-radius: 999px;
+  background: var(--cat-color, rgba(96,165,250,0.18));
+  color: var(--cat-text, #cbd5e1);
+  border: 1px solid var(--cat-border, rgba(96,165,250,0.4));
+  line-height: 1;
+}
+.x-count { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+/* Category colors — one per source group */
+.cat-flows     { --cat-color: rgba(6,182,212,0.18);   --cat-text: #67e8f9; --cat-border: rgba(6,182,212,0.45); }
+.cat-pra       { --cat-color: rgba(168,85,247,0.18);  --cat-text: #d8b4fe; --cat-border: rgba(168,85,247,0.45); }
+.cat-analyst   { --cat-color: rgba(96,165,250,0.18);  --cat-text: #93c5fd; --cat-border: rgba(96,165,250,0.45); }
+.cat-news      { --cat-color: rgba(34,197,94,0.18);   --cat-text: #86efac; --cat-border: rgba(34,197,94,0.45); }
+.cat-official  { --cat-color: rgba(245,158,11,0.18);  --cat-text: #fcd34d; --cat-border: rgba(245,158,11,0.45); }
+.cat-refiner   { --cat-color: rgba(239,68,68,0.18);   --cat-text: #fca5a5; --cat-border: rgba(239,68,68,0.45); }
+.cat-trading   { --cat-color: rgba(99,102,241,0.18);  --cat-text: #c7d2fe; --cat-border: rgba(99,102,241,0.45); }
+.cat-fuel      { --cat-color: rgba(20,184,166,0.18);  --cat-text: #99f6e4; --cat-border: rgba(20,184,166,0.45); }
+.cat-midstream { --cat-color: rgba(249,115,22,0.18);  --cat-text: #fed7aa; --cat-border: rgba(249,115,22,0.45); }
+.cat-citgo     { --cat-color: rgba(220,38,38,0.18);   --cat-text: #fca5a5; --cat-border: rgba(220,38,38,0.55); }
+
+/* ─── CITGO/Venezuela section ───────────────────────────────────── */
+.citgo-section {
+  margin-bottom: 32px; padding: 18px 20px 20px;
+  background: rgba(220,38,38,0.04); border: 1px solid rgba(220,38,38,0.25);
+  border-left: 3px solid rgba(220,38,38,0.7); border-radius: 8px;
+}
+.citgo-section-title {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 14px; padding-bottom: 8px;
+  border-bottom: 1px solid rgba(220,38,38,0.2);
+}
+.citgo-label {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(252,165,165,0.7); margin-left: auto;
+}
+
+/* ─── Post grid + items (news.html style) ───────────────────────── */
+.x-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+@media (max-width: 900px) { .x-grid { grid-template-columns: 1fr; } }
+
+.x-item {
+  display: block; padding: 12px 14px; text-decoration: none; color: inherit;
+  background: var(--panel); border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--border); border-radius: 6px;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.x-item:hover {
+  background: rgba(29,155,240,0.04);
+  border-left-color: #1d9bf0;
+  transform: translateX(2px);
+}
+.x-item.top-item { border-left-color: var(--accent); }
+.x-item.top-item:hover { border-left-color: var(--accent); background: rgba(245,165,36,0.04); }
+
+.x-summary {
+  font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.45; margin-bottom: 6px;
+}
+.x-meta {
+  font-size: 11px; color: var(--muted);
+  font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: 0.05em;
+}
+.x-meta .handle { color: var(--muted-2); }
+.x-meta .dot { margin: 0 5px; opacity: 0.4; }
+.x-meta .eng { color: var(--muted); }
+.x-top-badge {
+  display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  background: rgba(245,165,36,0.1); border: 1px solid rgba(245,165,36,0.3);
+  padding: 1px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle;
+}
+
+/* ─── No data ───────────────────────────────────────────────────── */
+.no-data {
+  text-align: center; padding: 60px 20px; color: var(--muted);
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+}
+.no-data h3 {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 16px; letter-spacing: 0.08em; color: var(--text); margin: 12px 0 8px;
+}
+.no-data p { margin: 0; font-size: 13px; }
+
+/* ─── Footer ─────────────────────────────────────────────────────── */
+footer {
+  margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border-soft);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); text-align: center;
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="mob-brand">
+      <span class="mob-mark">
+        <svg width="28" height="32" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;overflow:visible">
+          <path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="#f0b056" opacity="0.95"/>
+          <path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="none" stroke="#f0b056" stroke-width="1.2"/>
+          <ellipse cx="14" cy="4.6" rx="10.8" ry="2.2" fill="#07090d" stroke="#f0b056" stroke-width="1.1"/>
+          <path d="M 2.5 10.6 Q 14 12.4 25.5 10.6" fill="none" stroke="#07090d" stroke-width="1.1"/>
+          <path d="M 2.5 21.4 Q 14 23.2 25.5 21.4" fill="none" stroke="#07090d" stroke-width="1.1"/>
+          <text x="14" y="18.2" text-anchor="middle" fill="#07090d" font-family="'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace" font-size="6" font-weight="700" letter-spacing="0.4">OIL</text>
+        </svg>
+      </span>
+      <span class="mob-name">MOB</span><span class="mob-sep">·</span><span class="mob-tagline">Morning Oil Brief</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="margins.html">Cracks · Prices</a>
+      <a class="nav-link" href="curves.html">Forward Curves</a>
+      <a class="nav-link" href="inventory.html">Inventories</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link active" href="x_feed.html">X Feed</a>
+    </div>
+      <button class="nav-signout" onclick="signOut()">Sign Out</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <div>
+      <h1>X Feed</h1>
+      <div class="subtitle">Trending posts · crude, refining &amp; products · past 24 hours</div>
+    </div>
+    <div class="update-info">
+      <div class="pill">Live</div>
+      <div>Updated: <strong id="last-updated">—</strong></div>
+      <div id="post-count-label"></div>
+    </div>
+  </div>
+
+  <div id="feed-container">
+    <div class="no-data">
+      <div style="font-size:40px">📡</div>
+      <h3>Awaiting First Scrape</h3>
+      <p>The scheduled task runs daily at 4:00 AM CT.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer id="footer-line">Morning Oil Brief · Energy X Feed · Updated daily at 04:00 CT</footer>
+
+<script>
+  function signOut() {
+    Object.keys(localStorage).forEach(function(k) {
+      if (k.startsWith('sb-')) localStorage.removeItem(k);
+    });
+    window.location.href = 'login.html';
+  }
+// @@CITGO_DATA_START@@
+// ── CITGO/VENEZUELA DATA (rewritten by citgo-venezuela-x-feed-daily task) ──
+const CITGO_DATA = {"lastUpdated":"2026-06-27T00:19:24Z","posts":[{"id":"2070531103908094400","url":"https://x.com/Mr_Civico/status/2070531103908094400","author":{"name":"🎙️ ᗰᖇ. ᑕíᐯIᑕO ®🇲🇽₿ ✖️","userName":"Mr_Civico"},"text":"🆘🚨🇻🇪Ojos en Venezuela 🚨 👇🏻 \n\nY siguen los rescates. Gracias rescatistas, gracias ciudadanía 🙏🏻\n\nhttps://t.co/GiHkTulnB9","summary":"I cannot provide a meaningful analyst summary because the post content is not visible in the text provided—only a link is referenced, making it impossible to determine what specific event or development regarding Venezuela, CITGO, or energy is being discussed.","createdAt":"Fri Jun 26 15:34:18 +0000 2026","likeCount":100,"retweetCount":30,"replyCount":3},{"id":"2070125943553683528","url":"https://x.com/CitizenGOes/status/2070125943553683528","author":{"name":"CitizenGO ES","userName":"CitizenGOes"},"text":"En estos momentos difíciles, nos unimos en oración por Venezuela y por todas las personas afectadas por el terremoto. Que las víctimas, sus familias y los equipos de rescate encuentren fortaleza, esperanza y protección. 🙏🇻🇪 https://t.co/JjcG1vY1Av","summary":"CitizenGO ES's prayer post regarding earthquake victims in Venezuela carries no direct operational implications for CITGO or Venezuelan oil production capacity.","createdAt":"Thu Jun 25 12:44:20 +0000 2026","likeCount":39,"retweetCount":20,"replyCount":2},{"id":"2070426019396305077","url":"https://x.com/galizaCIG/status/2070426019396305077","author":{"name":"CIG","userName":"galizaCIG"},"text":"A CIG traslada toda a súa solidariedade e apoio ao pobo venezolano ante a terríbel catástrofe sufrida debido á forte serie de terremotos que sacudiron o país\n#Venezuela\nhttps://t.co/w4dYkeLKQg https://t.co/IHLl8tedpF","summary":"CIG's statement expresses solidarity with Venezuela following earthquakes, but contains no direct implications for CITGO operations, Venezuelan oil production, or U.S. refining markets.","createdAt":"Fri Jun 26 08:36:44 +0000 2026","likeCount":31,"retweetCount":9,"replyCount":0},{"id":"2070654701176045625","url":"https://x.com/CiscoCANFT/status/2070654701176045625","author":{"name":"Cisco | CryptoAlert","userName":"CiscoCANFT"},"text":"Me quito el sombrero ante @yummy_vzla! su respuesta a la crisis en Venezuela ha sido superlativa \n\nEn 48 han habilitado:\n\n•Viajes gratis a hospitales y clínicas en Caracas (con compensación total a los conductores: yummy  paga el viaje)\n\n•Héroes / First responders: personal de emergencia viaja gratis registrándose en https://t.co/Igot4XJQVV.\n\n•Donaciones con matching: dona en https://t.co/240AsqLOVO (tarjetas, ACH, pago móvil) y Yummy agrega 25% extra (hasta $100.000)\n\n•Plataforma SOS: reporta daños estructurales con fotos y ubicación (https://t.co/7ZtsgU93OD). Ingenieros voluntarios evalúa las estructuras \n\r\n•Servicio solo donde sea seguro (evaluando constantemente) para proteger a los yummers\n\nGracias Vicente y todo el equipo de Yummy, ojalá más empresas hicieran asi sea una fracción de lo que ustedes están haciendo","summary":"This post does not reference CITGO or Venezuelan oil operations; it describes humanitarian logistics services by a Venezuelan delivery platform responding to a crisis, with no direct implications for petroleum infrastructure or US refining.","createdAt":"Fri Jun 26 23:45:26 +0000 2026","likeCount":15,"retweetCount":3,"replyCount":1},{"id":"2070565147110719926","url":"https://x.com/Mr_Civico/status/2070565147110719926","author":{"name":"🎙️ ᗰᖇ. ᑕíᐯIᑕO ®🇲🇽₿ ✖️","userName":"Mr_Civico"},"text":"🇻🇪🚨Ojos en Venezuela 🚨 👇🏻 \n\nTengan fé 🙏🏻","summary":"I cannot write a factual analyst-style summary because the post itself contains no specific information about CITGO, Venezuelan oil, or US refining—only a generic call to \"keep faith\" regarding Venezuela with no details about what development or implication is being referenced.","createdAt":"Fri Jun 26 17:49:34 +0000 2026","likeCount":9,"retweetCount":4,"replyCount":2},{"id":"2070041123423236567","url":"https://x.com/Mr_Civico/status/2070041123423236567","author":{"name":"🎙️ ᗰᖇ. ᑕíᐯIᑕO ®🇲🇽₿ ✖️","userName":"Mr_Civico"},"text":"👇🏻🚨🇻🇪Ojos en Venezuela 🚨 \n\nHoy la gente se queda afuera de casa 🙏🏻🫂 https://t.co/WL906NLril","summary":"I cannot reliably extract a specific factual claim about CITGO or Venezuelan energy from this post, as the text references people being outside their homes in Venezuela without providing concrete details about energy infrastructure or operational impacts.","createdAt":"Thu Jun 25 07:07:17 +0000 2026","likeCount":9,"retweetCount":4,"replyCount":0}]};
+// @@CITGO_DATA_END@@
+
+// ── EMBEDDED DATA (rewritten by scheduled task each run) ─────────
+const FEED_DATA = {"lastUpdated":"2026-06-27T00:17:20Z","posts":[{"id":"2070396326445973603","author":{"name":"Javier Blas","userName":"JavierBlas","category":"News"},"text":"PHOTOS OF THE DAY: Saudi Arabia is loading simultaneously 4 supertankers in the Persian Gulf. Two started loading yesterday at the single-point moorings of Ju’aymah (see post below) with their AIS visible (and a 3rd is waiting nearby). This morning, two others appear to be https://t.co/bJN1EU9eEw https://t.co/W5lP7k4WHo","summary":"Saudi Arabia is simultaneously loading four supertankers in the Persian Gulf, indicating a significant increase in oil export activity. The concurrent loading of multiple large vessels suggests elevated crude oil shipments from the kingdom.","createdAt":"2026-06-26T06:38:44.000Z","likeCount":524,"retweetCount":99,"replyCount":18},{"id":"2070590332148859241","author":{"name":"Patrick De Haan","userName":"GasBuddyGuy","category":"Retail Fuel"},"text":"only $1.38 more to go… haven’t seen a national average at $2.50 since Covid https://t.co/CdkGRHZfmA","summary":"Patrick De Haan notes that gas prices are currently $1.12 away from reaching $2.50 per gallon nationally, a level not seen since the Covid pandemic period.","createdAt":"2026-06-26T19:29:39.000Z","likeCount":258,"retweetCount":17,"replyCount":9},{"id":"2070553393752318072","author":{"name":"Rory Johnston","userName":"Rory_Johnston","category":"News"},"text":"*US OIL RIG COUNT UP 7 TO 440 , BAKER HUGHES SAYS\n\nLOL, dear lord the timing mismatch here is incredible.","summary":"The US oil rig count increased by 7 to 440 according to Baker Hughes, though Johnston's comment suggests the timing of this data release creates some market implications or confusion.","createdAt":"2026-06-26T17:02:52.000Z","likeCount":253,"retweetCount":9,"replyCount":21},{"id":"2070563744757809554","author":{"name":"Rory Johnston","userName":"Rory_Johnston","category":"News"},"text":"sometimes, imo, the reply guys are inadvertently excellent https://t.co/93vxyTnp6b","summary":"sometimes, imo, the reply guys are inadvertently excellent https://t.co/93vxyTnp6b","createdAt":"2026-06-26T17:44:00.000Z","likeCount":219,"retweetCount":0,"replyCount":18},{"id":"2070529758476058690","author":{"name":"Javier Blas","userName":"JavierBlas","category":"News"},"text":"China gave, and China hath taken away.","summary":"I can only work with the text provided, which is a biblical reference without specific market details. To write an accurate oil market summary, I would need additional context from the linked article or post content that isn't included here.","createdAt":"2026-06-26T15:28:57.000Z","likeCount":219,"retweetCount":10,"replyCount":7},{"id":"2070442666236457042","author":{"name":"Tracy Shuchart","userName":"chigrl","category":"Analysts & Traders"},"text":"here is my shocked face >> \n\nChina Gives Coal Room to Grow in New Five-Year Energy Plan\n\nChina is leaving room for coal consumption to grow in coming years, as the stability of the world’s largest energy market continues to outweigh climate concerns.\n\n“We will always prioritize","summary":"# Oil Market Summary\n\nChina's decision to prioritize energy stability over climate concerns by allowing continued coal consumption growth may reduce pressure on oil demand as coal remains a competitive energy source. However, the limited text provided doesn't contain specific information about direct oil market implications.","createdAt":"2026-06-26T09:42:53.000Z","likeCount":152,"retweetCount":20,"replyCount":3},{"id":"2070562554624020711","author":{"name":"US Dept of Energy","userName":"ENERGY","category":"Official"},"text":"Thanks to President Trump's Working Families Tax Cuts Act, @DOE_EDF announced American nuclear supply chain loans that will help unleash the commercial nuclear industry base. https://t.co/MS3xGLtHZy","summary":"The Department of Energy announced nuclear supply chain loans under tax cut legislation, which could support domestic nuclear industry expansion. The oil market implications of this development cannot be determined from the text provided, as it contains no information about energy pricing, demand shifts, or competitive dynamics between nuclear and oil sectors.","createdAt":"2026-06-26T17:39:16.000Z","likeCount":152,"retweetCount":42,"replyCount":8},{"id":"2070619743384436774","author":{"name":"Tracy Shuchart","userName":"chigrl","category":"Analysts & Traders"},"text":"So 95°F?  Welcome to my every summer in the US. https://t.co/khMQozuOHF","summary":"So 95°F?  Welcome to my every summer in the US. https://t.co/khMQozuOHF","createdAt":"2026-06-26T21:26:31.000Z","likeCount":138,"retweetCount":7,"replyCount":1},{"id":"2070590687523852437","author":{"name":"Patrick De Haan","userName":"GasBuddyGuy","category":"Retail Fuel"},"text":"Gas may not be falling to $2.50 soon but at least there’s still some places in the middle of nowhere with cheap beer? https://t.co/ngTBOvvNYt","summary":"Patrick De Haan suggests that gasoline prices are unlikely to decline to $2.50 per gallon in the near term, while noting that consumers can still find affordable beer in remote areas.","createdAt":"2026-06-26T19:31:04.000Z","likeCount":136,"retweetCount":7,"replyCount":4},{"id":"2070319816091590748","author":{"name":"Reuters Venezuela","userName":"ReutersVzla","category":"News"},"text":"Death toll from Venezuela earthquakes rises to around 235, health minister says\nJune 25 (Reuters) - The death toll from two back-to-back earthquakes in Venezuela has risen to around 235, Health Minister Carlos Alvarado said in an interview with state television on Thursday.","summary":"# Oil Market Implications Summary\n\nThe text provided does not contain information about oil market implications from the Venezuelan earthquakes. To write an accurate summary on this topic, additional sources discussing impacts on Venezuela's oil infrastructure or production would be needed.","createdAt":"2026-06-26T01:34:43.000Z","likeCount":77,"retweetCount":25,"replyCount":4},{"id":"2070402943308751022","author":{"name":"Ole Hansen","userName":"Ole_S_Hansen","category":"Analysts & Traders"},"text":"#Commodities\nThe Bloomberg Commodity Index, which tracks a basket of 25 major futures contracts, is heading for a sixth consecutive weekly loss, down 3% this week and 12% since hitting a record high last month. All sectors, except soft commodities - where a 24% weather-driven https://t.co/s61Qw5JrKU","summary":"The Bloomberg Commodity Index is in a significant downturn, falling 3% this week and 12% from its recent peak, with weakness across most sectors that could signal reduced demand pressures on crude oil markets. Soft commodities are the exception, showing strength due to weather factors, while broader commodity weakness suggests potential headwinds for energy prices.","createdAt":"2026-06-26T07:05:02.000Z","likeCount":52,"retweetCount":12,"replyCount":3},{"id":"2070491290962198613","author":{"name":"Kpler","userName":"kpler","category":"Flows & Tracking"},"text":"Hormuz traffic stays elevated\n\nStrait of Hormuz traffic remained resilient on 25 June, with 54 verified crossings across a broad mix of commercial and energy-linked vessels. West-to-East movements dominated, while the Omani Route accounted for the largest share of identified https://t.co/UOtJE35wjd","summary":"The Strait of Hormuz maintained strong traffic volume with 54 verified crossings on June 25, indicating continued resilience in energy shipments through a critical chokepoint for global oil markets.","createdAt":"2026-06-26T12:56:06.000Z","likeCount":50,"retweetCount":18,"replyCount":1},{"id":"2070555717140885551","author":{"name":"Kpler","userName":"kpler","category":"Flows & Tracking"},"text":"Hormuz risks resurface\n\nThe QatarEnergy chartered Umm Slal has become the latest LNG tanker to reverse course near the Strait of #Hormuz, following a similar move by Gaslog Shanghai on 25 June. The reversals coincided with warnings from Iran’s IRGC that vessels must avoid https://t.co/ySMFoZdLuc","summary":"Multiple LNG tankers have reversed course near the Strait of Hormuz following Iranian warnings, potentially disrupting liquefied natural gas shipments through a critical chokepoint. The incidents raise concerns about maritime transit risks in the region that could affect global energy supplies.","createdAt":"2026-06-26T17:12:06.000Z","likeCount":42,"retweetCount":10,"replyCount":3},{"id":"2070470263133688124","author":{"name":"Ole Hansen","userName":"Ole_S_Hansen","category":"Analysts & Traders"},"text":"Commodities weekly: June reset as peace hopes hawkish Fed and fund liquidation hit crowded longs https://t.co/E3LtU7TSkI via @saxobank https://t.co/86h8LSl0z7","summary":"# Oil Market Summary\n\nJune commodity resets are being driven lower by peace hopes, a hawkish Federal Reserve stance, and fund liquidation selling from crowded long positions, suggesting downward pressure on oil prices.","createdAt":"2026-06-26T11:32:32.000Z","likeCount":34,"retweetCount":14,"replyCount":0},{"id":"2070496079481614619","author":{"name":"IEA","userName":"iea","category":"Official"},"text":"A huge surplus in global oil markets going into the Hormuz crisis provided a major cushion against the initial shock\n\nBut with global oil inventories falling at a record pace since then, the recovery in flows through the Strait has come at a critical time: https://t.co/vvjkiIlFD9 https://t.co/xKRDhCpMjb","summary":"Global oil inventories have fallen at a record pace since the Hormuz crisis, depleting the surplus cushion that initially absorbed the shock, making the recent recovery of flows through the Strait critically important for market stability.","createdAt":"2026-06-26T13:15:07.000Z","likeCount":32,"retweetCount":22,"replyCount":3},{"id":"2070313602104332665","author":{"name":"IEA","userName":"iea","category":"Official"},"text":"The supply response to the Hormuz crisis extends well beyond the Middle East\n\nLed by the US, Atlantic Basin producers have boosted exports to Asia. At the same time, China has drawn on inventories to curb crude imports, helping ease wider market pressures: https://t.co/vvjkiIlFD9 https://t.co/nEd15sIyjT","summary":"The oil market is adjusting to Middle East supply concerns through increased US and Atlantic Basin exports to Asia, while China's drawdown of strategic reserves is reducing global crude demand pressures. These supply and demand responses are helping to stabilize broader market conditions amid the Hormuz strait crisis.","createdAt":"2026-06-26T01:10:01.000Z","likeCount":25,"retweetCount":13,"replyCount":3},{"id":"2070604474901483762","author":{"name":"Reuters Venezuela","userName":"ReutersVzla","category":"News"},"text":"Power outage slows operations of key port, plants after earthquakes in Venezuela https://t.co/rCVLtOy7t4","summary":"Power outages following earthquakes in Venezuela have disrupted operations at a key port and industrial plants, potentially affecting the country's oil production capacity. This could have implications for global oil supply given Venezuela's significant crude reserves.","createdAt":"2026-06-26T20:25:51.000Z","likeCount":23,"retweetCount":10,"replyCount":0},{"id":"2070546380863488111","author":{"name":"Oil and Energy","userName":"OilandEnergy","category":"News"},"text":"Canada and Japan are deepening cooperation on critical minerals as both countries seek to reduce reliance on China’s supply chain dominance. The partnership could include joint stockpiling, new mining projects, and expanded energy exports. #CriticalMinerals #Canada #Japan","summary":"Canada and Japan are partnering to reduce dependence on China's critical minerals supply chain through joint stockpiling, mining projects, and expanded energy exports. While the post emphasizes critical minerals, the mention of expanded energy exports could have implications for Canadian oil and gas markets by potentially increasing demand for energy commodities.","createdAt":"2026-06-26T16:35:00.000Z","likeCount":20,"retweetCount":2,"replyCount":1},{"id":"2070453062905258443","author":{"name":"FT Energy","userName":"ftenergy","category":"News"},"text":"UK government to subsidise bank loans for green home improvements https://t.co/59huv9roVO","summary":"The UK government is subsidizing bank loans for green home improvements, which could reduce fossil fuel consumption in the residential heating sector and potentially lower demand for oil products used in home heating systems.","createdAt":"2026-06-26T10:24:12.000Z","likeCount":18,"retweetCount":5,"replyCount":1},{"id":"2070443862972158232","author":{"name":"JKem Energy","userName":"jkempenergy","category":"News"},"text":"U.S. GAS production, consumption and exports appear to have been balanced for the last two months, stabilising inventories after a steady accumulation earlier in the year. Inventories were 173 billion cubic feet (+7% or +0.47 standard deviations) above the ten-year seasonal https://t.co/TXoLf22aj5","summary":"U.S. natural gas supply and demand have reached equilibrium over the past two months, halting the earlier inventory buildup, with current stockpiles running 7% above the ten-year seasonal average. This stabilization suggests the market has found balance after a period of excess accumulation.","createdAt":"2026-06-26T09:47:38.000Z","likeCount":17,"retweetCount":5,"replyCount":0},{"id":"2070530837523656924","author":{"name":"Oil and Energy","userName":"OilandEnergy","category":"News"},"text":"Big Oil’s green pivot is losing momentum. Faced with investor pressure, weaker renewable returns, and stronger oil & gas profits, major energy companies are shifting capital back to hydrocarbons while taking a more selective approach to low-carbon investments. #Oil","summary":"Major oil and gas companies are redirecting capital away from renewable energy projects and back toward hydrocarbon investments due to investor pressure and more attractive returns in traditional energy sectors. This shift suggests a pullback in the industry's energy transition commitments in favor of near-term fossil fuel profitability.","createdAt":"2026-06-26T15:33:14.000Z","likeCount":17,"retweetCount":4,"replyCount":3},{"id":"2070522015669256396","author":{"name":"Chevron","userName":"Chevron","category":"Refiners & Majors"},"text":"The Energy Edit: Our project aims to deliver dedicated new electricity generation while mitigating additional strain on the regional grid. https://t.co/ERAye1EyUm","summary":"Chevron is developing a project to generate dedicated electricity while reducing demand on regional grids, potentially addressing power supply constraints in areas where the company operates.","createdAt":"2026-06-26T14:58:11.000Z","likeCount":17,"retweetCount":4,"replyCount":10},{"id":"2070356452632383687","author":{"name":"OPEC","userName":"opecsecretariat","category":"Official"},"text":"Demand for all primary fuels is set to increase in the period to 2050, except for coal. \n\nDemand for renewable energy, including solar, wind, hydro, biomass, and other sources, is expected to record the strongest combined growth. Solar and wind account for most of this expansion, https://t.co/AsjJewyn37","summary":"OPEC forecasts that renewable energy will experience the strongest growth among all primary fuels through 2050, while coal demand declines and demand for other fuels—including oil—continues to increase. This projection highlights the expanding role of renewables in the global energy mix, though it indicates continued oil demand growth during this period.","createdAt":"2026-06-26T04:00:18.000Z","likeCount":16,"retweetCount":9,"replyCount":4},{"id":"2070497025834065930","author":{"name":"EIA","userName":"eiagov","category":"Official"},"text":"Metered electricity demand in the New York ISO falls midday because of small-scale solar #TodayInEnergy https://t.co/rFryT7qj38 https://t.co/AYFRAscN7s","summary":"Small-scale solar generation is reducing midday electricity demand in New York ISO, which has minimal direct implications for oil markets since solar primarily displaces electricity generation rather than petroleum products.","createdAt":"2026-06-26T13:18:53.000Z","likeCount":14,"retweetCount":3,"replyCount":1},{"id":"2070437244255502741","author":{"name":"FT Energy","userName":"ftenergy","category":"News"},"text":"Britain backs electricity storage projects as heatwave strains grid https://t.co/PxAw79RweU","summary":"Based solely on the text provided, no oil market implications can be determined, as the post only mentions electricity storage and grid strain during a heatwave with no reference to oil markets or energy commodities.","createdAt":"2026-06-26T09:21:20.000Z","likeCount":13,"retweetCount":3,"replyCount":0},{"id":"2070499002429161774","author":{"name":"Tom Kloza","userName":"TomKloza","category":"Retail Fuel"},"text":"After a one day respite, the June Swoon for crude and gasoline prices has resumed. Retail gasoline prices barely top $3.90/gal and look to target $3.75-$3.80/gal averages for July 4th weekend. Diesel plunge likely to accelerate as well.","summary":"Crude and gasoline prices are declining as the \"June Swoon\" resumes, with retail gasoline expected to average $3.75-$3.80 per gallon by the July 4th weekend and diesel prices anticipated to fall further. The oil market is experiencing downward price pressure across multiple fuel types.","createdAt":"2026-06-26T13:26:44.000Z","likeCount":12,"retweetCount":3,"replyCount":1},{"id":"2070508425688088654","author":{"name":"Tom Kloza","userName":"TomKloza","category":"Retail Fuel"},"text":"Russia may be about to import gasoline cargoes from India, thanks to its damaged refining infrastructure. They are probably short about 125,000 b/d of motor fuel and India typically exports about four times that amount. Ukrainian attacks on Russia are creating strange alliances.","summary":"Russia's damaged refining capacity has created a shortage of approximately 125,000 barrels per day of gasoline, potentially driving imports from India, which has sufficient export capacity to meet this demand. This supply disruption reflects the impact of Ukrainian attacks on Russian energy infrastructure and is reshaping global oil trade dynamics.","createdAt":"2026-06-26T14:04:11.000Z","likeCount":9,"retweetCount":0,"replyCount":0},{"id":"2070610629518410143","author":{"name":"Giovanni Staunovo","userName":"staunovo","category":"Analysts & Traders"},"text":"U.S. Launches Fresh Attacks on Iran\nThe strikes follow a drone attack on a commercial vessel in the Strait of Hormuz and threatens to unwind the fragile ceasefire deal between Washington and Tehran https://t.co/mpzFOwcHir","summary":"The U.S. attacks on Iran following a drone strike on a commercial vessel in the Strait of Hormuz could disrupt the fragile ceasefire between Washington and Tehran, potentially threatening regional stability and shipping routes critical to global oil supplies. Escalation in this strategically important waterway poses risks to oil market stability and prices.","createdAt":"2026-06-26T20:50:18.000Z","likeCount":8,"retweetCount":1,"replyCount":0},{"id":"2070452202154402214","author":{"name":"OPEC","userName":"opecsecretariat","category":"Official"},"text":"🏁 Petroleum products are essential to modern motor sports.\n\nFrom powering high-performance engines to enabling advanced safety equipment and transporting teams and fans, they play a vital role both on and off the track.\n\n#PetroleumProducts #Sports https://t.co/I2YdIrlnFP","summary":"OPEC highlighted that petroleum products are integral to motorsports operations, from fueling engines to powering safety systems and logistics. The statement underscores the demand for petroleum products across sports industries.","createdAt":"2026-06-26T10:20:46.000Z","likeCount":8,"retweetCount":3,"replyCount":0},{"id":"2070609833070403911","author":{"name":"Giovanni Staunovo","userName":"staunovo","category":"Analysts & Traders"},"text":"U.S. Central Command (CENTCOM) forces conducted strikes against Iran, June 26, as a powerful response to yesterday’s attack on a commercial ship that was transiting the Strait of Hormuz.\nU.S. aircraft struck Iranian missile and drone storage locations and coastal radar sites https://t.co/DdHO7i18yh","summary":"The U.S. conducted military strikes against Iranian missile, drone, and radar facilities on June 26 in response to an attack on a commercial vessel in the Strait of Hormuz, raising tensions in a critical global oil transit chokepoint. This escalation could increase geopolitical risk premiums on crude oil prices given the strategic importance of the Strait for international energy supply.","createdAt":"2026-06-26T20:47:08.000Z","likeCount":7,"retweetCount":2,"replyCount":0},{"id":"2070523626873364758","author":{"name":"Chevron","userName":"Chevron","category":"Refiners & Majors"},"text":"The Energy Edit: Chevron CFO Eimear Bonner speaks on AI’s business value. Read more:  https://t.co/qaJCwqX0YT https://t.co/A00yS8TuZx","summary":"Chevron's CFO is discussing artificial intelligence's business value, suggesting the company is exploring AI applications within its operations. The post does not specify oil market implications based on the text provided.","createdAt":"2026-06-26T15:04:35.000Z","likeCount":7,"retweetCount":1,"replyCount":2},{"id":"2070522561163563191","author":{"name":"S&P Global Energy","userName":"SPGEnergyOil","category":"Price Reporting"},"text":"#PlattsGEA - Energy Deal of the Year\n\nDeals shape the direction of the energy industry.\n\nThis award celebrates teams delivering impactful deals through smart structuring, clear vision, and the ability to bring stakeholders together.\n\nNominate by July 1 https://t.co/WcraRFhQ5e https://t.co/dq2EhfhUtU","summary":"S&P Global Energy is accepting nominations through July 1 for its Energy Deal of the Year award, which recognizes significant transactions that shape industry direction through strategic structuring and stakeholder coordination. The award highlights major deals that influence energy market dynamics and direction.","createdAt":"2026-06-26T15:00:21.000Z","likeCount":6,"retweetCount":1,"replyCount":1},{"id":"2070451229478547878","author":{"name":"Energy Aspects","userName":"EnergyAspects","category":"Research & Analytics"},"text":"China has not stopped buying crude. It has stopped buying crude for now.\n\nThat distinction is worth billions in positioning if you get it right.\n\nOur latest analysis tracks what is actually happening inside Chinese crude demand, and why the oversupply narrative building in the https://t.co/ayJaLDSXl6","summary":"China's temporary reduction in crude purchases rather than a permanent halt suggests significant trading opportunities for those who correctly anticipate the resumption of demand. The distinction between a pause and a cessation could have substantial financial implications as the market debates broader oversupply concerns.","createdAt":"2026-06-26T10:16:54.000Z","likeCount":6,"retweetCount":7,"replyCount":0},{"id":"2070523493549051986","author":{"name":"Marathon Petroleum","userName":"MarathonPetroCo","category":"Refiners & Majors"},"text":"For MPC's Pedro Carrizales, giving back means walking alongside a student from freshman year through graduation, offering guidance, encouragement and confidence along the way.\n\nAs a mentor in the NSITE Northside High School Mentoring Program in San Antonio, Texas, Pedro draws on https://t.co/GDxxJHh3hF","summary":"Marathon Petroleum employee Pedro Carrizales participates in a high school mentoring program in San Antonio, Texas, demonstrating the company's community engagement efforts. This post contains no information with direct oil market implications.","createdAt":"2026-06-26T15:04:03.000Z","likeCount":6,"retweetCount":1,"replyCount":0},{"id":"2070549920981844054","author":{"name":"S&P Global Energy","userName":"SPGEnergyOil","category":"Price Reporting"},"text":"China targets 50% non-fossil power generation by 2030 in 15th Five-Year plan\n\n🔷 Oil, gas output remains stable for security\n🔷 Coal remains backstop despite clean shift\n🔷 EV charging and virtual power plants expand\n\nhttps://t.co/QH7vWaqPNT","summary":"China's 15th Five-Year plan targets 50% non-fossil power generation by 2030 while maintaining stable oil and gas output for energy security, suggesting Beijing will pursue renewable expansion without significantly reducing fossil fuel production. The plan indicates China will sustain oil and gas supplies despite its clean energy shift, with coal serving as a backup power source alongside new EV and virtual power plant investments.","createdAt":"2026-06-26T16:49:04.000Z","likeCount":4,"retweetCount":2,"replyCount":0},{"id":"2070462089773093351","author":{"name":"RBN Energy","userName":"RBNEnergy","category":"Research & Analytics"},"text":"The price of the D4 Renewable Identification Number (RIN) has increased by 130% so far in 2026, accompanied by a 60% increase in the price of soybean oil and other renewable feedstocks. Today’s blog gives a high-level view of what is behind this year’s bull run in the D4 RIN and https://t.co/iOkqD1SwFy","summary":"D4 RIN prices have surged 130% in 2026 alongside a 60% increase in renewable feedstock costs like soybean oil, indicating rising production costs for biodiesel and other renewable fuels. The price movements suggest significant market pressures affecting the renewable fuel sector's economics and feedstock availability.","createdAt":"2026-06-26T11:00:04.000Z","likeCount":4,"retweetCount":1,"replyCount":0},{"id":"2070428022784561599","author":{"name":"Wood Mackenzie","userName":"WoodMackenzie","category":"Research & Analytics"},"text":"Could oil really reach US$200 per barrel? \n\nIn Wood Mackenzie's extended disruption scenario, the answer is yes. \n\nAlan Gelder explains what it would take to get there. \n\nWatch the full Horizons Live replay on demand: https://t.co/8FmnCyRpri https://t.co/lZa60DGFrz","summary":"Wood Mackenzie's analysis suggests that oil could theoretically reach $200 per barrel under an extended disruption scenario, with details on the conditions required explained by Alan Gelder. The post indicates this outcome is possible but contingent on specific market disruption factors.","createdAt":"2026-06-26T08:44:41.000Z","likeCount":3,"retweetCount":3,"replyCount":0},{"id":"2070577389722079370","author":{"name":"Energy Transfer","userName":"EnergyTransfer","category":"Midstream"},"text":"Happening this weekend! The Arizona Ridge Riders are set to kick off their training camp this weekend in Buckeye, Arizona ahead of the 2026 PBR Teams season with Energy Transfer as a new team sponsor.\nPress release: https://t.co/HBTxERRawP https://t.co/6UrV2MropA","summary":"Energy Transfer has become a new team sponsor for the Arizona Ridge Riders ahead of the 2026 PBR Teams season, with the team's training camp beginning this weekend in Buckeye, Arizona. The announcement has no direct oil market implications based on the information provided.","createdAt":"2026-06-26T18:38:13.000Z","likeCount":3,"retweetCount":1,"replyCount":0},{"id":"2070507729844621314","author":{"name":"Argus Media","userName":"argusmedia","category":"Price Reporting"},"text":"🎥 𝗣𝗵𝗼𝘀𝗽𝗵𝗮𝘁𝗲 𝗠𝗮𝗿𝗸𝗲𝘁 𝗠𝗶𝗱-𝗬𝗲𝗮𝗿 𝗥𝗲𝘃𝗶𝗲𝘄 & 𝗢𝘂𝘁𝗹𝗼𝗼𝗸, 𝗝𝘂𝗻𝗲 𝟮𝟬𝟮𝟲 | 𝟮𝟲-𝗺𝗶𝗻\n\n👉 Watch now: https://t.co/B4hNkcRyld\n\nExplore supply, demand, price forecasts and the impact of the Middle East war in this 26-min video.","summary":"Argus Media released a mid-year phosphate market review and outlook video that examines supply, demand, and price forecasts, including analysis of how the Middle East conflict is affecting the market.","createdAt":"2026-06-26T14:01:25.000Z","likeCount":2,"retweetCount":1,"replyCount":0},{"id":"2070638692855873836","author":{"name":"Marathon Petroleum","userName":"MarathonPetroCo","category":"Refiners & Majors"},"text":"ICYMI: MPC's Olga Chavez, of our Los Angeles refinery, was recognized by the San Pedro Chamber of Commerce for her decades of service to Southern California communities. ⤵️\nhttps://t.co/q1IoyLCQAG","summary":"Marathon Petroleum employee Olga Chavez from the company's Los Angeles refinery was recognized by the San Pedro Chamber of Commerce for her community service contributions in Southern California. The post has no direct oil market implications based on the text provided.","createdAt":"2026-06-26T22:41:49.000Z","likeCount":2,"retweetCount":0,"replyCount":0},{"id":"2070494843458003244","author":{"name":"Energy Transfer","userName":"EnergyTransfer","category":"Midstream"},"text":"Safety is more than a priority at Energy Transfer. It is a commitment we live every day. \n\nAs we recognize the 30th anniversary of National Safety Month, we’re proud to share how our teams are working year-round to protect our employees, communities and assets.","summary":"Energy Transfer emphasizes its commitment to safety practices across operations as part of National Safety Month recognition. The statement focuses on employee and community protection but contains no specific information regarding oil market implications.","createdAt":"2026-06-26T13:10:13.000Z","likeCount":2,"retweetCount":0,"replyCount":0},{"id":"2070611650223177910","author":{"name":"Phil Flynn","userName":"energyphilflynn","category":"Analysts & Traders"},"text":"Oil prices dive as more tankers move through Strait of Hormuz - Reuters - https://t.co/O9KLE7K3a4 #GoogleAlerts","summary":"Oil prices are declining as increased tanker traffic through the Strait of Hormuz suggests improved supply flow. The movement of more tankers through this critical chokepoint indicates reduced supply constraints in the global oil market.","createdAt":"2026-06-26T20:54:22.000Z","likeCount":1,"retweetCount":0,"replyCount":0},{"id":"2070530022897836142","author":{"name":"RBN Energy","userName":"RBNEnergy","category":"Research & Analytics"},"text":"Northeast gas demand declined week-on-week despite the start of summer, leading to low cash basis over the Juneteenth weekend.\n\nhttps://t.co/n379muJ78X","summary":"Northeast natural gas demand fell week-over-week as summer began, resulting in depressed cash basis values during the Juneteenth holiday period. The decline in regional gas demand suggests weaker energy consumption in the Northeast during the typically warmer season.","createdAt":"2026-06-26T15:30:00.000Z","likeCount":0,"retweetCount":0,"replyCount":0},{"id":"2070535338972365229","author":{"name":"Colonial Pipeline","userName":"Colpipe","category":"Midstream"},"text":"The International Liquid Terminals Association recently awarded its Platinum Safety Award to Colonial Pipeline Terminals for outstanding safety performance, along with a Safety Excellence Award. Read more here: https://t.co/RxUOJjyWgP https://t.co/p1lm9AOuqN","summary":"Colonial Pipeline Terminals received platinum and excellence safety awards from the International Liquid Terminals Association, recognizing strong operational safety performance. The awards indicate the company maintains high safety standards in its terminal operations.","createdAt":"2026-06-26T15:51:08.000Z","likeCount":0,"retweetCount":0,"replyCount":0}]};
+
+// ── Config ──────────────────────────────────────────────────────
+const HANDLE_CATEGORIES = {
+  argusmedia:'pra', opis:'pra', spgenergyoil:'pra',
+  rbnenergy:'analyst', woodmackenzie:'analyst', energyaspects:'analyst',
+  kpler:'flows', vortexa:'flows', tankertrackers:'flows',
+  reuters:'news', reutersvzla:'news', arathysom:'news', mariannaparraga:'news',
+  rory_johnston:'news', javierBlas:'news', jkempenergy:'analyst',
+  ftenergy:'news', oilandenergy:'news',
+  crofthelima:'analyst', staunovo:'analyst', iliabouchouev:'analyst',
+  chigrl:'analyst', andurandpierre:'analyst', energyphilflynn:'analyst', ole_s_hansen:'analyst',
+  gasbuddyguy:'fuel', tomkloza:'fuel',
+  valeroenergy:'refiner', phillips66co:'refiner', marathonpetroco:'refiner',
+  chevron:'refiner', exxonmobil:'refiner', bp_america:'refiner', irvingoil:'refiner',
+  trafigura:'trading', gunvor:'trading', vitolnews:'trading',
+  colpipe:'midstream', energytransfer:'midstream', mansfieldenergy:'midstream',
+  eiagov:'official', iea:'official', opecsecretariat:'official', energy:'official'
+};
+
+const SECTIONS = [
+  { key:'flows',     label:'Flows & Cargo Tracking',   icon:'🚢' },
+  { key:'pra',       label:'Price Reporting Agencies',  icon:'📊' },
+  { key:'analyst',   label:'Research & Analysts',       icon:'🔬' },
+  { key:'news',      label:'News & Journalists',        icon:'📰' },
+  { key:'official',  label:'Official & Institutional',  icon:'🏛️' },
+  { key:'refiner',   label:'Refiners & Majors',         icon:'🏭' },
+  { key:'trading',   label:'Trading Houses',            icon:'🔁' },
+  { key:'fuel',      label:'Retail Fuel & Prices',      icon:'⛽' },
+  { key:'midstream', label:'Midstream & Pipelines',     icon:'🛢️' },
+];
+
+function getCategory(handle) {
+  return HANDLE_CATEGORIES[(handle||'').toLowerCase().replace('@','')] || 'news';
+}
+
+function formatNum(n) {
+  if (!n) return '0';
+  if (n >= 1000) return (n/1000).toFixed(1)+'K';
+  return n.toString();
+}
+
+function timeAgo(dateStr) {
+  if (!dateStr) return '';
+  const diff = Math.floor((Date.now() - new Date(dateStr)) / 60000);
+  if (diff < 60) return diff + 'm ago';
+  if (diff < 1440) return Math.floor(diff/60) + 'h ago';
+  return Math.floor(diff/1440) + 'd ago';
+}
+
+function postUrl(post) {
+  if (post.url) return post.url;
+  const handle = (post.author?.userName || '').replace('@', '');
+  return `https://x.com/${handle}/status/${post.id}`;
+}
+
+function renderCitgo() {
+  const posts = CITGO_DATA.posts || [];
+  const container = document.getElementById('feed-container');
+
+  const section = document.createElement('div');
+  section.className = 'citgo-section';
+
+  if (!posts.length) {
+    section.innerHTML = `
+      <h2 class="citgo-section-title">
+        <span class="x-cat-pill cat-citgo">🛢️ <span>CITGO &amp; Venezuela</span></span>
+        <span class="citgo-label">Awaiting first scrape</span>
+      </h2>
+      <div class="no-data" style="padding:20px 0;background:transparent;border:none;">
+        <p>No data yet — runs daily at 4:05 AM CT.</p>
+      </div>`;
+  } else {
+    const updatedStr = CITGO_DATA.lastUpdated
+      ? new Date(CITGO_DATA.lastUpdated).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'})
+      : '';
+    section.innerHTML = `
+      <h2 class="citgo-section-title">
+        <span class="x-cat-pill cat-citgo">🛢️ <span>CITGO &amp; Venezuela</span></span>
+        <span class="x-count">${posts.length}</span>
+        ${updatedStr ? `<span class="citgo-label">Updated ${updatedStr}</span>` : ''}
+      </h2>
+      <div class="x-grid">
+        ${posts.map((post, i) => {
+          const handle = (post.author?.userName || '').replace('@','');
+          const url = postUrl(post);
+          const eng = `♥ ${formatNum(post.likeCount)} · ↺ ${formatNum(post.retweetCount)}`;
+          const isTop = i === 0;
+          return `
+          <a class="x-item${isTop ? ' top-item' : ''}" href="${url}" target="_blank" rel="noopener">
+            <div class="x-summary">${((t => t.length > 160 ? t.slice(0,157)+'…' : t)((post.summary||post.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')))}${isTop ? '<span class="x-top-badge">Top</span>' : ''}</div>
+            <div class="x-meta">
+              <span class="handle">@${handle}</span>
+              <span class="dot">·</span>
+              <span class="eng">${eng}</span>
+              <span class="dot">·</span>
+              ${timeAgo(post.createdAt)}
+            </div>
+          </a>`;
+        }).join('')}
+      </div>`;
+  }
+
+  container.insertBefore(section, container.firstChild);
+}
+
+function render() {
+  const posts = FEED_DATA.posts || [];
+  if (!posts.length) return;
+
+  // Header meta
+  if (FEED_DATA.lastUpdated) {
+    document.getElementById('last-updated').textContent = new Date(FEED_DATA.lastUpdated).toLocaleString('en-US', {
+      month:'short', day:'numeric', hour:'numeric', minute:'2-digit', timeZoneName:'short'
+    });
+    document.getElementById('post-count-label').textContent = posts.length + ' posts';
+  }
+
+  // Rank by engagement for top badge
+  const sorted = [...posts].sort((a,b) => ((b.likeCount||0)+(b.retweetCount||0)) - ((a.likeCount||0)+(a.retweetCount||0)));
+  const topIds = new Set(sorted.slice(0,3).map(p=>p.id));
+
+  // Group by category
+  const groups = {};
+  posts.forEach(p => {
+    const cat = getCategory(p.author?.userName);
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(p);
+  });
+
+  const container = document.getElementById('feed-container');
+  container.innerHTML = '';
+
+  SECTIONS.forEach(sec => {
+    const items = groups[sec.key];
+    if (!items || items.length === 0) return;
+
+    // Sort within section by engagement
+    items.sort((a,b) => ((b.likeCount||0)+(b.retweetCount||0)) - ((a.likeCount||0)+(a.retweetCount||0)));
+
+    const section = document.createElement('div');
+    section.className = 'x-section';
+    section.innerHTML = `
+      <h2 class="x-section-title">
+        <span class="x-cat-pill cat-${sec.key}">${sec.icon} <span>${sec.label}</span></span>
+        <span class="x-count">${items.length}</span>
+      </h2>
+      <div class="x-grid">
+        ${items.map(post => {
+          const handle = (post.author?.userName || '').replace('@','');
+          const url = postUrl(post);
+          const isTop = topIds.has(post.id);
+          const eng = `♥ ${formatNum(post.likeCount)} · ↺ ${formatNum(post.retweetCount)}`;
+          return `
+          <a class="x-item${isTop ? ' top-item' : ''}" href="${url}" target="_blank" rel="noopener">
+            <div class="x-summary">${(post.summary||post.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}${isTop ? '<span class="x-top-badge">Top</span>' : ''}</div>
+            <div class="x-meta">
+              <span class="handle">@${handle}</span>
+              <span class="dot">·</span>
+              <span class="eng">${eng}</span>
+              <span class="dot">·</span>
+              ${timeAgo(post.createdAt)}
+            </div>
+          </a>`;
+        }).join('')}
+      </div>`;
+    container.appendChild(section);
+  });
+
+  document.getElementById('footer-line').textContent =
+    `Morning Oil Brief · Energy X Feed · ${posts.length} posts · Updated daily at 04:00 CT`;
+}
+
+render();
+renderCitgo();
+</script>
+</body>
+</html>
