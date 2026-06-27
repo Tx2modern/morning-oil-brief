@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T00:17:06.302755+00:00",
+  "generated_at": "2026-06-27T10:22:08.313392+00:00",
   "cutoff_hours": 72,
   "items": [
     {
@@ -21,16 +21,6 @@
       "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/AI-Demand-War-and-Climate-Pressure-Push-World-Back-To-Nuclear.html",
       "description": "Global energy markets are in turmoil as energy crises keep piling up. The energy-hungry AI boom, war in Iran, geopolitical instability, and climate pressures are creating a polycrisis for the global energy sector, and it\u2019s just getting started. To solve multiple overlapping crises, we will need mult",
       "category": "Energy Markets"
-    },
-    {
-      "title": "China's Battery Giant Bets Big on Sodium as Lithium Volatility Persists",
-      "source": "OilPrice.com",
-      "date": "Fri, 26 Jun 2026 14:00:00 -0500",
-      "datetime": "2026-06-26T14:00:00-05:00",
-      "epoch": 1782500400.0,
-      "link": "https://oilprice.com/Energy/Energy-General/Chinas-Battery-Giant-Bets-Big-on-Sodium-as-Lithium-Volatility-Persists.html",
-      "description": "The world\u2019s largest battery maker is taking a step back from the eclectic vehicles sector to refocus its efforts on energy storage. China\u2019s Contemporary Amperex Technology Co. Ltd. (better known as CATL) has been building up its energy storage portfolio for years now, but the company\u2019s transition aw",
-      "category": "Crude Oil & OPEC"
     },
     {
       "title": "The IAEA Faces a New Nuclear Puzzle Inside Iran",
@@ -183,6 +173,16 @@
       "category": "Energy Markets"
     },
     {
+      "title": "Oil curve points to near-term glut as Hormuz flows rise - Reuters",
+      "source": "Reuters",
+      "date": "Thu, 25 Jun 2026 16:18:44 GMT",
+      "datetime": "2026-06-25T16:18:44+00:00",
+      "epoch": 1782404324.0,
+      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQMmJaZHpSZ2pFeUs5SjJxLUVGcTIzRGhXLU1WbUF3enJsdjJneVVob01zdE5zZW80OE1fX2poRzZYUFhTTGc1SENEZmNhMTlndHZTcHFWQi1zRm82bVd4cmdWUGl4eEFTb0xULUlPMlRRbk1iLUdSODhDRXlfVkl2WklKNnY2ZmFmd1ZDZmktc215bEJadHlZUkZxanlXa19UQ0FkX3hwYW9ackhyUUtDcVlLbmZtR3lQbmduTnB6QnBkZw?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
       "title": "Even as Iran War Resolution Looms, Natural Gas Analysts Are Dubious - Natural Gas Intelligence",
       "source": "Natural Gas Intelligence",
       "date": "Thu, 25 Jun 2026 14:18:36 GMT",
@@ -283,16 +283,6 @@
       "category": "Energy Markets"
     },
     {
-      "title": "Oil curve points to near-term glut as Hormuz flows rise - Reuters",
-      "source": "Reuters",
-      "date": "Wed, 24 Jun 2026 18:50:00 GMT",
-      "datetime": "2026-06-24T18:50:00+00:00",
-      "epoch": 1782327000.0,
-      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQMmJaZHpSZ2pFeUs5SjJxLUVGcTIzRGhXLU1WbUF3enJsdjJneVVob01zdE5zZW80OE1fX2poRzZYUFhTTGc1SENEZmNhMTlndHZTcHFWQi1zRm82bVd4cmdWUGl4eEFTb0xULUlPMlRRbk1iLUdSODhDRXlfVkl2WklKNnY2ZmFmd1ZDZmktc215bEJadHlZUkZxanlXa19UQ0FkX3hwYW9ackhyUUtDcVlLbmZtR3lQbmduTnB6QnBkZw?oc=5",
-      "description": "",
-      "category": "Energy Markets"
-    },
-    {
       "title": "U.S. commercial crude oil inventories have decreased in June - U.S. Energy Information Administration (EIA) (.gov)",
       "source": "U.S. Energy Information Administration (EIA) (.gov)",
       "date": "Wed, 24 Jun 2026 18:14:26 GMT",
@@ -309,6 +299,16 @@
       "datetime": "2026-06-24T15:15:00+00:00",
       "epoch": 1782314100.0,
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOMEVaRHF0aVNwUnUxWnctcUxBdU9kN2FNZEpheVMxdGJ1VXFVR3hYY2RONUVCVEhmOFBpR252LXc4QUdyYzd2S01kZ3BKY3BpZVhJbEVvWjJkaVNGcmhzb25GNjhSSENVUTZObDJ4d2pEcjlJeGlnQmdKeFdEYTZuQUhENW5HWHRFbXVEUjZQcmcweDBJNmtST1BaemppclBD?oc=5",
+      "description": "",
+      "category": "EIA & Inventory"
+    },
+    {
+      "title": "U.S. Crude Inventories Post Another Major Draw - Yahoo Finance Singapore",
+      "source": "Yahoo Finance Singapore",
+      "date": "Wed, 24 Jun 2026 14:41:53 GMT",
+      "datetime": "2026-06-24T14:41:53+00:00",
+      "epoch": 1782312113.0,
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNWTB6UkloZF8xZFNqUHhhREZ6T2oxNDNOMU1HbmlWcGpQNTJhTkI3eVZkd21NYjI0NkVjNlMtUFRvVHczemlOeGZmbWxKNXA0MzJwV0dwM3NXV0tCeG1qaUdYYkk5WEx1WEZiSmE1ZDZxN2thbkNveko2bFdkUVRGaUVYMjJBcVJL?oc=5",
       "description": "",
       "category": "EIA & Inventory"
     },
