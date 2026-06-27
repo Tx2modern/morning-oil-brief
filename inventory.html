@@ -540,6 +540,51 @@ tr.total-row.total-jet      td { background: rgba(34,211,238,0.06) !important; b
   border-left: 1px solid var(--border) !important;
 }
 
+/* ── Trading Calls ─────────────────────────────────────────────── */
+.trading-calls-wrap {
+  margin-bottom: 18px;
+}
+.trading-calls-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px;
+}
+.trading-calls-header h3 {
+  font-size: 13px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted); margin: 0;
+}
+.trading-calls-header .tc-divider {
+  flex: 1; height: 1px; background: var(--border);
+}
+.trading-calls-list { display: flex; flex-direction: column; gap: 8px; }
+.trade-call {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.trade-direction {
+  flex-shrink: 0;
+  font-size: 11px; font-weight: 800; letter-spacing: .08em;
+  padding: 3px 9px; border-radius: 5px;
+  min-width: 54px; text-align: center; margin-top: 1px;
+}
+.trade-direction.long  { background: rgba(34,197,94,.18); color: #4ade80; border: 1px solid rgba(34,197,94,.3); }
+.trade-direction.short { background: rgba(239,68,68,.18);  color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+.trade-direction.spread{ background: rgba(245,158,11,.18); color: #fbbf24; border: 1px solid rgba(245,158,11,.3); }
+.trade-body { flex: 1; min-width: 0; }
+.trade-instrument {
+  font-size: 14px; font-weight: 700; color: #fff;
+  margin-bottom: 3px;
+}
+.trade-setup {
+  font-size: 13px; font-weight: 600; color: #93c5fd;
+  margin-bottom: 5px;
+}
+.trade-rationale {
+  font-size: 13px; line-height: 1.55; color: var(--muted);
+}
+
 
 /* ────────────────────────────────────────────────────────────────────
    MOB · 2026 redesign — Inter + JetBrains Mono, deep dark, mono accents
@@ -881,6 +926,7 @@ footer {
       
     </div>
     <div class="market-read-static" id="market-read-static"></div>
+    <div class="trading-calls-wrap" id="trading-calls-wrap"></div>
     <div class="padd-grid" id="padd-grid"></div>
   </div>
 
@@ -965,6 +1011,26 @@ const SNAPSHOT = {
   "nextRelease": "Wed Jul 1, 2026 \u00b7 10:30 AM ET",
   "lastRefreshed": "Jun 27, 2026",
   "marketRead": "<strong>Headline:</strong> A 6.1 mb crude draw to 412.1 mb dominated the week, but the real story sits at Cushing, where stocks fell another 1.1 mb to 18.96 mb \u2014 now firmly below the ~25 mb operational floor. Refinery utilization eased 0.6 pts to 96.1% with crude inputs at 17.11 mb/d, keeping the demand pull on the system strong heading into peak summer.\n<strong>Driver:</strong> The crude draw is the product of high run rates and steady export pull, with 4-week crude exports at 4.93 mb/d against 5.75 mb/d imports. Products diverged: gasoline built 2.1 mb and distillate built 3.1 mb. The distillate build came on soft 3.63 mb/d demand failing to absorb steady output \u2014 an expected outcome, not a surprise. Gasoline demand softened to 8.83 mb/d (4-wk) from 8.9 mb/d prior, taking some shine off the build.\n<strong>Trade flows:</strong> Crude imports ticked up to 5.75 mb/d (4-wk) from 5.65 mb/d while exports slipped to 4.93 from 5.07, a mild net loosening that nonetheless could not offset the Cushing drain. PADD III crude drew a heavy 4.0 mb as Gulf refiners ran at 96.7% and exports continued to clear barrels.\n<strong>Watch next week:</strong> Cushing deliverability is the single most important variable \u2014 at 18.96 mb and drawing ~1 mb/wk for five straight weeks, tank minimums are the binding constraint and prompt WTI backwardation should stay firm. Watch whether the draw rate moderates or extends into the low-18s, and track hurricane-season risk now that the June 1 Atlantic window is open.",
+  "tradingCalls": [
+    {
+      "direction": "long",
+      "instrument": "WTI M1\u2013M2 Spread",
+      "setup": "Cushing sub-floor deliverability stress deepens prompt backwardation",
+      "rationale": "Cushing fell to 18.96 mb \u2014 already 6+ mb below the ~25 mb operational floor \u2014 drawing ~1 mb/wk for nine consecutive weeks. Tank minimums, not market economics, are now the binding constraint on WTI delivery. Each additional draw mechanically steepens the M1\u2013M2 spread; the trade stays live until draws halt or a meaningful refill materializes."
+    },
+    {
+      "direction": "short",
+      "instrument": "Jet Crack vs Heating Oil (Jet\u2013HO Spread)",
+      "setup": "Record jet output and above-band stocks create refinery yield length",
+      "rationale": "Jet production hit a record 2.2 mb/d (+50 kbd w/w) with refinery jet yields at 12.9%, the highest in recent EIA history. Total jet stocks rose to 46.3 mb, already above the 5-yr band ceiling of 44.7 mb. Supply-side length at an all-time output rate will pressure the jet\u2013HO crack spread as oversupply builds into peak summer travel."
+    },
+    {
+      "direction": "long",
+      "instrument": "NYH RBOB Cash Basis (spot vs M1 futures)",
+      "setup": "PADD I outage tightens prompt supply at New York Harbor",
+      "rationale": "East Coast refinery utilization collapsed 10.6 pp to 76.5%, near the 5-yr band floor \u2014 consistent with an unplanned unit outage rather than routine turnaround. With local production curtailed, NYH must lean on Colonial Pipeline nominations and waterborne imports to backstop supply. Prompt RBOB cash basis should firm versus the futures strip until the outage resolves and Colonial flow adjusts."
+    }
+  ],
   "kpi": [
     {
       "id": "total",
@@ -1479,6 +1545,29 @@ function renderStaticMarketRead() {
   `;
 }
 renderStaticMarketRead();
+
+// Trading Calls
+function renderTradingCalls() {
+  const wrap = document.getElementById("trading-calls-wrap");
+  const calls = SNAPSHOT.tradingCalls;
+  if (!wrap || !calls || !calls.length) return;
+  const items = calls.map(c => `
+    <div class="trade-call">
+      <span class="trade-direction ${c.direction}">${c.direction.toUpperCase()}</span>
+      <div class="trade-body">
+        <div class="trade-instrument">${c.instrument}</div>
+        <div class="trade-setup">${c.setup}</div>
+        <div class="trade-rationale">${c.rationale}</div>
+      </div>
+    </div>`).join('');
+  wrap.innerHTML = `
+    <div class="trading-calls-header">
+      <h3>Trading Calls</h3>
+      <div class="tc-divider"></div>
+    </div>
+    <div class="trading-calls-list">${items}</div>`;
+}
+renderTradingCalls();
 
 // KPIs
 const kpiStrip = document.getElementById("kpi-strip");
