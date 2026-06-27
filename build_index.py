@@ -1090,6 +1090,57 @@ DATA (week ending {report_date}):
 {data}
 """
 
+TRADING_CALLS_PROMPT = """You are a senior petroleum derivatives trader writing concise, actionable trading calls from a weekly EIA inventory report.
+
+Rules:
+- Identify 2–4 specific trade opportunities directly supported by the data.
+- Each call must be a concrete, executable trade — not a general observation.
+- Direction must be one of: "long", "short", or "spread".
+- Instrument: the exact contract or spread to trade (e.g. "WTI M1–M2 Spread", "NYH RBOB Cash Basis", "Jet Crack vs HO").
+- Setup: one tight sentence (≤15 words) naming the structural reason for the trade.
+- Rationale: 2–3 sentences with specific numbers from the data. State what the data shows, why it creates the opportunity, and the key risk or catalyst to watch.
+- Do NOT restate general market conditions as a trading call. Every call needs a specific entry thesis.
+- Do NOT fabricate numbers. Use only figures present in the data.
+
+Return STRICT JSON (no markdown, no commentary):
+
+{{
+  "calls": [
+    {{
+      "direction": "long" | "short" | "spread",
+      "instrument": "...",
+      "setup": "...",
+      "rationale": "..."
+    }}
+  ]
+}}
+
+DATA (week ending {report_date}):
+{data}
+"""
+
+
+def _generate_trading_calls_via_claude(ctx):
+    prompt = TRADING_CALLS_PROMPT.format(
+        report_date=ctx['reportDate'],
+        data=json.dumps(ctx, indent=2),
+    )
+    raw = _call_claude(prompt, max_tokens=1500)
+    start = raw.find('{')
+    end = raw.rfind('}')
+    if start == -1 or end == -1 or end <= start:
+        raise ValueError(f'no JSON in trading calls response: {raw[:200]}')
+    parsed = json.loads(raw[start:end + 1])
+    return parsed.get('calls', [])
+
+
+def generate_trading_calls(ctx):
+    try:
+        return _generate_trading_calls_via_claude(ctx)
+    except Exception as e:
+        print(f'  ⚠ trading calls generation failed: {e}')
+        return []
+
 
 def _extract_first_json_object(raw):
     """Pull the first balanced top-level JSON object out of a Claude response.
@@ -5476,6 +5527,25 @@ def main():
     # Normalize: real newlines + bold paragraph leads.
     market_read = _normalize_narrative(narratives.get('market_read', ''))
 
+    # Generate trading calls (separate Claude call, cached alongside narratives)
+    tc_cache_path = os.path.join(HERE, '.trading_calls_cache.json')
+    tc_key = hashlib.md5(json.dumps(nctx, sort_keys=True).encode()).hexdigest()
+    try:
+        with open(tc_cache_path) as f:
+            tc_cache = json.load(f)
+    except Exception:
+        tc_cache = {}
+    if tc_cache.get('key') == tc_key and tc_cache.get('value') is not None:
+        print('  → trading calls: from cache')
+        trading_calls = tc_cache['value']
+    else:
+        trading_calls = generate_trading_calls(nctx)
+        try:
+            with open(tc_cache_path, 'w') as f:
+                json.dump({'key': tc_key, 'value': trading_calls}, f, indent=2)
+        except Exception:
+            pass
+
     # NOW build padd_read using the generated narratives
     padd_read = []
     for pid, pname, pk in padd_meta:
@@ -5600,6 +5670,7 @@ def main():
             'nextRelease':  _next_wpsr_release_str(latest_date),
             'lastRefreshed': _utcnow().strftime('%b %-d, %Y'),
             'marketRead':   market_read,
+            'tradingCalls': trading_calls,
             'kpi':          kpi_data,
             'trade':        trade_snapshot,
             'regional':     regional,
