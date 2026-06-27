@@ -12,6 +12,7 @@ Filters out:
   - Stock/equity analysis articles (simplywall, Motley Fool, etc.)
   - Crypto sites repurposing oil as a price hook
   - Low-quality aggregators and SEO spam
+  - Nuclear power, electricity grid, battery, and coal articles
 """
 import html
 import json
@@ -164,6 +165,18 @@ BLOCKED_TITLE_PATTERNS = [
     # Generic low-value
     r'\bcheck\s+(out\s+)?(petrol|diesel|fuel|gas)\s+price[s]?\b',
     r'\btoday[\'s]?\s+(petrol|diesel|fuel|gas)\s+price[s]?\b',
+    # Nuclear power (not petroleum-relevant)
+    r'\bnuclear\s+(power|plant[s]?|reactor[s]?|energy|capacity|fuel|waste)\b',
+    r'\b(nuclear|atomic)\s+power\b',
+    r'\bnuclear\b.*\b(megawatt|gigawatt|kwh|mwh|gwh|electricity)\b',
+    # Electricity grid / power markets
+    r'\belectricity\b',
+    # Battery / energy storage
+    r'\bbatter(y|ies)\b',
+    r'\b(lithium.ion|sodium.ion|solid.state)\s+batter',
+    # Coal
+    r'\bcoal\s+(mine[s]?|mining|plant[s]?|power|fired|price[s]?|production|sector|energy)\b',
+    r'\bcoal-fired\b',
 ]
 _BLOCKED_RE = [re.compile(p, re.IGNORECASE) for p in BLOCKED_TITLE_PATTERNS]
 
@@ -221,7 +234,7 @@ def _quality_score(item):
 def _clean_description(description, title):
     """Strip HTML tags, decode entities, and discard Google News pseudo-descriptions.
 
-    Google News RSS sets <description> to "ArticleTitle&nbsp;&nbsp;Source" — just a
+    Google News RSS sets <description> to "ArticleTitle&nbsp;&nbsp;Source" -- just a
     duplicate of the title with the source appended.  Detect this by comparing the
     cleaned text against the title and return '' in that case so we don't show noise.
     """
