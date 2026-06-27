@@ -4,8 +4,9 @@ Refresh the CITGO_DATA block in x_feed.html via Apify tweet-scraper.
 
 Searches for recent posts (last 24h) mentioning "CITGO Venezuela",
 fetches up to 20, keeps the top 6 by engagement (likes + retweets),
-generates a 1-sentence analyst summary for each, then patches x_feed.html
-between the sentinel comments:
+generates a 1-sentence analyst summary for each (translating Spanish
+to English when needed), then patches x_feed.html between the sentinel
+comments:
 
     // @@CITGO_DATA_START@@
     ...
@@ -103,7 +104,8 @@ def summarize(text, author_name):
 
     prompt = (
         f'This X post by {author_name} mentions CITGO or Venezuela energy:\n\n"{text}"\n\n'
-        'Write exactly 1 sentence, analyst-style, summarizing the key implication '
+        'If the post is in Spanish or another language, translate it to English first. '
+        'Then write exactly 1 sentence, analyst-style, summarizing the key implication '
         'for CITGO, Venezuelan oil, or US refining. Be factual. No quotes.'
     )
     payload = json.dumps({
