@@ -102,6 +102,46 @@ TOP_POSTS_PER_ACCOUNT = 2  # keep the 2 highest-liked posts per account
 MAX_TOTAL_POSTS = 90       # hard cap on combined feed
 LOOKBACK_HOURS = 24        # only posts from the past 24 hours
 
+# ── Off-topic keyword filter ──────────────────────────────────────────────────
+# Posts whose text matches one of these patterns AND lacks an oil/petroleum
+# anchor are dropped before summarising.  Keeps the feed focused on crude,
+# refined products, and freight — not the broader energy transition.
+_OFFTOPIC_PATTERNS = [
+    r'\bnuclear\s+(power|plant[s]?|reactor[s]?|energy|capacity|fuel|waste)\b',
+    r'\b(nuclear|atomic)\s+power\b',
+    r'\bnuclear\s+deal\b',
+    r'\belectricity\s+(grid|price[s]?|market[s]?|generation|demand|supply|rate[s]?|network|sector)\b',
+    r'\b(power\s+grid|electric\s+grid|grid\s+operator|grid\s+stability)\b',
+    r'\bsolar\s+(panel[s]?|farm[s]?|power|energy|cell[s]?|capacity|install)\b',
+    r'\bphotovoltaic\b',
+    r'\bcoal\s+(mine[s]?|mining|plant[s]?|power|fired|price[s]?|production|sector|energy)\b',
+    r'\bcoal-fired\b',
+    r'\bbatter(y|ies)\b',
+    r'\b(lithium.ion|sodium.ion|solid.state)\s+batter',
+    r'\bwind\s+(farm[s]?|turbine[s]?|power|energy|capacity)\b',
+    r'\brenewable\s+(energy|power|capacity|generation)\b',
+]
+_OFFTOPIC_RE = [re.compile(p, re.IGNORECASE) for p in _OFFTOPIC_PATTERNS]
+
+# If any of these oil anchors appear, keep the post even if an off-topic
+# pattern also matched (e.g. "crude oil vs solar cost comparison").
+_OIL_ANCHORS = re.compile(
+    r'\b(crude|brent|wti|opec|refin|gasoline|diesel|jet\s+fuel|naphtha|fuel\s+oil|'
+    r'petroleum|barrel[s]?|bbl|tanker|pipeline|lng|natural\s+gas|upstream|downstream|'
+    r'drilling|frack|shale|permian|pdvsa|citgo|venezuela\s+oil)\b',
+    re.IGNORECASE,
+)
+
+
+def _is_offtopic(text):
+    """Return True if the post is primarily about an off-topic energy sector."""
+    if any(rx.search(text) for rx in _OFFTOPIC_RE):
+        # Keep it if there is a clear oil/petroleum anchor in the text
+        if _OIL_ANCHORS.search(text):
+            return False
+        return True
+    return False
+
 
 def x_get(path, params=None):
     url = 'https://api.twitter.com/2' + path
@@ -208,9 +248,14 @@ def main():
             tweets = get_recent_tweets(uid, MAX_POSTS_PER_ACCOUNT, LOOKBACK_HOURS)
             print(f'    {len(tweets)} tweets fetched (last {LOOKBACK_HOURS}h)')
 
+            # Filter off-topic posts (electricity, coal, nuclear, solar, etc.)
+            filtered = [t for t in tweets if not _is_offtopic(t.get('text', ''))]
+            if len(filtered) < len(tweets):
+                print(f'    {len(tweets) - len(filtered)} off-topic posts filtered')
+
             # Select top 2 by likes
-            tweets.sort(key=lambda t: t.get('public_metrics', {}).get('like_count', 0), reverse=True)
-            top_tweets = tweets[:TOP_POSTS_PER_ACCOUNT]
+            filtered.sort(key=lambda t: t.get('public_metrics', {}).get('like_count', 0), reverse=True)
+            top_tweets = filtered[:TOP_POSTS_PER_ACCOUNT]
 
             for tweet in top_tweets:
                 metrics = tweet.get('public_metrics', {})
