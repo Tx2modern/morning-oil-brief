@@ -1128,10 +1128,19 @@ You have access to:
 2. EIA weekly inventory data with PADD-level breakdowns
 3. PADD inventory quartile positions vs 5-year seasonal range
 4. Institutional wiki context with supply/demand fundamentals
+5. Price trend signals: SMA10/20/50, RSI-14, 30-day return, trend direction for each product
 
 INVENTORY DIRECTION RULE (critical — get this right):
 - LOW stocks (bottom quartile, below 5-yr average) = TIGHT supply = BULLISH for prices and prompt spreads
 - HIGH stocks (top quartile, above 5-yr average) = AMPLE supply = BEARISH for prices and prompt spreads
+
+TECHNICAL SIGNAL RULES (use to calibrate entry/timing, not direction alone):
+- RSI < 35 = oversold; RSI > 65 = overbought — use as entry timing confirmation
+- Price above SMA20 and SMA50 = uptrend; below both = downtrend
+- Confluence of fundamental bullish signal + oversold RSI = higher conviction long
+- Confluence of fundamental bearish signal + overbought RSI = higher conviction short
+- When price is in downtrend (below SMA20 < SMA50), raise conviction threshold for longs
+- 30-day return shows recent momentum — use to assess whether move is exhausted or continuing
 
 FUNDAMENTAL SIGNAL RULES (apply these cross-asset):
 - When PADD 2 crude stocks are in the TOP QUARTILE (ample) AND US crude exports are BELOW their 4-week average → bearish WTI vs Brent (barrels stranded in Midwest with no export relief)
@@ -5328,6 +5337,46 @@ footer {{
 """
 
 
+def _price_trends(prices):
+    """Compute 10/20/50-day price trend signals for WTI, Brent, RBOB, HO."""
+    out = {}
+    keys = [('wti', 'wti'), ('brent', 'brent'), ('rbob', 'rbob'), ('ho', 'ulsd')]
+    for label, key in keys:
+        try:
+            hist = prices.get('futures', {}).get(key, {}).get('front_history', [])
+            vals = [v for _, v in hist if v is not None]
+            if len(vals) < 50:
+                continue
+            last = vals[-1]
+            sma10 = sum(vals[-10:]) / 10
+            sma20 = sum(vals[-20:]) / 20
+            sma50 = sum(vals[-50:]) / 50
+            chg30 = round((last - vals[-31]) / vals[-31] * 100, 1) if len(vals) >= 31 else None
+            # RSI-14
+            diffs = [vals[i] - vals[i-1] for i in range(len(vals)-14, len(vals))]
+            gains = [d for d in diffs if d > 0]
+            losses = [-d for d in diffs if d < 0]
+            avg_gain = sum(gains) / 14 if gains else 0
+            avg_loss = sum(losses) / 14 if losses else 0.0001
+            rsi = round(100 - 100 / (1 + avg_gain / avg_loss), 1)
+            trend = 'uptrend' if last > sma20 > sma50 else ('downtrend' if last < sma20 < sma50 else 'mixed')
+            out[label] = {
+                'last': round(last, 4),
+                'sma10': round(sma10, 4),
+                'sma20': round(sma20, 4),
+                'sma50': round(sma50, 4),
+                'above_sma20': last > sma20,
+                'above_sma50': last > sma50,
+                'rsi14': rsi,
+                'chg30d_pct': chg30,
+                'trend': trend,
+                'rsi_signal': 'oversold' if rsi < 35 else ('overbought' if rsi > 65 else 'neutral'),
+            }
+        except Exception:
+            pass
+    return out
+
+
 def _build_trading_page(prices, eia_raw, latest_date):
     """Regenerate trading.html SNAPSHOT with live price data, calendar spreads,
     PADD-aware trading commentary, and AI-generated trade calls."""
@@ -5484,6 +5533,7 @@ def _build_trading_page(prices, eia_raw, latest_date):
         'rbob_price_gal': rbob_price,
         'ho_price_gal': ho_price,
         'cal_spreads': cal_spreads,
+        'price_trends': _price_trends(prices),
     }
 
     # ── Load wiki context ─────────────────────────────────────────────────────
