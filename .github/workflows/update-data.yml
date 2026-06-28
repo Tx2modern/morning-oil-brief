@@ -26,11 +26,6 @@ jobs:
       - name: Install dependencies
         run: pip install yfinance
 
-      - name: Refresh EIA weekly inventory data
-        env:
-          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
-        run: python3 refresh_eia.py
-
       - name: Refresh prices & forward curves
         env:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
@@ -71,6 +66,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add eia_data.json prices_data.json news_data.json x_feed_data.json wiki_context.json index.html margins.html curves.html news.html inventory.html x_feed.html .curves_cache.json .margins_cache.json .morning_brief_cache.json .narratives_cache.json
+          git add prices_data.json news_data.json x_feed_data.json wiki_context.json index.html margins.html curves.html news.html x_feed.html .curves_cache.json .margins_cache.json .morning_brief_cache.json .narratives_cache.json
           git diff --staged --quiet || git commit -m "chore: daily data refresh [skip ci]"
           git push
