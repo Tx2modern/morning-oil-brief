@@ -221,13 +221,13 @@ def _is_blocked(title, source):
     return False
 
 
+OILPRICE_CAP = 25  # max OilPrice.com articles kept in final output
+
 def _quality_score(item):
     """Higher = better. Used for final sort when epoch is equal."""
     src_lower = (item.get('source') or '').lower()
     bonus = 2 if any(p in src_lower for p in PREFERRED_SOURCES) else 0
-    # Small OilPrice boost — don't let it crowd out wire services in Top Stories
-    if 'oilprice' in src_lower:
-        bonus += 1
+    # No OilPrice bonus — wire services and trade press should rank above it
     return item.get('epoch', 0) + bonus * 3600  # treat bonus as +hours
 
 
@@ -499,9 +499,18 @@ def main():
     else:
         print('[3/3] OilPrice.com API: skipped (no OILPRICE_API_KEY)')
 
-    # Sort: quality-adjusted recency (OilPrice + preferred sources float up)
+    # Sort: quality-adjusted recency (preferred sources float up)
     all_items.sort(key=_quality_score, reverse=True)
-    all_items = all_items[:MAX_ITEMS]
+    # Cap OilPrice articles so wire services / trade press aren't crowded out
+    op_seen = 0
+    filtered = []
+    for item in all_items:
+        if 'oilprice' in (item.get('source') or '').lower():
+            if op_seen >= OILPRICE_CAP:
+                continue
+            op_seen += 1
+        filtered.append(item)
+    all_items = filtered[:MAX_ITEMS]
 
     # Strip internal fields
     for item in all_items:
