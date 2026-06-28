@@ -1294,9 +1294,17 @@ def _call_claude(prompt, model=None, max_tokens=1500, temperature=None):
             'anthropic-version': '2023-06-01',
         },
     )
-    with urllib.request.urlopen(req, timeout=60) as r:
-        resp = json.loads(r.read())
-    return resp['content'][0]['text']
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            resp = json.loads(r.read())
+        return resp['content'][0]['text']
+    except urllib.error.HTTPError as e:
+        body = e.read()
+        try:
+            err_detail = json.loads(body).get('error', {})
+            raise RuntimeError(f'HTTP {e.code}: {err_detail.get("type","?")} — {err_detail.get("message","?")}') from None
+        except (json.JSONDecodeError, AttributeError):
+            raise RuntimeError(f'HTTP {e.code}: {body[:400]}') from None
 
 
 def _generate_via_claude(ctx):
@@ -5653,8 +5661,8 @@ def _build_trading_page(prices, eia_raw, latest_date):
             wiki_context_block=wiki_context_block + prior_block,
             data=json.dumps(eia_summary, indent=2),
         )
-        # temperature=0.3 — low enough for consistency, high enough to break flat-call lock
-        raw_response = _call_claude(prompt, max_tokens=2500, temperature=0.3)
+        # Use sonnet explicitly — opus may return 400 with temperature on some API versions
+        raw_response = _call_claude(prompt, model='claude-sonnet-4-6', max_tokens=2500, temperature=0.3)
         parsed = _extract_first_json_object(raw_response)
         if parsed:
             result = json.loads(parsed)
@@ -6092,8 +6100,8 @@ def main():
     # Normalize: real newlines + bold paragraph leads.
     market_read = _normalize_narrative(narratives.get('market_read', ''))
 
-    # Generate trading calls (separate Claude call, cached alongside narratives)
-    tc_cache_path = os.path.join(HERE, '.trading_calls_cache.json')
+    # Generate trading calls for index page narrative (separate from trading.html cache)
+    tc_cache_path = os.path.join(HERE, '.tc_index_cache.json')
     tc_key = hashlib.md5(json.dumps(nctx, sort_keys=True).encode()).hexdigest()
     try:
         with open(tc_cache_path) as f:
