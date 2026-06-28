@@ -387,7 +387,7 @@ NAV_PAGES = [
     ('margins.html',   'Prices'),
     ('curves.html',    'Curves'),
     ('inventory.html', 'Inventories'),
-    ('trading.html',   'Calls'),
+    ('trading.html',   'Trades'),
     ('news.html',      'News'),
     ('x_feed.html',    'X Feed'),
 ]
@@ -3671,6 +3671,7 @@ def _build_margins_page(prices, latest_date, raw=None):
         'priceContracts': {k: front_contract_label(k) for k in price_keys},
     })
 
+    _margins_chat = _chat_widget('"=== Prices & Margins ===\\n" + document.body.innerText.slice(0,2000)')
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -4179,6 +4180,7 @@ function renderAllPriceCharts() {{
 }}
 renderAllPriceCharts();
 </script>
+{_margins_chat}
 </body>
 </html>
 """
@@ -4652,6 +4654,7 @@ def _build_curves_page(prices, latest_date):
         'ulsdCurve':  ulsd_curve,
     })
 
+    _curves_chat = _chat_widget('"=== Page Data ===\\n" + document.body.innerText.slice(0,3000)')
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5008,6 +5011,7 @@ fillCurveTable('ulsd-table',  SNAPSHOT.ulsdCurve,  '$/gal');
 
 // (All Four Curves overlay removed by request)
 </script>
+{_curves_chat}
 </body>
 </html>
 """
@@ -5660,6 +5664,87 @@ def _build_trading_page(prices, eia_raw, latest_date):
     with open(OUT_TRADING, 'w') as f:
         f.write(new_html)
     print(f'Wrote {OUT_TRADING}  ({os.path.getsize(OUT_TRADING):,} bytes)')
+
+
+def _chat_widget(context_js):
+    """Return the floating chat widget CSS + HTML + JS for any page.
+    context_js: JS expression string that returns the context string for the AI.
+    """
+    return f"""<style>
+#mob-chat-btn{{position:fixed;bottom:24px;right:24px;z-index:9000;width:52px;height:52px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(245,158,11,0.45);transition:transform 0.2s,box-shadow 0.2s;font-size:22px;}}
+#mob-chat-btn:hover{{transform:scale(1.08);box-shadow:0 6px 24px rgba(245,158,11,0.6);}}
+#mob-chat-panel{{position:fixed;bottom:88px;right:24px;z-index:9000;width:380px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 120px);background:var(--panel);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,0.55);transform:translateY(16px) scale(0.97);opacity:0;pointer-events:none;transition:opacity 0.18s ease,transform 0.18s ease;}}
+#mob-chat-panel.open{{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}}
+.mob-chat-header{{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}}
+.mob-chat-header-title{{font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:7px;}}
+.mob-chat-badge{{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;background:rgba(245,158,11,0.18);color:var(--accent);border:1px solid rgba(245,158,11,0.3);letter-spacing:0.5px;text-transform:uppercase;}}
+.mob-chat-close{{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;padding:2px 4px;border-radius:4px;}}
+.mob-chat-close:hover{{color:var(--text);background:var(--panel-2);}}
+.mob-chat-messages{{flex:1;overflow-y:auto;padding:14px 14px 8px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}}
+.mob-chat-msg{{display:flex;flex-direction:column;gap:2px;max-width:88%;}}
+.mob-chat-msg.user{{align-self:flex-end;align-items:flex-end;}}
+.mob-chat-msg.assistant{{align-self:flex-start;align-items:flex-start;}}
+.mob-chat-bubble{{padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.5;word-break:break-word;}}
+.mob-chat-msg.user .mob-chat-bubble{{background:var(--accent);color:#0f1117;border-radius:10px 10px 2px 10px;font-weight:500;}}
+.mob-chat-msg.assistant .mob-chat-bubble{{background:var(--panel-2);color:var(--text);border:1px solid var(--border);border-radius:10px 10px 10px 2px;}}
+.mob-chat-msg.assistant .mob-chat-bubble.thinking{{color:var(--muted);font-style:italic;}}
+.mob-chat-suggestions{{display:flex;flex-direction:column;gap:5px;margin-top:2px;}}
+.mob-chat-suggestion{{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted-2);font-size:12px;padding:6px 10px;cursor:pointer;text-align:left;transition:border-color 0.15s,color 0.15s,background 0.15s;}}
+.mob-chat-suggestion:hover{{border-color:var(--accent);color:var(--accent);background:rgba(245,158,11,0.07);}}
+.mob-chat-footer{{padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;}}
+#mob-chat-input{{flex:1;background:var(--panel-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;padding:8px 11px;outline:none;resize:none;font-family:inherit;line-height:1.4;max-height:100px;min-height:36px;transition:border-color 0.15s;}}
+#mob-chat-input:focus{{border-color:rgba(245,158,11,0.5);}}
+#mob-chat-input::placeholder{{color:var(--muted);}}
+#mob-chat-send{{background:var(--accent);border:none;border-radius:8px;color:#0f1117;cursor:pointer;font-size:16px;padding:0 12px;flex-shrink:0;transition:opacity 0.15s;}}
+#mob-chat-send:disabled{{opacity:0.4;cursor:default;}}
+#mob-chat-send:not(:disabled):hover{{opacity:0.85;}}
+</style>
+<button id="mob-chat-btn" title="Ask AI about this data">&#x1F4AC;</button>
+<div id="mob-chat-panel">
+  <div class="mob-chat-header">
+    <div class="mob-chat-header-title">&#x1F6E2;&#xFE0F; MOB Analyst <span class="mob-chat-badge">AI</span></div>
+    <button class="mob-chat-close" id="mob-chat-close">&#x2715;</button>
+  </div>
+  <div class="mob-chat-messages" id="mob-chat-messages">
+    <div class="mob-chat-msg assistant"><div class="mob-chat-bubble">Ask me anything about today's petroleum data &mdash; prices, cracks, inventory, or market outlook.</div></div>
+    <div class="mob-chat-suggestions" id="mob-chat-suggestions">
+      <button class="mob-chat-suggestion">What's driving WTI lower today?</button>
+      <button class="mob-chat-suggestion">How do current crack spreads compare to normal?</button>
+      <button class="mob-chat-suggestion">What does the inventory draw mean for prices?</button>
+    </div>
+  </div>
+  <div class="mob-chat-footer">
+    <textarea id="mob-chat-input" rows="1" placeholder="Ask about the data..." maxlength="800"></textarea>
+    <button id="mob-chat-send">&#x27A4;</button>
+  </div>
+</div>
+<script>
+(function(){{
+  var btn=document.getElementById("mob-chat-btn"),panel=document.getElementById("mob-chat-panel"),closeBtn=document.getElementById("mob-chat-close"),msgs=document.getElementById("mob-chat-messages"),input=document.getElementById("mob-chat-input"),send=document.getElementById("mob-chat-send"),suggestions=document.getElementById("mob-chat-suggestions"),open=false,busy=false,history=[];
+  function toggle(){{open=!open;panel.classList.toggle("open",open);if(open)input.focus();}}
+  btn.addEventListener("click",toggle);
+  closeBtn.addEventListener("click",toggle);
+  suggestions.addEventListener("click",function(e){{var c=e.target.closest(".mob-chat-suggestion");if(!c)return;input.value=c.textContent;suggestions.style.display="none";submit();}});
+  input.addEventListener("keydown",function(e){{if(e.key==="Enter"&&!e.shiftKey){{e.preventDefault();submit();}}}});
+  send.addEventListener("click",submit);
+  function buildContext(){{ return {context_js}; }}
+  function appendMsg(role,text,thinking){{var w=document.createElement("div");w.className="mob-chat-msg "+role;var b=document.createElement("div");b.className="mob-chat-bubble"+(thinking?" thinking":"");b.textContent=text;w.appendChild(b);msgs.appendChild(w);msgs.scrollTop=msgs.scrollHeight;return b;}}
+  async function submit(){{
+    var text=input.value.trim();if(!text||busy)return;
+    suggestions.style.display="none";input.value="";input.style.height="auto";
+    busy=true;send.disabled=true;
+    appendMsg("user",text);history.push({{role:"user",content:text}});
+    var tb=appendMsg("assistant","Thinking...",true);
+    try{{
+      var r=await fetch("https://mob-chat.brad-95b.workers.dev",{{method:"POST",headers:{{"Content-Type":"application/json"}},body:JSON.stringify({{messages:history,context:buildContext()}})}});
+      if(!r.ok){{var e=await r.json().catch(function(){{return{{error:"Unknown error"}};}});tb.textContent="Error: "+(e.error||r.statusText);}}
+      else{{var d=await r.json();var rep=d.content||"(no response)";tb.textContent=rep;tb.classList.remove("thinking");history.push({{role:"assistant",content:rep}});}}
+    }}catch(e){{tb.textContent="Network error.";}}
+    busy=false;send.disabled=false;msgs.scrollTop=msgs.scrollHeight;input.focus();
+  }}
+  input.addEventListener("input",function(){{input.style.height="auto";input.style.height=Math.min(input.scrollHeight,100)+"px";}});
+}})();
+</script>"""
 
 
 def main():
@@ -6797,6 +6882,8 @@ tr.total-row.total-jet      td { background: rgba(34,211,238,0.06) !important; b
     new_html = new_html.replace('<body>', f'<body>\n{nav_html}', 1)
     # Inject nav CSS
     new_html = new_html.replace('</style>', NAV_CSS + '\n</style>', 1)
+    # Inject chat widget before </body>
+    new_html = new_html.replace('</body>', _chat_widget('"=== Page Data ===\\n" + document.body.innerText.slice(0,3000)') + '\n</body>', 1)
     # Inject signOut function before </body>
     new_html = new_html.replace('</body>', f'<script>{_SIGNOUT_JS}</script>\n</body>', 1)
 
