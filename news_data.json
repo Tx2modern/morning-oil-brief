@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T16:48:10.378225+00:00",
+  "generated_at": "2026-06-28T16:56:42.553979+00:00",
   "cutoff_hours": 72,
   "items": [
     {
@@ -125,9 +125,9 @@
     {
       "title": "Current price of oil as of June 26, 2026 - Fortune",
       "source": "Fortune",
-      "date": "Fri, 26 Jun 2026 13:00:00 GMT",
-      "datetime": "2026-06-26T13:00:00+00:00",
-      "epoch": 1782478800.0,
+      "date": "Fri, 26 Jun 2026 14:19:52 GMT",
+      "datetime": "2026-06-26T14:19:52+00:00",
+      "epoch": 1782483592.0,
       "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5FQzFQVGtCaXFQNGRNNGN4SGNob0lWdEViRnV0SGZFX0xUNWNrOUlJUkplT2hLdV9kWnV3bnVTbnNHMWw2cHBham1SRkQtLTBxdFI5dXIxQ0RVZzNJM081UnFR?oc=5",
       "description": "",
       "category": "Crude Oil & OPEC"
