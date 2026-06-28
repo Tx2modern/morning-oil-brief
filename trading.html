@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+(function(){{
+  var ok=false;
+  try {{
+    for(var i=0;i<localStorage.length;i++){{
+      var k=localStorage.key(i);
+      if(k&&k.startsWith('sb-')&&k.endsWith('-auth-token')){{
+        var d=JSON.parse(localStorage.getItem(k));
+        if(d&&d.access_token&&d.expires_at>Date.now()/1000){{ok=true;break;}}
+      }}
+    }}
+  }}catch(e){{}}
+  if(!ok)window.location.replace('login.html');
+}})();
+</script>
+<meta name="description" content="Daily trading calls — Brent/WTI spread, calendar spreads, and technical indicators for WTI, Brent, RBOB, and Heating Oil.">
+<meta name="theme-color" content="#07090d">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://mob-chat.brad-95b.workers.dev;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>📈</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MOB · Morning Oil Brief">
+<meta property="og:title" content="Trading Calls · MOB">
+<meta property="og:description" content="Daily trading calls — Brent/WTI spread, calendar spreads, and technical indicators for WTI, Brent, RBOB, and Heating Oil.">
+<meta property="og:url" content="https://www.morningoilbrief.com/trading">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Trading Calls · MOB">
+<meta name="twitter:description" content="Brent/WTI spread, M1 vs deferred calendar spreads, and technical indicators updated daily.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Calls · Morning Oil Brief</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0f1117; --panel: #1a1d24; --panel-2: #232730;
+  --border: #25272e; --border-soft: #1c1e24;
+  --text: #e4e7ec; --muted: #9aa0ac; --muted-2: #c1c5cf;
+  --build: #16a34a; --draw: #dc2626; --accent: #f59e0b;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: var(--text); font-size: 15px; line-height: 1.5; }
+.container { max-width: 1500px; margin: 0 auto; padding: 14px; }
+.header { display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.header h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
+.header .subtitle { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.update-info { text-align: right; font-size: 11px; color: var(--muted); line-height: 1.6; }
+.update-info strong { color: var(--text); font-weight: 500; }
+.update-info .pill { display: inline-block; padding: 2px 9px; background: rgba(22,163,74,0.15);
+  color: #4ade80; border-radius: 10px; font-weight: 500; font-size: 11px; letter-spacing: 0.4px;
+  text-transform: uppercase; margin-bottom: 4px; border: 1px solid rgba(22,163,74,0.35); }
+.section { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px 18px; margin-bottom: 14px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.section-title { font-size: 14px; font-weight: 600; margin: 0; letter-spacing: -0.1px; }
+.section-subtitle { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: 8px; text-transform: none; letter-spacing: 0; }
+.chart-container { height: 280px; position: relative; }
+.curve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+@media (max-width: 1000px) { .curve-grid { grid-template-columns: 1fr; } }
+.kpi-strip { display: grid; gap: 8px; margin-bottom: 18px; max-width: 1300px; margin-left: auto !important; margin-right: auto !important; }
+.kpi-row-label {
+  font-size: 13px; font-weight: 700; color: var(--muted-2);
+  letter-spacing: -0.1px;
+  padding: 12px 2px 6px; border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 8px;
+}
+.calspread-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.calspread-row .kpi-row-label { padding-top: 8px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.calspread-row .kpi-strip { max-width: none !important; margin: 0 !important; grid-template-columns: repeat(4, 1fr) !important; }
+@media (max-width: 1100px) {
+  .calspread-row { grid-template-columns: 1fr; gap: 0; }
+  .calspread-row .kpi-strip { grid-template-columns: repeat(2, 1fr) !important; margin-bottom: 8px !important; }
+}
+.kpi {
+  border-radius: 8px; padding: 12px 13px;
+  position: relative; overflow: hidden;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kpi.build { --kpi-tint: rgba(22,163,74,0.22); --kpi-accent: #16a34a; }
+.kpi.draw  { --kpi-tint: rgba(220,38,38,0.22);  --kpi-accent: #dc2626; }
+.kpi.neutral { --kpi-tint: rgba(120,130,150,0.18); --kpi-accent: #6b7280; }
+.kpi::before {
+  content: ''; position: absolute; inset: 0 0 auto 0; height: 2px;
+  background: var(--kpi-accent, transparent); opacity: 0.9; z-index: 1; pointer-events: none;
+}
+.kpi::after { display: none !important; }
+.kpi:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.35); border-color: var(--kpi-accent); }
+.kpi > * { position: relative; z-index: 1; }
+.kpi-row { display: flex; justify-content: space-between; align-items: center; }
+.kpi-label { font-size: 12px; font-weight: 700; color: var(--muted-2); letter-spacing: -0.1px; }
+.kpi-tag {
+  font-size: 11px; padding: 3px 9px; border-radius: 999px;
+  background: transparent; color: var(--kpi-accent); border: 1px solid var(--kpi-accent);
+  font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+}
+.kpi-value { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; font-variant-numeric: tabular-nums; line-height: 1; display: flex; align-items: baseline; gap: 4px; }
+.kpi-value-units { font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: 0.3px; }
+.kpi-change-row { display: flex; align-items: center; gap: 6px; font-size: 11px; font-variant-numeric: tabular-nums; }
+.kpi-change { font-weight: 600; color: var(--kpi-accent); display: inline-flex; align-items: center; gap: 3px; }
+.kpi-change-sub { color: var(--muted); font-size: 11px; }
+.spread-context-table { width: 100%; margin-top: 14px; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.spread-context-table th, .spread-context-table td { padding: 6px 10px; border-bottom: 1px solid var(--border-soft); text-align: right; }
+.spread-context-table th:first-child, .spread-context-table td:first-child { text-align: left; font-weight: 600; color: var(--muted-2); }
+.spread-context-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); font-weight: 600; }
+.spread-context-table td { color: var(--text); }
+.spread-context-table td.pos { color: #4ade80; font-weight: 500; }
+.spread-context-table td.neg { color: #f87171; font-weight: 500; }
+.trade-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; margin-top: 12px; }
+.trade-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); font-weight: 700; padding: 6px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+.trade-table td { padding: 8px 10px; border-bottom: 1px solid var(--border-soft); color: var(--text); vertical-align: middle; }
+.trade-table tr:last-child td { border-bottom: none; }
+.trade-pill {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.6px;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
+  border: 1px solid;
+}
+.trade-pill.long  { color: #4ade80; border-color: rgba(74,222,128,0.5); background: rgba(74,222,128,0.08); }
+.trade-pill.short { color: #f87171; border-color: rgba(248,113,113,0.5); background: rgba(248,113,113,0.08); }
+.trade-pill.flat  { color: var(--muted-2); border-color: var(--border); background: rgba(255,255,255,0.04); }
+.conv-high { color: #f5a524; }
+.conv-med  { color: var(--muted-2); }
+.conv-low  { color: var(--muted); }
+.tech-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-soft); font-size: 12px; font-variant-numeric: tabular-nums; }
+.tech-stat { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.tech-stat .lbl { color: var(--muted); }
+.tech-stat .val { color: var(--muted-2); font-weight: 500; font-variant-numeric: tabular-nums; }
+.tech-stat .val.above { color: #f87171; }
+.tech-stat .val.below { color: #4ade80; }
+footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 11px; color: var(--muted); text-align: center; }
+
+/* ────────────────────────────────────────────────────────────────────
+   MOB · 2026 redesign — Inter + JetBrains Mono, deep dark, mono accents
+   ──────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #07090d;
+  --panel: #0e1117;
+  --panel-2: #141821;
+  --border: #1d222d;
+  --border-soft: #161a23;
+  --text: #e6e8ec;
+  --muted: #7c8593;
+  --muted-2: #9aa3b1;
+  --accent: #f5a524;
+  --mob-ai: #5eead4;
+  --mob-text-dim: #c1c5cf;
+  --mob-border-strong: #2a3041;
+}
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  background:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 64px 64px,
+    var(--bg) !important;
+  font-size: 14px !important;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1320px !important; padding: 22px 32px 60px !important; }
+@media (max-width: 720px) { .container { padding: 18px 18px 40px !important; } }
+.top-nav { position: static !important; background: transparent !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; border-bottom: none !important; margin: 0 0 18px !important; }
+.top-nav .nav-inner { max-width: 1320px !important; margin: 0 auto !important; padding: 18px 32px 0 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 24px; flex-wrap: wrap; }
+@media (max-width: 720px) { .top-nav .nav-inner { padding: 18px 18px 0 !important; } }
+.top-nav .nav-links { display: flex; gap: 4px !important; flex-wrap: wrap; }
+.top-nav .nav-link { font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace !important; font-size: 11.5px !important; font-weight: 600 !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; padding: 8px 14px !important; color: var(--muted-2) !important; background: transparent !important; border-radius: 6px !important; text-decoration: none; transition: color 0.15s, background 0.15s; }
+.top-nav .nav-link:hover { color: var(--text) !important; background: var(--panel-2) !important; }
+.top-nav .nav-link.active { color: var(--accent) !important; background: transparent !important; }
+.nav-signout { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 8px 14px; color: var(--muted); background: transparent; border: 1px solid var(--border-soft, var(--border)); border-radius: 6px; cursor: pointer; transition: color 0.15s, border-color 0.15s; margin-left: 8px; }
+.nav-signout:hover { color: #f87171; border-color: rgba(248,113,113,0.45); background: rgba(248,113,113,0.06); }
+.mob-brand { display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace; font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); }
+.mob-brand .mob-mark { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; }
+.mob-brand .mob-mark svg { width: 100%; height: 100%; display: block; }
+.mob-brand .mob-name { color: var(--text); }
+.mob-brand .mob-sep { color: var(--muted); margin: 0 2px; }
+.mob-brand .mob-tagline { color: var(--muted-2); }
+.header { flex-direction: row !important; align-items: flex-end !important; justify-content: space-between !important; border-bottom: 1px solid var(--border-soft) !important; padding: 18px 0 26px !important; margin-bottom: 26px !important; gap: 24px !important; }
+.header > div:first-child { min-width: 0; }
+.header h1 { font-family: 'Inter', system-ui, sans-serif !important; font-size: 56px !important; font-weight: 600 !important; letter-spacing: -0.03em !important; line-height: 1 !important; color: var(--text) !important; margin: 0 !important; }
+@media (max-width: 900px) { .header h1 { font-size: 40px !important; } }
+@media (max-width: 560px) { .header h1 { font-size: 32px !important; } }
+.header .subtitle { font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--muted) !important; margin-top: 10px !important; }
+.header .update-info { margin-left: auto !important; flex-shrink: 0 !important; text-align: right !important; font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important; font-size: 11px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; color: var(--muted) !important; line-height: 1.7 !important; }
+.header .update-info strong { color: var(--mob-text-dim) !important; font-weight: 500 !important; }
+.header .update-info .pill { background: rgba(94,234,212,0.08) !important; color: var(--mob-ai) !important; border: 1px solid rgba(94,234,212,0.35) !important; border-radius: 4px !important; padding: 4px 10px !important; font-family: 'JetBrains Mono', ui-monospace, monospace !important; font-size: 10.5px !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; }
+.section, .panel { background: var(--panel) !important; border: 1px solid var(--border) !important; border-radius: 12px !important; }
+footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 1px solid var(--border-soft) !important; font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important; font-size: 11px !important; letter-spacing: 0.16em !important; text-transform: uppercase !important; color: var(--muted) !important; text-align: center !important; }
+.kpi { background: var(--panel) !important; border: 1px solid var(--border) !important; border-radius: 12px !important; padding: 14px 16px !important; position: relative; overflow: hidden; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease !important; }
+.kpi.build { --kpi-status-color: #22c55e; background: var(--panel) !important; border-color: var(--border) !important; }
+.kpi.draw  { --kpi-status-color: #ef4444; background: var(--panel) !important; border-color: var(--border) !important; }
+.kpi.neutral { --kpi-status-color: var(--muted); background: var(--panel) !important; }
+.kpi::before { content: '' !important; position: absolute !important; inset: 0 0 auto 0 !important; height: 2px !important; width: auto !important; background: var(--kpi-status-color, transparent) !important; opacity: 0.9 !important; z-index: 1 !important; pointer-events: none !important; }
+.kpi::after { display: none !important; }
+.kpi:hover { transform: translateY(-2px); border-color: var(--kpi-status-color, var(--mob-border-strong)) !important; box-shadow: 0 12px 32px rgba(0,0,0,0.45) !important; }
+.kpi-label { color: var(--muted-2) !important; font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important; font-size: 11px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; font-weight: 600 !important; }
+.kpi-value { color: var(--text) !important; }
+.kpi-value-units { color: var(--muted) !important; font-family: 'JetBrains Mono', ui-monospace, monospace !important; letter-spacing: 0.12em !important; }
+.kpi-change-sub { color: var(--muted) !important; }
+.kpi-tag { background: transparent !important; color: var(--kpi-status-color, var(--muted)) !important; border: 1px solid var(--kpi-status-color, var(--muted)) !important; font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important; font-size: 10.5px !important; letter-spacing: 0.16em !important; font-weight: 600 !important; border-radius: 4px !important; padding: 3px 9px !important; }
+.kpi-change { color: var(--kpi-status-color, var(--muted)) !important; }
+
+/* Minimal strip — hides spark/band/position */
+.kpi-strip-minimal .kpi-spark,
+.kpi-strip-minimal .kpi-band,
+.kpi-strip-minimal .kpi-position { display: none !important; }
+.kpi-strip-minimal .kpi { padding: 12px 14px !important; gap: 6px !important; min-height: 110px; display: flex !important; flex-direction: column !important; }
+.kpi-strip-minimal .kpi-row { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 5px !important; }
+.kpi-strip-minimal .kpi-label { font-size: 13px !important; font-weight: 700 !important; white-space: nowrap !important; color: var(--text) !important; }
+.kpi-strip-minimal .kpi-tag { font-size: 9px !important; padding: 2px 7px !important; align-self: flex-start !important; }
+.kpi-strip-minimal .kpi-value { font-size: 22px !important; font-weight: 700 !important; white-space: nowrap !important; margin-top: auto !important; }
+.kpi-strip-minimal .kpi-value-units { font-size: 10px !important; }
+.kpi-strip-minimal .kpi-change-row { font-size: 12px !important; white-space: nowrap !important; display: flex !important; align-items: center !important; }
+.kpi-strip-minimal .kpi-change { font-size: 13px !important; font-weight: 700 !important; }
+.mob-section-h { font-size: 22px; font-weight: 600; letter-spacing: -0.012em; color: var(--text); margin: 26px 0 18px; font-family: 'Inter', system-ui, sans-serif; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <div class="mob-brand"><span class="mob-mark"><svg width="28" height="32" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;overflow:visible"><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="#f0b056" opacity="0.95"/><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="none" stroke="#f0b056" stroke-width="1.2"/><ellipse cx="14" cy="4.6" rx="10.8" ry="2.2" fill="#07090d" stroke="#f0b056" stroke-width="1.1"/><path d="M 2.5 10.6 Q 14 12.4 25.5 10.6" fill="none" stroke="#07090d" stroke-width="1.1"/><path d="M 2.5 21.4 Q 14 23.2 25.5 21.4" fill="none" stroke="#07090d" stroke-width="1.1"/><text x="14" y="18.2" text-anchor="middle" fill="#07090d" font-family="'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace" font-size="6" font-weight="700" letter-spacing="0.4">OIL</text></svg></span><span class="mob-name">MOB</span><span class="mob-sep">·</span><span class="mob-tagline">Morning Oil Brief</span></div>
+    <div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="margins.html">Cracks · Prices</a><a class="nav-link" href="curves.html">Forward Curves</a><a class="nav-link" href="inventory.html">Inventories</a><a class="nav-link active" href="trading.html">Trading Calls</a><a class="nav-link" href="news.html">News</a><a class="nav-link" href="x_feed.html">X Feed</a></div>
+    <button class="nav-signout" onclick="signOut()">Sign Out</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <div>
+      <h1>Trading Calls</h1>
+      <div class="subtitle">Brent/WTI spread · Calendar spreads · Technical indicators</div>
+    </div>
+    <div class="update-info">
+      <span class="pill">NYMEX SETTLEMENT</span><br>
+      Prices thru: <strong id="prices-thru">—</strong><br>
+      Next refresh: <strong id="next-refresh">—</strong>
+    </div>
+  </div>
+
+  <!-- ─── Section 1: Brent/WTI Spread ───────────────────────────────── -->
+  <h2 class="mob-section-h">Brent / WTI Spread</h2>
+  <div class="curve-grid" style="margin-bottom:14px">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">30-Day Spread History <span class="section-subtitle">Brent − WTI · $/bbl · positive = Brent premium</span></h2>
+      </div>
+      <div class="chart-container"><canvas id="bwti-chart" role="img" aria-label="Brent WTI spread chart"></canvas></div>
+    </div>
+    <div class="section" style="display:flex;flex-direction:column;gap:0">
+      <div class="section-header">
+        <h2 class="section-title">Spread Context</h2>
+      </div>
+      <table class="spread-context-table" id="bwti-context-table">
+        <thead><tr><th>Metric</th><th>Value</th><th>Signal</th></tr></thead>
+        <tbody id="bwti-context-body"></tbody>
+      </table>
+      <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border-soft);font-size:12px;color:var(--muted-2);line-height:1.65" id="bwti-narrative"></div>
+    </div>
+  </div>
+
+  <!-- ─── Section 2: Calendar Spreads ──────────────────────────────── -->
+  <h2 class="mob-section-h">Calendar Spreads — M1 vs Deferred</h2>
+  <p style="font-size:12px;color:var(--muted);margin:-12px 0 16px;font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:0.06em">Positive = M1 premium (backwardation) · Negative = M1 discount (contango)</p>
+
+  <div class="calspread-row">
+    <div>
+      <div class="kpi-row-label">WTI <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/bbl spread vs M1</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="cal-wti"></div>
+    </div>
+    <div>
+      <div class="kpi-row-label">Brent <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/bbl spread vs M1</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="cal-brent"></div>
+    </div>
+  </div>
+  <div class="calspread-row">
+    <div>
+      <div class="kpi-row-label">RBOB Gasoline <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/gal spread vs M1</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="cal-rbob"></div>
+    </div>
+    <div>
+      <div class="kpi-row-label">Heating Oil (ULSD) <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/gal spread vs M1</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="cal-ho"></div>
+    </div>
+  </div>
+
+  <!-- ─── Section 3: Technical Indicators ──────────────────────────── -->
+  <h2 class="mob-section-h">Technical Indicators</h2>
+  <div class="curve-grid">
+    <div class="section">
+      <div class="section-header"><h2 class="section-title">WTI <span class="section-subtitle">$/bbl · price vs SMAs</span></h2><span id="wti-trend-pill" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid"></span></div>
+      <div class="chart-container"><canvas id="wti-tech-chart" role="img" aria-label="WTI technical chart"></canvas></div>
+      <div class="tech-stat-grid" id="wti-tech-stats"></div>
+    </div>
+    <div class="section">
+      <div class="section-header"><h2 class="section-title">Brent <span class="section-subtitle">$/bbl · price vs SMAs</span></h2><span id="brent-trend-pill" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid"></span></div>
+      <div class="chart-container"><canvas id="brent-tech-chart" role="img" aria-label="Brent technical chart"></canvas></div>
+      <div class="tech-stat-grid" id="brent-tech-stats"></div>
+    </div>
+    <div class="section">
+      <div class="section-header"><h2 class="section-title">RBOB Gasoline <span class="section-subtitle">$/gal · price vs SMAs</span></h2><span id="rbob-trend-pill" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid"></span></div>
+      <div class="chart-container"><canvas id="rbob-tech-chart" role="img" aria-label="RBOB technical chart"></canvas></div>
+      <div class="tech-stat-grid" id="rbob-tech-stats"></div>
+    </div>
+    <div class="section">
+      <div class="section-header"><h2 class="section-title">Heating Oil <span class="section-subtitle">$/gal · price vs SMAs</span></h2><span id="ho-trend-pill" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid"></span></div>
+      <div class="chart-container"><canvas id="ho-tech-chart" role="img" aria-label="HO technical chart"></canvas></div>
+      <div class="tech-stat-grid" id="ho-tech-stats"></div>
+    </div>
+  </div>
+
+  <!-- ─── Section 4: Summary Trade Table ───────────────────────────── -->
+  <h2 class="mob-section-h">Summary Trade Table</h2>
+  <div class="section">
+    <table class="trade-table">
+      <thead>
+        <tr>
+          <th>Trade</th>
+          <th>Direction</th>
+          <th>Entry</th>
+          <th>Target</th>
+          <th>Stop</th>
+          <th>Conviction</th>
+          <th>Timeframe</th>
+          <th>Thesis</th>
+        </tr>
+      </thead>
+      <tbody id="trade-table-body"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    MOB · Trading Calls · Data through <span id="footer-date">—</span>
+  </footer>
+</div>
+
+<script>
+function signOut() {
+  Object.keys(localStorage).forEach(function(k) {
+    if (k.startsWith('sb-')) localStorage.removeItem(k);
+  });
+  window.location.href = 'login.html';
+}
+
+// ── SNAPSHOT (rewritten by build_index.py each morning) ──────────
+// @@TRADING_DATA_START@@
+const SNAPSHOT = {"asOf":"June 26, 2026","pricesThru":"June 26, 2026","nextRefresh":"June 30, 2026","wtiSpark":[101.17,105.42,108.66,107.77,98.26,96.35,96.6,93.89,88.68,88.9,87.36,92.16,93.76,96.02,93.04,90.54,91.3,88.2,90.03,87.71,84.88,80.75,76.05,76.79,76.6,74.82,73.21,70.34,71.92,69.23],"brentSpark":[105.72,109.26,112.1,111.28,105.02,102.58,103.54,99.58,94.29,93.71,92.05,94.98,96.0,97.81,95.03,93.09,94.25,91.45,93.1,90.38,87.33,83.17,78.96,79.55,79.85,77.9,77.08,73.74,75.26,71.99],"rbobSpark":[],"hoSpark":[],"wtiPrice":69.23,"wtiChange":-2.69,"brentPrice":71.99,"brentChange":-3.27,"rbobPrice":2.9571,"rbobChange":-0.0714,"hoPrice":3.2082,"hoChange":-0.091,"calSpreads":{"wti":{"m1m2":0.3,"m1m3":0.63,"m1m6":1.68,"m1m12":2.84},"brent":{"m1m2":-0.61,"m1m3":-0.55,"m1m6":0.14,"m1m12":1.34},"rbob":{"m1m2":0.1312,"m1m3":0.2751,"m1m6":0.7868,"m1m12":0.5816},"ho":{"m1m2":0.106,"m1m3":0.1713,"m1m6":0.3843,"m1m12":0.5488}},"trades":[{"trade":"Brent/WTI Spread","direction":"flat","entry":"—","target":"—","stop":"—","conviction":"low","timeframe":"—","thesis":"Spread at $2.76 — watch for widening on Iran re-escalation vs narrowing if US export arb reopens"},{"trade":"WTI M1–M2","direction":"long","entry":"$0.30","target":"$0.80","stop":"$0.00","conviction":"med","timeframe":"1–2 weeks","thesis":"Cushing below operational floor; structural backwardation supported while draws continue"},{"trade":"Brent M1–M2","direction":"flat","entry":"—","target":"—","stop":"—","conviction":"low","timeframe":"—","thesis":"Front contango ($-0.61) unusual — monitor Hormuz re-escalation risk for prompt flip"},{"trade":"RBOB M1–M2","direction":"long","entry":"$0.131","target":"$0.200","stop":"$0.050","conviction":"med","timeframe":"1–3 weeks","thesis":"Peak summer demand; $0.13/gal prompt premium supported by July 4 driving season"},{"trade":"HO M1–M2","direction":"long","entry":"$0.106","target":"$0.180","stop":"$0.040","conviction":"med","timeframe":"2–4 weeks","thesis":"Distillate curve steeply backward; lean inventories and industrial demand underpin prompt"},{"trade":"WTI Outright","direction":"flat","entry":"—","target":"—","stop":"—","conviction":"low","timeframe":"—","thesis":"$69 trapped between Cushing draw support and Iran de-escalation/OPEC supply headwind"},{"trade":"RBOB Crack","direction":"long","entry":"$54.97","target":"$60.00","stop":"$50.00","conviction":"med","timeframe":"2–4 weeks","thesis":"3:2:1 crack at $58 — summer driving + low inventories = crack support; sell any demand miss"}]};
+// @@TRADING_DATA_END@@
+
+// ── Helpers ──────────────────────────────────────────────────────
+function sma(arr, n) {
+  if (arr.length < n) return null;
+  const slice = arr.slice(arr.length - n);
+  return slice.reduce((a,b) => a+b, 0) / n;
+}
+
+function rsi14(prices) {
+  if (prices.length < 15) return null;
+  const p = prices.slice(prices.length - 15);
+  let gains = 0, losses = 0;
+  for (let i = 1; i < p.length; i++) {
+    const d = p[i] - p[i-1];
+    if (d > 0) gains += d; else losses += Math.abs(d);
+  }
+  const rs = gains / (losses || 0.001);
+  return 100 - (100 / (1 + rs));
+}
+
+function trendPill(el, price, sma20) {
+  if (!sma20) return;
+  const abv = price > sma20;
+  el.textContent = abv ? 'Above SMA20' : 'Below SMA20';
+  el.style.color = abv ? '#f87171' : '#4ade80';
+  el.style.borderColor = abv ? 'rgba(248,113,113,0.5)' : 'rgba(74,222,128,0.5)';
+  el.style.background = abv ? 'rgba(248,113,113,0.08)' : 'rgba(74,222,128,0.08)';
+}
+
+function buildTechChart(canvasId, spark, color, label) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx || !spark.length) return;
+  const s10 = sma(spark, 10);
+  const s20 = sma(spark, 20);
+  const datasets = [
+    { label: label, data: spark, borderColor: color, backgroundColor: color + '18',
+      borderWidth: 2, pointRadius: 0, fill: true, tension: 0.3, order: 1 }
+  ];
+  if (s10 !== null) {
+    const sma10arr = spark.map((_, i) => i >= spark.length - 10 ? sma(spark.slice(0, i+1), Math.min(i+1,10)) : null);
+    datasets.push({ label: 'SMA10', data: sma10arr, borderColor: '#fbbf24',
+      borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.3, spanGaps: true, order: 2 });
+  }
+  if (s20 !== null) {
+    const sma20arr = spark.map((_, i) => i >= 19 ? sma(spark.slice(0, i+1), Math.min(i+1,20)) : null);
+    datasets.push({ label: 'SMA20', data: sma20arr, borderColor: '#818cf8',
+      borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.3, spanGaps: true, order: 3 });
+  }
+  new Chart(ctx.getContext('2d'), {
+    type: 'line',
+    data: { labels: spark.map((_, i) => 'D-' + (spark.length - 1 - i)), datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', align: 'end', labels: { color: '#9aa3b1', boxWidth: 10, font: { size: 10 } } },
+        tooltip: { mode: 'index', intersect: false }
+      },
+      scales: {
+        x: { ticks: { font: { size: 10 }, color: '#7c8593', maxTicksLimit: 8 }, grid: { color: 'rgba(255,255,255,0.04)' } },
+        y: { ticks: { font: { size: 10 }, color: '#7c8593' }, grid: { color: 'rgba(255,255,255,0.06)' } }
+      }
+    }
+  });
+  return { sma10: s10, sma20: s20, rsi: rsi14(spark) };
+}
+
+function buildTechStats(elId, price, change, info, units) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const dec = units === '$/gal' ? 4 : 2;
+  const rows = [
+    ['Price', (units === '$/gal' ? '$' : '$') + price.toFixed(dec)],
+    ['1-Day Chg', (change >= 0 ? '+' : '') + '$' + change.toFixed(dec)],
+    ['SMA10', info && info.sma10 ? '$' + info.sma10.toFixed(dec) : '—'],
+    ['SMA20', info && info.sma20 ? '$' + info.sma20.toFixed(dec) : '—'],
+    ['vs SMA10', info && info.sma10 ? (price > info.sma10 ? '+' : '') + '$' + (price - info.sma10).toFixed(dec) : '—'],
+    ['vs SMA20', info && info.sma20 ? (price > info.sma20 ? '+' : '') + '$' + (price - info.sma20).toFixed(dec) : '—'],
+    ['RSI (14)', info && info.rsi ? info.rsi.toFixed(1) : '—'],
+    ['30D Range', '']
+  ];
+  if (info && info.sma10) {
+    const vs10 = price - info.sma10;
+    const vs20 = info.sma20 ? price - info.sma20 : null;
+    rows[4][2] = vs10 > 0 ? 'above' : 'below';
+    if (vs20 !== null) rows[5][2] = vs20 > 0 ? 'above' : 'below';
+  }
+  el.innerHTML = rows.map(([lbl, val, cls]) => {
+    const valCls = cls === 'above' ? 'above' : cls === 'below' ? 'below' : '';
+    return `<div class="tech-stat"><span class="lbl">${lbl}</span><span class="val ${valCls}">${val}</span></div>`;
+  }).join('');
+}
+
+function buildCalCard(strip, label, value, tag, units, dec) {
+  const isBuild = value >= 0;
+  const cls = isBuild ? 'build' : 'draw';
+  const arrow = isBuild ? '▲' : '▼';
+  const tagText = tag;
+  const card = document.createElement('div');
+  card.className = `kpi ${cls}`;
+  const prefix = units === '$/gal' ? '$' : '$';
+  card.innerHTML = `
+    <div class="kpi-row">
+      <span class="kpi-label">${label}</span>
+      <span class="kpi-tag">${tagText}</span>
+    </div>
+    <div class="kpi-value">${value >= 0 ? '' : ''}${prefix}${value.toFixed(dec)}<span class="kpi-value-units">${units}</span></div>
+    <div class="kpi-change-row">
+      <span class="kpi-change">${value >= 0 ? '▲ Bkwd' : '▼ Contango'}</span>
+    </div>
+  `;
+  strip.appendChild(card);
+}
+
+// ── Render ────────────────────────────────────────────────────────
+(function init() {
+  const S = SNAPSHOT;
+  if (!S) return;
+
+  // Header dates
+  document.getElementById('prices-thru').textContent = S.pricesThru || '—';
+  document.getElementById('next-refresh').textContent = S.nextRefresh || '—';
+  document.getElementById('footer-date').textContent = S.pricesThru || '—';
+
+  // ── Brent/WTI spread chart ──
+  const spreadSpark = S.wtiSpark.map((w, i) => +(S.brentSpark[i] - w).toFixed(2));
+  const curSpread = (S.brentPrice - S.wtiPrice).toFixed(2);
+  const spreadCtx = document.getElementById('bwti-chart');
+  if (spreadCtx && spreadSpark.length) {
+    const spreadColor = spreadSpark[spreadSpark.length-1] >= 0 ? '#60a5fa' : '#f87171';
+    new Chart(spreadCtx.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: spreadSpark.map((_, i) => 'D-' + (spreadSpark.length - 1 - i)),
+        datasets: [{
+          label: 'Brent−WTI ($/bbl)',
+          data: spreadSpark,
+          borderColor: '#60a5fa',
+          backgroundColor: 'rgba(96,165,250,0.12)',
+          borderWidth: 2, pointRadius: 0, fill: true, tension: 0.3
+        }, {
+          label: '30D Avg',
+          data: spreadSpark.map(() => spreadSpark.reduce((a,b)=>a+b,0)/spreadSpark.length),
+          borderColor: 'rgba(255,255,255,0.2)',
+          borderWidth: 1, borderDash: [4,4], pointRadius: 0, fill: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top', align: 'end', labels: { color: '#9aa3b1', boxWidth: 10, font: { size: 10 } } },
+          tooltip: { mode: 'index', intersect: false, callbacks: { label: c => c.dataset.label + ': $' + c.parsed.y.toFixed(2) + '/bbl' } }
+        },
+        scales: {
+          x: { ticks: { font: { size: 10 }, color: '#7c8593', maxTicksLimit: 10 }, grid: { color: 'rgba(255,255,255,0.04)' } },
+          y: { ticks: { font: { size: 10 }, color: '#7c8593', callback: v => '$' + v.toFixed(2) }, grid: { color: 'rgba(255,255,255,0.06)' } }
+        }
+      }
+    });
+  }
+
+  // Brent/WTI context table
+  const avg30 = (spreadSpark.reduce((a,b)=>a+b,0)/spreadSpark.length).toFixed(2);
+  const lo30 = Math.min(...spreadSpark).toFixed(2);
+  const hi30 = Math.max(...spreadSpark).toFixed(2);
+  const rows = [
+    ['Current spread', '$' + curSpread + '/bbl', curSpread > avg30 ? 'Wide vs avg' : 'Narrow vs avg'],
+    ['30-day avg', '$' + avg30 + '/bbl', ''],
+    ['30-day low', '$' + lo30 + '/bbl', ''],
+    ['30-day high', '$' + hi30 + '/bbl', ''],
+    ['WTI (M1)', '$' + S.wtiPrice.toFixed(2) + '/bbl', S.wtiChange < 0 ? '▼ ' + Math.abs(S.wtiChange).toFixed(2) : '▲ ' + S.wtiChange.toFixed(2)],
+    ['Brent (M1)', '$' + S.brentPrice.toFixed(2) + '/bbl', S.brentChange < 0 ? '▼ ' + Math.abs(S.brentChange).toFixed(2) : '▲ ' + S.brentChange.toFixed(2)],
+  ];
+  const tbody = document.getElementById('bwti-context-body');
+  if (tbody) {
+    tbody.innerHTML = rows.map(([lbl, val, sig]) =>
+      `<tr><td>${lbl}</td><td>${val}</td><td style="color:var(--muted-2)">${sig}</td></tr>`
+    ).join('');
+  }
+  const narr = document.getElementById('bwti-narrative');
+  if (narr) {
+    const cur = +curSpread;
+    const avg = +avg30;
+    const dir = cur > avg ? 'above its 30-day average of $' + avg + ', suggesting Brent is commanding an elevated premium' : 'below its 30-day average of $' + avg + ', suggesting the Atlantic Basin arb is compressed';
+    narr.innerHTML = '<strong>Read:</strong> The Brent/WTI spread at <strong>$' + curSpread + '/bbl</strong> is ' + dir + '. A spread above $3 typically incentivizes US crude exports; below $3 the export arb weakens. Watch Cushing draws (widening) vs Hormuz de-escalation (narrowing).';
+  }
+
+  // ── Calendar spread cards ──
+  function renderCalStrip(stripId, spreads, units, dec) {
+    const strip = document.getElementById(stripId);
+    if (!strip) return;
+    const labels = ['M1–M2', 'M1–M3', 'M1–M6', 'M1–M12'];
+    const vals = [spreads.m1m2, spreads.m1m3, spreads.m1m6, spreads.m1m12];
+    labels.forEach((lbl, i) => buildCalCard(strip, lbl, vals[i], vals[i] >= 0 ? 'BKWD' : 'CONTANGO', units, dec));
+  }
+  renderCalStrip('cal-wti',   S.calSpreads.wti,   '/bbl', 2);
+  renderCalStrip('cal-brent', S.calSpreads.brent, '/bbl', 2);
+  renderCalStrip('cal-rbob',  S.calSpreads.rbob,  '/gal', 4);
+  renderCalStrip('cal-ho',    S.calSpreads.ho,    '/gal', 4);
+
+  // ── Technical charts ──
+  const wtiInfo  = buildTechChart('wti-tech-chart',   S.wtiSpark,   '#fbbf24', 'WTI');
+  const brentInfo = buildTechChart('brent-tech-chart', S.brentSpark, '#60a5fa', 'Brent');
+  const rbobInfo  = buildTechChart('rbob-tech-chart',  S.rbobSpark,  '#ef4444', 'RBOB');
+  const hoInfo    = buildTechChart('ho-tech-chart',    S.hoSpark,    '#facc15', 'HO');
+
+  trendPill(document.getElementById('wti-trend-pill'),   S.wtiPrice,   wtiInfo   && wtiInfo.sma20);
+  trendPill(document.getElementById('brent-trend-pill'), S.brentPrice, brentInfo && brentInfo.sma20);
+  trendPill(document.getElementById('rbob-trend-pill'),  S.rbobPrice,  rbobInfo  && rbobInfo.sma20);
+  trendPill(document.getElementById('ho-trend-pill'),    S.hoPrice,    hoInfo    && hoInfo.sma20);
+
+  buildTechStats('wti-tech-stats',   S.wtiPrice,   S.wtiChange,   wtiInfo,   '$/bbl');
+  buildTechStats('brent-tech-stats', S.brentPrice, S.brentChange, brentInfo, '$/bbl');
+  buildTechStats('rbob-tech-stats',  S.rbobPrice,  S.rbobChange,  rbobInfo,  '$/gal');
+  buildTechStats('ho-tech-stats',    S.hoPrice,    S.hoChange,    hoInfo,    '$/gal');
+
+  // ── Summary trade table ──
+  const tradeBody = document.getElementById('trade-table-body');
+  if (tradeBody && S.trades) {
+    tradeBody.innerHTML = S.trades.map(t => {
+      const dirCls = t.direction === 'long' ? 'long' : t.direction === 'short' ? 'short' : 'flat';
+      const dirLabel = t.direction === 'long' ? 'Long' : t.direction === 'short' ? 'Short' : 'Flat / Watch';
+      const convCls = t.conviction === 'high' ? 'conv-high' : t.conviction === 'med' ? 'conv-med' : 'conv-low';
+      const convLabel = t.conviction === 'high' ? 'High' : t.conviction === 'med' ? 'Med' : 'Low';
+      return `<tr>
+        <td style="font-weight:600">${t.trade}</td>
+        <td><span class="trade-pill ${dirCls}">${dirLabel}</span></td>
+        <td>${t.entry}</td>
+        <td>${t.target}</td>
+        <td>${t.stop}</td>
+        <td class="${convCls}">${convLabel}</td>
+        <td style="color:var(--muted-2)">${t.timeframe}</td>
+        <td style="color:var(--muted-2);font-size:11px;max-width:260px">${t.thesis}</td>
+      </tr>`;
+    }).join('');
+  }
+})();
+</script>
+
+</body>
+</html>
