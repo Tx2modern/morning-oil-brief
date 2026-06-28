@@ -585,10 +585,10 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   if (!priceChart) return;
 
   function syncScales(src, targets) {
-    src.timeScale().subscribeVisibleLogicalRangeChange(range => {
+    src.timeScale().subscribeVisibleTimeRangeChange(range => {
       if (syncing || !range) return;
       syncing = true;
-      targets.forEach(t => { if (t) try { t.timeScale().setVisibleLogicalRange(range); } catch(e){} });
+      targets.forEach(t => { if (t) try { t.timeScale().setVisibleRange(range); } catch(e){} });
       syncing = false;
     });
   }
