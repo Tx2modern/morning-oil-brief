@@ -757,9 +757,9 @@ function buildCalCard(strip, label, value, tag, units, dec) {
       const rsiData = calcRSI(data, 14);
       rsiSeries = rsiChart.addLineSeries({ color: '#818cf8', lineWidth: 1.5, priceLineVisible: false });
       rsiSeries.setData(rsiData);
-      rsiOB = rsiChart.addLineSeries({ color: 'rgba(220,38,38,0.4)', lineWidth: 1, lineStyle: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
+      rsiOB = rsiChart.addLineSeries({ color: 'rgba(220,38,38,0.75)', lineWidth: 1, lineStyle: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
       rsiOB.setData(rsiData.map(d => ({ time: d.time, value: 70 })));
-      rsiOS = rsiChart.addLineSeries({ color: 'rgba(22,163,74,0.4)', lineWidth: 1, lineStyle: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
+      rsiOS = rsiChart.addLineSeries({ color: 'rgba(22,163,74,0.75)', lineWidth: 1, lineStyle: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
       rsiOS.setData(rsiData.map(d => ({ time: d.time, value: 30 })));
     }
 
@@ -787,11 +787,13 @@ function buildCalCard(strip, label, value, tag, units, dec) {
     const data = S.history[curProd];
     if (!data || !data.length || !priceChart) return;
     const last = data[data.length - 1].time;
-    if (range === 'All') { priceChart.timeScale().fitContent(); return; }
+    const allCharts = [priceChart, rsiChart, macdChart].filter(Boolean);
+    if (range === 'All') { allCharts.forEach(c => { try { c.timeScale().fitContent(); } catch(e){} }); return; }
     const months = { '1M': 1, '3M': 3, '6M': 6, '1Y': 12, '2Y': 24 }[range] || 12;
     const from = new Date(last);
     from.setMonth(from.getMonth() - months);
-    try { priceChart.timeScale().setVisibleRange({ from: from.toISOString().slice(0, 10), to: last }); } catch(e) {}
+    const r = { from: from.toISOString().slice(0, 10), to: last };
+    allCharts.forEach(c => { try { c.timeScale().setVisibleRange(r); } catch(e){} });
   }
 
   function updateStats(data, meta) {
