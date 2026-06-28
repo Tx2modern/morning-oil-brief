@@ -147,6 +147,7 @@ ALLOWED_GNEWS_SOURCES = {
 }
 
 # ── Title pattern blocklist ───────────────────────────────────────────────────
+# DO NOT REMOVE OR SHORTEN — these patterns keep non-petroleum articles out of the feed.
 BLOCKED_TITLE_PATTERNS = [
     # Indian retail pump prices
     r'\bpetrol\b.*\bprice[s]?\b.*\b(india|delhi|mumbai|chennai|kolkata|bangalore|hyderabad)\b',
@@ -171,12 +172,34 @@ BLOCKED_TITLE_PATTERNS = [
     r'\bnuclear\b.*\b(megawatt|gigawatt|kwh|mwh|gwh|electricity)\b',
     # Electricity grid / power markets
     r'\belectricity\b',
+    r'\belectric\s+(grid|power|utility|utilities|vehicle[s]?|car[s]?|truck[s]?|bus(?:es)?)\b',
+    r'\bpower\s+(grid[s]?|market[s]?|plant[s]?|generation|sector)\b',
     # Battery / energy storage
     r'\bbatter(y|ies)\b',
     r'\b(lithium.ion|sodium.ion|solid.state)\s+batter',
+    r'\benergy\s+storage\b',
     # Coal
     r'\bcoal\s+(mine[s]?|mining|plant[s]?|power|fired|price[s]?|production|sector|energy)\b',
     r'\bcoal-fired\b',
+    # Fuel cells & hydrogen energy (not oil refining)
+    r'\bfuel\s+cell[s]?\b',
+    r'\bhydrogen\s+(fuel|energy|power|economy|production|storage|vehicle[s]?|station[s]?)\b',
+    r'\b(green|blue|grey|gray|clean)\s+hydrogen\b',
+    r'\belectrolyzer[s]?\b',
+    # Renewables / clean energy (non-petroleum)
+    r'\b(solar|photovoltaic|wind)\s+(power|energy|farm[s]?|panel[s]?|turbine[s]?|capacity|project[s]?)\b',
+    r'\brenewable\s+(energy|power|fuel[s]?)\b',
+    r'\bclean\s+energy\b',
+    r'\b(offshore|onshore)\s+wind\b',
+    r'\bsolar\s+(panel[s]?|cell[s]?|array[s]?|install)\b',
+    r'\bgeotherm(al)?\b',
+    # Electric vehicles (not oil demand context)
+    r'\b(EV|BEV|PHEV)\s+(sale[s]?|market|adoption|charging|maker[s]?|manufacture[r]?[s]?)\b',
+    r'\belectric\s+vehicle[s]?\b',
+    r'\bEV\s+charging\b',
+    # Carbon / emissions credits (not oil operations)
+    r'\bcarbon\s+(credit[s]?|offset[s]?|market[s]?|trading|tax|neutral|capture\s+storage)\b',
+    r'\b(CCS|CCUS|DAC)\b.*\b(project|plant|facility|storage|investment)\b',
 ]
 _BLOCKED_RE = [re.compile(p, re.IGNORECASE) for p in BLOCKED_TITLE_PATTERNS]
 
