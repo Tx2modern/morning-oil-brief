@@ -369,7 +369,10 @@ AI_BRIEF_BOX_CSS = """
 """
 
 
+TEMPLATE = os.path.join(HERE, 'eia-dashboard-shareable.html')
+DATA_FILE = os.path.join(HERE, 'eia_data.json')
 OUT_LANDING = os.path.join(HERE, 'index.html')      # summary / home page
+OUT_INVENTORY = os.path.join(HERE, 'inventory.html')  # detail dashboard
 OUT_MARGINS = os.path.join(HERE, 'margins.html')      # margins & cracks
 OUT_CURVES = os.path.join(HERE, 'curves.html')        # forward curves
 OUT_NEWS   = os.path.join(HERE, 'news.html')          # daily news page
@@ -382,6 +385,7 @@ NAV_PAGES = [
     ('index.html',     'Home'),
     ('margins.html',   'Cracks · Prices'),
     ('curves.html',    'Forward Curves'),
+    ('inventory.html', 'Inventories'),
     ('news.html',      'News'),
     ('x_feed.html',    'X Feed'),
 ]
