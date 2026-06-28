@@ -144,6 +144,36 @@ ALLOWED_GNEWS_SOURCES = {
     'isicds', 's&p capital iq',
     # Paywalled but recognizable headline value
     'bloomberg businessweek', 'wsj pro', 'ft energy',
+    # Additional energy / commodity outlets that commonly appear in Google News
+    'energy voice', 'energyvoice', 'offshore technology', 'freightwaves',
+    'oil & gas 360', 'oil and gas 360', 'kallanish energy',
+    'tank storage magazine', 'opis', 'pipeline & gas journal',
+    'energy now', 'energynow', 'e&e news', 'e&e', 'climatewire',
+    'hydrocarbon engineering', 'refining & petrochemicals world',
+    'drilling contractor', 'the driller',
+    'power magazine', 'oil and gas investor',
+    'commodity weather group', 'oilfield technology',
+    'energy monitor', 'spglobal', 'sp global',
+    'wood mackenzie', 'rystad energy', 'ihs markit',
+    'dow jones', 'dow jones newswires',
+    'nikkei', 'nikkei asia', 'south china morning post', 'scmp',
+    'the telegraph', 'daily telegraph',
+    'times', 'the times', 'sunday times',
+    'le monde', 'der spiegel', 'zeit',
+    'rbc capital', 'goldman sachs', 'jp morgan',
+    'commodity context', 'crude oil peak', 'gasbuddy',
+    'eia.gov', 'energy.gov',
+    # Shipping / freight extras
+    'splash247', 'maritime executive', 'maritime-executive',
+    'port technology', 'container news',
+    # Nigeria / West Africa energy
+    'thisday', 'vanguard nigeria', 'punch nigeria', 'daily post nigeria',
+    'nairametrics',
+    # Americas
+    'mining.com', 'bnn', 'the globe and mail',
+    'houston chronicle', 'houston press', 'dallas morning news',
+    'texas tribune', 'permian basin oil and gas magazine',
+    'hart energy', 'oil and gas journal',
 }
 
 # ── Title pattern blocklist ───────────────────────────────────────────────────
@@ -166,10 +196,20 @@ BLOCKED_TITLE_PATTERNS = [
     # Generic low-value
     r'\bcheck\s+(out\s+)?(petrol|diesel|fuel|gas)\s+price[s]?\b',
     r'\btoday[\'s]?\s+(petrol|diesel|fuel|gas)\s+price[s]?\b',
-    # Nuclear power (not petroleum-relevant)
-    r'\bnuclear\s+(power|plant[s]?|reactor[s]?|energy|capacity|fuel|waste)\b',
+    # Nuclear power (not petroleum-relevant) — broad: block nuclear as an energy topic
+    r'\bnuclear\s+(power|plant[s]?|reactor[s]?|energy|capacity|fuel[s]?|waste|weapon[s]?|deal|program[me]?|proliferat\w*)\b',
     r'\b(nuclear|atomic)\s+power\b',
     r'\bnuclear\b.*\b(megawatt|gigawatt|kwh|mwh|gwh|electricity)\b',
+    r'\b(ai|data\s+center[s]?|tech|demand|climate)\b.*\bnuclear\b',
+    r'\bnuclear\b.*\b(ai|data\s+center[s]?|grid|gigawatt|megawatt)\b',
+    r'\bback\s+to\s+nuclear\b',
+    r'\bnuclear\s+renaissance\b',
+    r'\bnuclear\s+(race|rush|puzzle|push|boom|build|ambition)\b',
+    r'\bnew\s+nuclear\b',
+    r'\bsmall\s+(modular|nuclear)\s+reactor[s]?\b',
+    r'\bSMR[s]?\b.*\b(power|energy|reactor|nuclear)\b',
+    r'\biaea\b.*\bnuclear\b',
+    r'\bnuclear\b.*\biaea\b',
     # Electricity grid / power markets
     r'\belectricity\b',
     r'\belectric\s+(grid|power|utility|utilities|vehicle[s]?|car[s]?|truck[s]?|bus(?:es)?)\b',
@@ -398,6 +438,9 @@ def fetch_oilprice_api(api_key):
     return items
 
 
+_gnews_allowlist_drops = []  # (source, title) pairs dropped by allowlist — for diagnostics
+
+
 def fetch_gnews(query, category):
     url = GNEWS_BASE.format(query=urllib.parse.quote(query))
     req = urllib.request.Request(
@@ -450,6 +493,7 @@ def fetch_gnews(query, category):
             re.search(r'\b' + re.escape(a) + r'\b', src_lower)
             for a in ALLOWED_GNEWS_SOURCES
         ):
+            _gnews_allowlist_drops.append(f'{source}: {title[:60]}')
             continue
 
         # Google News <description> is always "Title&nbsp;&nbsp;Source" — not real
@@ -501,6 +545,13 @@ def main():
         n = _add(items)
         print(f'  {category:30} → {n} added ({len(items)} fetched)')
         time.sleep(0.5)
+
+    if _gnews_allowlist_drops:
+        print(f'  Google News allowlist dropped {len(_gnews_allowlist_drops)} articles. Top unknown sources:')
+        from collections import Counter
+        src_counts = Counter(e.split(':')[0].strip() for e in _gnews_allowlist_drops)
+        for src, cnt in src_counts.most_common(15):
+            print(f'    {cnt:3d}  {src}')
 
     # 2. OilPrice.com RSS — supplements Google News with energy-specific coverage
     print('[2/3] OilPrice.com RSS feeds...')
