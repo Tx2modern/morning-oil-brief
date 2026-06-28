@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T14:11:57.996187+00:00",
+  "generated_at": "2026-06-28T16:48:10.378225+00:00",
   "cutoff_hours": 72,
   "items": [
     {
@@ -123,16 +123,6 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "Russia\u2019s Fuel Crisis Is Pushing the Kremlin Toward Kazakhstan",
-      "source": "OilPrice.com",
-      "date": "Fri, 26 Jun 2026 11:00:00 -0500",
-      "datetime": "2026-06-26T11:00:00-05:00",
-      "epoch": 1782489600.0,
-      "link": "https://oilprice.com/Energy/Energy-General/Russias-Fuel-Crisis-Is-Pushing-the-Kremlin-Toward-Kazakhstan.html",
-      "description": "Grappling with a severe shortage, Russia is seeking to purchase a significant volume of gasoline from neighboring Kazakhstan. Astana appears hesitant to fulfill the request, however, apparently concerned that doing so might entail consequences for the Central Asian nation\u2019s own energy exports. The R",
-      "category": "Crude Oil & OPEC"
-    },
-    {
       "title": "Current price of oil as of June 26, 2026 - Fortune",
       "source": "Fortune",
       "date": "Fri, 26 Jun 2026 13:00:00 GMT",
@@ -141,6 +131,16 @@
       "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5FQzFQVGtCaXFQNGRNNGN4SGNob0lWdEViRnV0SGZFX0xUNWNrOUlJUkplT2hLdV9kWnV3bnVTbnNHMWw2cHBham1SRkQtLTBxdFI5dXIxQ0RVZzNJM081UnFR?oc=5",
       "description": "",
       "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Hormuz oil shock echoes 1973 embargo lessons - Reuters",
+      "source": "Reuters",
+      "date": "Fri, 26 Jun 2026 06:29:00 GMT",
+      "datetime": "2026-06-26T06:29:00+00:00",
+      "epoch": 1782455340.0,
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNZlVCN0JISXdjeGxKelR2bHd4Vjl5aUV1YzZidWltbHU1NFRYWmVwaFlpMWFFRnlZcHVST3ZxdjhoR3VQc3kyazVKSTdmTUk2bGtDWldxVGozOVdjZlRVUGpGZWVWdlZtVS1hdGNjTWQzeE81bGF2V0JxN2NZX2pwM0xua2c1eElUNU1keUZUVGNqdGg2TFU4eEowNzdSYzdTbFhDZUFpMWpfQjEwTTB5Mm9sTQ?oc=5",
+      "description": "",
+      "category": "Energy Markets"
     },
     {
       "title": "U.S. crude oil falls below $70, resuming losses after attack on cargo ship near Oman - CNBC",
@@ -161,16 +161,6 @@
       "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5OZHIxM1lhQkRraXlheGwtYThBMExIQTVtdWRLOGRSbE1lb3VWaHV4d2VNaU41WC1vX1Z0Z2F5LWRIY1RUUG9HNmpYSmJzLTRGOV9YeEVXUGVpYUhtZDhZS1dLUXZUWHM3cldLRkxSUEk0Zw?oc=5",
       "description": "",
       "category": "Energy Markets"
-    },
-    {
-      "title": "Even as Iran War Resolution Looms, Natural Gas Analysts Are Dubious - Natural Gas Intelligence",
-      "source": "Natural Gas Intelligence",
-      "date": "Thu, 25 Jun 2026 14:18:36 GMT",
-      "datetime": "2026-06-25T14:18:36+00:00",
-      "epoch": 1782397116.0,
-      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPU1p4M3JxS2V5LVM1WW5vZEU1V2RIbHZPcTU3eUVqYzgtcG5HTlpYakdORXFkQlVvdnpseDBIUTQwd0R2SlYyT1lXbDFXcnp5OFJoUlVyeG4zTndILXZBUlptMnFSUjlYMG8ydG16R1hIM2ZNUERkbEJwRVgtbE5rQmJoOG9WTnpmYURtQmFQdGdkcmQ5VTdRWFJsUEVWRGFHaWc?oc=5",
-      "description": "",
-      "category": "LNG & Gas"
     }
   ]
 }
