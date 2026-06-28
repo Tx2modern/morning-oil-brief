@@ -272,52 +272,6 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
     </div>
   </div>
 
-  <!-- ─── Section 1: Brent/WTI Spread ───────────────────────────────── -->
-  <h2 class="mob-section-h">Brent / WTI Spread</h2>
-  <div class="curve-grid" style="margin-bottom:14px">
-    <div class="section">
-      <div class="section-header">
-        <h2 class="section-title">30-Day Spread History <span class="section-subtitle">Brent − WTI · $/bbl · positive = Brent premium</span></h2>
-      </div>
-      <div class="chart-container"><canvas id="bwti-chart" role="img" aria-label="Brent WTI spread chart"></canvas></div>
-    </div>
-    <div class="section" style="display:flex;flex-direction:column;gap:0">
-      <div class="section-header">
-        <h2 class="section-title">Spread Context</h2>
-      </div>
-      <table class="spread-context-table" id="bwti-context-table">
-        <thead><tr><th>Metric</th><th>Value</th><th>Signal</th></tr></thead>
-        <tbody id="bwti-context-body"></tbody>
-      </table>
-      <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border-soft);font-size:12px;color:var(--muted-2);line-height:1.65" id="bwti-narrative"></div>
-    </div>
-  </div>
-
-  <!-- ─── Section 2: Calendar Spreads ──────────────────────────────── -->
-  <h2 class="mob-section-h">Calendar Spreads — M1 vs Deferred</h2>
-  <p style="font-size:12px;color:var(--muted);margin:-12px 0 16px;font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:0.06em">Positive = M1 premium (backwardation) · Negative = M1 discount (contango)</p>
-
-  <div class="calspread-row">
-    <div>
-      <div class="kpi-row-label">WTI <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/bbl spread vs M1</span></div>
-      <div class="kpi-strip kpi-strip-minimal" id="cal-wti"></div>
-    </div>
-    <div>
-      <div class="kpi-row-label">Brent <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/bbl spread vs M1</span></div>
-      <div class="kpi-strip kpi-strip-minimal" id="cal-brent"></div>
-    </div>
-  </div>
-  <div class="calspread-row">
-    <div>
-      <div class="kpi-row-label">RBOB Gasoline <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/gal spread vs M1</span></div>
-      <div class="kpi-strip kpi-strip-minimal" id="cal-rbob"></div>
-    </div>
-    <div>
-      <div class="kpi-row-label">Heating Oil (ULSD) <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/gal spread vs M1</span></div>
-      <div class="kpi-strip kpi-strip-minimal" id="cal-ho"></div>
-    </div>
-  </div>
-
   <!-- ─── Section 3: Advanced Price Charts ────────────────────────── -->
   <h2 class="mob-section-h">Price Charts</h2>
   <div class="section adv-chart-panel">
@@ -326,6 +280,7 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
       <button class="adv-tab" data-prod="brent">Brent</button>
       <button class="adv-tab" data-prod="rbob">RBOB</button>
       <button class="adv-tab" data-prod="ho">HO</button>
+      <button class="adv-tab" data-prod="spread">B−W</button>
     </div>
     <div class="adv-controls">
       <div class="adv-ctrl-group">
@@ -373,12 +328,6 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
     <div class="adv-note">Candlestick · Volume · ATR · Stochastics · ADX · Ichimoku · OBV require OHLC+volume data (future pipeline upgrade)</div>
   </div>
 
-  <!-- ─── Market Commentary ────────────────────────────────────────── -->
-  <div id="trading-commentary" style="display:none;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:14px">
-    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Market Read · Inventory &amp; Fundamental Context</div>
-    <div id="trading-commentary-text" style="font-size:13px;color:var(--muted-2);line-height:1.75"></div>
-  </div>
-
   <!-- ─── Section 4: Summary Trade Table ───────────────────────────── -->
   <h2 class="mob-section-h">Summary Trade Table</h2>
   <div class="section">
@@ -397,6 +346,31 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
       </thead>
       <tbody id="trade-table-body"></tbody>
     </table>
+  </div>
+
+  <!-- ─── Section 2: Calendar Spreads ──────────────────────────────── -->
+  <h2 class="mob-section-h">Calendar Spreads — M1 vs Deferred</h2>
+  <p style="font-size:12px;color:var(--muted);margin:-12px 0 16px;font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:0.06em">Positive = M1 premium (backwardation) · Negative = M1 discount (contango)</p>
+
+  <div class="calspread-row">
+    <div>
+      <div class="kpi-row-label">WTI <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/bbl spread vs M1</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="cal-wti"></div>
+    </div>
+    <div>
+      <div class="kpi-row-label">Brent <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/bbl spread vs M1</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="cal-brent"></div>
+    </div>
+  </div>
+  <div class="calspread-row">
+    <div>
+      <div class="kpi-row-label">RBOB Gasoline <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/gal spread vs M1</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="cal-rbob"></div>
+    </div>
+    <div>
+      <div class="kpi-row-label">Heating Oil (ULSD) <span style="font-weight:400;text-transform:none;color:var(--muted)"> · $/gal spread vs M1</span></div>
+      <div class="kpi-strip kpi-strip-minimal" id="cal-ho"></div>
+    </div>
   </div>
 
   <footer>
@@ -450,79 +424,6 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   document.getElementById('next-refresh').textContent = S.nextRefresh || '—';
   document.getElementById('footer-date').textContent = S.pricesThru || '—';
 
-  // ── Market Commentary ──
-  if (S.commentary) {
-    const commWrap = document.getElementById('trading-commentary');
-    const commText = document.getElementById('trading-commentary-text');
-    if (commWrap && commText) {
-      commText.textContent = S.commentary;
-      commWrap.style.display = '';
-    }
-  }
-
-  // ── Brent/WTI spread chart ──
-  const spreadSpark = S.wtiSpark.map((w, i) => +(S.brentSpark[i] - w).toFixed(2));
-  const curSpread = (S.brentPrice - S.wtiPrice).toFixed(2);
-  const spreadCtx = document.getElementById('bwti-chart');
-  if (spreadCtx && spreadSpark.length) {
-    const spreadColor = spreadSpark[spreadSpark.length-1] >= 0 ? '#60a5fa' : '#f87171';
-    new Chart(spreadCtx.getContext('2d'), {
-      type: 'line',
-      data: {
-        labels: spreadSpark.map((_, i) => 'D-' + (spreadSpark.length - 1 - i)),
-        datasets: [{
-          label: 'Brent−WTI ($/bbl)',
-          data: spreadSpark,
-          borderColor: '#60a5fa',
-          backgroundColor: 'rgba(96,165,250,0.12)',
-          borderWidth: 2, pointRadius: 0, fill: true, tension: 0.3
-        }, {
-          label: '30D Avg',
-          data: spreadSpark.map(() => spreadSpark.reduce((a,b)=>a+b,0)/spreadSpark.length),
-          borderColor: 'rgba(255,255,255,0.2)',
-          borderWidth: 1, borderDash: [4,4], pointRadius: 0, fill: false
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { position: 'top', align: 'end', labels: { color: '#9aa3b1', boxWidth: 10, font: { size: 10 } } },
-          tooltip: { mode: 'index', intersect: false, callbacks: { label: c => c.dataset.label + ': $' + c.parsed.y.toFixed(2) + '/bbl' } }
-        },
-        scales: {
-          x: { ticks: { font: { size: 10 }, color: '#7c8593', maxTicksLimit: 10 }, grid: { color: 'rgba(255,255,255,0.04)' } },
-          y: { ticks: { font: { size: 10 }, color: '#7c8593', callback: v => '$' + v.toFixed(2) }, grid: { color: 'rgba(255,255,255,0.06)' } }
-        }
-      }
-    });
-  }
-
-  // Brent/WTI context table
-  const avg30 = (spreadSpark.reduce((a,b)=>a+b,0)/spreadSpark.length).toFixed(2);
-  const lo30 = Math.min(...spreadSpark).toFixed(2);
-  const hi30 = Math.max(...spreadSpark).toFixed(2);
-  const rows = [
-    ['Current spread', '$' + curSpread + '/bbl', curSpread > avg30 ? 'Wide vs avg' : 'Narrow vs avg'],
-    ['30-day avg', '$' + avg30 + '/bbl', ''],
-    ['30-day low', '$' + lo30 + '/bbl', ''],
-    ['30-day high', '$' + hi30 + '/bbl', ''],
-    ['WTI (M1)', '$' + S.wtiPrice.toFixed(2) + '/bbl', S.wtiChange < 0 ? '▼ ' + Math.abs(S.wtiChange).toFixed(2) : '▲ ' + S.wtiChange.toFixed(2)],
-    ['Brent (M1)', '$' + S.brentPrice.toFixed(2) + '/bbl', S.brentChange < 0 ? '▼ ' + Math.abs(S.brentChange).toFixed(2) : '▲ ' + S.brentChange.toFixed(2)],
-  ];
-  const tbody = document.getElementById('bwti-context-body');
-  if (tbody) {
-    tbody.innerHTML = rows.map(([lbl, val, sig]) =>
-      `<tr><td>${lbl}</td><td>${val}</td><td style="color:var(--muted-2)">${sig}</td></tr>`
-    ).join('');
-  }
-  const narr = document.getElementById('bwti-narrative');
-  if (narr) {
-    const cur = +curSpread;
-    const avg = +avg30;
-    const dir = cur > avg ? 'above its 30-day average of $' + avg + ', suggesting Brent is commanding an elevated premium' : 'below its 30-day average of $' + avg + ', suggesting the Atlantic Basin arb is compressed';
-    narr.innerHTML = '<strong>Read:</strong> The Brent/WTI spread at <strong>$' + curSpread + '/bbl</strong> is ' + dir + '. A spread above $3 typically incentivizes US crude exports; below $3 the export arb weakens. Watch Cushing draws (widening) vs Hormuz de-escalation (narrowing).';
-  }
-
   // ── Calendar spread cards ──
   function renderCalStrip(stripId, spreads, units, dec) {
     const strip = document.getElementById(stripId);
@@ -539,7 +440,10 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   // ── Summary trade table ──
   const tradeBody = document.getElementById('trade-table-body');
   if (tradeBody && S.trades) {
-    tradeBody.innerHTML = S.trades.map(t => {
+    const commRow = S.commentary
+      ? `<tr><td colspan="8" style="padding:10px 12px;font-size:12px;color:var(--muted-2);line-height:1.65;border-bottom:1px solid var(--border);background:var(--panel-2)"><span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-right:8px">Market Read</span>${S.commentary}</td></tr>`
+      : '';
+    tradeBody.innerHTML = commRow + S.trades.map(t => {
       const dirCls = t.direction === 'long' ? 'long' : t.direction === 'short' ? 'short' : 'flat';
       const dirLabel = t.direction === 'long' ? 'Long' : t.direction === 'short' ? 'Short' : 'Flat / Watch';
       const convCls = t.conviction === 'high' ? 'conv-high' : t.conviction === 'med' ? 'conv-med' : 'conv-low';
@@ -565,10 +469,11 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   if (!S || !S.history) { console.warn('No history data in SNAPSHOT'); return; }
 
   const PROD_META = {
-    wti:   { label: 'WTI Crude',     units: '$/bbl', color: '#fbbf24', dec: 2 },
-    brent: { label: 'Brent Crude',   units: '$/bbl', color: '#60a5fa', dec: 2 },
-    rbob:  { label: 'RBOB Gasoline', units: '$/gal', color: '#ef4444', dec: 4 },
-    ho:    { label: 'Heating Oil',   units: '$/gal', color: '#facc15', dec: 4 },
+    wti:    { label: 'WTI Crude',        units: '$/bbl', color: '#fbbf24', dec: 2 },
+    brent:  { label: 'Brent Crude',      units: '$/bbl', color: '#60a5fa', dec: 2 },
+    rbob:   { label: 'RBOB Gasoline',    units: '$/gal', color: '#ef4444', dec: 4 },
+    ho:     { label: 'Heating Oil',      units: '$/gal', color: '#facc15', dec: 4 },
+    spread: { label: 'Brent−WTI Spread', color: '#60a5fa', dec: 2, units: '$/bbl' },
   };
 
   let curProd = 'wti', curType = 'line', curScale = 'linear', curRange = '1Y';
@@ -704,7 +609,14 @@ function buildCalCard(strip, label, value, tag, units, dec) {
 
   function render() {
     const meta = PROD_META[curProd];
-    const data = S.history[curProd];
+    const rawData = curProd === 'spread'
+      ? (() => {
+          const bMap = {};
+          (S.history.brent || []).forEach(d => { bMap[d.time] = d.value; });
+          return (S.history.wti || []).map(d => ({ time: d.time, value: parseFloat((bMap[d.time] - d.value).toFixed(2)) })).filter(d => bMap[d.time] !== undefined);
+        })()
+      : (S.history[curProd] || []);
+    const data = rawData;
     if (!data || !data.length) return;
 
     rmSeries(priceChart, priceSeries);
@@ -784,7 +696,9 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   }
 
   function applyRange(range) {
-    const data = S.history[curProd];
+    const data = curProd === 'spread'
+      ? (() => { const bMap = {}; (S.history.brent||[]).forEach(d=>{bMap[d.time]=d.value;}); return (S.history.wti||[]).map(d=>({time:d.time,value:+(bMap[d.time]-d.value).toFixed(2)})).filter(d=>bMap[d.time]!==undefined); })()
+      : (S.history[curProd] || []);
     if (!data || !data.length || !priceChart) return;
     const last = data[data.length - 1].time;
     const allCharts = [priceChart, rsiChart, macdChart].filter(Boolean);
@@ -818,7 +732,7 @@ function buildCalCard(strip, label, value, tag, units, dec) {
 
   document.querySelectorAll('.adv-tab').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.adv-tab').forEach(b => { b.classList.remove('active'); b.textContent = b.dataset.prod.toUpperCase(); });
+      document.querySelectorAll('.adv-tab').forEach(b => { b.classList.remove('active'); b.textContent = b.dataset.prod === 'spread' ? 'B−W' : b.dataset.prod.toUpperCase(); });
       btn.classList.add('active');
       curProd = btn.dataset.prod;
       render();
@@ -861,7 +775,10 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   const csvBtn = document.getElementById('adv-csv');
   if (csvBtn) csvBtn.addEventListener('click', () => {
     const meta = PROD_META[curProd];
-    const rows = ['date,' + meta.label + ' (' + meta.units + ')'].concat(S.history[curProd].map(d => d.time + ',' + d.value));
+    const csvData = curProd === 'spread'
+      ? (() => { const bMap = {}; (S.history.brent||[]).forEach(d=>{bMap[d.time]=d.value;}); return (S.history.wti||[]).map(d=>({time:d.time,value:+(bMap[d.time]-d.value).toFixed(2)})).filter(d=>bMap[d.time]!==undefined); })()
+      : (S.history[curProd] || []);
+    const rows = ['date,' + meta.label + ' (' + meta.units + ')'].concat(csvData.map(d => d.time + ',' + d.value));
     const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = url; a.download = curProd + '_prices.csv'; a.click();
