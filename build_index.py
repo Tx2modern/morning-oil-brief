@@ -1174,10 +1174,14 @@ Also write a 2–3 sentence market commentary paragraph for the top of the page.
 
 Rules:
 - Use ONLY numbers present in the data below. Do NOT fabricate.
-- For "flat" calls, entry/target/stop should be "—"
+- ALWAYS make a directional or flat call for every instrument — never skip or defer.
+- Do NOT say "awaiting EIA data" or "pending inventory" — you have the latest EIA data in the DATA block below. Use it.
+- Even "flat" calls must include a detailed thesis (2–3 sentences) explaining the current fundamental picture, what signals would trigger a directional entry, and specific levels to watch. A flat call with no thesis is not acceptable.
+- For "flat" calls, entry/target/stop should be "—" but thesis must still be substantive.
 - Conviction is "low", "med", or "high"
 - Thesis must reference specific data (e.g. "Cushing at 18.9 mb, below 25 mb floor...")
 - Do NOT write "see above" or cross-references. Each thesis is self-contained.
+- When data supports a directional call (e.g. Cushing below 25 mb floor, distillate in Q1), make the call — do not default to flat out of excessive caution.
 
 {wiki_context_block}
 
@@ -5578,23 +5582,29 @@ def _build_trading_page(prices, eia_raw, latest_date):
         wiki_context_block = f'\nWIKI CONTEXT (institutional market intelligence):\n{wiki_text}\n'
 
     # ── Generate AI trading calls ─────────────────────────────────────────────
+    _bw = round(brent_price - wti_price, 2)
+    _cush = f'{crude_cushing:,.0f} mb' if crude_cushing else 'n/a'
+    _gas_q = quartile_label(q_gas)
+    _dist_q = quartile_label(q_dist)
+    _p2_q = quartile_label(q_p2)
+    _p3_q = quartile_label(q_p3)
     default_trades = [
         {'trade': 'Brent/WTI Spread', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'Spread at ${round(brent_price - wti_price, 2)}/bbl — watch for widening on export arb or narrowing on supply normalization.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'Spread at ${_bw}/bbl. PADD 2 crude {_p2_q}; Cushing at {_cush}. Watch for widening if PADD 2 stocks build or exports slow; narrowing if Cushing draws below 25 mb floor.'},
         {'trade': 'WTI M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': 'Awaiting fresh EIA signal for directional entry.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'WTI at ${wti_price:.2f}/bbl. Cushing {_cush} ({("below 25 mb operational floor — physically tight" if crude_cushing and crude_cushing < 25000 else "above 25 mb floor")}) and PADD 2 crude {_p2_q}. A Cushing draw below 25 mb would strengthen M1-M2 backwardation conviction.'},
         {'trade': 'Brent M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': 'Monitor term structure for prompt flip.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'Brent at ${brent_price:.2f}/bbl. Brent M1-M2 at ${cal_spreads.get("brent", {{}}).get("m1m2", 0):.2f}/bbl. Watch term structure for prompt flip driven by North Sea supply disruptions or OPEC+ compliance data.'},
         {'trade': 'RBOB M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': 'Seasonal demand context needed for conviction.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'RBOB at ${rbob_price:.4f}/gal. US gasoline stocks {_gas_q}. {"Driving season active — tight gasoline could support M1 premium." if _gas_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Ample gasoline supply limits upside to M1-M2 spread."}'},
         {'trade': 'HO M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': 'Distillate inventory position unclear — watch next draw.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'HO at ${ho_price:.4f}/gal. US distillate stocks {_dist_q}. {"Tight distillate supports backwardation in HO calendar — watch next EIA print for confirmation." if _dist_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Distillate supply ample — limited catalyst for M1-M2 widening."}'},
         {'trade': 'WTI Outright', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': 'Range-bound pending macro clarity.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'WTI at ${wti_price:.2f}/bbl. Cushing {_cush}; PADD 3 crude {_p3_q}; refinery utilization {refutil:.1f}%. Macro and OPEC+ clarity needed for conviction — monitor Cushing draws and export data.'},
         {'trade': 'RBOB Crack', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': 'Crack spread awaiting gasoline inventory signal.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'RBOB crack vs WTI. US gasoline stocks {_gas_q}; refinery utilization {refutil:.1f}%. {"Tight gasoline stocks supportive of crack — watch for demand data confirmation." if _gas_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Ample gasoline supply pressures crack — short bias if stocks remain elevated."}'},
         {'trade': 'HO Crack', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': 'Distillate crack awaiting inventory and demand signal.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'HO crack vs WTI. US distillate stocks {_dist_q}; refinery utilization {refutil:.1f}%. {"Tight distillate inventory is structurally supportive of HO crack — watch export demand and weather." if _dist_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Distillate supply ample — HO crack upside limited near-term."}'},
     ]
     default_commentary = (
         f'WTI at ${wti_price:.2f}/bbl, Brent at ${brent_price:.2f}/bbl '
@@ -5644,17 +5654,6 @@ def _build_trading_page(prices, eia_raw, latest_date):
                 merged = []
                 for t in default_trades:
                     ai_t = ai_by_name.get(t['trade'], default_by_name[t['trade']])
-                    # Conviction threshold: require at least one confirming signal
-                    # for any non-flat call. If conviction is low and direction is
-                    # non-flat, check that technicals or inventory support it;
-                    # if nothing confirms, keep the prior call or go flat.
-                    if ai_t.get('direction', 'flat') != 'flat' and ai_t.get('conviction') == 'low':
-                        # Low conviction non-flat: check if prior call agreed
-                        prior_by_name = {p['trade']: p for p in prior_trades}
-                        prior_t = prior_by_name.get(t['trade'], {})
-                        if prior_t.get('direction', 'flat') != ai_t.get('direction'):
-                            # Prior disagreed and conviction is low — revert to prior or flat
-                            ai_t = prior_t if prior_t else default_by_name[t['trade']]
                     merged.append(ai_t)
                 trades = merged
                 _save_trading_cache(latest_date.strftime('%Y-%m-%d'), commentary, trades)
