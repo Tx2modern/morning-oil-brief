@@ -5582,29 +5582,37 @@ def _build_trading_page(prices, eia_raw, latest_date):
         wiki_context_block = f'\nWIKI CONTEXT (institutional market intelligence):\n{wiki_text}\n'
 
     # ── Generate AI trading calls ─────────────────────────────────────────────
-    _bw = round(brent_price - wti_price, 2)
+    _bw = round(brent_price - wti_price, 2) if (brent_price and wti_price) else 0
     _cush = f'{crude_cushing:,.0f} mb' if crude_cushing else 'n/a'
     _gas_q = quartile_label(q_gas)
     _dist_q = quartile_label(q_dist)
     _p2_q = quartile_label(q_p2)
     _p3_q = quartile_label(q_p3)
+    _refutil = f'{refutil:.1f}%' if refutil else 'n/a'
+    _wti = f'${wti_price:.2f}/bbl' if wti_price else 'n/a'
+    _brent = f'${brent_price:.2f}/bbl' if brent_price else 'n/a'
+    _rbob = f'${rbob_price:.4f}/gal' if rbob_price else 'n/a'
+    _ho = f'${ho_price:.4f}/gal' if ho_price else 'n/a'
+    _brent_m1m2 = f'${cal_spreads.get("brent", {}).get("m1m2", 0):.2f}/bbl' if cal_spreads else 'n/a'
+    _cushing_note = ("below 25 mb operational floor — physically tight"
+                     if crude_cushing and crude_cushing < 25000 else "above 25 mb floor")
     default_trades = [
         {'trade': 'Brent/WTI Spread', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'Spread at ${_bw}/bbl. PADD 2 crude {_p2_q}; Cushing at {_cush}. Watch for widening if PADD 2 stocks build or exports slow; narrowing if Cushing draws below 25 mb floor.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'B-W spread at ${_bw:.2f}/bbl. PADD 2 crude {_p2_q}; Cushing at {_cush}. Watch for widening if PADD 2 stocks build or exports slow; narrowing if Cushing draws below 25 mb floor.'},
         {'trade': 'WTI M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'WTI at ${wti_price:.2f}/bbl. Cushing {_cush} ({("below 25 mb operational floor — physically tight" if crude_cushing and crude_cushing < 25000 else "above 25 mb floor")}) and PADD 2 crude {_p2_q}. A Cushing draw below 25 mb would strengthen M1-M2 backwardation conviction.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'WTI at {_wti}. Cushing {_cush} ({_cushing_note}) and PADD 2 crude {_p2_q}. A Cushing draw below 25 mb would strengthen M1-M2 backwardation conviction.'},
         {'trade': 'Brent M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'Brent at ${brent_price:.2f}/bbl. Brent M1-M2 at ${cal_spreads.get("brent", {{}}).get("m1m2", 0):.2f}/bbl. Watch term structure for prompt flip driven by North Sea supply disruptions or OPEC+ compliance data.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'Brent at {_brent}. M1-M2 at {_brent_m1m2}. Watch term structure for prompt flip driven by North Sea supply disruptions or OPEC+ compliance data.'},
         {'trade': 'RBOB M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'RBOB at ${rbob_price:.4f}/gal. US gasoline stocks {_gas_q}. {"Driving season active — tight gasoline could support M1 premium." if _gas_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Ample gasoline supply limits upside to M1-M2 spread."}'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'RBOB at {_rbob}. US gasoline stocks {_gas_q}. {"Driving season active — tight gasoline could support M1 premium." if _gas_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Ample gasoline supply limits upside to M1-M2 spread."}'},
         {'trade': 'HO M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'HO at ${ho_price:.4f}/gal. US distillate stocks {_dist_q}. {"Tight distillate supports backwardation in HO calendar — watch next EIA print for confirmation." if _dist_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Distillate supply ample — limited catalyst for M1-M2 widening."}'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'HO at {_ho}. US distillate stocks {_dist_q}. {"Tight distillate supports backwardation in HO calendar — watch next EIA print for confirmation." if _dist_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Distillate supply ample — limited catalyst for M1-M2 widening."}'},
         {'trade': 'WTI Outright', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'WTI at ${wti_price:.2f}/bbl. Cushing {_cush}; PADD 3 crude {_p3_q}; refinery utilization {refutil:.1f}%. Macro and OPEC+ clarity needed for conviction — monitor Cushing draws and export data.'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'WTI at {_wti}. Cushing {_cush}; PADD 3 crude {_p3_q}; refinery utilization {_refutil}. Macro and OPEC+ clarity needed for conviction — monitor Cushing draws and export data.'},
         {'trade': 'RBOB Crack', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'RBOB crack vs WTI. US gasoline stocks {_gas_q}; refinery utilization {refutil:.1f}%. {"Tight gasoline stocks supportive of crack — watch for demand data confirmation." if _gas_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Ample gasoline supply pressures crack — short bias if stocks remain elevated."}'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'RBOB crack vs WTI. US gasoline stocks {_gas_q}; refinery utilization {_refutil}. {"Tight gasoline stocks supportive of crack — watch for demand data confirmation." if _gas_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Ample gasoline supply pressures crack — short bias if stocks remain elevated."}'},
         {'trade': 'HO Crack', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
-         'conviction': 'low', 'timeframe': '—', 'thesis': f'HO crack vs WTI. US distillate stocks {_dist_q}; refinery utilization {refutil:.1f}%. {"Tight distillate inventory is structurally supportive of HO crack — watch export demand and weather." if _dist_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Distillate supply ample — HO crack upside limited near-term."}'},
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'HO crack vs WTI. US distillate stocks {_dist_q}; refinery utilization {_refutil}. {"Tight distillate inventory is structurally supportive of HO crack — watch export demand and weather." if _dist_q in ("bottom quartile (bullish — tight supply)", "second quartile") else "Distillate supply ample — HO crack upside limited near-term."}'},
     ]
     default_commentary = (
         f'WTI at ${wti_price:.2f}/bbl, Brent at ${brent_price:.2f}/bbl '
