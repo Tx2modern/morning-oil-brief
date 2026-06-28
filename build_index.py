@@ -1129,13 +1129,17 @@ You have access to:
 3. PADD inventory quartile positions vs 5-year seasonal range
 4. Institutional wiki context with supply/demand fundamentals
 
+INVENTORY DIRECTION RULE (critical — get this right):
+- LOW stocks (bottom quartile, below 5-yr average) = TIGHT supply = BULLISH for prices and prompt spreads
+- HIGH stocks (top quartile, above 5-yr average) = AMPLE supply = BEARISH for prices and prompt spreads
+
 FUNDAMENTAL SIGNAL RULES (apply these cross-asset):
-- When PADD 2 crude stocks are in the TOP QUARTILE of 5-yr range AND US crude exports are BELOW their 4-week average → bearish WTI vs Brent signal (physical barrels stranded in Midwest, no export relief)
-- When Cushing stocks are BELOW 25 mb operational floor → prompt WTI backwardation support; strengthen WTI M1-M2 long conviction
-- When PADD 3 crude stocks are in the BOTTOM QUARTILE and refinery utilization is >93% → tight Gulf Coast supply, bullish crude crack spreads
-- When PADD 1 distillate stocks are in the BOTTOM QUARTILE entering winter (Oct-Mar) → bullish ULSD/HO M1-M2 spread
-- When PADD 5 gasoline stocks are in the TOP QUARTILE in summer (Apr-Sep) → bearish RBOB West Coast basis, neutral-to-bearish RBOB crack
-- When total US gasoline stocks are BELOW 5-yr seasonal average AND driving season is active (May-Sep) → bullish RBOB M1-M2 spread
+- When PADD 2 crude stocks are in the TOP QUARTILE (ample) AND US crude exports are BELOW their 4-week average → bearish WTI vs Brent (barrels stranded in Midwest with no export relief)
+- When Cushing stocks are BELOW 25 mb operational floor → physically tight, bullish WTI prompt backwardation; strengthen WTI M1-M2 long conviction
+- When PADD 3 crude stocks are in the BOTTOM QUARTILE (tight) and refinery utilization is >93% → tight Gulf Coast supply, bullish crude crack spreads
+- When US distillate stocks are in the BOTTOM QUARTILE (tight) → bullish ULSD/HO M1-M2 spread and HO outrights
+- When US gasoline stocks are in the BOTTOM QUARTILE (tight) AND driving season is active (May-Sep) → bullish RBOB M1-M2 spread and cracks
+- When US gasoline stocks are in the TOP QUARTILE (ample) in summer → bearish RBOB crack
 - The Brent-WTI spread above $3/bbl incentivizes US crude exports; below $3 the Atlantic arb weakens
 
 TRADE OUTPUT FORMAT:
@@ -5433,7 +5437,8 @@ def _build_trading_page(prices, eia_raw, latest_date):
     def quartile_label(q):
         if q is None:
             return 'unknown'
-        labels = {1: 'bottom quartile (bearish)', 2: 'lower-mid range', 3: 'upper-mid range', 4: 'top quartile (bullish)'}
+        # Low stocks (Q1) = tight supply = bullish for prices; high stocks (Q4) = ample supply = bearish
+        labels = {1: 'bottom quartile (bullish — tight supply)', 2: 'lower-mid range (mildly bullish)', 3: 'upper-mid range (mildly bearish)', 4: 'top quartile (bearish — ample supply)'}
         return labels.get(q, 'unknown')
 
     crude_us     = series_last('crude_us')

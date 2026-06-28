@@ -247,9 +247,6 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
     </div>
   </div>
 
-  <!-- ─── AI Commentary ───────────────────────────────────────────────── -->
-  <div id="trading-commentary" style="background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:14px;font-size:13px;color:var(--muted-2);line-height:1.7;display:none"></div>
-
   <!-- ─── Section 1: Brent/WTI Spread ───────────────────────────────── -->
   <h2 class="mob-section-h">Brent / WTI Spread</h2>
   <div class="curve-grid" style="margin-bottom:14px">
@@ -321,6 +318,12 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
     </div>
   </div>
 
+  <!-- ─── Market Commentary ────────────────────────────────────────── -->
+  <div id="trading-commentary" style="display:none;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Market Read · Inventory &amp; Fundamental Context</div>
+    <div id="trading-commentary-text" style="font-size:13px;color:var(--muted-2);line-height:1.75"></div>
+  </div>
+
   <!-- ─── Section 4: Summary Trade Table ───────────────────────────── -->
   <h2 class="mob-section-h">Summary Trade Table</h2>
   <div class="section">
@@ -356,7 +359,7 @@ function signOut() {
 
 // ── SNAPSHOT (rewritten by build_index.py each morning) ──────────
 // @@TRADING_DATA_START@@
-const SNAPSHOT = {"asOf":"June 26, 2026","pricesThru":"June 26, 2026","nextRefresh":"June 29, 2026","wtiSpark":[101.17,105.42,108.66,107.77,98.26,96.35,96.6,93.89,88.68,88.9,87.36,92.16,93.76,96.02,93.04,90.54,91.3,88.2,90.03,87.71,84.88,80.75,76.05,76.79,76.6,74.82,73.21,70.34,71.92,69.23],"brentSpark":[105.72,109.26,112.1,111.28,105.02,102.58,103.54,99.58,94.29,93.71,92.05,94.98,96.0,97.81,95.03,93.09,94.25,91.45,93.1,90.38,87.33,83.17,78.96,79.55,79.85,77.9,77.08,73.74,75.26,72.6],"rbobSpark":[3.6057,3.7019,3.7607,3.6962,3.4874,3.3796,3.4539,3.2205,3.1337,3.1852,3.1267,3.0847,3.1443,3.1316,3.0383,3.0459,3.0706,3.0211,3.1099,3.1014,3.0498,2.9472,2.8805,2.9096,2.9949,2.987,2.959,2.8818,3.0273,2.8259],"hoSpark":[3.9056,4.0534,4.1145,4.1625,3.9471,3.8316,3.8878,3.7146,3.5975,3.6187,3.5373,3.6394,3.6987,3.8481,3.6738,3.5874,3.5999,3.5418,3.6126,3.5131,3.4044,3.2665,3.1702,3.1946,3.1273,3.0931,3.1546,3.1762,3.2982,3.1022],"wtiPrice":69.23,"wtiChange":-2.69,"brentPrice":72.6,"brentChange":-2.66,"rbobPrice":2.8259,"rbobChange":-0.2014,"hoPrice":3.1022,"hoChange":-0.196,"calSpreads":{"wti":{"m1m2":0.3,"m1m3":0.63,"m1m6":1.68,"m1m12":2.84},"brent":{"m1m2":0.06,"m1m3":0.25,"m1m6":1.03,"m1m12":1.95},"rbob":{"m1m2":0.1439,"m1m3":0.3972,"m1m6":0.6556,"m1m12":0.4504},"ho":{"m1m2":0.0653,"m1m3":0.1174,"m1m6":0.2783,"m1m12":0.4428}},"commentary":"WTI at $69.23/bbl, Brent at $72.60/bbl (spread $3.37/bbl). Cushing at 18,957 mb; PADD 2 crude bottom quartile (bearish). US distillate stocks bottom quartile (bearish).","trades":[{"trade":"Brent/WTI Spread","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Spread at $3.37/bbl \u2014 watch for widening on export arb or narrowing on supply normalization."},{"trade":"WTI M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Awaiting fresh EIA signal for directional entry."},{"trade":"Brent M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Monitor term structure for prompt flip."},{"trade":"RBOB M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Seasonal demand context needed for conviction."},{"trade":"HO M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Distillate inventory position unclear \u2014 watch next draw."},{"trade":"WTI Outright","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Range-bound pending macro clarity."},{"trade":"RBOB Crack","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Crack spread awaiting gasoline inventory signal."}]};
+const SNAPSHOT = {"asOf":"June 26, 2026","pricesThru":"June 26, 2026","nextRefresh":"June 29, 2026","wtiSpark":[101.17,105.42,108.66,107.77,98.26,96.35,96.6,93.89,88.68,88.9,87.36,92.16,93.76,96.02,93.04,90.54,91.3,88.2,90.03,87.71,84.88,80.75,76.05,76.79,76.6,74.82,73.21,70.34,71.92,69.23],"brentSpark":[105.72,109.26,112.1,111.28,105.02,102.58,103.54,99.58,94.29,93.71,92.05,94.98,96.0,97.81,95.03,93.09,94.25,91.45,93.1,90.38,87.33,83.17,78.96,79.55,79.85,77.9,77.08,73.74,75.26,72.6],"rbobSpark":[3.6057,3.7019,3.7607,3.6962,3.4874,3.3796,3.4539,3.2205,3.1337,3.1852,3.1267,3.0847,3.1443,3.1316,3.0383,3.0459,3.0706,3.0211,3.1099,3.1014,3.0498,2.9472,2.8805,2.9096,2.9949,2.987,2.959,2.8818,3.0273,2.8259],"hoSpark":[3.9056,4.0534,4.1145,4.1625,3.9471,3.8316,3.8878,3.7146,3.5975,3.6187,3.5373,3.6394,3.6987,3.8481,3.6738,3.5874,3.5999,3.5418,3.6126,3.5131,3.4044,3.2665,3.1702,3.1946,3.1273,3.0931,3.1546,3.1762,3.2982,3.1022],"wtiPrice":69.23,"wtiChange":-2.69,"brentPrice":72.6,"brentChange":-2.66,"rbobPrice":2.8259,"rbobChange":-0.2014,"hoPrice":3.1022,"hoChange":-0.196,"calSpreads":{"wti":{"m1m2":0.3,"m1m3":0.63,"m1m6":1.68,"m1m12":2.84},"brent":{"m1m2":0.06,"m1m3":0.25,"m1m6":1.03,"m1m12":1.95},"rbob":{"m1m2":0.1439,"m1m3":0.3972,"m1m6":0.6556,"m1m12":0.4504},"ho":{"m1m2":0.0653,"m1m3":0.1174,"m1m6":0.2783,"m1m12":0.4428}},"commentary":"WTI at $69.23/bbl, Brent at $72.60/bbl (spread $3.37/bbl). Cushing at 18,957 mb; PADD 2 crude bottom quartile (bullish \u2014 tight supply). US distillate stocks bottom quartile (bullish \u2014 tight supply).","trades":[{"trade":"Brent/WTI Spread","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Spread at $3.37/bbl \u2014 watch for widening on export arb or narrowing on supply normalization."},{"trade":"WTI M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Awaiting fresh EIA signal for directional entry."},{"trade":"Brent M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Monitor term structure for prompt flip."},{"trade":"RBOB M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Seasonal demand context needed for conviction."},{"trade":"HO M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Distillate inventory position unclear \u2014 watch next draw."},{"trade":"WTI Outright","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Range-bound pending macro clarity."},{"trade":"RBOB Crack","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Crack spread awaiting gasoline inventory signal."}]};
 // @@TRADING_DATA_END@@
 
 // ── Helpers ──────────────────────────────────────────────────────
@@ -481,11 +484,14 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   document.getElementById('next-refresh').textContent = S.nextRefresh || '—';
   document.getElementById('footer-date').textContent = S.pricesThru || '—';
 
-  // ── AI Commentary ──
-  const commEl = document.getElementById('trading-commentary');
-  if (commEl && S.commentary) {
-    commEl.textContent = S.commentary;
-    commEl.style.display = '';
+  // ── Market Commentary ──
+  if (S.commentary) {
+    const commWrap = document.getElementById('trading-commentary');
+    const commText = document.getElementById('trading-commentary-text');
+    if (commWrap && commText) {
+      commText.textContent = S.commentary;
+      commWrap.style.display = '';
+    }
   }
 
   // ── Brent/WTI spread chart ──
