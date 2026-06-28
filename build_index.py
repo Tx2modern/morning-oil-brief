@@ -5439,9 +5439,20 @@ def _build_trading_page(prices, eia_raw, latest_date):
 
     # ── Date strings ──────────────────────────────────────────────────────────
     as_of = latest_date.strftime('%B %-d, %Y')
-    prices_thru = latest_date.strftime('%B %-d, %Y')
+    # prices_thru = NYMEX settlement date (daily), not EIA report date (weekly)
+    _prices_as_of = prices.get('prices_as_of', '')
     from datetime import timedelta
-    next_mon = latest_date + timedelta(days=(7 - latest_date.weekday()))
+    if _prices_as_of:
+        try:
+            _prices_dt = datetime.strptime(_prices_as_of, '%Y-%m-%d')
+            prices_thru = _prices_dt.strftime('%B %-d, %Y')
+            next_mon = _prices_dt + timedelta(days=(7 - _prices_dt.weekday()))
+        except ValueError:
+            prices_thru = as_of
+            next_mon = latest_date + timedelta(days=(7 - latest_date.weekday()))
+    else:
+        prices_thru = as_of
+        next_mon = latest_date + timedelta(days=(7 - latest_date.weekday()))
     next_refresh = next_mon.strftime('%B %-d, %Y')
 
     # ── Helpers ───────────────────────────────────────────────────────────────
