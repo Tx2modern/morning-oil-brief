@@ -5544,6 +5544,10 @@ def _build_trading_page(prices, eia_raw, latest_date):
     except Exception as e:
         print(f'  trading page: AI generation failed ({e}), using defaults')
 
+    def hist_data(key):
+            h = front_history(key)
+            return [{'time': d, 'value': round(v, 4)} for d, v in h]
+
     # ── Build SNAPSHOT JSON ───────────────────────────────────────────────────
     snapshot = {
         'asOf': as_of,
@@ -5564,6 +5568,12 @@ def _build_trading_page(prices, eia_raw, latest_date):
         'calSpreads': cal_spreads,
         'commentary': commentary,
         'trades': trades,
+        'history': {
+            'wti':   hist_data('wti'),
+            'brent': hist_data('brent'),
+            'rbob':  hist_data('rbob'),
+            'ho':    hist_data('ulsd'),
+        },
     }
     snapshot_js = 'const SNAPSHOT = ' + json.dumps(snapshot, separators=(',', ':')) + ';'
 
