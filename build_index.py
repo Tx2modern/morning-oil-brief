@@ -1142,11 +1142,17 @@ TECHNICAL SIGNAL RULES (use to calibrate entry/timing, not direction alone):
 - When price is in downtrend (below SMA20 < SMA50), raise conviction threshold for longs
 - 30-day return shows recent momentum — use to assess whether move is exhausted or continuing
 
-CONVICTION THRESHOLD RULES (stability guard — apply before finalizing each call):
-- Do NOT issue a non-flat call at low conviction unless at least TWO independent signals agree (e.g. fundamental + RSI, or trend + calendar spread structure). One signal alone = flat/watch.
-- Do NOT reverse a prior-day direction call unless a specific data point changed (new EIA print, RSI crossed 35/65, price broke SMA20/50, spread moved >0.50/bbl). If nothing material changed, hold the prior call and restate the thesis.
-- Prefer "flat" when signals conflict or are ambiguous. A flat call with a clear watchlist trigger is more useful than a low-confidence directional call.
-- Conviction "high" requires: fundamentals aligned + technicals confirming + term structure supporting. "Med" requires two of three. "Low" = directional lean only, likely flat in practice.
+MANDATORY DIRECTIONAL CALL RULES — these override all other caution:
+- If RSI-14 < 30 for any product AND a fundamental signal aligns (Cushing below floor, tight inventory quartile) → you MUST issue a directional call (not flat). RSI < 20 = high conviction.
+- If Cushing is BELOW 25 mb operational floor → WTI M1-M2 MUST be long, conviction at least med.
+- If gasoline stocks are Q1 (bottom quartile) during May-Sep driving season → RBOB M1-M2 and RBOB Crack MUST be long.
+- If distillate stocks are Q1 → HO M1-M2 and HO Crack MUST be long.
+- These mandatory rules exist because the data is unambiguous — flat is NOT acceptable when these fire.
+
+STABILITY RULES (apply after mandatory rules):
+- Do NOT reverse a prior-day direction call unless a specific data point changed.
+- When signals conflict, use med/low conviction rather than going flat.
+- A well-reasoned directional call at low conviction is better than flat with no thesis.
 
 FUNDAMENTAL SIGNAL RULES (apply these cross-asset):
 - When PADD 2 crude stocks are in the TOP QUARTILE (ample) AND US crude exports are BELOW their 4-week average → bearish WTI vs Brent (barrels stranded in Midwest with no export relief)
@@ -5647,8 +5653,8 @@ def _build_trading_page(prices, eia_raw, latest_date):
             wiki_context_block=wiki_context_block + prior_block,
             data=json.dumps(eia_summary, indent=2),
         )
-        # temperature=0 for maximum determinism — same data should yield same calls
-        raw_response = _call_claude(prompt, max_tokens=2500, temperature=0)
+        # temperature=0.3 — low enough for consistency, high enough to break flat-call lock
+        raw_response = _call_claude(prompt, max_tokens=2500, temperature=0.3)
         parsed = _extract_first_json_object(raw_response)
         if parsed:
             result = json.loads(parsed)
