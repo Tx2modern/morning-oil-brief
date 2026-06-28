@@ -386,6 +386,7 @@ NAV_PAGES = [
     ('margins.html',   'Cracks · Prices'),
     ('curves.html',    'Forward Curves'),
     ('inventory.html', 'Inventories'),
+    ('trading.html',   'Trading Calls'),
     ('news.html',      'News'),
     ('x_feed.html',    'X Feed'),
 ]
