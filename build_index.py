@@ -5661,14 +5661,18 @@ def _build_trading_page(prices, eia_raw, latest_date):
             wiki_context_block=wiki_context_block + prior_block,
             data=json.dumps(eia_summary, indent=2),
         )
-        # Use sonnet explicitly — opus may return 400 with temperature on some API versions
-        raw_response = _call_claude(prompt, model='claude-sonnet-4-6', max_tokens=2500, temperature=0.3)
+        # Use sonnet explicitly — opus returns 400 with temperature on some API versions
+        # max_tokens=4000: 8 trades × ~150 tokens + commentary; 2500 was truncating JSON
+        raw_response = _call_claude(prompt, model='claude-sonnet-4-6', max_tokens=4000, temperature=0.3)
         parsed = _extract_first_json_object(raw_response)
-        if parsed:
+        if not parsed:
+            print(f'  trading page: WARNING — no JSON object found in response (response len={len(raw_response)})')
+        else:
             result = json.loads(parsed)
             commentary = result.get('commentary', default_commentary)
             ai_trades = result.get('trades', [])
-            # Validate: must be list, each entry has required keys
+            print(f'  trading page: parsed {len(ai_trades)} trades from AI response')
+            # Validate: must be list with at least 3 entries
             if isinstance(ai_trades, list) and len(ai_trades) >= 3:
                 # Ensure all 8 instruments are present; fall back to defaults for missing ones
                 default_by_name = {t['trade']: t for t in default_trades}
@@ -5679,7 +5683,10 @@ def _build_trading_page(prices, eia_raw, latest_date):
                     merged.append(ai_t)
                 trades = merged
                 _save_trading_cache(latest_date.strftime('%Y-%m-%d'), commentary, trades)
-        print('  trading page: AI commentary + trades generated (temperature=0, carry-forward active)')
+                print(f'  trading page: {sum(1 for t in trades if t.get("direction") != "flat")} directional calls saved')
+            else:
+                print(f'  trading page: WARNING — validation failed, too few trades ({len(ai_trades)}), using defaults')
+        print('  trading page: AI call complete')
     except Exception as e:
         print(f'  trading page: AI generation failed ({e}), using prior cache or defaults')
         if prior_trades:
