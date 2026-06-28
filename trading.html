@@ -799,27 +799,16 @@ function buildCalCard(strip, label, value, tag, units, dec) {
     const last = vals[vals.length - 1];
     const hi52 = Math.max(...vals.slice(-252));
     const lo52 = Math.min(...vals.slice(-252));
-    const curYear = new Date().getFullYear();
-    const ytdEntry = data.find(d => d.time >= curYear + '-01-01');
-    const ytd = ytdEntry ? (last - ytdEntry.value) / ytdEntry.value * 100 : null;
     const s30 = vals.slice(-31);
     const rets = s30.map((v, i) => i ? Math.log(v / s30[i - 1]) : null).filter(Boolean);
     const meanR = rets.reduce((a, b) => a + b, 0) / rets.length;
     const vol = Math.sqrt(rets.reduce((a, r) => a + (r - meanR) ** 2, 0) / rets.length * 252) * 100;
-    let peak = vals[0], maxDD = 0;
-    for (const v of vals) {
-      if (v > peak) peak = v;
-      const dd = (v - peak) / peak;
-      if (dd < maxDD) maxDD = dd;
-    }
-    const pfx = meta.units === '$/gal' ? '$' : '$';
+    const pfx = '$';
     const stats = [
-      { l: 'Last Price',    v: pfx + last.toFixed(meta.dec),  cls: '' },
-      { l: '52W High',      v: pfx + hi52.toFixed(meta.dec),  cls: '' },
-      { l: '52W Low',       v: pfx + lo52.toFixed(meta.dec),  cls: '' },
-      { l: '30D Vol (ann)', v: vol.toFixed(1) + '%',           cls: '' },
-      { l: 'YTD Return',    v: ytd !== null ? (ytd >= 0 ? '+' : '') + ytd.toFixed(1) + '%' : '—', cls: ytd !== null ? (ytd >= 0 ? 'pos' : 'neg') : '' },
-      { l: 'Max Drawdown',  v: (maxDD * 100).toFixed(1) + '%', cls: 'neg' },
+      { l: 'Last Price',    v: pfx + last.toFixed(meta.dec), cls: '' },
+      { l: '52W High',      v: pfx + hi52.toFixed(meta.dec), cls: '' },
+      { l: '52W Low',       v: pfx + lo52.toFixed(meta.dec), cls: '' },
+      { l: '30D Vol (ann)', v: vol.toFixed(1) + '%',          cls: '' },
     ];
     const el = document.getElementById('adv-stats');
     if (el) el.innerHTML = stats.map(s => `<div class="adv-stat"><div class="adv-stat-lbl">${s.l}</div><div class="adv-stat-val ${s.cls}">${s.v}</div></div>`).join('');
