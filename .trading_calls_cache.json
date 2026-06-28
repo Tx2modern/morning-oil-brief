@@ -1,6 +1,6 @@
 {
   "date": "2026-06-19",
-  "commentary": "A historically extreme fundamental setup is colliding with a brutal macro-driven selloff: Cushing sits at 18.957 mb, fully 6.043 mb below the 25 mb operational floor, while US gasoline (216.3 mb, bottom quartile), distillates (106.1 mb, bottom quartile), and PADD 2 crude (97.3 mb, bottom quartile) are all simultaneously tight \u2014 a rare tri-product squeeze. Yet WTI has shed 31.5% over the past 30 days and trades at RSI 15.8, the most oversold reading in years, with Brent RSI at 16.9, suggesting macro/financial liquidation has overwhelmed physical fundamentals and created a coiled-spring setup for a violent mean-reversion rally once selling exhausts. Refinery utilization at 96.1% against tight feedstock and product inventories across the board means the physical market is screaming backwardation, with WTI M1-M2 already at +$0.30 and RBOB M1-M2 at +$0.1439/gal \u2014 both structures that should widen materially as the financial overhang clears.",
+  "commentary": "The US physical crude complex remains acutely tight: Cushing sits at 18.957 mb, a full 6.043 mb below the 25 mb operational floor, while both PADD 2 crude stocks (bottom quartile) and PADD 3 crude stocks (lower-mid range, mildly bullish) confirm there is no regional buffer to relieve prompt delivery stress. Refined products are equally strained \u2014 gasoline at 216.3 mb and distillates at 106.1 mb are both in the bottom quartile of the 5-year seasonal range, with refinery utilization already maxed at 96.1%, leaving no throughput headroom to rebuild inventories ahead of peak summer demand. The macro selloff (WTI -31.5% and Brent -31.3% over 30 days, RSI-14 at 15.8 and 16.9 respectively) has driven both benchmarks to extreme oversold territory that is deeply disconnected from the underlying physical tightness, creating high-conviction spread and outright opportunities as financial liquidation exhausts itself against an unambiguously bullish fundamental backdrop.",
   "trades": [
     {
       "trade": "Brent/WTI Spread",
@@ -10,7 +10,7 @@
       "stop": "4.10",
       "conviction": "med",
       "timeframe": "1\u20132 weeks",
-      "thesis": "Brent/WTI at $3.37/bbl sits just above the $3.00 export-incentive threshold, but the bullish WTI physical case is far stronger than Brent's: Cushing is at 18.957 mb, a staggering 6.043 mb below the 25 mb operational floor, and PADD 2 crude is in the bottom quartile \u2014 both signals that point to acute domestic tightness that should compress the spread back toward or below $3.00. US crude exports at 4,669 kbd are running, which provides some relief, but with Cushing this depleted the domestic physical premium for WTI prompt barrels should reassert. A move back to $2.20 is the target as WTI backwardation steepens relative to Brent's flatter M1-M2 of only $0.06/bbl vs WTI's $0.30/bbl. Stop above $4.10 where the arb fully opens and export demand would structurally widen the spread."
+      "thesis": "No data point has changed to warrant reversing the prior short: Brent/WTI at $3.37/bbl sits just above the $3.00 export-incentive threshold, but the WTI physical case is structurally stronger than Brent's. Cushing at 18.957 mb is 6.043 mb below the 25 mb operational floor, and PADD 2 crude is in the bottom quartile \u2014 both signals point to acute domestic tightness that should compress the spread as WTI prompt backwardation ($0.30/bbl M1-M2) steepens relative to Brent's near-flat $0.06/bbl M1-M2. US crude exports at 4,669 kbd provide some arb relief but cannot offset the Cushing scarcity signal; target $2.20 as WTI physical premium reasserts, stop above $4.10 where a full arb opening would structurally widen the spread."
     },
     {
       "trade": "WTI M1\u2013M2",
@@ -20,7 +20,7 @@
       "stop": "0.10",
       "conviction": "high",
       "timeframe": "1\u20133 weeks",
-      "thesis": "MANDATORY CALL \u2014 Cushing at 18.957 mb is 6.043 mb below the 25 mb operational floor, triggering the mandatory long rule at high conviction. At sub-20 mb, Cushing is approaching levels where physical delivery mechanics become stressed and prompt barrels command a structural scarcity premium. WTI RSI-14 at 15.8 is in extreme oversold territory, providing high-conviction entry timing confirmation: the fundamental signal (Cushing below floor) and the technical signal (RSI < 20) are in full confluence. The current M1-M2 of $0.30/bbl dramatically understates the physical tightness implied by 18.957 mb Cushing; historical analogs at these storage levels have seen M1-M2 trade to $1.00\u2013$1.50/bbl. Target $0.85 on spread widening as financial liquidation abates and physical buyers reassert. Stop at $0.10 on a surprise large Cushing build."
+      "thesis": "MANDATORY CALL \u2014 Cushing at 18.957 mb is 6.043 mb below the 25 mb operational floor, triggering the mandatory long rule at high conviction with no change from the prior session. WTI RSI-14 at 15.8 remains in extreme oversold territory (below 20), providing full confluence of fundamental tightness and technical exhaustion \u2014 the highest-conviction setup in the framework. At sub-19 mb, Cushing is approaching levels where physical delivery mechanics become stressed and prompt barrels command a structural scarcity premium; the current M1-M2 of $0.30/bbl dramatically understates the tightness implied by these storage levels, with historical analogs pointing to $1.00\u2013$1.50/bbl at comparable Cushing levels. Target $0.85/bbl on spread widening as financial liquidation abates and physical buyers reassert; stop at $0.10/bbl on a surprise large Cushing build that would signal the tightness narrative has broken."
     },
     {
       "trade": "Brent M1\u2013M2",
@@ -30,7 +30,7 @@
       "stop": "-0.08",
       "conviction": "med",
       "timeframe": "1\u20132 weeks",
-      "thesis": "Brent M1-M2 at only $0.06/bbl is nearly flat despite a global crude market that is tightening at the margin, and Brent RSI-14 at 16.9 confirms extreme oversold conditions consistent with financial liquidation rather than a genuine fundamental loosening. The spread structure is too flat given OPEC+ production discipline and the global distillate tightness signal (US distillates at 106.1 mb, bottom quartile) that points to sustained refinery crude demand. A mean-reversion to $0.35/bbl is achievable as macro selling exhausts; conviction is med rather than high because Brent lacks the specific Cushing-floor trigger that drives the WTI call, and the 30-day return of -31.3% suggests the macro headwind remains powerful. Stop at -$0.08 (contango) where the structure would signal genuine demand destruction."
+      "thesis": "No data point has changed to warrant reversing the prior long: Brent M1-M2 at $0.06/bbl is nearly flat despite a global crude market tightening at the margin, and Brent RSI-14 at 16.9 confirms extreme oversold conditions consistent with financial liquidation rather than genuine fundamental loosening. The spread structure is too flat given OPEC+ production discipline and the global distillate tightness signal \u2014 US distillates at 106.1 mb in the bottom quartile points to sustained refinery crude demand that should support prompt Brent backwardation. Conviction remains med rather than high because Brent lacks the specific Cushing-floor trigger driving the WTI call, and the 30-day return of -31.3% confirms the macro headwind remains powerful; target $0.35/bbl on mean-reversion as selling exhausts, stop at -$0.08/bbl (contango) where the structure would signal genuine demand destruction."
     },
     {
       "trade": "RBOB M1\u2013M2",
@@ -40,7 +40,7 @@
       "stop": "0.0800",
       "conviction": "high",
       "timeframe": "1\u20133 weeks",
-      "thesis": "MANDATORY CALL \u2014 US gasoline stocks at 216.3 mb are in the bottom quartile during the active May\u2013September driving season, triggering the mandatory long rule. RBOB M1-M2 at $0.1439/gal reflects meaningful backwardation but should widen further as summer demand draws on already-tight inventories; refinery utilization at 96.1% leaves virtually no spare throughput capacity to rebuild stocks quickly. RBOB RSI-14 at 38.6 is neutral-to-approaching-oversold, and the 30-day return of -21.9% suggests the outright has been beaten down by macro selling rather than demand destruction \u2014 the spread structure should outperform outrights as physical tightness reasserts. Target $0.2200/gal on continued seasonal draws; stop at $0.0800/gal on a surprise large gasoline build that would signal demand has genuinely weakened."
+      "thesis": "MANDATORY CALL \u2014 US gasoline stocks at 216.3 mb are in the bottom quartile during the active May\u2013September driving season, triggering the mandatory long rule with no change from the prior session. RBOB M1-M2 at $0.1439/gal reflects meaningful backwardation but should widen further as summer demand draws on already-tight inventories; refinery utilization at 96.1% leaves virtually no spare throughput capacity to rebuild stocks quickly, and the M1-M3 spread at $0.3972/gal confirms the market is pricing in sustained tightness through the summer curve. RBOB RSI-14 at 38.6 is neutral-to-approaching-oversold, and the 30-day return of -21.9% reflects macro selling rather than demand destruction \u2014 the spread structure should outperform outrights as physical tightness reasserts into peak driving season. Target $0.2200/gal on continued seasonal draws; stop at $0.0800/gal on a surprise large gasoline build that would signal demand has genuinely weakened."
     },
     {
       "trade": "HO M1\u2013M2",
@@ -50,7 +50,7 @@
       "stop": "0.0200",
       "conviction": "high",
       "timeframe": "1\u20133 weeks",
-      "thesis": "MANDATORY CALL \u2014 US distillate stocks at 106.1 mb are in the bottom quartile, triggering the mandatory long HO M1-M2 rule. HO RSI-14 at 28.2 is in oversold territory (below 30), providing strong entry timing confirmation alongside the fundamental signal \u2014 this is a high-conviction confluence setup. The current M1-M2 of $0.0653/gal is remarkably flat given bottom-quartile distillate inventories; with refinery utilization already maxed at 96.1%, there is no easy supply response to tighten the prompt. The 30-day return of -21.8% reflects macro liquidation, not a structural loosening of distillate balances. Target $0.1400/gal as the spread reprices to reflect physical scarcity; stop at $0.0200/gal where a move toward flat structure would suggest the fundamental signal has been overwhelmed by demand destruction."
+      "thesis": "MANDATORY CALL \u2014 US distillate stocks at 106.1 mb are in the bottom quartile, triggering the mandatory long HO M1-M2 rule with no change from the prior session. HO RSI-14 at 28.2 remains in oversold territory (below 30), providing strong entry timing confirmation alongside the fundamental signal \u2014 this is a high-conviction confluence setup. The current M1-M2 of $0.0653/gal is remarkably flat given bottom-quartile distillate inventories; with refinery utilization already maxed at 96.1%, there is no easy supply response, and the M1-M3 at $0.1174/gal and M1-M6 at $0.2783/gal confirm the market is pricing in a gradual tightening but the prompt spread has not yet repriced to reflect the acute near-term scarcity. The 30-day return of -21.8% reflects macro liquidation, not a structural loosening of distillate balances; target $0.1400/gal as the spread reprices to reflect physical scarcity, stop at $0.0200/gal where a move toward flat structure would suggest the fundamental signal has been overwhelmed by demand destruction."
     },
     {
       "trade": "WTI Outright",
@@ -60,27 +60,27 @@
       "stop": "65.50",
       "conviction": "med",
       "timeframe": "2\u20134 weeks",
-      "thesis": "MANDATORY DIRECTIONAL CALL \u2014 WTI RSI-14 at 15.8 is below 20 with a clear fundamental alignment (Cushing at 18.957 mb, 6.043 mb below the 25 mb operational floor; PADD 2 crude in bottom quartile; gasoline and distillates both in bottom quartile), triggering the mandatory directional call rule at high fundamental conviction. Conviction is calibrated to med on the outright rather than high because the 30-day return of -31.5% and the price trading below SMA10 (75.459), SMA20 (83.24), and SMA50 (91.99) all confirm a powerful macro-driven downtrend that could persist before the physical fundamental reasserts \u2014 the spread trades are higher conviction expressions of the same thesis. Entry at 69.23 targets a mean-reversion to 78.00 as RSI normalizes and Cushing tightness becomes the dominant narrative; stop at 65.50 below recent lows where a break would suggest the macro selloff has further to run."
+      "thesis": "MANDATORY DIRECTIONAL CALL \u2014 WTI RSI-14 at 15.8 is below 20 with clear fundamental alignment (Cushing at 18.957 mb, 6.043 mb below the 25 mb operational floor; PADD 2 crude in bottom quartile; gasoline at 216.3 mb and distillates at 106.1 mb both in bottom quartile; refinery utilization at 96.1%), triggering the mandatory directional call rule with no change from the prior session. Conviction is calibrated to med on the outright rather than high because the 30-day return of -31.5% and price trading well below SMA10 (75.459), SMA20 (83.24), and SMA50 (91.99) all confirm a powerful macro-driven downtrend that could persist before the physical fundamental reasserts \u2014 the spread trades remain higher-conviction expressions of the same thesis. Entry at 69.23 targets a mean-reversion to 78.00 as RSI normalizes and Cushing tightness becomes the dominant narrative; stop at 65.50 below recent lows where a break would suggest the macro selloff has further to run before the physical floor is found."
     },
     {
       "trade": "RBOB Crack",
-      "direction": "flat",
-      "entry": "\u2014",
-      "target": "\u2014",
-      "stop": "\u2014",
-      "conviction": "low",
-      "timeframe": "\u2014",
-      "thesis": "RBOB crack vs WTI. US gasoline stocks bottom quartile (bullish \u2014 tight supply); refinery utilization 96.1%. Tight gasoline stocks supportive of crack \u2014 watch for demand data confirmation."
+      "direction": "long",
+      "entry": "28.50",
+      "target": "34.00",
+      "stop": "25.00",
+      "conviction": "med",
+      "timeframe": "1\u20133 weeks",
+      "thesis": "Upgrading from flat to long: US gasoline stocks at 216.3 mb are in the bottom quartile during the active May\u2013September driving season \u2014 the same mandatory signal that drives the RBOB M1-M2 long also supports the crack spread, as tight product inventories relative to crude should widen the refining margin. Refinery utilization at 96.1% means refiners are already running flat-out and cannot increase throughput to rebuild gasoline stocks, which structurally supports the crack; RBOB RSI-14 at 38.6 is approaching oversold while WTI RSI-14 at 15.8 is in extreme oversold territory, meaning the crack (RBOB minus WTI) should benefit from RBOB's relative outperformance as the macro selloff unwinds. The 3:2:1 crack spread is supported by both the gasoline bottom-quartile signal and the distillate bottom-quartile signal (106.1 mb); target $34.00/bbl on seasonal tightening, stop at $25.00/bbl where a demand destruction signal would undermine the product-over-crude thesis."
     },
     {
       "trade": "HO Crack",
-      "direction": "flat",
-      "entry": "\u2014",
-      "target": "\u2014",
-      "stop": "\u2014",
-      "conviction": "low",
-      "timeframe": "\u2014",
-      "thesis": "HO crack vs WTI. US distillate stocks bottom quartile (bullish \u2014 tight supply); refinery utilization 96.1%. Tight distillate inventory is structurally supportive of HO crack \u2014 watch export demand and weather."
+      "direction": "long",
+      "entry": "27.50",
+      "target": "33.00",
+      "stop": "24.00",
+      "conviction": "med",
+      "timeframe": "1\u20133 weeks",
+      "thesis": "Upgrading from flat to long: US distillate stocks at 106.1 mb are in the bottom quartile \u2014 the same mandatory signal driving the HO M1-M2 long also supports the crack spread, as tight distillate inventories relative to crude should widen the heating oil refining margin. HO RSI-14 at 28.2 is in oversold territory while WTI RSI-14 at 15.8 is in extreme oversold territory, meaning HO should outperform WTI on any mean-reversion rally, widening the crack; refinery utilization at 96.1% leaves no throughput headroom to rebuild distillate stocks, removing the supply-side escape valve. The 30-day return of -21.8% for HO vs -31.5% for WTI already shows HO's relative resilience \u2014 the crack has been partially supported even through the macro selloff, and a stabilization in crude should allow the product premium to reassert more fully. Target $33.00/bbl on distillate tightness repricing; stop at $24.00/bbl where a large distillate build would signal the fundamental case has broken."
     }
   ]
 }
