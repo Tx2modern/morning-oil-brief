@@ -116,10 +116,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sa
 .spread-context-table td { color: var(--text); }
 .spread-context-table td.pos { color: #4ade80; font-weight: 500; }
 .spread-context-table td.neg { color: #f87171; font-weight: 500; }
-.trade-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; margin-top: 12px; }
-.trade-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); font-weight: 700; padding: 6px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+.trade-table-wrap { overflow-y: auto; max-height: 480px; border-radius: 0 0 8px 8px; }
+.trade-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.trade-table thead { position: sticky; top: 0; z-index: 2; }
+.trade-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: #e4e7ec; font-weight: 700; padding: 9px 10px; background: #2a2d38; border-bottom: 2px solid var(--accent); text-align: left; white-space: nowrap; }
 .trade-table td { padding: 8px 10px; border-bottom: 1px solid var(--border-soft); color: var(--text); vertical-align: middle; }
 .trade-table tr:last-child td { border-bottom: none; }
+.trade-market-read { font-size: 12px; color: var(--muted-2); line-height: 1.7; padding: 10px 14px; background: var(--panel-2); border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; display: none; }
+.trade-market-read .mr-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-right: 8px; }
 .trade-pill {
   display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.6px;
   text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
@@ -330,22 +334,25 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
 
   <!-- ─── Section 4: Summary Trade Table ───────────────────────────── -->
   <h2 class="mob-section-h">Summary Trade Table</h2>
-  <div class="section">
-    <table class="trade-table">
-      <thead>
-        <tr>
-          <th>Trade</th>
-          <th>Direction</th>
-          <th>Entry</th>
-          <th>Target</th>
-          <th>Stop</th>
-          <th>Conviction</th>
-          <th>Timeframe</th>
-          <th>Thesis</th>
-        </tr>
-      </thead>
-      <tbody id="trade-table-body"></tbody>
-    </table>
+  <div class="section" style="padding:0;overflow:hidden">
+    <div class="trade-market-read" id="trade-market-read"><span class="mr-label">Market Read</span><span id="trade-market-read-text"></span></div>
+    <div class="trade-table-wrap">
+      <table class="trade-table">
+        <thead>
+          <tr>
+            <th>Trade</th>
+            <th>Direction</th>
+            <th>Entry</th>
+            <th>Target</th>
+            <th>Stop</th>
+            <th>Conviction</th>
+            <th>Timeframe</th>
+            <th>Thesis</th>
+          </tr>
+        </thead>
+        <tbody id="trade-table-body"></tbody>
+      </table>
+    </div>
   </div>
 
   <!-- ─── Section 2: Calendar Spreads ──────────────────────────────── -->
@@ -438,12 +445,14 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   renderCalStrip('cal-ho',    S.calSpreads.ho,    '/gal', 4);
 
   // ── Summary trade table ──
+  if (S.commentary) {
+    const mrWrap = document.getElementById('trade-market-read');
+    const mrText = document.getElementById('trade-market-read-text');
+    if (mrWrap && mrText) { mrText.textContent = S.commentary; mrWrap.style.display = ''; }
+  }
   const tradeBody = document.getElementById('trade-table-body');
   if (tradeBody && S.trades) {
-    const commRow = S.commentary
-      ? `<tr><td colspan="8" style="padding:10px 12px;font-size:12px;color:var(--muted-2);line-height:1.65;border-bottom:1px solid var(--border);background:var(--panel-2)"><span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-right:8px">Market Read</span>${S.commentary}</td></tr>`
-      : '';
-    tradeBody.innerHTML = commRow + S.trades.map(t => {
+    tradeBody.innerHTML = S.trades.map(t => {
       const dirCls = t.direction === 'long' ? 'long' : t.direction === 'short' ? 'short' : 'flat';
       const dirLabel = t.direction === 'long' ? 'Long' : t.direction === 'short' ? 'Short' : 'Flat / Watch';
       const convCls = t.conviction === 'high' ? 'conv-high' : t.conviction === 'med' ? 'conv-med' : 'conv-low';

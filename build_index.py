@@ -1154,7 +1154,7 @@ FUNDAMENTAL SIGNAL RULES (apply these cross-asset):
 TRADE OUTPUT FORMAT:
 For each instrument in the summary table, provide: direction (long/short/flat), entry price or spread level, target, stop, conviction (low/med/high), timeframe, and a specific thesis using the fundamental signals above.
 
-Instruments to cover (all 7 rows):
+Instruments to cover (all 8 rows):
 1. Brent/WTI Spread ($/bbl)
 2. WTI M1–M2 ($/bbl)
 3. Brent M1–M2 ($/bbl)
@@ -1162,6 +1162,7 @@ Instruments to cover (all 7 rows):
 5. HO M1–M2 ($/gal)
 6. WTI Outright ($/bbl)
 7. RBOB Crack ($/bbl — 3:2:1 crack spread)
+8. HO Crack ($/bbl — heating oil crack spread vs WTI)
 
 Also write a 2–3 sentence market commentary paragraph for the top of the page. Reference PADD quartile positions and specific numbers from the data.
 
@@ -5558,6 +5559,8 @@ def _build_trading_page(prices, eia_raw, latest_date):
          'conviction': 'low', 'timeframe': '—', 'thesis': 'Range-bound pending macro clarity.'},
         {'trade': 'RBOB Crack', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
          'conviction': 'low', 'timeframe': '—', 'thesis': 'Crack spread awaiting gasoline inventory signal.'},
+        {'trade': 'HO Crack', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
+         'conviction': 'low', 'timeframe': '—', 'thesis': 'Distillate crack awaiting inventory and demand signal.'},
     ]
     default_commentary = (
         f'WTI at ${wti_price:.2f}/bbl, Brent at ${brent_price:.2f}/bbl '
