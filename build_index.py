@@ -376,6 +376,7 @@ OUT_INVENTORY = os.path.join(HERE, 'inventory.html')  # detail dashboard
 OUT_MARGINS = os.path.join(HERE, 'margins.html')      # margins & cracks
 OUT_CURVES = os.path.join(HERE, 'curves.html')        # forward curves
 OUT_NEWS   = os.path.join(HERE, 'news.html')          # daily news page
+OUT_TRADING = os.path.join(HERE, 'trading.html')      # trading calls
 PRICES_FILE = os.path.join(HERE, 'prices_data.json')
 SITE_BASE_URL = os.environ.get('SITE_BASE_URL', 'https://www.morningoilbrief.com')
 CHAT_ENDPOINT_URL = os.environ.get('CHAT_ENDPOINT_URL', '/.netlify/functions/chat')
@@ -383,10 +384,10 @@ CHAT_ENDPOINT_URL = os.environ.get('CHAT_ENDPOINT_URL', '/.netlify/functions/cha
 # ─── Shared top navigation (rendered on every page) ───
 NAV_PAGES = [
     ('index.html',     'Home'),
-    ('margins.html',   'Cracks · Prices'),
-    ('curves.html',    'Forward Curves'),
+    ('margins.html',   'Prices'),
+    ('curves.html',    'Curves'),
     ('inventory.html', 'Inventories'),
-    ('trading.html',   'Trading Calls'),
+    ('trading.html',   'Calls'),
     ('news.html',      'News'),
     ('x_feed.html',    'X Feed'),
 ]
@@ -1117,6 +1118,68 @@ Return STRICT JSON (no markdown, no commentary):
 }}
 
 DATA (week ending {report_date}):
+{data}
+"""
+
+TRADING_PAGE_PROMPT = """You are a senior petroleum derivatives trader generating the daily trading calls page for a professional oil market dashboard.
+
+You have access to:
+1. Current futures prices and calendar spreads for WTI, Brent, RBOB, and Heating Oil
+2. EIA weekly inventory data with PADD-level breakdowns
+3. PADD inventory quartile positions vs 5-year seasonal range
+4. Institutional wiki context with supply/demand fundamentals
+
+FUNDAMENTAL SIGNAL RULES (apply these cross-asset):
+- When PADD 2 crude stocks are in the TOP QUARTILE of 5-yr range AND US crude exports are BELOW their 4-week average → bearish WTI vs Brent signal (physical barrels stranded in Midwest, no export relief)
+- When Cushing stocks are BELOW 25 mb operational floor → prompt WTI backwardation support; strengthen WTI M1-M2 long conviction
+- When PADD 3 crude stocks are in the BOTTOM QUARTILE and refinery utilization is >93% → tight Gulf Coast supply, bullish crude crack spreads
+- When PADD 1 distillate stocks are in the BOTTOM QUARTILE entering winter (Oct-Mar) → bullish ULSD/HO M1-M2 spread
+- When PADD 5 gasoline stocks are in the TOP QUARTILE in summer (Apr-Sep) → bearish RBOB West Coast basis, neutral-to-bearish RBOB crack
+- When total US gasoline stocks are BELOW 5-yr seasonal average AND driving season is active (May-Sep) → bullish RBOB M1-M2 spread
+- The Brent-WTI spread above $3/bbl incentivizes US crude exports; below $3 the Atlantic arb weakens
+
+TRADE OUTPUT FORMAT:
+For each instrument in the summary table, provide: direction (long/short/flat), entry price or spread level, target, stop, conviction (low/med/high), timeframe, and a specific thesis using the fundamental signals above.
+
+Instruments to cover (all 7 rows):
+1. Brent/WTI Spread ($/bbl)
+2. WTI M1–M2 ($/bbl)
+3. Brent M1–M2 ($/bbl)
+4. RBOB M1–M2 ($/gal)
+5. HO M1–M2 ($/gal)
+6. WTI Outright ($/bbl)
+7. RBOB Crack ($/bbl — 3:2:1 crack spread)
+
+Also write a 2–3 sentence market commentary paragraph for the top of the page. Reference PADD quartile positions and specific numbers from the data.
+
+Rules:
+- Use ONLY numbers present in the data below. Do NOT fabricate.
+- For "flat" calls, entry/target/stop should be "—"
+- Conviction is "low", "med", or "high"
+- Thesis must reference specific data (e.g. "Cushing at 18.9 mb, below 25 mb floor...")
+- Do NOT write "see above" or cross-references. Each thesis is self-contained.
+
+{wiki_context_block}
+
+Return STRICT JSON (no markdown, no extra text):
+
+{{
+  "commentary": "...2-3 sentence market read referencing specific PADD data and spread levels...",
+  "trades": [
+    {{
+      "trade": "Brent/WTI Spread",
+      "direction": "long" | "short" | "spread" | "flat",
+      "entry": "...",
+      "target": "...",
+      "stop": "...",
+      "conviction": "low" | "med" | "high",
+      "timeframe": "...",
+      "thesis": "..."
+    }}
+  ]
+}}
+
+DATA (as of {report_date}):
 {data}
 """
 
@@ -5261,6 +5324,276 @@ footer {{
 """
 
 
+def _build_trading_page(prices, eia_raw, latest_date):
+    """Regenerate trading.html SNAPSHOT with live price data, calendar spreads,
+    PADD-aware trading commentary, and AI-generated trade calls."""
+
+    futures = prices.get('futures', {})
+    series = eia_raw.get('series', {})
+
+    # ── Date strings ──────────────────────────────────────────────────────────
+    as_of = latest_date.strftime('%B %-d, %Y')
+    prices_thru = latest_date.strftime('%B %-d, %Y')
+    from datetime import timedelta
+    next_mon = latest_date + timedelta(days=(7 - latest_date.weekday()))
+    next_refresh = next_mon.strftime('%B %-d, %Y')
+
+    # ── Helpers ───────────────────────────────────────────────────────────────
+    def front_history(key):
+        return futures.get(key, {}).get('front_history', [])
+
+    def spark30(key):
+        """Last 30 daily closes, rounded to 4 decimal places."""
+        h = front_history(key)
+        pts = h[-30:] if len(h) >= 30 else h
+        return [round(v, 4) for _, v in pts]
+
+    def front_price(key):
+        h = front_history(key)
+        return round(h[-1][1], 4) if h else None
+
+    def front_change(key):
+        h = front_history(key)
+        if len(h) < 2:
+            return 0.0
+        return round(h[-1][1] - h[-2][1], 4)
+
+    def cal_spread(key, m1_idx, m2_idx):
+        c = futures.get(key, {}).get('curve', [])
+        if len(c) > max(m1_idx, m2_idx):
+            return round(c[m1_idx]['price'] - c[m2_idx]['price'], 4)
+        elif len(c) >= 2:
+            return round(c[0]['price'] - c[-1]['price'], 4)
+        return 0.0
+
+    def cal_spreads_for(key):
+        return {
+            'm1m2':  cal_spread(key, 0, 1),
+            'm1m3':  cal_spread(key, 0, 2),
+            'm1m6':  cal_spread(key, 0, 5),
+            'm1m12': cal_spread(key, 0, 11),
+        }
+
+    # ── Price data ────────────────────────────────────────────────────────────
+    wti_spark   = spark30('wti')
+    brent_spark = spark30('brent')
+    rbob_spark  = spark30('rbob')
+    ho_spark    = spark30('ulsd')
+
+    wti_price   = front_price('wti')   or 0.0
+    brent_price = front_price('brent') or 0.0
+    rbob_price  = front_price('rbob')  or 0.0
+    ho_price    = front_price('ulsd')  or 0.0
+
+    wti_chg   = front_change('wti')
+    brent_chg = front_change('brent')
+    rbob_chg  = front_change('rbob')
+    ho_chg    = front_change('ulsd')
+
+    cal_spreads = {
+        'wti':   cal_spreads_for('wti'),
+        'brent': cal_spreads_for('brent'),
+        'rbob':  cal_spreads_for('rbob'),
+        'ho':    cal_spreads_for('ulsd'),
+    }
+
+    # ── EIA PADD fundamentals for prompt ─────────────────────────────────────
+    def series_last(key):
+        d = series.get(key, {}).get('data', [])
+        return d[-1][1] if d else None
+
+    def series_quartile(key, n_years=5):
+        """Return quartile (1-4) of latest value vs n_years of same-week history."""
+        d = series.get(key, {}).get('data', [])
+        if not d:
+            return None
+        latest_val = d[-1][1]
+        # collect same ISO week from prior years
+        from datetime import datetime as _dt
+        latest_wk = _dt.strptime(d[-1][0], '%Y-%m-%d').isocalendar()[1]
+        hist = []
+        for date_str, val in d[:-1]:
+            dt = _dt.strptime(date_str, '%Y-%m-%d')
+            if dt.isocalendar()[1] == latest_wk:
+                hist.append(val)
+        hist = hist[-n_years:]
+        if not hist:
+            return None
+        hist_sorted = sorted(hist)
+        pct = sum(1 for v in hist_sorted if latest_val > v) / len(hist_sorted)
+        if pct <= 0.25:
+            return 1
+        elif pct <= 0.50:
+            return 2
+        elif pct <= 0.75:
+            return 3
+        else:
+            return 4
+
+    def quartile_label(q):
+        if q is None:
+            return 'unknown'
+        labels = {1: 'bottom quartile (bearish)', 2: 'lower-mid range', 3: 'upper-mid range', 4: 'top quartile (bullish)'}
+        return labels.get(q, 'unknown')
+
+    crude_us     = series_last('crude_us')
+    crude_p1     = series_last('crude_p1')
+    crude_p2     = series_last('crude_p2')
+    crude_p3     = series_last('crude_p3')
+    crude_p4     = series_last('crude_p4')
+    crude_p5     = series_last('crude_p5')
+    crude_cushing = series_last('crude_cushing')
+    crude_exp    = series_last('crude_exp_us')
+    gas_us       = series_last('gas_us')
+    dist_us      = series_last('dist_us')
+    refutil      = series_last('refutil_us')
+    crude_input  = series_last('crude_input')
+
+    q_p2  = series_quartile('crude_p2')
+    q_p3  = series_quartile('crude_p3')
+    q_gas = series_quartile('gas_us')
+    q_dist = series_quartile('dist_us')
+
+    eia_summary = {
+        'report_date': latest_date.strftime('%Y-%m-%d'),
+        'crude_us_mb': crude_us,
+        'crude_p1_mb': crude_p1,
+        'crude_p2_mb': crude_p2,
+        'crude_p2_quartile': quartile_label(q_p2),
+        'crude_p3_mb': crude_p3,
+        'crude_p3_quartile': quartile_label(q_p3),
+        'crude_p4_mb': crude_p4,
+        'crude_p5_mb': crude_p5,
+        'cushing_mb': crude_cushing,
+        'cushing_vs_25mb_floor': round(crude_cushing - 25000, 0) if crude_cushing else None,
+        'crude_exports_kbd': crude_exp,
+        'gasoline_us_mb': gas_us,
+        'gasoline_quartile': quartile_label(q_gas),
+        'distillate_us_mb': dist_us,
+        'distillate_quartile': quartile_label(q_dist),
+        'refinery_util_pct': refutil,
+        'crude_input_kbd': crude_input,
+        'wti_price': wti_price,
+        'brent_price': brent_price,
+        'brent_wti_spread': round(brent_price - wti_price, 2),
+        'rbob_price_gal': rbob_price,
+        'ho_price_gal': ho_price,
+        'cal_spreads': cal_spreads,
+    }
+
+    # ── Load wiki context ─────────────────────────────────────────────────────
+    wiki_text = _load_wiki_context()
+    wiki_context_block = ''
+    if wiki_text:
+        wiki_context_block = f'\nWIKI CONTEXT (institutional market intelligence):\n{wiki_text}\n'
+
+    # ── Generate AI trading calls ─────────────────────────────────────────────
+    default_trades = [
+        {'trade': 'Brent/WTI Spread', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
+         'conviction': 'low', 'timeframe': '—', 'thesis': f'Spread at ${round(brent_price - wti_price, 2)}/bbl — watch for widening on export arb or narrowing on supply normalization.'},
+        {'trade': 'WTI M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
+         'conviction': 'low', 'timeframe': '—', 'thesis': 'Awaiting fresh EIA signal for directional entry.'},
+        {'trade': 'Brent M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
+         'conviction': 'low', 'timeframe': '—', 'thesis': 'Monitor term structure for prompt flip.'},
+        {'trade': 'RBOB M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
+         'conviction': 'low', 'timeframe': '—', 'thesis': 'Seasonal demand context needed for conviction.'},
+        {'trade': 'HO M1–M2', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
+         'conviction': 'low', 'timeframe': '—', 'thesis': 'Distillate inventory position unclear — watch next draw.'},
+        {'trade': 'WTI Outright', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
+         'conviction': 'low', 'timeframe': '—', 'thesis': 'Range-bound pending macro clarity.'},
+        {'trade': 'RBOB Crack', 'direction': 'flat', 'entry': '—', 'target': '—', 'stop': '—',
+         'conviction': 'low', 'timeframe': '—', 'thesis': 'Crack spread awaiting gasoline inventory signal.'},
+    ]
+    default_commentary = (
+        f'WTI at ${wti_price:.2f}/bbl, Brent at ${brent_price:.2f}/bbl '
+        f'(spread ${brent_price - wti_price:.2f}/bbl). '
+        f'Cushing at {crude_cushing:,.0f} mb; PADD 2 crude {quartile_label(q_p2)}. '
+        f'US distillate stocks {quartile_label(q_dist)}.'
+    )
+
+    commentary = default_commentary
+    trades = default_trades
+
+    try:
+        prompt = TRADING_PAGE_PROMPT.format(
+            report_date=latest_date.strftime('%Y-%m-%d'),
+            wiki_context_block=wiki_context_block,
+            data=json.dumps(eia_summary, indent=2),
+        )
+        raw_response = _call_claude(prompt, max_tokens=2500)
+        parsed = _extract_first_json_object(raw_response)
+        if parsed:
+            result = json.loads(parsed)
+            commentary = result.get('commentary', default_commentary)
+            ai_trades = result.get('trades', [])
+            # Validate: must be list, each entry has required keys
+            if isinstance(ai_trades, list) and len(ai_trades) >= 3:
+                # Ensure all 7 instruments are present; fall back to defaults for missing ones
+                default_by_name = {t['trade']: t for t in default_trades}
+                ai_by_name = {t.get('trade', ''): t for t in ai_trades}
+                merged = []
+                for t in default_trades:
+                    merged.append(ai_by_name.get(t['trade'], default_by_name[t['trade']]))
+                trades = merged
+        print('  trading page: AI commentary + trades generated')
+    except Exception as e:
+        print(f'  trading page: AI generation failed ({e}), using defaults')
+
+    # ── Build SNAPSHOT JSON ───────────────────────────────────────────────────
+    snapshot = {
+        'asOf': as_of,
+        'pricesThru': prices_thru,
+        'nextRefresh': next_refresh,
+        'wtiSpark': wti_spark,
+        'brentSpark': brent_spark,
+        'rbobSpark': rbob_spark,
+        'hoSpark': ho_spark,
+        'wtiPrice': wti_price,
+        'wtiChange': wti_chg,
+        'brentPrice': brent_price,
+        'brentChange': brent_chg,
+        'rbobPrice': rbob_price,
+        'rbobChange': rbob_chg,
+        'hoPrice': ho_price,
+        'hoChange': ho_chg,
+        'calSpreads': cal_spreads,
+        'commentary': commentary,
+        'trades': trades,
+    }
+    snapshot_js = 'const SNAPSHOT = ' + json.dumps(snapshot, separators=(',', ':')) + ';'
+
+    # ── Read trading.html and inject SNAPSHOT ─────────────────────────────────
+    with open(OUT_TRADING, 'r') as f:
+        html = f.read()
+
+    start_marker = '// @@TRADING_DATA_START@@'
+    end_marker   = '// @@TRADING_DATA_END@@'
+    start_idx = html.find(start_marker)
+    end_idx   = html.find(end_marker)
+    if start_idx == -1 or end_idx == -1:
+        raise ValueError('trading.html missing SNAPSHOT markers')
+
+    new_html = (
+        html[:start_idx + len(start_marker)] + '\n'
+        + snapshot_js + '\n'
+        + html[end_idx:]
+    )
+
+    # ── Inject shared nav (active = trading) ──────────────────────────────────
+    nav_html = _render_nav('trading.html')
+    # Replace existing nav block (if already injected) or inject fresh after <body>
+    if '<nav class="top-nav"' in new_html:
+        new_html = re.sub(r'<nav class="top-nav"[^>]*>.*?</nav>', nav_html, new_html, count=1, flags=re.DOTALL)
+    else:
+        new_html = new_html.replace('<body>', f'<body>\n{nav_html}', 1)
+        new_html = new_html.replace('</style>', NAV_CSS + '\n</style>', 1)
+
+    # ── Write output ──────────────────────────────────────────────────────────
+    with open(OUT_TRADING, 'w') as f:
+        f.write(new_html)
+    print(f'Wrote {OUT_TRADING}  ({os.path.getsize(OUT_TRADING):,} bytes)')
+
+
 def main():
     raw = load_data()
     series = raw['series']
@@ -6453,6 +6786,15 @@ tr.total-row.total-jet      td { background: rgba(34,211,238,0.06) !important; b
             print(f'  curves page build failed: {e}')
     else:
         print(f'  (skipped curves page — run refresh_prices.py first)')
+
+    # ─── Build the trading page ────────────────────────────────────────────
+    if prices and os.path.exists(OUT_TRADING):
+        try:
+            _build_trading_page(prices, raw, latest_date)
+        except Exception as e:
+            print(f'  trading page build failed: {e}')
+    else:
+        print(f'  (skipped trading page — missing prices or trading.html)')
 
     # ─── Build the news page ───────────────────────────────────────────────
     if news_items:
