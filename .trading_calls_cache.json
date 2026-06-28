@@ -1,1 +1,29 @@
-{}
+{
+  "key": "8091a5d177fc5526622f7165555c8c91",
+  "value": [
+    {
+      "direction": "spread",
+      "instrument": "WTI M1\u2013M2 Spread",
+      "setup": "Cushing draws five straight weeks toward tank-bottom tightness.",
+      "rationale": "Cushing fell to 18.96 mb, down 1.08 this week and from 23.02 mb on May 22, a relentless 4 mb decline in a month. Such low hub stocks tighten prompt WTI deliverability and support backwardation. Watch for any Cushing rebuild or import surge as the catalyst to fade the steepening."
+    },
+    {
+      "direction": "long",
+      "instrument": "WTI Front-Month Flat Price",
+      "setup": "Large headline crude draw with rising exports and high runs.",
+      "rationale": "US crude stocks drew 6.09 mb to 412.134 mb while exports rose to 4.93 mbd and runs held at 17.11 mbd with 96.1% utilization. PADD3 crude drew a heavy 3.98 mb, confirming Gulf tightness. Key risk is the slight dip in refiner inputs (-0.08 mbd) signaling demand softening."
+    },
+    {
+      "direction": "spread",
+      "instrument": "HO\u2013RBOB Spread (long distillate, short gasoline)",
+      "setup": "Distillate builds but PADD1 draws sharply as gasoline overhangs.",
+      "rationale": "Distillate built 3.06 mb nationally yet PADD1 drew 2.12 mb amid a steep 10.6-point utilization collapse to 76.5%, tightening East Coast diesel supply. Meanwhile gasoline built 2.06 mb with 4-week demand slipping to 8.83 from 8.90 mbd. Watch PADD1 refinery restarts as the reversal catalyst."
+    },
+    {
+      "direction": "short",
+      "instrument": "NYH RBOB Cash Basis",
+      "setup": "PADD1 gasoline build coincides with softening national demand.",
+      "rationale": "PADD1 gasoline stocks rose 1.21 mb and national gasoline built 2.06 mb to 216.299 mb, while 4-week gasoline demand eased to 8.83 mbd from 8.90. Collapsing PADD1 utilization (-10.6 to 76.5%) usually supports basis, but the inventory overhang and weak demand argue for near-term pressure. Catalyst risk is a demand rebound into peak summer driving season."
+    }
+  ]
+}
