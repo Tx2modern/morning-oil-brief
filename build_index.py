@@ -1142,6 +1142,12 @@ TECHNICAL SIGNAL RULES (use to calibrate entry/timing, not direction alone):
 - When price is in downtrend (below SMA20 < SMA50), raise conviction threshold for longs
 - 30-day return shows recent momentum — use to assess whether move is exhausted or continuing
 
+CONVICTION THRESHOLD RULES (stability guard — apply before finalizing each call):
+- Do NOT issue a non-flat call at low conviction unless at least TWO independent signals agree (e.g. fundamental + RSI, or trend + calendar spread structure). One signal alone = flat/watch.
+- Do NOT reverse a prior-day direction call unless a specific data point changed (new EIA print, RSI crossed 35/65, price broke SMA20/50, spread moved >0.50/bbl). If nothing material changed, hold the prior call and restate the thesis.
+- Prefer "flat" when signals conflict or are ambiguous. A flat call with a clear watchlist trigger is more useful than a low-confidence directional call.
+- Conviction "high" requires: fundamentals aligned + technicals confirming + term structure supporting. "Med" requires two of three. "Low" = directional lean only, likely flat in practice.
+
 FUNDAMENTAL SIGNAL RULES (apply these cross-asset):
 - When PADD 2 crude stocks are in the TOP QUARTILE (ample) AND US crude exports are BELOW their 4-week average → bearish WTI vs Brent (barrels stranded in Midwest with no export relief)
 - When Cushing stocks are BELOW 25 mb operational floor → physically tight, bullish WTI prompt backwardation; strengthen WTI M1-M2 long conviction
@@ -1257,15 +1263,18 @@ def _extract_first_json_object(raw):
     return None
 
 
-def _call_claude(prompt, model=None, max_tokens=1500):
+def _call_claude(prompt, model=None, max_tokens=1500, temperature=None):
     """Call Anthropic's Messages API. Returns text content or raises."""
     if not ANTHROPIC_API_KEY:
         raise RuntimeError('no ANTHROPIC_API_KEY')
-    body = json.dumps({
+    body_dict = {
         'model': model or ANTHROPIC_MODEL,
         'max_tokens': max_tokens,
         'messages': [{'role': 'user', 'content': prompt}],
-    }).encode('utf-8')
+    }
+    if temperature is not None:
+        body_dict['temperature'] = temperature
+    body = json.dumps(body_dict).encode('utf-8')
     req = urllib.request.Request(
         'https://api.anthropic.com/v1/messages',
         data=body,
@@ -5382,6 +5391,27 @@ def _price_trends(prices):
     return out
 
 
+TRADING_CALLS_CACHE = os.path.join(HERE, '.trading_calls_cache.json')
+
+
+def _load_trading_cache():
+    """Load prior trading calls from cache. Returns dict with 'trades', 'commentary', 'date'."""
+    try:
+        with open(TRADING_CALLS_CACHE) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _save_trading_cache(date_str, commentary, trades):
+    """Persist the validated AI output so it can be carried forward tomorrow."""
+    try:
+        with open(TRADING_CALLS_CACHE, 'w') as f:
+            json.dump({'date': date_str, 'commentary': commentary, 'trades': trades}, f, indent=2)
+    except Exception as e:
+        print(f'  trading cache write failed: {e}')
+
+
 def _build_trading_page(prices, eia_raw, latest_date):
     """Regenerate trading.html SNAPSHOT with live price data, calendar spreads,
     PADD-aware trading commentary, and AI-generated trade calls."""
@@ -5576,13 +5606,31 @@ def _build_trading_page(prices, eia_raw, latest_date):
     commentary = default_commentary
     trades = default_trades
 
+    # Load prior calls to carry forward — injected into prompt so AI must justify reversals
+    prior_cache = _load_trading_cache()
+    prior_trades = prior_cache.get('trades', [])
+    prior_date = prior_cache.get('date', '')
+
+    if prior_trades:
+        prior_block = (
+            f'\nPRIOR CALLS (from {prior_date}) — carry these forward unless a specific '
+            f'data-driven reason exists to change direction. Reversing a direction requires '
+            f'citing the signal that changed (e.g. RSI crossed a threshold, new EIA data, '
+            f'price broke a key level). Do NOT change direction just because the model wants '
+            f'to be creative.\n'
+            + json.dumps(prior_trades, indent=2) + '\n'
+        )
+    else:
+        prior_block = ''
+
     try:
         prompt = TRADING_PAGE_PROMPT.format(
             report_date=latest_date.strftime('%Y-%m-%d'),
-            wiki_context_block=wiki_context_block,
+            wiki_context_block=wiki_context_block + prior_block,
             data=json.dumps(eia_summary, indent=2),
         )
-        raw_response = _call_claude(prompt, max_tokens=2500)
+        # temperature=0 for maximum determinism — same data should yield same calls
+        raw_response = _call_claude(prompt, max_tokens=2500, temperature=0)
         parsed = _extract_first_json_object(raw_response)
         if parsed:
             result = json.loads(parsed)
@@ -5590,16 +5638,33 @@ def _build_trading_page(prices, eia_raw, latest_date):
             ai_trades = result.get('trades', [])
             # Validate: must be list, each entry has required keys
             if isinstance(ai_trades, list) and len(ai_trades) >= 3:
-                # Ensure all 7 instruments are present; fall back to defaults for missing ones
+                # Ensure all 8 instruments are present; fall back to defaults for missing ones
                 default_by_name = {t['trade']: t for t in default_trades}
                 ai_by_name = {t.get('trade', ''): t for t in ai_trades}
                 merged = []
                 for t in default_trades:
-                    merged.append(ai_by_name.get(t['trade'], default_by_name[t['trade']]))
+                    ai_t = ai_by_name.get(t['trade'], default_by_name[t['trade']])
+                    # Conviction threshold: require at least one confirming signal
+                    # for any non-flat call. If conviction is low and direction is
+                    # non-flat, check that technicals or inventory support it;
+                    # if nothing confirms, keep the prior call or go flat.
+                    if ai_t.get('direction', 'flat') != 'flat' and ai_t.get('conviction') == 'low':
+                        # Low conviction non-flat: check if prior call agreed
+                        prior_by_name = {p['trade']: p for p in prior_trades}
+                        prior_t = prior_by_name.get(t['trade'], {})
+                        if prior_t.get('direction', 'flat') != ai_t.get('direction'):
+                            # Prior disagreed and conviction is low — revert to prior or flat
+                            ai_t = prior_t if prior_t else default_by_name[t['trade']]
+                    merged.append(ai_t)
                 trades = merged
-        print('  trading page: AI commentary + trades generated')
+                _save_trading_cache(latest_date.strftime('%Y-%m-%d'), commentary, trades)
+        print('  trading page: AI commentary + trades generated (temperature=0, carry-forward active)')
     except Exception as e:
-        print(f'  trading page: AI generation failed ({e}), using defaults')
+        print(f'  trading page: AI generation failed ({e}), using prior cache or defaults')
+        if prior_trades:
+            trades = prior_trades
+            commentary = prior_cache.get('commentary', default_commentary)
+            print('  trading page: fell back to prior cached calls')
 
     def hist_data(key):
             h = front_history(key)
