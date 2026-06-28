@@ -25,14 +25,14 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>📈</text></svg>">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MOB · Morning Oil Brief">
-<meta property="og:title" content="Trading Calls · MOB">
+<meta property="og:title" content="Calls · MOB">
 <meta property="og:description" content="Daily trading calls — Brent/WTI spread, calendar spreads, and technical indicators for WTI, Brent, RBOB, and Heating Oil.">
 <meta property="og:url" content="https://www.morningoilbrief.com/trading">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Trading Calls · MOB">
+<meta name="twitter:title" content="Calls · MOB">
 <meta name="twitter:description" content="Brent/WTI spread, M1 vs deferred calendar spreads, and technical indicators updated daily.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trading Calls · Morning Oil Brief</title>
+<title>Calls · Morning Oil Brief</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 :root {
@@ -228,7 +228,7 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
 <nav class="top-nav" aria-label="Main navigation">
   <div class="nav-inner">
     <div class="mob-brand"><span class="mob-mark"><svg width="28" height="32" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;overflow:visible"><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="#f0b056" opacity="0.95"/><path d="M 3.2 4.6 Q 2 16 3.2 27.4 Q 14 29.6 24.8 27.4 Q 26 16 24.8 4.6 Q 14 2.4 3.2 4.6 Z" fill="none" stroke="#f0b056" stroke-width="1.2"/><ellipse cx="14" cy="4.6" rx="10.8" ry="2.2" fill="#07090d" stroke="#f0b056" stroke-width="1.1"/><path d="M 2.5 10.6 Q 14 12.4 25.5 10.6" fill="none" stroke="#07090d" stroke-width="1.1"/><path d="M 2.5 21.4 Q 14 23.2 25.5 21.4" fill="none" stroke="#07090d" stroke-width="1.1"/><text x="14" y="18.2" text-anchor="middle" fill="#07090d" font-family="'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace" font-size="6" font-weight="700" letter-spacing="0.4">OIL</text></svg></span><span class="mob-name">MOB</span><span class="mob-sep">·</span><span class="mob-tagline">Morning Oil Brief</span></div>
-    <div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="margins.html">Cracks · Prices</a><a class="nav-link" href="curves.html">Forward Curves</a><a class="nav-link" href="inventory.html">Inventories</a><a class="nav-link active" href="trading.html">Trading Calls</a><a class="nav-link" href="news.html">News</a><a class="nav-link" href="x_feed.html">X Feed</a></div>
+    <div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="margins.html">Prices</a><a class="nav-link" href="curves.html">Curves</a><a class="nav-link" href="inventory.html">Inventories</a><a class="nav-link active" href="trading.html">Calls</a><a class="nav-link" href="news.html">News</a><a class="nav-link" href="x_feed.html">X Feed</a></div>
     <button class="nav-signout" onclick="signOut()">Sign Out</button>
   </div>
 </nav>
@@ -237,7 +237,7 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
 
   <div class="header">
     <div>
-      <h1>Trading Calls</h1>
+      <h1>Calls</h1>
       <div class="subtitle">Brent/WTI spread · Calendar spreads · Technical indicators</div>
     </div>
     <div class="update-info">
@@ -246,6 +246,9 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
       Next refresh: <strong id="next-refresh">—</strong>
     </div>
   </div>
+
+  <!-- ─── AI Commentary ───────────────────────────────────────────────── -->
+  <div id="trading-commentary" style="background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:14px;font-size:13px;color:var(--muted-2);line-height:1.7;display:none"></div>
 
   <!-- ─── Section 1: Brent/WTI Spread ───────────────────────────────── -->
   <h2 class="mob-section-h">Brent / WTI Spread</h2>
@@ -353,7 +356,7 @@ function signOut() {
 
 // ── SNAPSHOT (rewritten by build_index.py each morning) ──────────
 // @@TRADING_DATA_START@@
-const SNAPSHOT = {"asOf":"June 26, 2026","pricesThru":"June 26, 2026","nextRefresh":"June 30, 2026","wtiSpark":[101.17,105.42,108.66,107.77,98.26,96.35,96.6,93.89,88.68,88.9,87.36,92.16,93.76,96.02,93.04,90.54,91.3,88.2,90.03,87.71,84.88,80.75,76.05,76.79,76.6,74.82,73.21,70.34,71.92,69.23],"brentSpark":[105.72,109.26,112.1,111.28,105.02,102.58,103.54,99.58,94.29,93.71,92.05,94.98,96.0,97.81,95.03,93.09,94.25,91.45,93.1,90.38,87.33,83.17,78.96,79.55,79.85,77.9,77.08,73.74,75.26,71.99],"rbobSpark":[],"hoSpark":[],"wtiPrice":69.23,"wtiChange":-2.69,"brentPrice":71.99,"brentChange":-3.27,"rbobPrice":2.9571,"rbobChange":-0.0714,"hoPrice":3.2082,"hoChange":-0.091,"calSpreads":{"wti":{"m1m2":0.3,"m1m3":0.63,"m1m6":1.68,"m1m12":2.84},"brent":{"m1m2":-0.61,"m1m3":-0.55,"m1m6":0.14,"m1m12":1.34},"rbob":{"m1m2":0.1312,"m1m3":0.2751,"m1m6":0.7868,"m1m12":0.5816},"ho":{"m1m2":0.106,"m1m3":0.1713,"m1m6":0.3843,"m1m12":0.5488}},"trades":[{"trade":"Brent/WTI Spread","direction":"flat","entry":"—","target":"—","stop":"—","conviction":"low","timeframe":"—","thesis":"Spread at $2.76 — watch for widening on Iran re-escalation vs narrowing if US export arb reopens"},{"trade":"WTI M1–M2","direction":"long","entry":"$0.30","target":"$0.80","stop":"$0.00","conviction":"med","timeframe":"1–2 weeks","thesis":"Cushing below operational floor; structural backwardation supported while draws continue"},{"trade":"Brent M1–M2","direction":"flat","entry":"—","target":"—","stop":"—","conviction":"low","timeframe":"—","thesis":"Front contango ($-0.61) unusual — monitor Hormuz re-escalation risk for prompt flip"},{"trade":"RBOB M1–M2","direction":"long","entry":"$0.131","target":"$0.200","stop":"$0.050","conviction":"med","timeframe":"1–3 weeks","thesis":"Peak summer demand; $0.13/gal prompt premium supported by July 4 driving season"},{"trade":"HO M1–M2","direction":"long","entry":"$0.106","target":"$0.180","stop":"$0.040","conviction":"med","timeframe":"2–4 weeks","thesis":"Distillate curve steeply backward; lean inventories and industrial demand underpin prompt"},{"trade":"WTI Outright","direction":"flat","entry":"—","target":"—","stop":"—","conviction":"low","timeframe":"—","thesis":"$69 trapped between Cushing draw support and Iran de-escalation/OPEC supply headwind"},{"trade":"RBOB Crack","direction":"long","entry":"$54.97","target":"$60.00","stop":"$50.00","conviction":"med","timeframe":"2–4 weeks","thesis":"3:2:1 crack at $58 — summer driving + low inventories = crack support; sell any demand miss"}]};
+const SNAPSHOT = {"asOf":"June 26, 2026","pricesThru":"June 26, 2026","nextRefresh":"June 29, 2026","wtiSpark":[101.17,105.42,108.66,107.77,98.26,96.35,96.6,93.89,88.68,88.9,87.36,92.16,93.76,96.02,93.04,90.54,91.3,88.2,90.03,87.71,84.88,80.75,76.05,76.79,76.6,74.82,73.21,70.34,71.92,69.23],"brentSpark":[105.72,109.26,112.1,111.28,105.02,102.58,103.54,99.58,94.29,93.71,92.05,94.98,96.0,97.81,95.03,93.09,94.25,91.45,93.1,90.38,87.33,83.17,78.96,79.55,79.85,77.9,77.08,73.74,75.26,72.6],"rbobSpark":[3.6057,3.7019,3.7607,3.6962,3.4874,3.3796,3.4539,3.2205,3.1337,3.1852,3.1267,3.0847,3.1443,3.1316,3.0383,3.0459,3.0706,3.0211,3.1099,3.1014,3.0498,2.9472,2.8805,2.9096,2.9949,2.987,2.959,2.8818,3.0273,2.8259],"hoSpark":[3.9056,4.0534,4.1145,4.1625,3.9471,3.8316,3.8878,3.7146,3.5975,3.6187,3.5373,3.6394,3.6987,3.8481,3.6738,3.5874,3.5999,3.5418,3.6126,3.5131,3.4044,3.2665,3.1702,3.1946,3.1273,3.0931,3.1546,3.1762,3.2982,3.1022],"wtiPrice":69.23,"wtiChange":-2.69,"brentPrice":72.6,"brentChange":-2.66,"rbobPrice":2.8259,"rbobChange":-0.2014,"hoPrice":3.1022,"hoChange":-0.196,"calSpreads":{"wti":{"m1m2":0.3,"m1m3":0.63,"m1m6":1.68,"m1m12":2.84},"brent":{"m1m2":0.06,"m1m3":0.25,"m1m6":1.03,"m1m12":1.95},"rbob":{"m1m2":0.1439,"m1m3":0.3972,"m1m6":0.6556,"m1m12":0.4504},"ho":{"m1m2":0.0653,"m1m3":0.1174,"m1m6":0.2783,"m1m12":0.4428}},"commentary":"WTI at $69.23/bbl, Brent at $72.60/bbl (spread $3.37/bbl). Cushing at 18,957 mb; PADD 2 crude bottom quartile (bearish). US distillate stocks bottom quartile (bearish).","trades":[{"trade":"Brent/WTI Spread","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Spread at $3.37/bbl \u2014 watch for widening on export arb or narrowing on supply normalization."},{"trade":"WTI M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Awaiting fresh EIA signal for directional entry."},{"trade":"Brent M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Monitor term structure for prompt flip."},{"trade":"RBOB M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Seasonal demand context needed for conviction."},{"trade":"HO M1\u2013M2","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Distillate inventory position unclear \u2014 watch next draw."},{"trade":"WTI Outright","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Range-bound pending macro clarity."},{"trade":"RBOB Crack","direction":"flat","entry":"\u2014","target":"\u2014","stop":"\u2014","conviction":"low","timeframe":"\u2014","thesis":"Crack spread awaiting gasoline inventory signal."}]};
 // @@TRADING_DATA_END@@
 
 // ── Helpers ──────────────────────────────────────────────────────
@@ -477,6 +480,13 @@ function buildCalCard(strip, label, value, tag, units, dec) {
   document.getElementById('prices-thru').textContent = S.pricesThru || '—';
   document.getElementById('next-refresh').textContent = S.nextRefresh || '—';
   document.getElementById('footer-date').textContent = S.pricesThru || '—';
+
+  // ── AI Commentary ──
+  const commEl = document.getElementById('trading-commentary');
+  if (commEl && S.commentary) {
+    commEl.textContent = S.commentary;
+    commEl.style.display = '';
+  }
 
   // ── Brent/WTI spread chart ──
   const spreadSpark = S.wtiSpark.map((w, i) => +(S.brentSpark[i] - w).toFixed(2));
