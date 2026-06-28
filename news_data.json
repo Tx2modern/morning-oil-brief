@@ -1,17 +1,7 @@
 {
-  "generated_at": "2026-06-28T20:16:32.207302+00:00",
+  "generated_at": "2026-06-28T20:39:35.886277+00:00",
   "cutoff_hours": 72,
   "items": [
-    {
-      "title": "The World Is Racing to Develop New Nuclear Fuels",
-      "source": "OilPrice.com",
-      "date": "Sun, 28 Jun 2026 14:00:00 -0500",
-      "datetime": "2026-06-28T14:00:00-05:00",
-      "epoch": 1782673200.0,
-      "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/The-World-Is-Racing-to-Develop-New-Nuclear-Fuels.html",
-      "description": "In the age of the nuclear renaissance, several countries are strategising to significantly increase their nuclear energy capacity over the coming decades, as part of efforts to diversify their energy mix and boost long-term energy security. However, securing fuel to power operations has been complic",
-      "category": "Energy Markets"
-    },
     {
       "title": "China Eyes a Major Opportunity in Post-War Iran",
       "source": "OilPrice.com",
@@ -21,16 +11,6 @@
       "link": "https://oilprice.com/Geopolitics/Middle-East/China-Eyes-a-Major-Opportunity-in-Post-War-Iran.html",
       "description": "Beijing is positioning itself to lead the post-war reconstruction effort in Tehran - a move analysts suggest could secure China long-term access to critical Iranian oil reserves. The diplomatic groundwork was laid during a recent meeting in New Delhi between Chinese Foreign Minister Wang Yi and the ",
       "category": "Geopolitics & Risk"
-    },
-    {
-      "title": "Executive summary \u2013 Southeast Asia Energy Outlook 2026 \u2013 Analysis - IEA \u2013 International Energy Agency",
-      "source": "IEA \u2013 International Energy Agency",
-      "date": "Sun, 28 Jun 2026 13:46:15 GMT",
-      "datetime": "2026-06-28T13:46:15+00:00",
-      "epoch": 1782654375.0,
-      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNdXA0NmV2RUkxVGNtXzVob1hvZzlVMGNUTUJWTzhSX3FLVE9yUFRvbE1lajRDM09zbWVCUlg0d0p4RmotYmFWZDI0YnBua0ZOZkNDa3gtNmJaMmVPcjVaMXhMVjZQeU5aR3MtZmRqd1RLTjFMM21KcFkzaFliYTFMaFZGWUlXRkE?oc=5",
-      "description": "",
-      "category": "Energy Markets"
     },
     {
       "title": "The $7 Trillion AI Boom Is Turning Into The Energy Trade of the Century",
@@ -63,6 +43,86 @@
       "category": "Crude Oil & OPEC"
     },
     {
+      "title": "Locked Out BP Workers Picket Outside Indiana Refinery Amid Labor Contract Dispute - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Sat, 27 Jun 2026 15:13:48 GMT",
+      "datetime": "2026-06-27T15:13:48+00:00",
+      "epoch": 1782573228.0,
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOVjNhaklVUmJfbHR5U1pBY0tycUsxbzV6NWh1OEo1eFJmaHdwVk1PNFhUdmRtNjZzeXNkUm5obnVsNG9MbGcwWjhybGd1WDlJWjM4Nml3Vy1IV09wWnZJaVNpLU1FeVlkY2IxMHlzZE9LNjNxcTNEX0RGakIzLVJsSUxoWGduVzB1SDJhWldXWVYzcUM5RV95d0M2VkRMdWItN1ozcXFETVBKbXZLa2Y2UlR3?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "Canada\u2019s LNG Exports to Hit New Levels \u2013 Resource Works - EnergyNow",
+      "source": "EnergyNow",
+      "date": "Sat, 27 Jun 2026 12:44:10 GMT",
+      "datetime": "2026-06-27T12:44:10+00:00",
+      "epoch": 1782564250.0,
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOcTBmMHByOUlmc2ZzQXJPT3gtV0lxUU9hN3ozV050ZUQ5U1ZiakhKYWt6bk9nLWsxajRleEdERmd0cHppSHhzeDRuWmpiSDNzLUo5TkFRalpZV0Q0MVJkZlJrb2lzYUtQVkVYTlVJd0xTcUp0U0oyZ0MzX2FGd2hqdzRObnpPUnlJQWc?oc=5",
+      "description": "",
+      "category": "LNG & Gas"
+    },
+    {
+      "title": "Iran War Threatens a Prolonged Hit to Global Energy Markets - EnergyNow",
+      "source": "EnergyNow",
+      "date": "Sat, 27 Jun 2026 07:59:47 GMT",
+      "datetime": "2026-06-27T07:59:47+00:00",
+      "epoch": 1782547187.0,
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQV3RPbFQzSUYtTVdYVTkyTUtwX0JsdmU0bzBPQjNBamRGajF6VG14QU1zUEdnOE9YMU4tSVhtZDY3MUtIU0FYNkhNQXZ2RkRERTkwWHZnNy1tYk9uaEpGdEdnLVNOR1hWZmRTbXVYUmVPUUJYUjJCU1F0OGY2MHh5SV80S1RLM1YxQmtGazB0ODdQRjg?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "North American Oil is in Demand as World Grasps for Supplies - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Sat, 27 Jun 2026 06:55:55 GMT",
+      "datetime": "2026-06-27T06:55:55+00:00",
+      "epoch": 1782543355.0,
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNUk9ocVhIMmJRaHhodzYyQVlVLUY2d1Zoc2pNZ21FSzRSVVNib3lvVXN6c3lRWG9IdlZkaWRmWW85M0Fzdjl5dTU1SWctUTY1SUI3a2hXR0YxcDluZmFtVXNlbTdZcHFCOW1HT2JaOVFxSXU1aEhGSkNBRmtiZ2taMWY2SnVfamdsOXpvSjJVckd1V1B6SEE?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "The Iran War Has Shattered Oil\u2019s Price Compass: Bousso - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Sat, 27 Jun 2026 06:45:59 GMT",
+      "datetime": "2026-06-27T06:45:59+00:00",
+      "epoch": 1782542759.0,
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQVVdLb2xHaUx5ZGY1cTVRdC1iMkpVTmlrdllnNl9Cc2VMSUxLclpJTkoxYzdjNllIeFhHLVhfVTAwczFYUVdnSjFOV0xCOEFjR2ZFSzlhN0lKZ0JrX0NSV0IxRG5OSnkxdm9qTHlJWDlGUVlKaVNzMzl1dGpGeldGMjlRZTdBZFB6NGNN?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "Iran War Raises Demand for US Fuel, Boosting Gulf Coast Refining Margins - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Sat, 27 Jun 2026 06:45:07 GMT",
+      "datetime": "2026-06-27T06:45:07+00:00",
+      "epoch": 1782542707.0,
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOaFBFeE9aMXltVV9yS0xqMEFpaVJGaG10NkVOa09mNTEwM1JyT1p6eEdKYkxvYnJQTWtaaUItS1hZbC1xandMZHpaV3N3Yzh4MmwzUVZPZnZyOGtjcVNlcFAxSFZSanVRcXhwOXpxR1R5M0U3NjRkV2NKODRmaUM2R05jY2RfTk15bkpKMFdTMVlQSFo3b3l5MVFIVUtPTFdZSFJtcQ?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "Oil-Gear Maker NOV Cuts Earnings Guidance as Iran War Hikes Costs and Snarls Deliveries - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Sat, 27 Jun 2026 06:44:29 GMT",
+      "datetime": "2026-06-27T06:44:29+00:00",
+      "epoch": 1782542669.0,
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQTkc4VE5VcFJuNzNERXo0bDRSdWJkMnQzcGJNUjdRdzM3bDdZYy1lRFppVWhNT0tsSnhmbnZGM2FXaEJtbzV5MlpwYUlqRFNVWnl0RE1lM1FGcEZCYlJ0WFJteS1ZZVM4SWkzY21tX09XOXBSWTNwMlhUWkhIZGdaM3lNZHVtNUhsbWxMcUdwdW5xblFoYXRWX0pSblZxbkVhVE4zVzBGRzhBUTRFaHVfNG1Wbk9UbG1zVUE?oc=5",
+      "description": "",
+      "category": "Geopolitics & Risk"
+    },
+    {
+      "title": "India Sees Qatar LNG Supply Cut After Iran Strike - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Sat, 27 Jun 2026 06:37:29 GMT",
+      "datetime": "2026-06-27T06:37:29+00:00",
+      "epoch": 1782542249.0,
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOQWtlUEpScEI3aXZTVk9wdVBPUDFKQ24ybU55X0R3WlVYR01kUTY0LVhUMjh5ZF9PUlpxbGZ0QUE0ZG9ieGlNbHNqQmxEclMxTzAwQ0FQRXJZbmdFSXNBaTlmVEVIcUJ6U1FQUlBzTUExVGlYaThsUTctLVlwaGxvNm9la3EtXzA?oc=5",
+      "description": "",
+      "category": "LNG & Gas"
+    },
+    {
       "title": "The Billion-Dollar Debt Deals Exposing an Oil Giant",
       "source": "OilPrice.com",
       "date": "Fri, 26 Jun 2026 17:00:00 -0500",
@@ -73,24 +133,114 @@
       "category": "Crude Oil & OPEC"
     },
     {
-      "title": "AI Demand, War, and Climate Pressure Push World Back To Nuclear",
-      "source": "OilPrice.com",
-      "date": "Fri, 26 Jun 2026 15:00:00 -0500",
-      "datetime": "2026-06-26T15:00:00-05:00",
-      "epoch": 1782504000.0,
-      "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/AI-Demand-War-and-Climate-Pressure-Push-World-Back-To-Nuclear.html",
-      "description": "Global energy markets are in turmoil as energy crises keep piling up. The energy-hungry AI boom, war in Iran, geopolitical instability, and climate pressures are creating a polycrisis for the global energy sector, and it\u2019s just getting started. To solve multiple overlapping crises, we will need mult",
+      "title": "US EIA Concedes Middle East Supply Disruptions are Far Worse Than Prior Estimates - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 22:49:33 GMT",
+      "datetime": "2026-06-26T22:49:33+00:00",
+      "epoch": 1782514173.0,
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPekx1eUJvRlR6akREWjF0NnFZT2RhMTRGWFV0T051cGJEYUhBR0RQWDFhOXpkbXBLTEZGaHNrc0c2VXRwV05URGRvSUZoOVRiZWhrbkVJZ0N3Sm82Sm5saWxwbUxZUzRLMGJKZFZBbms1ZkxWQU1WYk9DblJtc0RUS1JIdWFlTmZvdjJiZmZsRVN6U1NSUURRTVM2cHFRTWFGMDZNWDZJdmFDTUpWUmpVNmhHNjk?oc=5",
+      "description": "",
       "category": "Energy Markets"
     },
     {
-      "title": "The IAEA Faces a New Nuclear Puzzle Inside Iran",
-      "source": "OilPrice.com",
-      "date": "Fri, 26 Jun 2026 13:00:00 -0500",
-      "datetime": "2026-06-26T13:00:00-05:00",
-      "epoch": 1782496800.0,
-      "link": "https://oilprice.com/Energy/Energy-General/The-IAEA-Faces-a-New-Nuclear-Puzzle-Inside-Iran.html",
-      "description": "Amid an ongoing row between Washington and Tehran over whether international monitors can verify Iranian compliance with its nuclear nonproliferation commitments, former officials have told RFE/RL that the scale, scope, and degree of access are crucial to the success of inspections. Details on those",
-      "category": "Crude Oil & OPEC"
+      "title": "Oil Supply Shock to Worsen as Inventories Fall Further Even if Conflict Ends - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 22:40:34 GMT",
+      "datetime": "2026-06-26T22:40:34+00:00",
+      "epoch": 1782513634.0,
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOaGYzaXl6WlJNeU56d01FU3p5VllfZnluamp1UU5FZWF6cUwwcVp1OXlNZENmeWk2S0xveU9zbmVHWGdiU1NLV1A5UDFIU2tQbEhySmZXdlpSMkdVNS12YW96ZzhRTUVWbGVPNlJFeTRtSGJsbjRjcTFrcDJETzFrVEd2RlZrUkUyZEpfTThKMjdhNGVFaWhRWTFVSXo3SVJYdk9ZSE9DdTFnd00?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "Iran War Spurs a Surge in Stock Sales From US Shale Companies - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 22:38:41 GMT",
+      "datetime": "2026-06-26T22:38:41+00:00",
+      "epoch": 1782513521.0,
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQU0RnaWRjNG9iZXZ6aWYwQ2tTYU52Mkc2azBIdU5oXzhma09OWk1wSy1GME9OWUJicHphZUN6bHpqNDZyRkN0SW9EQzJnN190ZEx1cExZRFNFdWlIZ2M4MFhFbm1zZW44LXZiT2djYXY2NzVVRzFiZWpfbWd3Y3NSVVpGODhpd3EyaDR5N0kyLUpUMlZGS3ZF?oc=5",
+      "description": "",
+      "category": "US Production"
+    },
+    {
+      "title": "Global Energy Show: The 2026 Executive Conference Program Is Now Live - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 22:24:55 GMT",
+      "datetime": "2026-06-26T22:24:55+00:00",
+      "epoch": 1782512695.0,
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOLTNheFRPM0VtbnhDWXcwcWlTNlVwV0QwaUd5NlZ6U0tpRzhXSFdsM3hvSVdLZFpmd3pxX1lvdFUzNmJHeUhPZmRPTFVOcVFjZXBkRWtjcTBOVjA1ZGM4elJOS1hmX3lnZFp6blhjR0hJenRxeFhIVXV6V2s0WThlcHNlM3JsMzVKUEhrNmdlcjZUVWpPd3MtVVlXYXM2S1cy?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "China Imports the Most Energy, But is Best Placed on Iran: Russell - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 22:16:15 GMT",
+      "datetime": "2026-06-26T22:16:15+00:00",
+      "epoch": 1782512175.0,
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPS3VnUEVxZTVaX3ZOS1ZlcG5lbjQ4cjRhMWVjSDF1cmFabnNQS0lxWms4OVBhZVlpai05YUM3Wkk3RTVqc2pFbXh6RTlGTTlMd1BZMUFKVkN4UF9ZUzhjR3liY1RINS1VYlJkU3Q2V3kxTnFyTmI3dUxKSEZaNWpxVEltWnBtSXRwbnducm9vM1MzSnN1QlZZWU91Yw?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "US Crude and Gasoline Inventories Fell Last Week, Distillates Rose, EIA Says - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 22:14:17 GMT",
+      "datetime": "2026-06-26T22:14:17+00:00",
+      "epoch": 1782512057.0,
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNWFpNS1NCU1oxQl9sRjY5dld2MEpfMnZBNUF2M2VqeVByMC1wQ1ZfNEJ1Y2o3U2U1YlVwaTJhTG5oemhBSXlTNWZGY2R2WTB2cFJHaGRxdjkwUmliYW9ibm12V3h6dUY5eWxOVzRFeUxFMkJTejJHalpaUld5ZW9wdEM0UEJ4ZjVLNkM2b2hkVW56WWREMFRDSEZoTEMxaHRtNmZJT2tIVVM?oc=5",
+      "description": "",
+      "category": "EIA & Inventory"
+    },
+    {
+      "title": "How the Iran War Is Disrupting Global Oil and Gas Supply - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 22:13:21 GMT",
+      "datetime": "2026-06-26T22:13:21+00:00",
+      "epoch": 1782512001.0,
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPR29RUm5jb3E5SjlCOE1kS0lVY3lmVlpMWkFxUUdfTHNUUkJUNDlwbFVLeXN1RDcwRE5oNVI0NW9XVzFjaWdobF9Dalo4SWUzbk91V3M5aEhxUm1KSzNUbDc5SzlhdE5TalZTWGxiTVhzVFJUY3BZRXNrbDZBTWtqdENiNGRRZUpfc0ZpdWZCV0I?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "Americas Heavy Crude Prices Hit Multi-Year Highs as Iran Conflict Disrupts Oil Markets - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 22:11:05 GMT",
+      "datetime": "2026-06-26T22:11:05+00:00",
+      "epoch": 1782511865.0,
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQTDRWcUZSRk84dHNLcDR5M0k1M2hvd0N1RWlBS2RTM293RENIRE1lZTlCZFNLRlZ5MXZnQ3lST21IMXd6bUNRbTZPUk45MEgtVU9BYzhmWFJOWmtzNDJRd1dqTDNmUTJ4VjR3WDh2V1R0YTdWNXJHYVFDdE9EY3JKQ2p6RGJ5SnEwTkxEVkxPdDlsTC1hZDdLSk1CRFMyMUItREMwYmNDVU52cHFCaGhJdWQ2elJ0MWtR?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "US Crude Stocks Climb to Near 1-Year High as Exports and Imports Fall, EIA Says - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 21:23:36 GMT",
+      "datetime": "2026-06-26T21:23:36+00:00",
+      "epoch": 1782509016.0,
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPeE05N3ZWLXFmTi1UN1Q5N2tUcWxlT1NyWndlNjlVNlc4VndJRDc1eWlXWHUzdTRtUFVncXF3Qkp2b0lTd21keVMyMk1kem0tTTNNUUFrZmNfYlJYZzZ2N0dSdmpMM1dIelNWVlBGTkU0d3YzM3U3T0FJN3otWWNWOS1UbzVxRWNhTnE5N1dnWWlIYkNMTl9TUUJ1bWRscmp1djZOU3dsNWpXVHBIbmc?oc=5",
+      "description": "",
+      "category": "EIA & Inventory"
+    },
+    {
+      "title": "BP Locks Out Union Workers at its Midwest Refinery - Energy News, Top Headlines, Commentaries, Features & Events - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 21:12:01 GMT",
+      "datetime": "2026-06-26T21:12:01+00:00",
+      "epoch": 1782508321.0,
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQZG54VERYQkFzaG82Y005a2o4b3k2bEJUb3FqREMtODNMSml5d2xzMllLb1pRSk9icUVtWThHWWdZWlJjQi1YRjFfSnN1Y1o0VENuek1oV1pwTzJnSXd0dEFrOVdUQlJqWklUUlI1UDRvenI4c2NPTHc5dzJCR3VGcEVYbXdWSWdO?oc=5",
+      "description": "",
+      "category": "Refined Products"
+    },
+    {
+      "title": "Global Oil Supply to Plunge Below Demand This Year Due to Iran War, IEA says - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 21:11:48 GMT",
+      "datetime": "2026-06-26T21:11:48+00:00",
+      "epoch": 1782508308.0,
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNaVBlWG5DSkFCVzhjMTZxbjlfMkxvZXZwdmJrUlZEUkx2Nm8xRnJRZC0zZFhna0p6VHJ3WTFpSEpCbjN4UHBOQ25lTVNaTFh3RmtRNXl4cWpFZzVLNXJhQ0d3MHg4RHNqSWN6V1g0Q2Nhem16ZkhubU1oVjJyME1hakxRUF8xRVJuZHNGQU5NYk0zeWgzNkt4ZlFnR2hoVEVSV0VabXBNcmdBZw?oc=5",
+      "description": "",
+      "category": "Energy Markets"
     },
     {
       "title": "US Drillers Add Oil, Gas Rigs As Hormuz Transit Resumes",
@@ -103,12 +253,32 @@
       "category": "Crude Oil & OPEC"
     },
     {
+      "title": "Oil Prices Settle Slightly Higher as Optimism Around US Inflation Data Outweighs OPEC Supply Concerns - EnergyNow",
+      "source": "EnergyNow",
+      "date": "Fri, 26 Jun 2026 19:36:47 GMT",
+      "datetime": "2026-06-26T19:36:47+00:00",
+      "epoch": 1782502607.0,
+      "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNX0tLRDdiNXR5MFJWUzFqeGJHaG1mNmJRbFVSV1BoS0JBa3RPbkRQMFFuRU9iRFBBN2REclZSUU9FTHVhMWxoYUhsdjlZY2J2QmRyNmtfUFZNX3RSRkktTzlpRnNtSmRBd3czbmR0N19QNDNRbW9DSXczcjZjYzU4NHpmTEZJYXZOYTh4NXI2b2dpb0h3RXN2ZEpXRFVTT1o5STJYYjVad0FtMG5yMGRlbXFLQ2R4VDBxUkY5NUQxclhxNzlQTzl6SUxuVQ?oc=5",
+      "description": "",
+      "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Iran War Boosts US Shale Oil But Only So Much: Bousso - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 18:57:50 GMT",
+      "datetime": "2026-06-26T18:57:50+00:00",
+      "epoch": 1782500270.0,
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPNVJqcXRlenVQSDlfU1pJYmpid1BPc2V5UUViYXhac0N4ZU9zWDg4YmkwcjR5R2Mxb1Bjcmlvc21XbkYtRGg1bXBkWUlLMlhrakM1blFOSm9zMUdFSlM1TzlPTDBENDVNcVlvWEV2bFR3NlV1eEFPWFJGSV91Ny1KaUdiTkVoWmE2MEZR?oc=5",
+      "description": "",
+      "category": "US Production"
+    },
+    {
       "title": "Qatar Massing Vessels Near Ras Laffan Ahead of LNG Restart - Natural Gas Intelligence",
       "source": "Natural Gas Intelligence",
       "date": "Fri, 26 Jun 2026 17:37:34 GMT",
       "datetime": "2026-06-26T17:37:34+00:00",
       "epoch": 1782495454.0,
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPek1vSjFxRDdOQi1ZVGVqS29zTVF2N2ZsdFR5TVczb21xdjZRRVdKOGxFMjRtbXNpVDFWSEFnemZVMzRHallGTUI3VGJmeFZEMV9TRkw5WHVrQUZibnhlVmtlbWpSSm5neXdGdXd2M2wyOGVYU1lqUFEtS3RrYTY3bV9mSFZqUDQtSzAzRkxCNUNWN3V4UVZB?oc=5",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNb19Kb2FOMVRYU21tTzRseWdIa2Q3SjRDUEx1R1VBU2RrMmxzRWdFYWdKTW83a2ZjRUdlSjYtclNtMk5nVHRDdGx1UG5qZlI2N1JRZ01JcV9xdnp5aTVZcVh3NlZrUV95RmpiUm9PczVHbmNCY2JHX1JFUEhudTBzUGZFeXl0N0RYTDE0Q2ZINmoweGxtd0t1N3FpNlo?oc=5",
       "description": "",
       "category": "LNG & Gas"
     },
@@ -121,6 +291,36 @@
       "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5FQzFQVGtCaXFQNGRNNGN4SGNob0lWdEViRnV0SGZFX0xUNWNrOUlJUkplT2hLdV9kWnV3bnVTbnNHMWw2cHBham1SRkQtLTBxdFI5dXIxQ0RVZzNJM081UnFR?oc=5",
       "description": "",
       "category": "Crude Oil & OPEC"
+    },
+    {
+      "title": "Canada\u2019s Oil Vulnerability Exposed: No SPR and Pipeline Bottlenecks - Tammy Nemeth: The Nemeth Report - EnergyNow",
+      "source": "EnergyNow",
+      "date": "Fri, 26 Jun 2026 14:18:13 GMT",
+      "datetime": "2026-06-26T14:18:13+00:00",
+      "epoch": 1782483493.0,
+      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPUzFEaEV4NlJvTUpQWHhTbm9RWTJoOUhfV0ZJazRkYWtfQzdWRFl6c0pBXzBJOXZzeTBaX2J3QWVCdjRkWW4tQXFBaWNYbjhfY3I1NW5icHBJTC1CY0k1eFVOZ0QybTNRM0pRUW1JNE5yakVaZWxBWkF2ak82S0RiSExwSFB0VndJUjhtLUI3S0t4QXhJeFRkbENEN2hjckFHdVlHRzRvbnJSSHVjbzZfOHdVeWYtNzJyMVkwRVlIREJuZUVK?oc=5",
+      "description": "",
+      "category": "LNG & Gas"
+    },
+    {
+      "title": "U.S. Shale Drillers Seen Lifting Crude Output on Hormuz-Driven Price Rally - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 13:47:35 GMT",
+      "datetime": "2026-06-26T13:47:35+00:00",
+      "epoch": 1782481655.0,
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPb3NHdFRIaUtTZ3lDY2JFMVJsV2UwZ0cyRVh5MlZFaGc4dVZRN3hqaEMwRk9KTmRRN3VVX2huVGxWdDhVdENtYk5uUnpHVjdPVjBZbDNVVklDSEFxQnB3VzJNR2RIOFcxcUpLbzRrYTlmWG5WY2RsemZrT2N1XzhmWE1nb2ZZSnd2azFkdGZwdy1Ta3hKREpxXzVST0JKZjRVWVNjaVh3RQ?oc=5",
+      "description": "",
+      "category": "US Production"
+    },
+    {
+      "title": "While Asia and Europe Scramble for Natural Gas, the US Glut Has Nowhere to Go - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Fri, 26 Jun 2026 12:46:35 GMT",
+      "datetime": "2026-06-26T12:46:35+00:00",
+      "epoch": 1782477995.0,
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQR0NqbzFZdzY2b2wzLTV2emVwQjJzT05rLWdwVVNzYXJWYzdBejJtVjNtTjdRcGg1dFhfVVVUWlQxRGFFNGZoNWp0YzJRVWlPV1dXYU8zSEdtUVV4WkxUY0VReDBUbDU0NFl4X3RmM3ByVWltVXliay12STItUDI1aW5sbk10ZU9UcUdjX3hTWm4ya2FrdTdjbE5Rb3VPMmVjdFVWX1NvejZfMFE?oc=5",
+      "description": "",
+      "category": "LNG & Gas"
     },
     {
       "title": "Hormuz oil shock echoes 1973 embargo lessons - Reuters",
@@ -143,12 +343,42 @@
       "category": "Crude Oil & OPEC"
     },
     {
+      "title": "Trump's Iran oil sanction waiver set to squeeze China's teapot refiners - Nikkei Asia",
+      "source": "Nikkei Asia",
+      "date": "Fri, 26 Jun 2026 05:36:00 GMT",
+      "datetime": "2026-06-26T05:36:00+00:00",
+      "epoch": 1782452160.0,
+      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQclFSV1ZrNjl2bDI3ZjRvYTlOQi1CYW8yS3ZOYl9HbXE5MHl1SEhXLXB6WmtpT2ZEd0ZVY18wUEtmNGpQN0diSVM4aFI2eGNUVXJfemNzWEt3U3BZNEpkNjlaT0JrQlVaYU9LUzNTOWtrRHNTVzdDbUJmNGFOTXZFblEtOU13akgzSnNUSjNHRFdGUXRkSWhoZ2gwNWs0d0dydnZMYlRaUEpSa0V5anFKTmJlWWZmU3Iyek5kY1ZZYW1CNGVWVTNF?oc=5",
+      "description": "",
+      "category": "Refining"
+    },
+    {
       "title": "Spot Crude Market Cracks as Gulf Barrels Meet Sluggish Demand - Energy Intelligence",
       "source": "Energy Intelligence",
       "date": "Thu, 25 Jun 2026 21:33:07 GMT",
       "datetime": "2026-06-25T21:33:07+00:00",
       "epoch": 1782423187.0,
       "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5OZHIxM1lhQkRraXlheGwtYThBMExIQTVtdWRLOGRSbE1lb3VWaHV4d2VNaU41WC1vX1Z0Z2F5LWRIY1RUUG9HNmpYSmJzLTRGOV9YeEVXUGVpYUhtZDhZS1dLUXZUWHM3cldLRkxSUEk0Zw?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "Iran War Upends IEA\u2019s Oil Market Outlook as Global Supply and Demand to Contract in 2026 - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Thu, 25 Jun 2026 22:32:29 GMT",
+      "datetime": "2026-06-25T22:32:29+00:00",
+      "epoch": 1782426749.0,
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPak5XcGxWUXBlNVhTbFd3RkFvM2dzMUdvcm84a3Nzc2hxLVJYMU1zOHBsYlY0eV90Z2NlY0xDajNSdUxweFJ6WVprRjNzOHVrT0cwbXM0LUZvRHRmdF9VMEN0NUZpZ1VjYjFNeEdiSHZ1SHpyZ2otTVhyLXVsb09yVm1NUUhQM2dMMUNkQjFCalh1a2Y3bjlqX1ZNOHFVRDM5Ylh2clBwd0JmTUFtcmZUeUUyRnhsRXNjeUE?oc=5",
+      "description": "",
+      "category": "Energy Markets"
+    },
+    {
+      "title": "War in Iran is Reshaping the Global Gas Market for Years to Come - EnergyNow.com",
+      "source": "EnergyNow.com",
+      "date": "Thu, 25 Jun 2026 22:03:39 GMT",
+      "datetime": "2026-06-25T22:03:39+00:00",
+      "epoch": 1782425019.0,
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPcW1paWh6ck5qZW1iZE5pWGwtdmRJMXBHdm4yQ01NQTUzTjlDZFJsLUt5dmhzYVNCejViZ0wzWDFpTzRQcXBSWHg5TXFQYmtOTk1DVWs5M1NQb3ZwaENMWHFrY2xhN0VSSnRSVkNwSXBFSFRYcFpTb1VnMjRkYkZacVRWZC14RTdqZzN0NDlpNURRLUlTTWhERVZadw?oc=5",
       "description": "",
       "category": "Energy Markets"
     }
