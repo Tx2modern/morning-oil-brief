@@ -2582,22 +2582,8 @@ def _build_landing_page(raw, kpi_data, narratives, latest_date, prices=None, new
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){{{{
-  var ok=false;
-  try {{{{
-    for(var i=0;i<localStorage.length;i++){{{{
-      var k=localStorage.key(i);
-      if(k&&k.startsWith('sb-')&&k.endsWith('-auth-token')){{{{
-        var d=JSON.parse(localStorage.getItem(k));
-        if(d&&d.access_token&&d.expires_at>Date.now()/1000){{{{ok=true;break;}}}}
-        if(d&&d.refresh_token){{{{ok=true;break;}}}}
-      }}}}
-    }}}}
-  }}}}catch(e){{{{}}}}
-  if(!ok){{{{sessionStorage.setItem('mob_redirect',window.location.href);window.location.replace('login.html');}}}}
-}})();
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>(function(){{var sb=supabase.createClient('https://ohagroxyqkoygxdkbjvn.supabase.co','sb_publishable_B88mNC5uZLnWjVqShctogg_wDh8QgEw');sb.auth.getSession().then(function(r){{if(!r.data.session){{sessionStorage.setItem('mob_redirect',window.location.href);window.location.replace('login.html');}}}}); }})()</script>
 <meta name="description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
 <meta name="theme-color" content="#07090d">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://mob-chat.brad-95b.workers.dev;">
