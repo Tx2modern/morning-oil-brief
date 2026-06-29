@@ -2,22 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){{
-  var ok=false;
-  try {{
-    for(var i=0;i<localStorage.length;i++){{
-      var k=localStorage.key(i);
-      if(k&&k.startsWith('sb-')&&k.endsWith('-auth-token')){{
-        var d=JSON.parse(localStorage.getItem(k));
-        if(d&&d.access_token&&d.expires_at>Date.now()/1000){{ok=true;break;}}
-        if(d&&d.refresh_token){{ok=true;break;}}
-      }}
-    }}
-  }}catch(e){{}}
-  if(!ok){{sessionStorage.setItem('mob_redirect',window.location.href);window.location.replace('login.html');}}
-}})();
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>(function(){var sb=supabase.createClient('https://ohagroxyqkoygxdkbjvn.supabase.co','sb_publishable_B88mNC5uZLnWjVqShctogg_wDh8QgEw');sb.auth.getSession().then(function(r){if(!r.data.session){sessionStorage.setItem('mob_redirect',window.location.href);window.location.replace('login.html');}});})()</script>
 <meta name="description" content="Daily trading calls — Brent/WTI spread, calendar spreads, and technical indicators for WTI, Brent, RBOB, and Heating Oil.">
 <meta name="theme-color" content="#07090d">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://mob-chat.brad-95b.workers.dev;">
@@ -117,11 +103,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sa
 .spread-context-table td { color: var(--text); }
 .spread-context-table td.pos { color: #4ade80; font-weight: 500; }
 .spread-context-table td.neg { color: #f87171; font-weight: 500; }
-.trade-table-wrap { overflow-y: auto; max-height: 480px; border-radius: 0 0 8px 8px; }
-.trade-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.trade-table-wrap { border-radius: 0 0 8px 8px; }
+.trade-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; table-layout: fixed; }
+.trade-table col.col-trade     { width: 13%; }
+.trade-table col.col-direction { width: 8%; }
+.trade-table col.col-entry     { width: 6%; }
+.trade-table col.col-target    { width: 6%; }
+.trade-table col.col-stop      { width: 6%; }
+.trade-table col.col-conv      { width: 8%; }
+.trade-table col.col-time      { width: 9%; }
+.trade-table col.col-thesis    { width: 44%; }
 .trade-table thead { position: sticky; top: 0; z-index: 2; }
 .trade-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: #e4e7ec; font-weight: 700; padding: 9px 10px; background: #2a2d38; border-bottom: 2px solid var(--accent); text-align: left; white-space: nowrap; }
-.trade-table td { padding: 8px 10px; border-bottom: 1px solid var(--border-soft); color: var(--text); vertical-align: middle; }
+.trade-table td { padding: 8px 10px; border-bottom: 1px solid var(--border-soft); color: var(--text); vertical-align: top; }
+.trade-table td.td-thesis { font-size: 12px; line-height: 1.6; color: var(--muted-2); }
 .trade-table tr:last-child td { border-bottom: none; }
 .trade-market-read { font-size: 12px; color: var(--muted-2); line-height: 1.7; padding: 10px 14px; background: var(--panel-2); border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; display: none; }
 .trade-market-read .mr-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-right: 8px; }
@@ -338,6 +333,16 @@ footer { margin-top: 56px !important; padding-top: 18px !important; border-top: 
     <div class="trade-market-read" id="trade-market-read"><span class="mr-label">Market Read</span><span id="trade-market-read-text"></span></div>
     <div class="trade-table-wrap">
       <table class="trade-table">
+        <colgroup>
+          <col class="col-trade">
+          <col class="col-direction">
+          <col class="col-entry">
+          <col class="col-target">
+          <col class="col-stop">
+          <col class="col-conv">
+          <col class="col-time">
+          <col class="col-thesis">
+        </colgroup>
         <thead>
           <tr>
             <th>Trade</th>
@@ -465,7 +470,7 @@ function buildCalCard(strip, label, value, tag, units, dec) {
         <td>${t.stop}</td>
         <td class="${convCls}">${convLabel}</td>
         <td style="color:var(--muted-2)">${t.timeframe}</td>
-        <td style="color:var(--muted-2);font-size:11px;max-width:260px">${t.thesis}</td>
+        <td class="td-thesis">${t.thesis}</td>
       </tr>`;
     }).join('');
   }
