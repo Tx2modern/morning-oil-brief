@@ -429,9 +429,13 @@
       pendingRecovery = true;
       switchTab('newpassword');
     } else if (event === 'SIGNED_IN' && session && !pendingRecovery) {
-      window.location.href = DASHBOARD_URL;
+      var dest = sessionStorage.getItem('mob_redirect') || DASHBOARD_URL;
+      sessionStorage.removeItem('mob_redirect');
+      window.location.href = dest;
     } else if (event === 'INITIAL_SESSION' && session && !pendingRecovery) {
-      window.location.href = DASHBOARD_URL;
+      var dest = sessionStorage.getItem('mob_redirect') || DASHBOARD_URL;
+      sessionStorage.removeItem('mob_redirect');
+      window.location.href = dest;
     }
   });
 
@@ -522,7 +526,11 @@
     btn.disabled = true;
     btn.textContent = 'Creating account…';
 
-    const { error } = await sb.auth.signUp({ email, password: pw });
+    const { error } = await sb.auth.signUp({
+      email,
+      password: pw,
+      options: { emailRedirectTo: window.location.origin + '/login.html' }
+    });
 
     if (error) {
       showAlert(error.message);
