@@ -2591,10 +2591,11 @@ def _build_landing_page(raw, kpi_data, narratives, latest_date, prices=None, new
       if(k&&k.startsWith('sb-')&&k.endsWith('-auth-token')){{{{
         var d=JSON.parse(localStorage.getItem(k));
         if(d&&d.access_token&&d.expires_at>Date.now()/1000){{{{ok=true;break;}}}}
+        if(d&&d.refresh_token){{{{ok=true;break;}}}}
       }}}}
     }}}}
   }}}}catch(e){{{{}}}}
-  if(!ok)window.location.replace('login.html');
+  if(!ok){{{{sessionStorage.setItem('mob_redirect',window.location.href);window.location.replace('login.html');}}}}
 }})();
 </script>
 <meta name="description" content="Daily petroleum intelligence — WTI settlement, crack spreads, inventory draws, and AI market analysis. Updated each morning.">
