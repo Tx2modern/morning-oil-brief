@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T17:46:03Z",
+  "lastUpdated": "2026-07-01T00:16:36Z",
   "posts": [
     {
       "id": "2071839987511734368",
@@ -9,11 +9,11 @@
         "category": "News"
       },
       "text": "Morgan Stanley nails it: \n\n\u201c\u2026 Strip away the narrative for a moment and read only the [oil] prices. They describe a market that has weakened across the board\u2026\u201d",
-      "summary": "According to Morgan Stanley's analysis cited by Blas, oil prices across the board are signaling market weakness rather than supporting bullish narratives. The price action indicates broad-based deterioration in oil market conditions.",
+      "summary": "Oil prices are declining across the board, indicating broad market weakness rather than localized supply disruptions or demand concerns. Morgan Stanley's analysis suggests the price movements themselves tell a clearer story of overall market deterioration than prevailing narratives about the sector.",
       "createdAt": "2026-06-30T06:15:20.000Z",
-      "likeCount": 598,
-      "retweetCount": 61,
-      "replyCount": 48
+      "likeCount": 661,
+      "retweetCount": 68,
+      "replyCount": 50
     },
     {
       "id": "2071755992392507712",
@@ -23,39 +23,53 @@
         "category": "News"
       },
       "text": "Unfortunately for Trump, while obviously connected, crude oil (white line, $/bbl) and gasoline (blue, \u00a2/gal) are actually different commodities.\n\nCrude market currently loose (yep, temporarily, surprising but true), but gasoline near its tightest ever relative to crude. https://t.co/1pHO9ctTW0",
-      "summary": "While crude oil prices are currently loose (ample supply), gasoline prices are near historically tight levels relative to crude, meaning the refining margin between the two commodities has widened significantly. This disconnect suggests that gasoline prices remain elevated despite softer crude markets, likely due to constraints in refining capacity or gasoline supply.",
+      "summary": "The crude oil market is currently oversupplied while gasoline prices remain unusually high relative to crude oil costs, indicating tight refining capacity or supply constraints in the gasoline market specifically.",
       "createdAt": "2026-06-30T00:41:34.000Z",
-      "likeCount": 588,
-      "retweetCount": 68,
-      "replyCount": 30
+      "likeCount": 637,
+      "retweetCount": 80,
+      "replyCount": 31
     },
     {
-      "id": "2071667084023521397",
+      "id": "2072012991394898122",
       "author": {
         "name": "Javier Blas",
         "userName": "JavierBlas",
         "category": "News"
       },
-      "text": "Both the American and the Iranian delegations have decided to visit Doha at the same time of a very sunny day of the Persian Gulf summer. Truly, a coincidence this all happened. https://t.co/k62BjfiI5L",
-      "summary": "The post suggests U.S. and Iranian delegations meeting simultaneously in Doha, implying potential diplomatic negotiations that could affect oil markets given Iran's role as a major oil producer.",
-      "createdAt": "2026-06-29T18:48:17.000Z",
-      "likeCount": 433,
-      "retweetCount": 58,
+      "text": "Another awfully weak trading day in the physical oil windows. Even after sellers offered the largest ever discounts for some WAF crudes, buyers are not emerging. In the North Sea, physical premia for some grades hit a fresh 6-year low.",
+      "summary": "Physical crude oil markets are experiencing severe weakness, with West African producers offering record discounts and North Sea grades hitting six-year low premiums while buyer demand remains absent. The deteriorating market conditions suggest weakening global oil demand or oversupply pressures in these key trading windows.",
+      "createdAt": "2026-06-30T17:42:47.000Z",
+      "likeCount": 364,
+      "retweetCount": 34,
+      "replyCount": 33
+    },
+    {
+      "id": "2072011769740997078",
+      "author": {
+        "name": "Tanker Trackers",
+        "userName": "tankertrackers",
+        "category": "Flows & Tracking"
+      },
+      "text": "Iran has exported 50 million barrels of crude oil since the US-imposed blockade was lifted two weeks ago. This equates to 1.66 million barrels per day for June 2026. Most other countries in the region are still nowhere near pre-war levels.\n\n#OOTT #IranWar #Tankers https://t.co/FJb70n0lbx",
+      "summary": "Iran has rapidly ramped up crude oil exports to 1.66 million barrels per day following the lifting of a US blockade, while regional competitors remain below pre-war production levels. This supply increase could influence global oil market dynamics and potentially ease supply constraints in the region.",
+      "createdAt": "2026-06-30T17:37:56.000Z",
+      "likeCount": 350,
+      "retweetCount": 102,
       "replyCount": 23
     },
     {
-      "id": "2071728479192612968",
+      "id": "2071973848371576964",
       "author": {
-        "name": "Reuters Venezuela",
-        "userName": "ReutersVzla",
+        "name": "Rory Johnston",
+        "userName": "Rory_Johnston",
         "category": "News"
       },
-      "text": "Venezuela's Machado says she will return to Venezuela to help quake victims https://t.co/nTWvgbqR7c",
-      "summary": "Machado's stated intention to return to Venezuela has limited direct oil market implications based on the information provided. The announcement focuses on humanitarian earthquake relief efforts rather than energy policy or production matters.",
-      "createdAt": "2026-06-29T22:52:14.000Z",
-      "likeCount": 272,
-      "retweetCount": 81,
-      "replyCount": 14
+      "text": "Tanker capacity entering the Gulf (East-to-West Hormuz transits) is running ahead of expectations, at least thus far.\n\nI'm seeing 8 confirmed VLCC entries yesterday alone. \n\nTrailing 10-day average sitting around ~10 MMbpd.\n\nWe'll soon see if this is sustainable, or just an early https://t.co/OpiE2gfjXh",
+      "summary": "Large tanker flows into the Persian Gulf are exceeding prior forecasts, with a 10-day average around 10 million barrels per day, though sustainability remains uncertain. The higher-than-expected throughput could signal stronger oil demand or supply adjustments, but Johnston indicates this surge may not persist.",
+      "createdAt": "2026-06-30T15:07:15.000Z",
+      "likeCount": 273,
+      "retweetCount": 43,
+      "replyCount": 27
     },
     {
       "id": "2071858615695077457",
@@ -65,25 +79,11 @@
         "category": "Analysts & Traders"
       },
       "text": "Gold's rebound above USD 4,000 appears to reflect a combination of short covering after the break below last week's low at USD 3,960 failed to attract sustained follow-through selling, together with some bottom fishing as energy prices continue to ease amid the risk of a https://t.co/RndooCbUyV",
-      "summary": "Gold's rebound above $4,000 is partly attributed to easing energy prices, which suggests declining oil demand amid unspecified economic risks. The post implies a potential inverse relationship between oil prices and gold, though the specific oil market implications are incomplete in the visible text.",
+      "summary": "Gold's rebound above $4,000 is partly attributed to easing energy prices, suggesting a potential softening in the oil market. The text indicates this price relief may be connected to recession risk, though the specific details are cut off in the incomplete post.",
       "createdAt": "2026-06-30T07:29:21.000Z",
-      "likeCount": 238,
-      "retweetCount": 36,
+      "likeCount": 271,
+      "retweetCount": 39,
       "replyCount": 4
-    },
-    {
-      "id": "2071668535835726234",
-      "author": {
-        "name": "Rory Johnston",
-        "userName": "Rory_Johnston",
-        "category": "News"
-      },
-      "text": "Over the past two weeks, the volume of oil on water stuck in the Persian Gulf has fallen by ~60 million barrels, an average pace of roughly 4.3 MMbpd.\n\nThat's roughly half the Hormuz exits we've realized over the same period, with the other half coming from fresh loadings.",
-      "summary": "Oil inventory in the Persian Gulf has declined sharply over the past two weeks at a pace of 4.3 million barrels per day, accounting for half of recent crude exports through the Strait of Hormuz, while new production loadings make up the other half.",
-      "createdAt": "2026-06-29T18:54:03.000Z",
-      "likeCount": 224,
-      "retweetCount": 20,
-      "replyCount": 14
     },
     {
       "id": "2071942171335242151",
@@ -93,39 +93,25 @@
         "category": "Retail Fuel"
       },
       "text": "Which experts? The debate wasn't whether oil would stay high after the conflict- it was whether the conflict would significantly disrupt supply. Once that risk faded, lower oil prices were a perfectly reasonable expectation. https://t.co/Ne0BgvqZ3x",
-      "summary": "Patrick De Haan clarifies that the original debate about oil prices centered on whether a conflict would disrupt supply, not on whether prices would remain elevated, and argues that lower oil prices became a reasonable expectation once supply disruption risks diminished.",
+      "summary": "Patrick De Haan clarifies that the debate about oil prices following a conflict centered on whether supply disruptions would occur, not on prices remaining permanently elevated. Once supply disruption risks diminished, lower oil prices became an expected market outcome rather than an expert failure.",
       "createdAt": "2026-06-30T13:01:23.000Z",
-      "likeCount": 182,
-      "retweetCount": 15,
-      "replyCount": 23
+      "likeCount": 205,
+      "retweetCount": 16,
+      "replyCount": 24
     },
     {
-      "id": "2071666784340759016",
+      "id": "2072069364665180263",
       "author": {
         "name": "Tracy Shuchart",
         "userName": "chigrl",
         "category": "Analysts & Traders"
       },
-      "text": "Lets see if they step up oil purchases as well now that prices have retreated&gt;\n\nChina is expected to have bought about 5.29 million tons of the super-chilled fuel this month, according to Kpler, which tracks shipping data. \n\nThis comes as the world\u2019s biggest importer steps up https://t.co/rWRkTyUWxA",
-      "summary": "China is expected to purchase approximately 5.29 million tons of liquefied natural gas this month as the world's largest importer increases its purchases amid retreating fuel prices. The observation raises the question of whether China will similarly increase its oil purchases now that prices have declined.",
-      "createdAt": "2026-06-29T18:47:05.000Z",
-      "likeCount": 170,
-      "retweetCount": 23,
-      "replyCount": 0
-    },
-    {
-      "id": "2071682688847581269",
-      "author": {
-        "name": "Patrick De Haan",
-        "userName": "GasBuddyGuy",
-        "category": "Retail Fuel"
-      },
-      "text": "The price cycles today in Florida and Michigan are absolutely wild to me and nearly impossible to justify with retail prices over $1/gal higher than spot/wholesale price. Though taxes, transportation, etc need to be added, this is a very lofty mark and is extremely frustrating.",
-      "summary": "Patrick De Haan highlights that retail gas prices in Florida and Michigan are significantly elevated relative to wholesale prices, with markups exceeding what can be reasonably explained by taxes and transportation costs, suggesting potential market inefficiencies or pricing pressures in those regions.",
-      "createdAt": "2026-06-29T19:50:17.000Z",
-      "likeCount": 159,
+      "text": "Europeans choosing to sweat through 40\u00b0 C heat  because they believe AC destroys the planet, is hilariously out of date. Refrigerant panic is a generation beyond us. EVEN Texas runs its AC on 30 percent wind and solar.",
+      "summary": "# Oil Market Implications Summary\n\nThe post argues that environmental concerns about air conditioning are outdated, citing Texas's renewable energy usage as evidence that AC cooling can be powered sustainably. This suggests reduced future oil demand for electricity generation in regions adopting similar renewable-heavy power grids.",
+      "createdAt": "2026-06-30T21:26:48.000Z",
+      "likeCount": 147,
       "retweetCount": 9,
-      "replyCount": 12
+      "replyCount": 4
     },
     {
       "id": "2071893688016372212",
@@ -135,10 +121,10 @@
         "category": "Analysts & Traders"
       },
       "text": "India Plans to Add Strategic Fuel Reserves After Iran War Shock\n\nIndia plans to build strategic reserves of crude, liquefied petroleum gas and liquefied natural gas large enough to meet as much as a month of domestic demand, as the country seeks to avoid a repeat of the supply",
-      "summary": "India is planning to expand its strategic fuel reserves to cover up to a month of domestic demand for crude oil, LPG, and LNG, signaling heightened concerns about potential supply disruptions from regional geopolitical tensions. This reserve buildup could increase global demand for energy commodities and reflect growing risks to oil supply chains in the Asia-Pacific region.",
+      "summary": "India is planning to significantly expand its strategic energy reserves to cover up to one month of domestic demand for crude oil, LPG, and LNG, aiming to insulate itself from supply disruptions. This move signals growing concerns about energy security risks and could increase global demand for storage infrastructure and crude oil purchases.",
       "createdAt": "2026-06-30T09:48:43.000Z",
-      "likeCount": 107,
-      "retweetCount": 21,
+      "likeCount": 122,
+      "retweetCount": 26,
       "replyCount": 3
     },
     {
@@ -149,39 +135,39 @@
         "category": "Official"
       },
       "text": ".@SecretaryWright on the success of President Trump\u2019s Working Families Tax Cuts:\n\n\u201cIn that fantastic piece of legislation we passed last summer, we cut $550 billion of energy subsidies, over a half $1 trillion of energy subsidies that have been there for decades.\" https://t.co/SfbQuiBY5z",
-      "summary": "# Oil Market Implications\n\nThe Department of Energy reports that the Working Families Tax Cuts legislation eliminated $550 billion in energy subsidies that had been in place for decades, which could reduce government support for various energy sectors including oil and gas.",
+      "summary": "Secretary Wright stated that recent tax legislation cut $550 billion in energy subsidies that had been in place for decades, which could reduce government support for energy production. The specific oil market implications of this subsidy reduction are not detailed in the statement provided.",
       "createdAt": "2026-06-30T15:33:05.000Z",
-      "likeCount": 73,
-      "retweetCount": 28,
-      "replyCount": 9
-    },
-    {
-      "id": "2071747571668914374",
-      "author": {
-        "name": "Reuters Venezuela",
-        "userName": "ReutersVzla",
-        "category": "News"
-      },
-      "text": "Survivors decry slow aid after deadly Venezuela quakes https://t.co/V8ScuLy7vx",
-      "summary": "Survivors decry slow aid after deadly Venezuela quakes https://t.co/V8ScuLy7vx",
-      "createdAt": "2026-06-30T00:08:06.000Z",
-      "likeCount": 63,
+      "likeCount": 115,
       "retweetCount": 32,
-      "replyCount": 5
+      "replyCount": 13
     },
     {
-      "id": "2071893291335893034",
+      "id": "2071945419672711176",
       "author": {
-        "name": "Ole Hansen",
-        "userName": "Ole_S_Hansen",
-        "category": "Analysts & Traders"
+        "name": "Patrick De Haan",
+        "userName": "GasBuddyGuy",
+        "category": "Retail Fuel"
       },
-      "text": "#Commodities in Q2-2026 https://t.co/G7nKidntrB",
-      "summary": "I can see Ole Hansen posted about commodities in Q2-2026, but the text provided doesn't contain substantive details about oil market implications\u2014only a headline and link. To provide an accurate summary of the oil market outlook, I would need access to the actual content of the post.",
-      "createdAt": "2026-06-30T09:47:09.000Z",
-      "likeCount": 47,
-      "retweetCount": 12,
-      "replyCount": 2
+      "text": "Ukrainian attacks on Russian refiners are increasingly accurate, knocking down refining capacity and cutting exports and making Russia import, putting global pressure on refined products. plus a massive heat wave in the US, but the Prez has a dececnt point on retail prices. https://t.co/z0q0cfNkFd",
+      "summary": "Ukrainian strikes on Russian refineries are reducing Russia's refining capacity and exports while forcing imports, which is increasing global pressure on refined product prices; additionally, a U.S. heat wave is contributing to upward pressure on retail fuel prices.",
+      "createdAt": "2026-06-30T13:14:17.000Z",
+      "likeCount": 97,
+      "retweetCount": 6,
+      "replyCount": 3
+    },
+    {
+      "id": "2072063127005307111",
+      "author": {
+        "name": "US Dept of Energy",
+        "userName": "ENERGY",
+        "category": "Official"
+      },
+      "text": "President Trump\u2019s Working Families Tax Cuts Act is allowing America to DRILL, BABY, DRILL! https://t.co/9OGTpGhchj",
+      "summary": "The Department of Energy's post indicates that the Working Families Tax Cuts Act is being promoted as enabling increased domestic oil drilling activity. Without access to the linked content, the specific market implications cannot be determined from the text alone.",
+      "createdAt": "2026-06-30T21:02:01.000Z",
+      "likeCount": 80,
+      "retweetCount": 18,
+      "replyCount": 7
     },
     {
       "id": "2071975067269968105",
@@ -193,79 +179,51 @@
       "text": "The 250-year history of U.S. energy consumption https://t.co/yar1sSUeh6. #TodayInEnergy #4thofJuly https://t.co/JJYfsdRw7v",
       "summary": "The 250-year history of U.S. energy consumption https://t.co/yar1sSUeh6. #TodayInEnergy #4thofJuly https://t.co/JJYfsdRw7v",
       "createdAt": "2026-06-30T15:12:06.000Z",
-      "likeCount": 34,
-      "retweetCount": 14,
-      "replyCount": 2
-    },
-    {
-      "id": "2072011769740997078",
-      "author": {
-        "name": "Tanker Trackers",
-        "userName": "tankertrackers",
-        "category": "Flows & Tracking"
-      },
-      "text": "Iran has exported 50 million barrels of crude oil since the US-imposed blockade was lifted two weeks ago. This equates to 1.66 million barrels per day for June 2026. Most other countries in the region are still nowhere near pre-war levels.\n\n#OOTT #IranWar #Tankers https://t.co/FJb70n0lbx",
-      "summary": "Iran has rapidly increased crude oil exports to 1.66 million barrels per day following the lifting of a US blockade, while regional competitors remain below pre-war production levels, potentially shifting global oil supply dynamics.",
-      "createdAt": "2026-06-30T17:37:56.000Z",
-      "likeCount": 32,
-      "retweetCount": 9,
-      "replyCount": 6
-    },
-    {
-      "id": "2071730487635083755",
-      "author": {
-        "name": "Oil and Energy",
-        "userName": "OilandEnergy",
-        "category": "News"
-      },
-      "text": "The Hormuz crisis has sparked a global race to build strategic oil reserves. China\u2019s estimated 1 billion-barrel stockpile helped cushion the supply shock, while the IEA, India, and other importers now face a massive refill and expansion effort. #Oil #EnergySecurity #OPEC",
-      "summary": "China's substantial strategic oil reserve of an estimated 1 billion barrels provided a buffer against supply disruptions from the Hormuz crisis, prompting the IEA, India, and other oil importers to accelerate their own reserve expansion efforts. This global push to build strategic stockpiles reflects growing concerns about energy security in response to regional supply risks.",
-      "createdAt": "2026-06-29T23:00:13.000Z",
-      "likeCount": 30,
-      "retweetCount": 11,
+      "likeCount": 56,
+      "retweetCount": 29,
       "replyCount": 3
     },
     {
-      "id": "2071984422174220735",
+      "id": "2071895428019204342",
       "author": {
-        "name": "Giovanni Staunovo",
-        "userName": "staunovo",
+        "name": "Reuters Venezuela",
+        "userName": "ReutersVzla",
+        "category": "News"
+      },
+      "text": "Venezuela health system strained after earthquakes, WHO says https://t.co/PdKYlio2Bc",
+      "summary": "I can only see the headline from the Reuters post, which states that Venezuela's health system is strained following earthquakes according to the WHO. The headline alone does not contain information about oil market implications, so I cannot provide a summary based on the text provided.",
+      "createdAt": "2026-06-30T09:55:38.000Z",
+      "likeCount": 51,
+      "retweetCount": 26,
+      "replyCount": 10
+    },
+    {
+      "id": "2071893291335893034",
+      "author": {
+        "name": "Ole Hansen",
+        "userName": "Ole_S_Hansen",
         "category": "Analysts & Traders"
       },
-      "text": "US crude production was at 13.934mbpd in April vs 13.718mbpd in March (revised from 13.696)\nm/m changes in kbpd\n\nUS +216\n\nGulf of America/Mexico +119\nNew Mexico +65\nTexas +36\nNorth Dakota +8\nOhio +6\nOklahoma -12\n\nEIA #oott https://t.co/i2NA2IFwLe",
-      "summary": "US crude oil production increased by 216,000 barrels per day in April to reach 13.934 million barrels per day, driven primarily by gains in the Gulf of Mexico and New Mexico, signaling continued domestic supply growth. The month-over-month expansion reflects ongoing production increases across major US oil-producing regions, with only Oklahoma showing a decline among the tracked areas.",
-      "createdAt": "2026-06-30T15:49:16.000Z",
-      "likeCount": 28,
-      "retweetCount": 3,
-      "replyCount": 1
-    },
-    {
-      "id": "2071948413105565878",
-      "author": {
-        "name": "Tom Kloza",
-        "userName": "TomKloza",
-        "category": "Retail Fuel"
-      },
-      "text": "Chatter in oil trading circles indicates that Monroe Energy's 200,000 b/d refinery in Trainer Pa. will be limping with equipment down for all of July and possibly most of August.",
-      "summary": "Monroe Energy's 200,000 barrel-per-day refinery in Trainer, Pennsylvania is expected to operate at reduced capacity throughout July and possibly into August due to equipment maintenance, which could tighten refined product supplies in the Northeast. The extended downtime at this major facility may put upward pressure on gasoline and diesel prices in the region during the summer driving season.",
-      "createdAt": "2026-06-30T13:26:11.000Z",
-      "likeCount": 27,
-      "retweetCount": 7,
-      "replyCount": 0
-    },
-    {
-      "id": "2071892776216608783",
-      "author": {
-        "name": "IEA",
-        "userName": "iea",
-        "category": "Official"
-      },
-      "text": "Electricity is moving to the centre of Southeast Asia\u2019s energy future, with demand already rising 2x as fast as overall energy use\n\nElectric mobility in particular is growing fast \u2013 improving long-term energy security &amp; bringing environmental gains \ud83d\udc49 https://t.co/kv0Ch9TCoO https://t.co/XjfsWCTlDP",
-      "summary": "Rising electricity demand in Southeast Asia, particularly driven by electric mobility growth, suggests declining reliance on oil for transportation and energy needs in the region. This shift could reduce long-term oil demand growth in one of the world's fastest-growing energy markets.",
-      "createdAt": "2026-06-30T09:45:06.000Z",
-      "likeCount": 27,
-      "retweetCount": 16,
+      "text": "#Commodities in Q2-2026 https://t.co/G7nKidntrB",
+      "summary": "#Commodities in Q2-2026 https://t.co/G7nKidntrB",
+      "createdAt": "2026-06-30T09:47:09.000Z",
+      "likeCount": 49,
+      "retweetCount": 13,
       "replyCount": 2
+    },
+    {
+      "id": "2071780975156043942",
+      "author": {
+        "name": "Reuters Venezuela",
+        "userName": "ReutersVzla",
+        "category": "News"
+      },
+      "text": "Families of Venezuelans deported from the US and lost in hotel collapse search for loved ones, and for answers https://t.co/1FLI1mvjZ1",
+      "summary": "The provided text describes a humanitarian situation involving Venezuelan deportees and a hotel collapse but contains no information about oil markets or their implications.",
+      "createdAt": "2026-06-30T02:20:50.000Z",
+      "likeCount": 46,
+      "retweetCount": 40,
+      "replyCount": 1
     },
     {
       "id": "2071949181657158090",
@@ -275,11 +233,39 @@
         "category": "Retail Fuel"
       },
       "text": "First refining casualty of 2026 heat wave and storms is Marathon refinery in Mandan, ND.  Power outage has temporarily knocked out the 71,000 b/d facility. https://t.co/e6FX5dY2pe",
-      "summary": "A power outage has temporarily shut down the Marathon refinery in Mandan, North Dakota, removing 71,000 barrels per day of refining capacity from the market during a 2026 heat wave and storms. The outage represents the first refining casualty from extreme weather conditions during this period.",
+      "summary": "A power outage has temporarily shut down the Marathon refinery in Mandan, North Dakota, removing 71,000 barrels per day of refining capacity from the market during a 2026 heat wave and storms. This represents the first refining facility casualty from the severe weather event.",
       "createdAt": "2026-06-30T13:29:14.000Z",
-      "likeCount": 24,
-      "retweetCount": 7,
-      "replyCount": 0
+      "likeCount": 42,
+      "retweetCount": 9,
+      "replyCount": 4
+    },
+    {
+      "id": "2071995334218113455",
+      "author": {
+        "name": "Tom Kloza",
+        "userName": "TomKloza",
+        "category": "Retail Fuel"
+      },
+      "text": "If you think the second mo. of the Iran War led to US gasoline demand destruction, today's EIA report tells a different story. April gas demand measured at 9.123-mbd, up 270,000 b/d from March and the highest April level since 2019. Number is 146,000 b/d above weekly estimates.",
+      "summary": "U.S. gasoline demand rose to 9.123 million barrels per day in April, the highest level since 2019 and significantly above weekly estimates, contradicting expectations of demand destruction from regional tensions. The increase of 270,000 barrels per day from March suggests resilient fuel consumption despite geopolitical concerns.",
+      "createdAt": "2026-06-30T16:32:38.000Z",
+      "likeCount": 33,
+      "retweetCount": 8,
+      "replyCount": 2
+    },
+    {
+      "id": "2071892776216608783",
+      "author": {
+        "name": "IEA",
+        "userName": "iea",
+        "category": "Official"
+      },
+      "text": "Electricity is moving to the centre of Southeast Asia\u2019s energy future, with demand already rising 2x as fast as overall energy use\n\nElectric mobility in particular is growing fast \u2013 improving long-term energy security &amp; bringing environmental gains \ud83d\udc49 https://t.co/kv0Ch9TCoO https://t.co/XjfsWCTlDP",
+      "summary": "Southeast Asia's rapidly growing electricity demand, driven particularly by electric mobility adoption, suggests a structural shift away from oil-dependent transport toward electrified alternatives, with potential implications for regional oil consumption trends. This transition could reduce future oil demand growth in the region as electric vehicles displace traditional petroleum-fueled vehicles.",
+      "createdAt": "2026-06-30T09:45:06.000Z",
+      "likeCount": 31,
+      "retweetCount": 17,
+      "replyCount": 2
     },
     {
       "id": "2071945743296860262",
@@ -289,10 +275,24 @@
         "category": "Official"
       },
       "text": "Global energy demand growth was met by diverse range of sources in 2025 \u2013 led by solar &amp; then gas.\n\nWhile growth slowed from the previous year against a complex economic and geopolitical backdrop, electricity use outpaced overall demand.\n\nMore \ud83d\udc49 https://t.co/c9Z4hPfenX https://t.co/nPO3FnCTsf",
-      "summary": "Global energy demand growth in 2025 was led by solar and gas rather than oil, suggesting a continued shift away from traditional petroleum sources. The slowdown in overall demand growth amid economic and geopolitical challenges may indicate softer near-term prospects for oil consumption.",
+      "summary": "Global energy demand growth in 2025 was primarily driven by solar and gas rather than oil, suggesting a continued shift away from petroleum. The slowdown in overall demand growth, coupled with electricity use outpacing total energy demand, indicates reduced reliance on oil-based energy sources.",
       "createdAt": "2026-06-30T13:15:34.000Z",
-      "likeCount": 22,
-      "retweetCount": 10,
+      "likeCount": 26,
+      "retweetCount": 12,
+      "replyCount": 5
+    },
+    {
+      "id": "2072017350270849483",
+      "author": {
+        "name": "Oil and Energy",
+        "userName": "OilandEnergy",
+        "category": "News"
+      },
+      "text": "Russia's fuel shortages are rippling across Central Asia. Kyrgyzstan, Tajikistan and Uzbekistan are seeing higher fuel prices, while Kazakhstan weighs requests to supply Russia even as it protects its own market. #Russia #Energy #Oil #CentralAsia \n\nhttps://t.co/po2PYpWYGS",
+      "summary": "Russia's fuel shortages are driving up fuel prices across Central Asia, with Kazakhstan facing pressure to supply Russia while managing domestic market needs. The energy disruption highlights regional supply vulnerabilities and competing economic interests among neighboring countries.",
+      "createdAt": "2026-06-30T18:00:07.000Z",
+      "likeCount": 24,
+      "retweetCount": 5,
       "replyCount": 4
     },
     {
@@ -303,25 +303,11 @@
         "category": "News"
       },
       "text": "Oil prices are heading for their biggest quarterly decline since the pandemic as easing Middle East supply fears outweigh geopolitical risk. Markets are now focused on whether U.S.-Iran diplomacy can hold and keep crude flowing. #Oil #OOTT #Brent #WTI #EnergyMarkets",
-      "summary": "Oil prices are experiencing their largest quarterly decline since the pandemic, driven by reduced concerns over Middle East supply disruptions. The market's attention has shifted to U.S.-Iran diplomatic efforts as a key factor in maintaining crude oil supply stability.",
+      "summary": "Oil prices are experiencing their largest quarterly decline since the pandemic, driven by reduced concerns over Middle East supply disruptions. The market's direction now hinges on whether U.S.-Iran diplomatic efforts can succeed in maintaining crude supply flows.",
       "createdAt": "2026-06-30T14:01:50.000Z",
-      "likeCount": 20,
+      "likeCount": 23,
       "retweetCount": 7,
-      "replyCount": 4
-    },
-    {
-      "id": "2072003875784048837",
-      "author": {
-        "name": "Giovanni Staunovo",
-        "userName": "staunovo",
-        "category": "Analysts & Traders"
-      },
-      "text": "US refined products exports were at record 8.017mbpd in April \n\nTop buyers in kbpd\nMexico 964\nChina 763\nIndia 676\nJapan 626  \nCanada 490\nNetherlands 440 \n\n EIA #oott https://t.co/qo9QEItfoH",
-      "summary": "US refined product exports reached a record 8.017 million barrels per day in April, with Mexico, China, and India as the leading destinations. This milestone reflects strong global demand for American refined fuels and the strategic importance of US refining capacity in international energy markets.",
-      "createdAt": "2026-06-30T17:06:34.000Z",
-      "likeCount": 20,
-      "retweetCount": 2,
-      "replyCount": 2
+      "replyCount": 3
     },
     {
       "id": "2071899769539096824",
@@ -331,11 +317,25 @@
         "category": "News"
       },
       "text": "U.K. PETROLEUM PRODUCT stocks fell sharply in the first two months of the war between the United States and Iran, according to official statistics released for the first time today. By the end of April, gasoline stocks had depleted to the lowest for fourteen years and diesel https://t.co/YJ28mtnwkH",
-      "summary": "UK petroleum product stocks declined significantly during the first two months of a U.S.-Iran conflict, with gasoline inventories reaching their lowest levels in 14 years by April. The sharp depletion of fuel reserves suggests tightening supply conditions in the energy market during this period.",
+      "summary": "U.K. petroleum product stocks declined significantly during the initial months of a U.S.-Iran conflict, with gasoline inventories reaching their lowest level in 14 years by April. The sharp depletion of fuel reserves suggests potential supply disruptions affecting the oil market.",
       "createdAt": "2026-06-30T10:12:53.000Z",
-      "likeCount": 17,
+      "likeCount": 21,
       "retweetCount": 8,
-      "replyCount": 3
+      "replyCount": 4
+    },
+    {
+      "id": "2072050285338308808",
+      "author": {
+        "name": "Giovanni Staunovo",
+        "userName": "staunovo",
+        "category": "Analysts & Traders"
+      },
+      "text": "The Revolutionary Guard has told mediators it would close the passage again if it doesn\u2019t get guarantees that Iran is in sole control of the Strait of Hormuz at the Doha talks, say officials familiar with the conversations. It also demands that the U.S. and other countries give https://t.co/ZXeNVXOIuk",
+      "summary": "# Summary\n\nIran's Revolutionary Guard is threatening to close the Strait of Hormuz passage unless it gains sole control of the waterway and receives unspecified guarantees from the U.S. and other countries, potentially disrupting one of the world's critical oil transit routes. The threat raises concerns about global oil supply security, given that a significant portion of the world's petroleum passes through the Strait of Hormuz.",
+      "createdAt": "2026-06-30T20:10:59.000Z",
+      "likeCount": 17,
+      "retweetCount": 2,
+      "replyCount": 0
     },
     {
       "id": "2071836223774028228",
@@ -345,24 +345,10 @@
         "category": "Official"
       },
       "text": "Global vehicle fleet to reach almost three billion by 2050\n\nFuture oil demand growth in road transportation comes on the back of a large expansion in the global vehicle fleet, particularly in developing countries. The global vehicle fleet is expected to increase from 1.7 billion https://t.co/yzpsuJLCy4",
-      "summary": "OPEC projects the global vehicle fleet will nearly double to 3 billion by 2050, with growth concentrated in developing countries, supporting continued oil demand in the transportation sector.",
+      "summary": "The global vehicle fleet is projected to nearly double from 1.7 billion to almost 3 billion by 2050, driven primarily by growth in developing countries, which OPEC expects will support future oil demand in the transportation sector.",
       "createdAt": "2026-06-30T06:00:23.000Z",
       "likeCount": 17,
       "retweetCount": 10,
-      "replyCount": 2
-    },
-    {
-      "id": "2071890536789676458",
-      "author": {
-        "name": "OPEC",
-        "userName": "opecsecretariat",
-        "category": "Official"
-      },
-      "text": "The key messages from #OPEC\u2019s World Oil Outlook 2026 are now available in 10 languages:\n\nArabic\nChinese\nEnglish\nFarsi\nFrench\nGerman\nJapanese\nPortuguese\nRussian\nSpanish\n\n\ud83c\udfa5 The full playlist can be accessed here: https://t.co/Fv0WIIV9LL\n \nEnergy markets are global and access to https://t.co/KBzXuoFDpv",
-      "summary": "OPEC has released its World Oil Outlook 2026 in 10 languages to increase global accessibility of its energy market analysis. The multilingual approach underscores OPEC's recognition that oil markets operate on a worldwide scale requiring broad information distribution.",
-      "createdAt": "2026-06-30T09:36:12.000Z",
-      "likeCount": 14,
-      "retweetCount": 7,
       "replyCount": 2
     },
     {
@@ -373,11 +359,25 @@
         "category": "Flows & Tracking"
       },
       "text": "Ballasters reshape tanker rates\n\nTanker markets are adjusting to the partial reopening of the Strait of Hormuz. MEG VLCC rates fell as inbound ballasters returned to the region, easing tightness after a period of disruption. In contrast, Atlantic VLCC and Suezmax routes gained https://t.co/s6xOZQN2Je",
-      "summary": "The reopening of the Strait of Hormuz has led to lower VLCC rates in the Middle East Gulf as returning empty tankers increased supply, while Atlantic and Suezmax routes saw rate gains as trade patterns adjusted. This shift reflects the market's rebalancing following the period of route disruption caused by the strait's closure.",
+      "summary": "The partial reopening of the Strait of Hormuz has eased tight tanker rates in the Middle East Gulf region as empty tankers return to load crude, while Atlantic and Suezmax shipping routes have seen rate increases. This rebalancing reflects a shift in oil transport demand away from longer alternative routes back toward the key Persian Gulf chokepoint.",
       "createdAt": "2026-06-30T10:51:07.000Z",
-      "likeCount": 12,
+      "likeCount": 15,
       "retweetCount": 5,
-      "replyCount": 0
+      "replyCount": 1
+    },
+    {
+      "id": "2071890536789676458",
+      "author": {
+        "name": "OPEC",
+        "userName": "opecsecretariat",
+        "category": "Official"
+      },
+      "text": "The key messages from #OPEC\u2019s World Oil Outlook 2026 are now available in 10 languages:\n\nArabic\nChinese\nEnglish\nFarsi\nFrench\nGerman\nJapanese\nPortuguese\nRussian\nSpanish\n\n\ud83c\udfa5 The full playlist can be accessed here: https://t.co/Fv0WIIV9LL\n \nEnergy markets are global and access to https://t.co/KBzXuoFDpv",
+      "summary": "OPEC has released its World Oil Outlook 2026 report in 10 languages to increase global accessibility of its energy market analysis. The multilingual distribution underscores OPEC's emphasis on reaching international audiences regarding global oil market developments and forecasts.",
+      "createdAt": "2026-06-30T09:36:12.000Z",
+      "likeCount": 15,
+      "retweetCount": 7,
+      "replyCount": 2
     },
     {
       "id": "2071953681621176500",
@@ -387,9 +387,9 @@
         "category": "News"
       },
       "text": "Rio Tinto agrees new financial terms for $18bn copper mine project https://t.co/xQm9YRnop2",
-      "summary": "Rio Tinto has secured new financial terms for an $18 billion copper mine project. This development has limited direct implications for the oil market, as it pertains to copper rather than crude oil or petroleum products.",
+      "summary": "Rio Tinto has agreed to new financial terms for an $18 billion copper mine project. This development has limited direct implications for oil markets, as it pertains to copper rather than crude oil or petroleum products.",
       "createdAt": "2026-06-30T13:47:07.000Z",
-      "likeCount": 9,
+      "likeCount": 11,
       "retweetCount": 2,
       "replyCount": 0
     },
@@ -401,11 +401,39 @@
         "category": "News"
       },
       "text": "EU must choose which sectors to protect or face exodus, warns Covestro chief https://t.co/yhfIh71N9i",
-      "summary": "The Covestro chief warns the EU must prioritize protecting certain sectors or risk losing companies to other regions, raising concerns about industrial competitiveness and potential capital flight from Europe. While the headline doesn't specify oil sector implications directly, such warnings typically relate to energy-intensive industries that depend on competitive energy costs, which could indirectly affect European oil demand dynamics.",
+      "summary": "The post reports that Covestro's chief is warning the EU must decide which industrial sectors to protect to prevent companies from relocating, suggesting potential supply chain disruptions if European chemical and manufacturing sectors face competitive pressures or exodus.",
       "createdAt": "2026-06-30T06:37:23.000Z",
-      "likeCount": 7,
+      "likeCount": 10,
       "retweetCount": 5,
       "replyCount": 1
+    },
+    {
+      "id": "2072032455695950220",
+      "author": {
+        "name": "EIA",
+        "userName": "eiagov",
+        "category": "Official"
+      },
+      "text": "\ud83c\udd95 U.S. average retail prices:\n\u26fd Regular-grade gasoline\n\u26fd On-highway diesel \n\nhttps://t.co/Yw0oW8T7Lb  #gasprices",
+      "summary": "The EIA reported updated U.S. average retail prices for regular-grade gasoline and on-highway diesel, which are key indicators of domestic fuel costs and petroleum market conditions.",
+      "createdAt": "2026-06-30T19:00:08.000Z",
+      "likeCount": 10,
+      "retweetCount": 5,
+      "replyCount": 0
+    },
+    {
+      "id": "2071922477949698458",
+      "author": {
+        "name": "S&P Global Energy",
+        "userName": "SPGEnergyOil",
+        "category": "Price Reporting"
+      },
+      "text": "Freight rates remain structurally elevated as the Strait of Hormuz operates as a 'risk-regulated corridor'. While crude flows are stabilizing, product market recovery is likely to lag until late 2027. This infographic analyzes the shipping conditions.\n\n\ud83d\udd17Read: https://t.co/OOfOeWYAA4",
+      "summary": "Elevated freight rates driven by geopolitical risk in the Strait of Hormuz are expected to persist, with crude oil flows stabilizing but product market recovery unlikely until late 2027.",
+      "createdAt": "2026-06-30T11:43:07.000Z",
+      "likeCount": 9,
+      "retweetCount": 4,
+      "replyCount": 2
     },
     {
       "id": "2071976309329203517",
@@ -415,10 +443,24 @@
         "category": "Refiners & Majors"
       },
       "text": "Last week, we announced our move into the power-for-AI business. \ud83d\udda5\ufe0f\u26a1\n\nThis next-gen infrastructure will be supported by reliable, behind-the-meter energy, which aims to mitigate impacts on the regional grid that consumers rely on. Learn more about how our project with @Microsoft https://t.co/uvwTbdMZ1B",
-      "summary": "Chevron is entering the power-for-AI business with behind-the-meter energy infrastructure designed to support data centers without burdening regional grids, signaling the oil and gas industry's diversification into energy services for artificial intelligence operations.",
+      "summary": "Chevron is entering the power-for-AI business with behind-the-meter energy infrastructure designed to support Microsoft's operations while minimizing grid impact. This represents a diversification of Chevron's energy services beyond traditional oil operations.",
       "createdAt": "2026-06-30T15:17:02.000Z",
-      "likeCount": 7,
+      "likeCount": 9,
       "retweetCount": 4,
+      "replyCount": 3
+    },
+    {
+      "id": "2072049312368877720",
+      "author": {
+        "name": "Giovanni Staunovo",
+        "userName": "staunovo",
+        "category": "Analysts & Traders"
+      },
+      "text": "US Supply Adjustment of Crude Oil\n#oott https://t.co/jCIjgrZe0W",
+      "summary": "Giovanni Staunovo posted about US crude oil supply adjustments, though the specific market implications cannot be determined from the text alone. The post references supply data but lacks detail regarding whether adjustments indicate increases, decreases, or other changes affecting oil markets.",
+      "createdAt": "2026-06-30T20:07:07.000Z",
+      "likeCount": 8,
+      "retweetCount": 3,
       "replyCount": 1
     },
     {
@@ -429,51 +471,23 @@
         "category": "News"
       },
       "text": "BASE RESEARCH published 41 newsletters in the second quarter taking the total so far this year to 88. The second quarter was inevitably dominated by the war, with newsletters covering all aspects of oil, gas, LNG, refining, jet fuel, strategic reserves, the impact of previous oil",
-      "summary": "BASE RESEARCH published 41 newsletters in Q2 2024, bringing the year-to-date total to 88, with coverage heavily focused on the geopolitical impacts of war on oil, gas, LNG, refining, and strategic reserves.",
+      "summary": "BASE RESEARCH published 41 newsletters in Q2 2024, bringing the year-to-date total to 88, with coverage heavily focused on war-related impacts across oil, gas, LNG, refining, and strategic reserves.",
       "createdAt": "2026-06-30T10:49:05.000Z",
       "likeCount": 6,
-      "retweetCount": 2,
+      "retweetCount": 3,
       "replyCount": 0
     },
     {
-      "id": "2071741798947639630",
+      "id": "2072005518281908328",
       "author": {
-        "name": "Phil Flynn",
-        "userName": "energyphilflynn",
-        "category": "Analysts & Traders"
+        "name": "S&P Global Energy",
+        "userName": "SPGEnergyOil",
+        "category": "Price Reporting"
       },
-      "text": "https://t.co/LNj29Zereg",
-      "summary": "I can see that Phil Flynn posted a link, but I cannot access external URLs or determine the content of that link. To provide an accurate summary of the oil market implications, I would need the actual text or content from that source.",
-      "createdAt": "2026-06-29T23:45:10.000Z",
+      "text": "S&amp;P Global Energy\u2019s Daniel Pratt discussed Africa\u2019s long-term investment climate with Nigeria\u2019s Channels Business Global Television, noting an expected 40% rise in upstream capital spending in Africa by 2030. \nSee: https://t.co/9X5hZqF62w https://t.co/d70cLVpiSB",
+      "summary": "S&P Global Energy expects upstream capital spending in Africa to rise 40% by 2030, reflecting confidence in the continent's long-term investment climate for energy projects. This significant increase in capital deployment suggests anticipated growth in African oil and gas production capacity over the coming years.",
+      "createdAt": "2026-06-30T17:13:06.000Z",
       "likeCount": 5,
-      "retweetCount": 0,
-      "replyCount": 0
-    },
-    {
-      "id": "2071699245003116977",
-      "author": {
-        "name": "Marathon Petroleum",
-        "userName": "MarathonPetroCo",
-        "category": "Refiners & Majors"
-      },
-      "text": "Behind safe operations are people like Eric Lord. \ud83e\uddba For National Safety Month, we\u2019re highlighting his career as a lead personal safety professional and the important role safety jobs play at Marathon Petroleum. \u2935\ufe0f\n\nhttps://t.co/yNITjGLweO\n\n#NationalSafetyMonth",
-      "summary": "Marathon Petroleum is emphasizing its commitment to workplace safety by featuring safety professionals during National Safety Month, reflecting the company's prioritization of operational safety standards across its facilities.",
-      "createdAt": "2026-06-29T20:56:04.000Z",
-      "likeCount": 5,
-      "retweetCount": 0,
-      "replyCount": 0
-    },
-    {
-      "id": "2071696221081579537",
-      "author": {
-        "name": "Energy Transfer",
-        "userName": "EnergyTransfer",
-        "category": "Midstream"
-      },
-      "text": "We\u2019re excited to partner with the Arizona Ridge Riders!\n\nA key focus includes supporting the new Youth Bull Riding Scholarship Program and serving as presenting sponsor of the inaugural Youth Rider Clinic, giving young Arizona riders access to coaching, mentorship and pro https://t.co/vVExLPNZqw",
-      "summary": "Energy Transfer is partnering with the Arizona Ridge Riders to support youth bull riding programs, though this announcement has no direct implications for oil markets.",
-      "createdAt": "2026-06-29T20:44:04.000Z",
-      "likeCount": 4,
       "retweetCount": 0,
       "replyCount": 0
     },
@@ -485,37 +499,23 @@
         "category": "Research & Analytics"
       },
       "text": "What does it cost to power a one-gigawatt AI data centre behind the meter? Between US$4 billion and US$6 billion. \n\n@BenHertzShargel, @WoodMackenzie's Global Head of Grid Transformation and Large Load, explains what is included in that estimate, why some hyperscalers have been https://t.co/Mq5bfc22T6",
-      "summary": "# Oil Market Implications Summary\n\nThe high capital costs ($4-6 billion) required to build behind-the-meter power infrastructure for AI data centers could incentivize some hyperscalers to pursue alternative energy solutions, potentially affecting traditional grid demand and energy commodity markets including oil. However, the post text alone does not provide sufficient detail about specific oil market impacts or hyperscaler energy decisions to draw definitive conclusions.",
+      "summary": "AI data centers require $4-6 billion in behind-the-meter power infrastructure, highlighting the enormous capital intensity of powering artificial intelligence operations. The high upfront costs of this infrastructure could influence hyperscalers' energy sourcing decisions and potentially affect oil demand dynamics as companies seek cost-effective power solutions.",
       "createdAt": "2026-06-30T14:01:48.000Z",
-      "likeCount": 3,
-      "retweetCount": 4,
+      "likeCount": 5,
+      "retweetCount": 5,
       "replyCount": 1
     },
     {
-      "id": "2071932656334274923",
+      "id": "2072006826451734668",
       "author": {
-        "name": "Oil and Gibbs",
-        "userName": "OilandGibbs",
-        "category": "News"
+        "name": "Energy Transfer",
+        "userName": "EnergyTransfer",
+        "category": "Midstream"
       },
-      "text": "Poll time...\n\nDec26 D4 RINs hovered between $2.40-$2.50 all of June after starting the year at $1.12.\n\nSo, will the @EPA intervene by year-end 2026?",
-      "summary": "Oil and Gibbs are questioning whether the EPA will intervene in the biodiesel market, given that D4 RINs (Renewable Identification Numbers) have remained elevated at $2.40-$2.50 throughout June after starting 2026 at $1.12. The post suggests persistently high RIN prices may trigger regulatory action before year-end.",
-      "createdAt": "2026-06-30T12:23:34.000Z",
-      "likeCount": 3,
-      "retweetCount": 2,
-      "replyCount": 5
-    },
-    {
-      "id": "2072005518281908328",
-      "author": {
-        "name": "S&P Global Energy",
-        "userName": "SPGEnergyOil",
-        "category": "Price Reporting"
-      },
-      "text": "S&amp;P Global Energy\u2019s Daniel Pratt discussed Africa\u2019s long-term investment climate with Nigeria\u2019s Channels Business Global Television, noting an expected 40% rise in upstream capital spending in Africa by 2030. \nSee: https://t.co/9X5hZqF62w https://t.co/d70cLVpiSB",
-      "summary": "S&P Global Energy expects upstream capital spending in Africa to increase by 40% through 2030, signaling growing investor confidence in the continent's long-term energy development prospects.",
-      "createdAt": "2026-06-30T17:13:06.000Z",
-      "likeCount": 2,
+      "text": "Press Release: Energy Transfer LP (NYSE: ET) today announced that it plans to release earnings for the second quarter of 2026 on Tuesday, August 4, 2026, before the market opens.\nhttps://t.co/0JcQy4NheA",
+      "summary": "Energy Transfer LP will release its second quarter 2026 earnings on August 4, 2026, before market open, providing investors with updates on the midstream energy company's financial performance during that period.",
+      "createdAt": "2026-06-30T17:18:18.000Z",
+      "likeCount": 5,
       "retweetCount": 0,
       "replyCount": 0
     },
@@ -527,39 +527,25 @@
         "category": "Research & Analytics"
       },
       "text": "What could the Middle East's energy transition look like over the next 35 years?\n\nOur 2025-26 energy transition outlook highlighted uneven progress for Middle East decarbonisation \u2013 and a US$5.3 trillion investment opportunity between now and 2060. \n\nGet the full outlook:",
-      "summary": "The Middle East faces uneven progress in its energy transition through 2060, with a $5.3 trillion investment opportunity that suggests significant structural changes to the region's energy mix and potentially its oil market role over the next 35 years.",
+      "summary": "The Middle East's energy transition will progress unevenly through 2060, requiring $5.3 trillion in investments and potentially reshaping the region's traditional oil-dependent economy. The outlook suggests significant structural changes ahead for Middle Eastern energy markets over the coming decades.",
       "createdAt": "2026-06-30T12:00:12.000Z",
-      "likeCount": 2,
+      "likeCount": 3,
       "retweetCount": 0,
       "replyCount": 0
     },
     {
-      "id": "2071922477949698458",
+      "id": "2071932656334274923",
       "author": {
-        "name": "S&P Global Energy",
-        "userName": "SPGEnergyOil",
-        "category": "Price Reporting"
+        "name": "Oil and Gibbs",
+        "userName": "OilandGibbs",
+        "category": "News"
       },
-      "text": "Freight rates remain structurally elevated as the Strait of Hormuz operates as a 'risk-regulated corridor'. While crude flows are stabilizing, product market recovery is likely to lag until late 2027. This infographic analyzes the shipping conditions.\n\n\ud83d\udd17Read: https://t.co/OOfOeWYAA4",
-      "summary": "Elevated freight rates driven by geopolitical risk in the Strait of Hormuz are expected to persist, with crude flows stabilizing but product market recovery delayed until late 2027. This structural cost increase in shipping will likely impact oil market dynamics and downstream product pricing in the near term.",
-      "createdAt": "2026-06-30T11:43:07.000Z",
-      "likeCount": 1,
+      "text": "Poll time...\n\nDec26 D4 RINs hovered between $2.40-$2.50 all of June after starting the year at $1.12.\n\nSo, will the @EPA intervene by year-end 2026?",
+      "summary": "Oil and Gibbs are questioning whether the EPA will intervene in the renewable fuel market after D4 biodiesel RINs (Renewable Identification Numbers) surged from $1.12 at the start of 2026 to a sustained $2.40-$2.50 range by late June, signaling potential regulatory concerns over rising compliance costs.",
+      "createdAt": "2026-06-30T12:23:34.000Z",
+      "likeCount": 3,
       "retweetCount": 2,
-      "replyCount": 1
-    },
-    {
-      "id": "2072006826451734668",
-      "author": {
-        "name": "Energy Transfer",
-        "userName": "EnergyTransfer",
-        "category": "Midstream"
-      },
-      "text": "Press Release: Energy Transfer LP (NYSE: ET) today announced that it plans to release earnings for the second quarter of 2026 on Tuesday, August 4, 2026, before the market opens.\nhttps://t.co/0JcQy4NheA",
-      "summary": "Energy Transfer LP will release its second quarter 2026 earnings results on August 4, 2026, before market open, providing investors with an update on the company's financial performance during that period.",
-      "createdAt": "2026-06-30T17:18:18.000Z",
-      "likeCount": 1,
-      "retweetCount": 0,
-      "replyCount": 0
+      "replyCount": 5
     },
     {
       "id": "2072011061000020082",
@@ -569,7 +555,7 @@
         "category": "Price Reporting"
       },
       "text": "Despite eased restrictions and hopes for stable U.S.-Iran relations, Indian #LPG buyers remain cautious amid new security concerns in the Strait of Hormuz. Discover how ongoing risks are shaping trade flows and pricing: https://t.co/6FzFQreaNN\n\n#OPISMontBelvieu #OOTT https://t.co/NrnXdBcygV",
-      "summary": "Indian LPG buyers are maintaining a cautious approach despite improved U.S.-Iran relations due to security risks in the Strait of Hormuz, which is affecting trade flows and LPG pricing dynamics.",
+      "summary": "Indian LPG buyers are exercising caution in their purchasing decisions despite relaxed U.S.-Iran restrictions, as security risks in the Strait of Hormuz continue to influence trade flows and pricing dynamics. The ongoing geopolitical concerns are shaping market behavior even as diplomatic conditions improve.",
       "createdAt": "2026-06-30T17:35:07.000Z",
       "likeCount": 0,
       "retweetCount": 0,
@@ -583,7 +569,7 @@
         "category": "Price Reporting"
       },
       "text": "The #SolarIndustry is entering a new chapter\u2014shaped by innovation, flexibility, and regional growth. Discover 8 major insights from #IntersolarEurope2026 and what they signal for the future of #Solar! https://t.co/sUZnqBt8xR",
-      "summary": "OPIS reports that the solar industry is experiencing innovation and regional growth trends highlighted at Intersolar Europe 2026, which could have implications for energy markets including potential shifts in demand for traditional energy sources like oil.",
+      "summary": "# Oil Market Implications Summary\n\nThe solar industry's advancement through innovation and regional growth may increase competition for energy market share, potentially affecting oil demand in sectors transitioning toward renewable energy sources.",
       "createdAt": "2026-06-30T13:31:11.000Z",
       "likeCount": 0,
       "retweetCount": 0,
@@ -597,8 +583,22 @@
         "category": "News"
       },
       "text": "IF EPA intervenes, which approach would they use?",
-      "summary": "I can only see the question posed by Oil and Gibbs about potential EPA intervention approaches, but the actual content discussing those approaches or their oil market implications is not included in the text provided. Without the substantive discussion that follows this question, I cannot provide a meaningful summary of the oil market implications.",
+      "summary": "IF EPA intervenes, which approach would they use?",
       "createdAt": "2026-06-30T12:23:35.000Z",
+      "likeCount": 0,
+      "retweetCount": 0,
+      "replyCount": 2
+    },
+    {
+      "id": "2072050930715861165",
+      "author": {
+        "name": "Energy Transfer",
+        "userName": "EnergyTransfer",
+        "category": "Midstream"
+      },
+      "text": "We're proud of our team for winning a Safety Excellence Award from ILTA again! https://t.co/7DAd5Fy0Do",
+      "summary": "Energy Transfer's recognition for safety excellence from ILTA reflects the company's operational standards, though the post provides no specific information about oil market implications or business impacts.",
+      "createdAt": "2026-06-30T20:13:33.000Z",
       "likeCount": 0,
       "retweetCount": 0,
       "replyCount": 0
