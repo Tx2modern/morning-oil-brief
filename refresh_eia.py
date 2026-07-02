@@ -24,26 +24,44 @@ BASE = 'https://api.eia.gov/v2/seriesid/'
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(HERE, 'eia_data.json')
 
+# A handful of series occasionally hit a transient EIA API error (e.g. 502).
+# Don't fail the whole build/deploy pipeline over a small number of those.
+MAX_TOLERATED_ERRORS = 3
+RETRIES_PER_SERIES = 3
+RETRY_BACKOFF_SECONDS = 5
+
 
 def fetch_series(series_id, length=370):
-    """Fetch latest `length` weekly observations for a single EIA series."""
+    """Fetch latest `length` weekly observations for a single EIA series.
+
+    Retries transient errors (e.g. 502s) before giving up.
+    """
     url = (
         BASE + urllib.parse.quote(series_id, safe='.')
         + f'?api_key={API_KEY}&frequency=weekly&data[]=value'
         + f'&sort[0][column]=period&sort[0][direction]=desc&length={length}'
     )
     req = urllib.request.Request(url, headers={'User-Agent': 'morning-oil-brief/1.0'})
-    with urllib.request.urlopen(req, timeout=20) as r:
-        doc = json.loads(r.read())
-    rows = doc.get('response', {}).get('data', [])
-    cleaned = []
-    for row in rows:
+
+    last_err = None
+    for attempt in range(RETRIES_PER_SERIES):
         try:
-            cleaned.append([row['period'], float(row['value'])])
-        except (KeyError, TypeError, ValueError):
-            continue
-    cleaned.sort(key=lambda x: x[0])
-    return cleaned
+            with urllib.request.urlopen(req, timeout=20) as r:
+                doc = json.loads(r.read())
+            rows = doc.get('response', {}).get('data', [])
+            cleaned = []
+            for row in rows:
+                try:
+                    cleaned.append([row['period'], float(row['value'])])
+                except (KeyError, TypeError, ValueError):
+                    continue
+            cleaned.sort(key=lambda x: x[0])
+            return cleaned
+        except Exception as e:
+            last_err = e
+            if attempt < RETRIES_PER_SERIES - 1:
+                time.sleep(RETRY_BACKOFF_SECONDS * (attempt + 1))
+    raise last_err
 
 
 def main():
@@ -104,7 +122,9 @@ def main():
 
     if errors:
         print(f'Failed series: {errors}', file=sys.stderr)
-        sys.exit(1)
+        if len(errors) > MAX_TOLERATED_ERRORS:
+            sys.exit(1)
+        print(f'Tolerating {len(errors)} failed series (<= {MAX_TOLERATED_ERRORS}); continuing.')
 
 
 if __name__ == '__main__':
