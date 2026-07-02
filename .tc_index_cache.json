@@ -1,29 +1,29 @@
 {
-  "key": "8091a5d177fc5526622f7165555c8c91",
+  "key": "ca454ab904e31ab44fe425b1773c8ab5",
   "value": [
     {
-      "direction": "spread",
-      "instrument": "WTI M1-M2 Spread",
-      "setup": "Cushing draws five straight weeks toward tank-bottoms tightening front structure.",
-      "rationale": "Cushing fell 1.08mb to 18.96mb, down from 23.02mb on May 22 \u2014 a relentless five-week draw of over 4mb. This low absolute level supports steepening backwardation at the front of the curve. Watch for any reversal in PADD2 utilization (now 100.0%) that could slow the draw."
+      "direction": "long",
+      "instrument": "WTI M1-M2 Spread (prompt timespread)",
+      "setup": "Large crude draw with high runs tightens prompt barrels.",
+      "rationale": "US crude fell 3.77 MMbbl to 408.36 with utilization at 96.6% and crude inputs at 17.2 Mbd. Crude exports jumped to 4.46 Mbd while imports dropped to 5.47 Mbd, draining supply. Watch Cushing, which rebuilt 0.71 MMbbl to 19.67 after weeks of draws, as a bearish catalyst."
     },
     {
-      "direction": "long",
-      "instrument": "WTI M1 Crude Futures",
-      "setup": "Headline 6.09mb crude draw with rising exports and falling imports net.",
-      "rationale": "Total crude stocks dropped 6.09mb to 412.13mb, led by PADD3's 3.98mb draw, while 4-week exports stayed firm at 4.93 mbd and imports only modest at 5.75 mbd. The combination of a Cushing drawdown and Gulf Coast tightening supports a bullish flat-price bias. Key risk is the 0.6pt utilization decline signaling softer refinery crude demand ahead."
+      "direction": "spread",
+      "instrument": "Distillate Crack vs Gasoline Crack (RBOB/HO switch)",
+      "setup": "Distillate builds while gasoline draws into peak demand.",
+      "rationale": "Distillate stocks rose 2.48 MMbbl to 108.6 despite modest 3.67 Mbd demand, while gasoline drew 2.33 MMbbl to 213.97 with demand climbing to 8.96 Mbd. This divergence favors long gasoline crack over distillate crack. Risk is PADD1 distillate build of 1.6 signaling weak diesel offtake persisting."
     },
     {
       "direction": "short",
-      "instrument": "RBOB M1 Crack vs WTI",
-      "setup": "Gasoline builds against falling demand into peak driving season.",
-      "rationale": "Gasoline inventories rose 2.06mb to 216.30mb while 4-week demand slipped to 8.83 mbd from 8.90 mbd, a bearish demand-supply signal mid-summer. PADD1 gas built 1.21mb even as utilization collapsed 10.6pts to 76.5%, suggesting weak underlying pull. Catalyst risk is a demand rebound or refinery outages tightening the East Coast."
+      "instrument": "Jet Crack vs HO",
+      "setup": "Jet inventories building faster than distillate on soft demand.",
+      "rationale": "Jet stocks rose 1.72 MMbbl to 48.01, driven by PADD3 build of 1.7, against only 1.78 Mbd of jet demand. The surplus argues for shorting jet relative to heating oil. Catalyst: summer travel could lift jet demand and reverse the build."
     },
     {
       "direction": "spread",
-      "instrument": "HO M1 Crack vs RBOB Crack",
-      "setup": "Distillate oversupplied as builds outpace gasoline relatively.",
-      "rationale": "Distillate stocks jumped 3.06mb to 106.12mb, driven by PADD3's large 2.96mb build, against modest 3.63 mbd demand. With gasoline demand also soft, favoring short HO crack against RBOB captures the heavier distillate length. Watch PADD1's 2.12mb distillate draw as a counter-signal of regional tightness."
+      "instrument": "PADD1 vs PADD3 Gasoline Cash Basis",
+      "setup": "East Coast refinery outage tightens PADD1 versus Gulf supply.",
+      "rationale": "PADD1 utilization collapsed 8.2 points to 68.3% while PADD3 rose 1.4 to 98.1%, and PADD1 gasoline drew 0.77 MMbbl versus PADD3's 2.19 draw. Weak East Coast runs support long NYH gasoline basis against Gulf. Risk is restart of idled PADD1 capacity normalizing runs."
     }
   ]
 }
